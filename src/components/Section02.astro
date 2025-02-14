@@ -1,0 +1,90 @@
+---
+import SectionLayout from "../layouts/SectionLayout.astro";
+
+interface Props {
+    maskedText: string; // Required content
+    subtitle: string; // Required content
+    background: string;
+}
+
+const {
+    maskedText = "LONDON VENUES",
+    subtitle = "Conference centres and hotels",
+    background = "bg-[#6895D2]",
+} = Astro.props;
+---
+
+<SectionLayout
+    {background}
+    variant="color"
+    imageFolder="connect"
+    className="Section01"
+    contentPosition="left"
+    verticalAlignment="center"
+>
+    <div class="masked-container">
+        <h1 class="masked-text">{maskedText}</h1>
+        <h1 class="masked-text-outline">{maskedText}</h1>
+    </div>
+
+    <div class="text-content">
+        <h2 class="title">{subtitle}</h2>
+    </div>
+</SectionLayout>
+
+<style>
+    .content-wrapper {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        margin: 0 auto;
+    }
+
+    .masked-container {
+        position: relative;
+        margin-bottom: 2rem;
+    }
+
+    .masked-text {
+        font-size: clamp(4rem, 15vw, 12rem);
+        font-weight: 500;
+        color: transparent;
+        background-clip: text;
+        -webkit-background-clip: text;
+        background-color: white;
+        mix-blend-mode: overlay;
+        line-height: 1;
+    }
+
+    .masked-text-outline {
+        position: absolute;
+        inset: 0;
+        font-size: clamp(4rem, 15vw, 12rem);
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.1);
+        pointer-events: none;
+        line-height: 1;
+    }
+
+    .text-content {
+        z-index: 1;
+    }
+
+    .title {
+        font-size: 3rem;
+        font-weight: 300;
+        color: white;
+        margin-bottom: 1rem;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .content-wrapper {
+            padding: 2rem;
+        }
+
+        .title {
+            font-size: 2rem;
+        }
+    }
+</style>
