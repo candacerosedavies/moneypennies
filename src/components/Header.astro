@@ -1,0 +1,76 @@
+---
+
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+  <nav class="container mx-auto px-6 py-12 flex justify-between items-center">
+    <div
+      class="logo text-white text-xl font-bold transition-colors duration-300"
+    >
+      Logo
+    </div>
+    <div class="space-x-4">
+      <button
+        class="nav-button px-4 py-2 text-white border border-white bg-transparent hover:bg-white hover:bg-opacity-10 transition-all duration-300"
+        aria-label="sign up button"
+      >
+        Sign Up
+      </button>
+      <button
+        class="nav-button px-4 py-2 text-white border border-white bg-transparent hover:bg-white hover:bg-opacity-10 transition-all duration-300"
+      >
+        Log In
+      </button>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const header = document.querySelector("header");
+  const logo = document.querySelector(".logo");
+  const buttons = document.querySelectorAll(".nav-button");
+
+  const handleScroll = () => {
+    if (window.scrollY > window.innerHeight * 0.8) {
+      // Add background to header
+      header?.classList.add("bg-white/20", "backdrop-blur-sm", "fade-in");
+      header?.classList.remove("bg-transparent");
+
+      // Change logo color
+      logo?.classList.remove("text-white");
+      logo?.classList.add("text-stone-950");
+
+      // Change button styles
+      buttons.forEach((button) => {
+        button.classList.remove("text-white", "border-white", "hover:bg-white");
+        button.classList.add(
+          "text-stone-950",
+          "border-stone-950",
+          "hover:bg-stone-950",
+          "hover:text-white"
+        );
+      });
+    } else {
+      // Reset header background
+      header?.classList.remove("bg-white/20", "backdrop-blur-sm");
+      header?.classList.add("bg-transparent", "fade-out");
+
+      // Reset logo color
+      logo?.classList.add("text-white");
+      logo?.classList.remove("text-stone-950");
+
+      // Reset button styles
+      buttons.forEach((button) => {
+        button.classList.add("text-white", "border-white", "hover:bg-white");
+        button.classList.remove(
+          "text-stone-950",
+          "border-stone-950",
+          "hover:bg-stone-950",
+          "hover:text-white"
+        );
+      });
+    }
+  };
+
+  window.addEventListener("scroll", handleScroll);
+</script>

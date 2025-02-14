@@ -1,11 +1,63 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Section from "../components/Section.astro";
+import ScrollArrow from "../components/ScrollArrow.astro";
+//need to insert the header below <header />
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>MoneyPennies</title>
+  </head>
+  <body>
+    <Header />
+
+    <Section
+      variant="image"
+      imageFolder="connect"
+      imageName="pexels-didsss-2127522.jpg"
+      maskText="CONNECT"
+      textStyle="normal"
+      subtitle="Building meaningful relationships"
+    >
+      <h1>Connect Section</h1>
+    </Section>
+
+    <!-- For a color background -->
+    <Section variant="color" background="bg-blue-500" maskText="VIBRANT">
+      <h1>Color Section</h1>
+    </Section>
+
+    <!-- For an image from your folders -->
+    <Section
+      variant="image"
+      imageFolder="award"
+      imageName="pexels-n-voitkevich-6532369.jpg"
+      maskText="EXCEL"
+      textStyle="masked"
+      subtitle="Recognition for excellence in everything we do"
+    >
+      <h1>Award Section</h1>
+    </Section>
+
+    <Section
+      variant="image"
+      imageFolder="celebrate"
+      imageName="pexels-vladvictoria-12478054.jpg"
+      maskText="CELEBRATE"
+      subtitle="Sharing moments of joy and achievement"
+    >
+      <h1>Celebration Section</h1>
+    </Section>
+
+    <ScrollArrow />
+  </body>
+</html>
