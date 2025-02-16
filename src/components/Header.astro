@@ -1,7 +1,3 @@
----
-
----
-
 <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
   <nav class="container mx-auto px-6 py-12 flex justify-between items-center">
     <div class="logo text-white text-5xl transition-colors duration-300">
@@ -9,67 +5,300 @@
     </div>
     <div class="space-x-4">
       <button
-        class="nav-button px-8 py-6 text-white border rounded-md border-white bg-transparent hover:bg-white hover:bg-opacity-10 transition-all duration-300 text-4xl"
+        class="nav-button px-8 py-6 text-white border rounded-full border-white bg-transparent hover:bg-white hover:bg-opacity-10 transition-all duration-300 text-4xl"
         aria-label="sign up"
       >
         Connect now
       </button>
-      <!--       
-      <button
-        class="nav-button px-4 py-2 text-white border border-white bg-transparent hover:bg-white hover:bg-opacity-10 transition-all duration-300"
-      >
-        Log In
-      </button> -->
     </div>
   </nav>
 </header>
 
+<i
+  class="scroll-arrow fixed bottom-12 md:bottom-12 left-12 md:left-12 text-white animate-bounce z-50 transition-opacity duration-300"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="h-32 w-32"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+  </svg>
+</i>
+
 <script>
-  const header = document.querySelector("header");
-  const logo = document.querySelector(".logo");
-  const buttons = document.querySelectorAll(".nav-button");
+  //const arrow = document.querySelector(".scroll-arrow") as HTMLElement; Added type assertion
 
+  // window.innerHeight gives you the height of the browser's viewport (visible area) in pixels For example,
+  // if your browser window is 1000 pixels tall, window.innerHeight would be 1000.
+  // Multiplying by 0.8 calculates 80% of that height If window.innerHeight is 1000 pixels 1000 * 0.8 = 800 pixels
   const handleScroll = () => {
-    if (window.scrollY > window.innerHeight * 0.8) {
-      // Add background to header
-      header?.classList.add("bg-white/20", "backdrop-blur-sm", "fade-in");
-      header?.classList.remove("bg-transparent");
+    // Thresholds
+    const headerScrollThreshold = window.innerHeight * 0.15;
+    const arrowScrollThreshold = window.innerHeight * 0.8;
 
-      // Change logo color
-      logo?.classList.remove("text-white");
-      logo?.classList.add("text-stone-950");
+    // Check scroll positions
+    const hasScrolledPastHeaderThreshold =
+      window.scrollY > headerScrollThreshold;
+    const hasScrolledPastArrowThreshold = window.scrollY > arrowScrollThreshold;
 
-      // Change button styles
-      buttons.forEach((button) => {
-        button.classList.remove("text-white", "border-white", "hover:bg-white");
-        button.classList.add(
-          "text-stone-950",
-          "border-stone-950",
-          "hover:bg-stone-950",
-          "hover:text-white",
-        );
-      });
-    } else {
-      // Reset header background
-      header?.classList.remove("bg-white/20", "backdrop-blur-sm");
-      header?.classList.add("bg-transparent", "fade-out");
+    // Header, logo, and button states (triggers early)
+    const headerStates = {
+      scrolled: {
+        add: {
+          header: ["bg-white/30", "backdrop-blur-sm", "fade-in", "text-5xl"],
+          logo: ["text-stone-950", "text-5xl"],
+          button: [
+            "text-stone-950",
+            "text-4xl",
+            "border-stone-950",
+            "hover:bg-stone-950",
+            "rounded-lg",
+          ],
+        },
+        remove: {
+          header: ["bg-transparent"],
+          logo: ["text-white"],
+          button: [
+            "text-white",
+            "border-white",
+            "hover:bg-white",
+            "hover:bg-opacity-10",
+          ],
+        },
+      },
+      reset: {
+        add: {
+          header: ["bg-transparent"],
+          logo: ["text-white"],
+          button: [
+            "text-white",
+            "text-4xl",
+            "border-white",
+            "hover:bg-white",
+            "hover:bg-opacity-30",
+          ],
+        },
+        remove: {
+          header: ["bg-white/20", "backdrop-blur-sm", "fade-in"],
+          logo: ["text-stone-950"],
+          button: ["text-stone-950", "border-stone-950", "hover:text-white"],
+        },
+      },
+    };
 
-      // Reset logo color
-      logo?.classList.add("text-white");
-      logo?.classList.remove("text-stone-950");
+    // Arrow states (triggers later)
+    const arrowStates = {
+      scrolled: {
+        add: ["opacity-0"],
+        remove: [],
+      },
+      reset: {
+        add: [],
+        remove: ["opacity-0"],
+      },
+    };
 
-      // Reset button styles
-      buttons.forEach((button) => {
-        button.classList.add("text-white", "border-white", "hover:bg-white");
-        button.classList.remove(
-          "text-stone-950",
-          "border-stone-950",
-          "hover:bg-stone-950",
-          "hover:text-white",
-        );
-      });
+    // Apply header, logo, and button changes
+    const header = document.querySelector("header");
+    const logo = document.querySelector(".logo");
+    const buttons = document.querySelectorAll(".nav-button");
+    const currentHeaderState = hasScrolledPastHeaderThreshold
+      ? headerStates.scrolled
+      : headerStates.reset;
+
+    // Apply header classes
+    header?.classList.add(...currentHeaderState.add.header);
+    header?.classList.remove(...currentHeaderState.remove.header);
+
+    // Apply logo classes
+    logo?.classList.add(...currentHeaderState.add.logo);
+    logo?.classList.remove(...currentHeaderState.remove.logo);
+
+    // Apply button classes
+    buttons.forEach((button) => {
+      button.classList.add(...currentHeaderState.add.button);
+      button.classList.remove(...currentHeaderState.remove.button);
+    });
+
+    // Apply arrow changes
+    const arrow = document.querySelector(".scroll-arrow") as HTMLElement;
+    const currentArrowState = hasScrolledPastArrowThreshold
+      ? arrowStates.scrolled
+      : arrowStates.reset;
+    if (arrow) {
+      arrow.classList.add(...currentArrowState.add);
+      arrow.classList.remove(...currentArrowState.remove);
+
+      if (hasScrolledPastArrowThreshold) {
+        setTimeout(() => {
+          if (arrow) arrow.style.display = "none";
+        }, 300);
+      } else {
+        arrow.style.display = "block";
+      }
     }
   };
 
   window.addEventListener("scroll", handleScroll);
+
+  // Combined class changes for scrolled state
+
+  //   const handleScroll = () => {
+  //     const handleScroll = () => {
+  //       const headerScrollThreshhold = window.innerHeight * 0.2;
+  //       const arrowScrollThreshold = window.innerHeight * 0.8;
+  //       const hasScrolledPastHeaderThreshhold =
+  //         window.scrollY > headerScrollThreshhold;
+  //       const hasScrolledPastArrowThreshhold =
+  //         window.scrollY > arrowScrollThreshold;
+
+  //       const headerStates = {
+  //         scrolled: {
+  //           add: {
+  //             // Changed from 'elements'
+  //             header: ["bg-white/20", "backdrop-blur-sm", "fade-in"],
+  //             logo: ["text-stone-950"],
+  //             button: [
+  //               "text-stone-950",
+  //               "border-stone-950",
+  //               "hover:bg-stone-950",
+  //               "hover:text-white",
+  //             ],
+  //           },
+  //           remove: {
+  //             header: ["bg-transparent"],
+  //             logo: ["text-white"],
+  //             button: ["text-white", "border-white", "hover:bg-white"],
+  //           },
+  //         },
+  //         reset: {
+  //           add: {
+  //             // Changed from 'elements'
+  //             header: ["bg-transparent"],
+  //             logo: ["text-white"],
+  //             button: ["text-white", "border-white", "hover:bg-white"],
+  //           },
+  //           remove: {
+  //             header: ["bg-white/20", "backdrop-blur-sm", "fade-in"],
+  //             logo: ["text-stone-950"],
+  //             button: [
+  //               "text-stone-950",
+  //               "border-stone-950",
+  //               "hover:bg-stone-950",
+  //               "hover:text-white",
+  //             ],
+  //           },
+  //         },
+  //       };
+
+  //       const arrowStates = {
+  //         scrolled: {
+  //           add: ["opacity-0"],
+  //           remove: [
+  //             "scroll-arrow",
+  //             "fixed",
+  //             "bottom-12",
+  //             "md:bottom-12",
+  //             "left-12",
+  //             "md:left-12",
+  //             "text-white",
+  //             "animate-bounce",
+  //             "z-50",
+  //             "transition-opacity",
+  //             "duration-300",
+  //           ],
+  //         },
+  //         reset: {
+  //           add: [
+  //             "scroll-arrow",
+  //             "fixed",
+  //             "bottom-12",
+  //             "md:bottom-12",
+  //             "left-12",
+  //             "md:left-12",
+  //             "text-white",
+  //             "animate-bounce",
+  //             "z-50",
+  //             "transition-opacity",
+  //             "duration-300",
+  //           ],
+  //           remove: ["opacity-0"],
+  //         },
+  //       };
+
+  //       const headerState = hasScrolledPastHeaderThreshhold
+  //         ? headerStates.reset
+  //         : headerStates.scrolled;
+  //       const arrowState = hasScrolledPastArrowThreshhold
+  //         ? arrowStates.reset
+  //         : arrowStates.scrolled;
+  //     };
+  //   };
+
+  //   // // Combined header classes for reset state
+  //   // const HeaderResetState = {
+  //   //  elements: {
+  //   //   header: ["bg-transparent", "fade-out"],
+  //   //   logo: ["text-white"],
+  //   //   button: ["text-white", "border-white", "hover:bg-white"]
+  //   //  }
+  //   // }
+
+  //   //   const arrowTimer = setTimeout(() => {
+  //   //           arrow.style.display = 'none';
+  //   //         }, 300);
+
+  //   //   const arrowScrolledState = arrow.classList.add
+
+  //   //    if (hasScrolledPastHeaderThreshhold ? HeaderScrolledState : HeaderResetState) {
+
+  //   //    } else if ()
+
+  //   //     if (hasScrolledPastHeaderThreshhold) {
+  //   //       // Header changes
+  //   //       header?.ClassList.add(...HeaderClassChanges.header.add);
+
+  //   //       // Arrow changes
+  //   //       arrow?.classList.remove("opacity-0");
+  //   //       setTimeout(() => {
+  //   //         if (arrow) arrow.style.display = "none";
+  //   //       }, 300);
+  //   //     } else {
+  //   //       // Reset header
+  //   //       header?.classList.remove("bg-white/20", "backdrop-blur-sm");
+  //   //       header?.classList.add("bg-transparent", "fade-out");
+
+  //   //       // Reset logo
+  //   //       logo?.classList.add("text-white");
+  //   //       logo?.classList.remove("text-stone-950");
+
+  //   //       // Reset buttons
+  //   //       buttons.forEach((button) => {
+  //   //         button.classList.add("text-white", "border-white", "hover:bg-white");
+  //   //         button.classList.remove(
+  //   //           "text-stone-950",
+  //   //           "border-stone-950",
+  //   //           "hover:bg-stone-950",
+  //   //           "hover:text-white",
+  //   //         );
+  //   //       });
+
+  //   //       // Reset arrow
+  //   //       if (arrow) {
+  //   //         arrow.style.display = "block";
+  //   //         arrow.classList.remove("opacity-0");
+  //   //       }
+  //   //     }
+  //   //   };
+
+  //   //   window.addEventListener("scroll", handleScroll);
+  //   //
+  //
 </script>
