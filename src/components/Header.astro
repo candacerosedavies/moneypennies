@@ -1,11 +1,11 @@
 <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-  <nav class="container mx-auto px-6 py-12 flex justify-between items-center">
+  <nav class="container mx-auto px-6 py-6 flex justify-between items-center">
     <div class="logo text-white text-5xl transition-colors duration-300">
       Moneypennies logo
     </div>
     <div class="space-x-4">
       <button
-        class="nav-button px-8 py-6 text-white border rounded-full border-white bg-transparent hover:bg-white hover:bg-opacity-10 transition-all duration-300 text-4xl"
+        class="nav-button px-8 py-6 text-white hover:text-black border rounded-full border-white bg-transparent hover:bg-white hover:border-black hover:bg-opacity-10 transition-all duration-300 text-4xl"
         aria-label="sign up"
       >
         Connect now
@@ -41,7 +41,7 @@
   const handleScroll = () => {
     // Thresholds
     const headerScrollThreshold = window.innerHeight * 0.15;
-    const arrowScrollThreshold = window.innerHeight * 0.8;
+    const arrowScrollThreshold = window.innerHeight * 0.5;
 
     // Check scroll positions
     const hasScrolledPastHeaderThreshold =
@@ -59,7 +59,7 @@
             "text-4xl",
             "border-stone-950",
             "hover:bg-stone-950",
-            "rounded-lg",
+            "rounded-full",
           ],
         },
         remove: {
@@ -81,7 +81,7 @@
             "text-white",
             "text-4xl",
             "border-white",
-            "hover:bg-white",
+            "hover:text-black",
             "hover:bg-opacity-30",
           ],
         },
@@ -147,158 +147,4 @@
   };
 
   window.addEventListener("scroll", handleScroll);
-
-  // Combined class changes for scrolled state
-
-  //   const handleScroll = () => {
-  //     const handleScroll = () => {
-  //       const headerScrollThreshhold = window.innerHeight * 0.2;
-  //       const arrowScrollThreshold = window.innerHeight * 0.8;
-  //       const hasScrolledPastHeaderThreshhold =
-  //         window.scrollY > headerScrollThreshhold;
-  //       const hasScrolledPastArrowThreshhold =
-  //         window.scrollY > arrowScrollThreshold;
-
-  //       const headerStates = {
-  //         scrolled: {
-  //           add: {
-  //             // Changed from 'elements'
-  //             header: ["bg-white/20", "backdrop-blur-sm", "fade-in"],
-  //             logo: ["text-stone-950"],
-  //             button: [
-  //               "text-stone-950",
-  //               "border-stone-950",
-  //               "hover:bg-stone-950",
-  //               "hover:text-white",
-  //             ],
-  //           },
-  //           remove: {
-  //             header: ["bg-transparent"],
-  //             logo: ["text-white"],
-  //             button: ["text-white", "border-white", "hover:bg-white"],
-  //           },
-  //         },
-  //         reset: {
-  //           add: {
-  //             // Changed from 'elements'
-  //             header: ["bg-transparent"],
-  //             logo: ["text-white"],
-  //             button: ["text-white", "border-white", "hover:bg-white"],
-  //           },
-  //           remove: {
-  //             header: ["bg-white/20", "backdrop-blur-sm", "fade-in"],
-  //             logo: ["text-stone-950"],
-  //             button: [
-  //               "text-stone-950",
-  //               "border-stone-950",
-  //               "hover:bg-stone-950",
-  //               "hover:text-white",
-  //             ],
-  //           },
-  //         },
-  //       };
-
-  //       const arrowStates = {
-  //         scrolled: {
-  //           add: ["opacity-0"],
-  //           remove: [
-  //             "scroll-arrow",
-  //             "fixed",
-  //             "bottom-12",
-  //             "md:bottom-12",
-  //             "left-12",
-  //             "md:left-12",
-  //             "text-white",
-  //             "animate-bounce",
-  //             "z-50",
-  //             "transition-opacity",
-  //             "duration-300",
-  //           ],
-  //         },
-  //         reset: {
-  //           add: [
-  //             "scroll-arrow",
-  //             "fixed",
-  //             "bottom-12",
-  //             "md:bottom-12",
-  //             "left-12",
-  //             "md:left-12",
-  //             "text-white",
-  //             "animate-bounce",
-  //             "z-50",
-  //             "transition-opacity",
-  //             "duration-300",
-  //           ],
-  //           remove: ["opacity-0"],
-  //         },
-  //       };
-
-  //       const headerState = hasScrolledPastHeaderThreshhold
-  //         ? headerStates.reset
-  //         : headerStates.scrolled;
-  //       const arrowState = hasScrolledPastArrowThreshhold
-  //         ? arrowStates.reset
-  //         : arrowStates.scrolled;
-  //     };
-  //   };
-
-  //   // // Combined header classes for reset state
-  //   // const HeaderResetState = {
-  //   //  elements: {
-  //   //   header: ["bg-transparent", "fade-out"],
-  //   //   logo: ["text-white"],
-  //   //   button: ["text-white", "border-white", "hover:bg-white"]
-  //   //  }
-  //   // }
-
-  //   //   const arrowTimer = setTimeout(() => {
-  //   //           arrow.style.display = 'none';
-  //   //         }, 300);
-
-  //   //   const arrowScrolledState = arrow.classList.add
-
-  //   //    if (hasScrolledPastHeaderThreshhold ? HeaderScrolledState : HeaderResetState) {
-
-  //   //    } else if ()
-
-  //   //     if (hasScrolledPastHeaderThreshhold) {
-  //   //       // Header changes
-  //   //       header?.ClassList.add(...HeaderClassChanges.header.add);
-
-  //   //       // Arrow changes
-  //   //       arrow?.classList.remove("opacity-0");
-  //   //       setTimeout(() => {
-  //   //         if (arrow) arrow.style.display = "none";
-  //   //       }, 300);
-  //   //     } else {
-  //   //       // Reset header
-  //   //       header?.classList.remove("bg-white/20", "backdrop-blur-sm");
-  //   //       header?.classList.add("bg-transparent", "fade-out");
-
-  //   //       // Reset logo
-  //   //       logo?.classList.add("text-white");
-  //   //       logo?.classList.remove("text-stone-950");
-
-  //   //       // Reset buttons
-  //   //       buttons.forEach((button) => {
-  //   //         button.classList.add("text-white", "border-white", "hover:bg-white");
-  //   //         button.classList.remove(
-  //   //           "text-stone-950",
-  //   //           "border-stone-950",
-  //   //           "hover:bg-stone-950",
-  //   //           "hover:text-white",
-  //   //         );
-  //   //       });
-
-  //   //       // Reset arrow
-  //   //       if (arrow) {
-  //   //         arrow.style.display = "block";
-  //   //         arrow.classList.remove("opacity-0");
-  //   //       }
-  //   //     }
-  //   //   };
-
-  //   //   window.addEventListener("scroll", handleScroll);
-  //   //
-  //
 </script>

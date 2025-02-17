@@ -8,8 +8,8 @@ interface Props {
 }
 
 const {
-    maskedText = "LONDON VENUES",
-    subtitle = "Conference centres and hotels",
+    maskedText = "Calendar details",
+    subtitle = "Discover who, what, where and when.",
     background = "bg-[#6895D2]",
 } = Astro.props;
 ---
@@ -18,9 +18,9 @@ const {
     {background}
     variant="color"
     imageFolder="connect"
-    className="Section01"
-    contentPosition="left"
-    verticalAlignment="bottom"
+    className="Section03"
+    contentPosition="right"
+    verticalAlignment="center"
 >
     <div class="masked-container">
         <h1 class="masked-text">{maskedText}</h1>
