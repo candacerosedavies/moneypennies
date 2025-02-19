@@ -1,32 +1,14 @@
 ---
-import "../styles/global.css";
-import Header from "../components/Header.astro";
+import HomeLayout from "../layouts/HomeLayout.astro";
 import Section01 from "../components/Section01.astro";
 import Section02 from "../components/Section02.astro";
 import Section03 from "../components/Section03.astro";
-import ScrollArrow from "../components/ScrollArrow.astro";
 
 const title = "Moneypennies home page";
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;900&display=swap"
-      rel="stylesheet"
-    />
-    <title>{title}</title>
-  </head>
-  <body>
-    <Header />
-    <!-- <slot /> -->
-    <!-- <Contact> -->
-    <Section01 />
-    <Section02 />
-    <Section03 />
-
-    <ScrollArrow />
-  </body>
-</html>
+<HomeLayout title={title}>
+  <Section01 />
+  <Section02 />
+  <Section03 />
+</HomeLayout>

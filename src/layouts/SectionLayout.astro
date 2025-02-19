@@ -11,9 +11,9 @@ interface Props {
 }
 
 const {
-  variant,
-  textStyle,
-  background = "bg-transparent",
+  variant = "",
+  textStyle = "",
+  background = "",
   imageFolder,
   imageName,
   className = "",
@@ -86,6 +86,8 @@ const backgroundImageStyle =
     display: flex;
     flex-direction: column;
     padding: 2rem;
+    max-width: 2000px;
+    margin: 0 auto;
   }
 
   .masked-container {

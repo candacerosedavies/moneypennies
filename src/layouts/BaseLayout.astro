@@ -1,6 +1,7 @@
 ---
-// src/layouts/BaseLayout.astro
+// layouts/BaseLayout.astro
 import "../styles/global.css";
+import Header from "../components/Header.astro";
 
 interface Props {
     title: string;
@@ -18,38 +19,15 @@ const { title, description = "Default description" } = Astro.props;
         <meta name="description" content={description} />
         <title>{title}</title>
     </head>
-    <body class="min-h-screen flex flex-col bg-gray-50">
-        <header class="bg-white shadow-sm">
-            <nav class="container mx-auto px-4 py-4">
-                <div class="flex justify-between items-center">
-                    <a href="/" class="text-xl font-semibold text-gray-900"
-                        >Your Logo</a
-                    >
-                    <div class="space-x-6">
-                        <a
-                            href="/"
-                            class="text-gray-600 hover:text-gray-900 transition-colors"
-                            >Home</a
-                        >
-                        <a
-                            href="/contact"
-                            class="text-gray-600 hover:text-gray-900 transition-colors"
-                            >Contact</a
-                        >
-                    </div>
-                </div>
-            </nav>
-        </header>
-
-        <main class="flex-grow container mx-auto px-4 py-8">
+    <body class="min-h-screen flex flex-col">
+        <Header />
+        <main class="flex-grow w-full">
             <slot />
         </main>
-
         <footer class="bg-white border-t mt-auto">
             <div class="container mx-auto px-4 py-6">
                 <p class="text-center text-gray-600">
-                    &copy; {new Date().getFullYear()} Your Company Name. All rights
-                    reserved.
+                    &copy; {new Date().getFullYear()} Moneypennies. All rights reserved.
                 </p>
             </div>
         </footer>

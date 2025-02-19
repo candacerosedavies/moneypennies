@@ -2,134 +2,100 @@
 import SectionLayout from "../layouts/SectionLayout.astro";
 
 interface Props {
-  h1Text: string; // Required content
-  subtitle: string; // Required content
+  h1Text?: string;
+  subtitle?: string;
+  para?: string;
 }
 
-const { h1Text = "Connect with over 4,000 event buyers", subtitle = "" } =
-  Astro.props;
+const {
+  h1Text = "Connect with over 4,000 event buyers",
+  subtitle = "",
+  para = "We provide the latest data to grow your venue's revenue today",
+} = Astro.props;
 ---
 
 <SectionLayout
   variant="image"
-  textSyle="normal"
+  textStyle="masked"
   imageFolder="connect"
   imageName="pexels-didsss-2127522.jpg"
   className="Section01"
 >
-  <!--   contentPosition="right"
-     contentPosition="left"
-verticalAlignment="center" -->
-  <div class="normal-text">
-    <h1>{h1Text}</h1>
-    <!-- <h1 class="masked-text-outline">{maskedText}</h1> -->
-  </div>
-  <span class="para-container">
-    <p class="para-style">
-      We provide the latest data to grow your venue's revenue today
+  <section class="text-layout">
+    <h1 class="h1-wrapper h1-container">
+      {h1Text}
+    </h1>
+
+    <p class="para-wrapper para-container">
+      {para}
     </p>
-  </span>
-  <!-- <div class="text-content">
-    <h2 class="title">{subtitle}</h2>
-  </div> -->
+  </section>
+
+  <slot />
 </SectionLayout>
 
 <style>
-  .content-wrapper {
+  section {
     display: flex;
     flex-direction: column;
-    height: 100%;
-    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 2rem 1rem;
   }
 
-  .masked-container {
-    position: relative;
-    margin-bottom: 2rem;
-  }
-
-  .masked-text {
-    font-size: 6rem;
-    font-weight: 500;
-    opacity: 50;
-    background-clip: text;
-    -webkit-background-clip: text;
-    background-color: white;
-    mix-blend-mode: overlay;
-    line-height: 1;
+  .h1-wrapper {
+    /* margin-bottom: 2rem; */
     position: absolute;
-    top: 13rem;
-    left: 63rem;
-    bottom: 30rem;
-    right: 2rem;
-    width: 60rem;
-  }
-
-  .masked-text-outline {
-    position: absolute;
-    opacity: 50;
-    inset: 0;
-    font-size: 8rem;
-    font-weight: 500;
-    color: rgba(0, 0, 0, 0.1);
-    pointer-events: none;
-    line-height: 1;
-  }
-
-  .para-container {
-    width: 5rem;
-  }
-
-  .para-style {
-    font-size: 3rem;
-    font-weight: 400;
-    font-family: "Roboto", sans-serif;
+    opacity: 0.7;
     color: white;
+    top: 55vh;
+    left: 5vw;
+    width: 70vw;
+    font-size: clamp(3rem, 8vw, 7rem);
+  }
+
+  .para-wrapper {
     position: absolute;
-    top: 15rem;
-    left: 75rem;
-    bottom: 30rem;
-    right: 15rem;
-    width: 30rem;
-    opacity: 50;
-    background-clip: text;
-    -webkit-background-clip: text;
-    background-color: white;
-    mix-blend-mode: overlay;
-  }
-
-  .normal-text {
-    font-size: 8rem;
-    font-weight: 100;
-    font-family: "Roboto", sans-serif;
+    top: 28vh;
+    right: 5vw;
+    width: 40vw;
+    margin-top: 2rem;
+    opacity: 0.7;
     color: white;
-    line-height: 1;
-    position: absolute;
-    top: 30rem;
-    left: 5rem;
-    bottom: 5rem;
-    right: 30rem;
-    width: 75rem;
+    font-size: clamp(1.5rem, 4vw, 3rem);
   }
 
-  .text-content {
-    z-index: 1;
-  }
-
-  .title {
-    font-size: 3rem;
-    font-weight: 300;
-    color: white;
-    margin-bottom: 1rem;
-  }
-
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    .content-wrapper {
-      padding: 2rem;
+  /* Tablet and smaller breakpoint */
+  @media (max-width: 1024px) {
+    .h1-wrapper {
+      left: 10%;
+      width: 80%;
     }
 
-    .title {
-      font-size: 2rem;
+    .para-wrapper {
+      right: 10%;
+      width: 70%;
+    }
+  }
+
+  /* Mobile breakpoint */
+  @media (max-width: 768px) {
+    .h1-wrapper {
+      font-weight: 200;
+      position: static;
+      width: 90%;
+      margin: 1rem auto;
+      text-align: center;
+      font-size: clamp(2.5rem, 10vw, 4rem);
+    }
+
+    .para-wrapper {
+      position: static;
+      width: 90%;
+      margin: 1rem auto;
+      text-align: center;
+      font-size: clamp(1rem, 5vw, 2rem);
     }
   }
 </style>
