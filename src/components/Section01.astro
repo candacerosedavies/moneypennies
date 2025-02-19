@@ -2,11 +2,11 @@
 import SectionLayout from "../layouts/SectionLayout.astro";
 
 interface Props {
-  maskedText: string; // Required content
+  h1Text: string; // Required content
   subtitle: string; // Required content
 }
 
-const { maskedText = "Connect with over 4,000 event buyers", subtitle = "" } =
+const { h1Text = "Connect with over 4,000 event buyers", subtitle = "" } =
   Astro.props;
 ---
 
@@ -16,17 +16,22 @@ const { maskedText = "Connect with over 4,000 event buyers", subtitle = "" } =
   imageFolder="connect"
   imageName="pexels-didsss-2127522.jpg"
   className="Section01"
-  contentPosition="left"
-  verticalAlignment="center"
 >
-  <div class="masked-container">
-    <h1 class="masked-text">{maskedText}</h1>
-    <h1 class="masked-text-outline">{maskedText}</h1>
+  <!--   contentPosition="right"
+     contentPosition="left"
+verticalAlignment="center" -->
+  <div class="normal-text">
+    <h1>{h1Text}</h1>
+    <!-- <h1 class="masked-text-outline">{maskedText}</h1> -->
   </div>
-
-  <div class="text-content">
+  <span class="para-container">
+    <p class="para-style">
+      We provide the latest data to grow your venue's revenue today
+    </p>
+  </span>
+  <!-- <div class="text-content">
     <h2 class="title">{subtitle}</h2>
-  </div>
+  </div> -->
 </SectionLayout>
 
 <style>
@@ -43,24 +48,67 @@ const { maskedText = "Connect with over 4,000 event buyers", subtitle = "" } =
   }
 
   .masked-text {
-    font-size: clamp(4rem, 15vw, 12rem);
+    font-size: 6rem;
     font-weight: 500;
-    color: transparent;
+    opacity: 50;
     background-clip: text;
     -webkit-background-clip: text;
     background-color: white;
     mix-blend-mode: overlay;
     line-height: 1;
+    position: absolute;
+    top: 13rem;
+    left: 63rem;
+    bottom: 30rem;
+    right: 2rem;
+    width: 60rem;
   }
 
   .masked-text-outline {
     position: absolute;
+    opacity: 50;
     inset: 0;
-    font-size: clamp(4rem, 15vw, 12rem);
+    font-size: 8rem;
     font-weight: 500;
-    color: rgba(255, 255, 255, 0.1);
+    color: rgba(0, 0, 0, 0.1);
     pointer-events: none;
     line-height: 1;
+  }
+
+  .para-container {
+    width: 5rem;
+  }
+
+  .para-style {
+    font-size: 3rem;
+    font-weight: 400;
+    font-family: "Roboto", sans-serif;
+    color: white;
+    position: absolute;
+    top: 15rem;
+    left: 75rem;
+    bottom: 30rem;
+    right: 15rem;
+    width: 30rem;
+    opacity: 50;
+    background-clip: text;
+    -webkit-background-clip: text;
+    background-color: white;
+    mix-blend-mode: overlay;
+  }
+
+  .normal-text {
+    font-size: 8rem;
+    font-weight: 100;
+    font-family: "Roboto", sans-serif;
+    color: white;
+    line-height: 1;
+    position: absolute;
+    top: 30rem;
+    left: 5rem;
+    bottom: 5rem;
+    right: 30rem;
+    width: 75rem;
   }
 
   .text-content {
