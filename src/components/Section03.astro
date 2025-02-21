@@ -6,23 +6,18 @@ interface Props {
     subtitle?: string; // Required content
 }
 
-const { maskedText = "The event industry's best kept secret", subtitle = "" } =
-    Astro.props;
+const { maskedText = "Best kept secret", subtitle = "" } = Astro.props;
 ---
 
 <SectionLayout
     variant="image"
-    textSyle="normal-text"
     imageFolder="secret"
     imageName="pexels-cottonbro-6284254.jpg"
     className="Section03"
     contentPosition="right"
     verticalAlignment="center"
 >
-    <div class="masked-container">
-        <h1 class="masked-text">{maskedText}</h1>
-        <h1 class="masked-text-outline">{maskedText}</h1>
-    </div>
+    <h1 class="masked-text">{maskedText}</h1>
 
     <div class="text-content">
         <h2 class="title">{subtitle}</h2>
@@ -37,12 +32,31 @@ const { maskedText = "The event industry's best kept secret", subtitle = "" } =
         margin: 0 auto;
     }
 
-    .masked-container {
+    /* .masked-container {
         position: relative;
         margin-bottom: 2rem;
-    }
+    } */
 
     .masked-text {
+        position: absolute;
+        top: 30vh;
+        left: 5vw;
+        width: 60vw;
+        font-size: clamp(4rem, 10vw, 10rem);
+        font-weight: 200;
+
+        /*masked styles*/
+        background-clip: text;
+        opacity: 2;
+        -webkit-background-clip: text;
+        -webkit-text-stroke: 1px rgba(40, 40, 40, 0);
+        background-color: white;
+        mix-blend-mode: overlay;
+
+        /* text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.1); */
+    }
+
+    /* .masked-text {
         font-size: clamp(4rem, 15vw, 12rem);
         font-weight: 500;
         opacity: 50;
@@ -62,7 +76,7 @@ const { maskedText = "The event industry's best kept secret", subtitle = "" } =
         color: rgba(255, 255, 255, 0.1);
         pointer-events: none;
         line-height: 1;
-    }
+    } */
 
     .text-content {
         z-index: 1;

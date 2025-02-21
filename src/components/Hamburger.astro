@@ -1,10 +1,94 @@
 ---
-
+// components/Hamburger.astro
 ---
 
-<nav>
-    <div class="hamburger">
+<div class="md:hidden">
+    <!-- Only show on mobile -->
+    <div class="hamburger" id="hamburger-menu">
         <span class="line"></span>
         <span class="line"></span>
     </div>
-</nav>
+    <div class="menu-items">
+        <a href="/">Home</a>
+        <a href="/about">Why Use Moneypennies?</a>
+        <a href="/Contact/" class="mobile-contact">Say Hello!</a>
+        <!-- Mobile version of contact button -->
+    </div>
+</div>
+
+<style>
+    .hamburger {
+        cursor: pointer;
+        padding: 1rem;
+        z-index: 100;
+    }
+
+    .line {
+        display: block;
+        width: 25px;
+        height: 3px;
+        margin: 5px auto;
+        background-color: white;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .hamburger.active .line:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .hamburger.active .line:nth-child(2) {
+        transform: translateY(0px) rotate(-45deg);
+    }
+
+    .menu-items {
+        position: fixed;
+        right: -100%;
+        top: 0;
+        gap: 0;
+        display: flex;
+        flex-direction: column;
+        background-color: rgba(0, 0, 0, 0.9);
+        width: 100%;
+        height: 100vh;
+        text-align: center;
+        transition: 0.3s;
+        padding-top: 4rem;
+    }
+
+    .menu-items.active {
+        right: 0;
+    }
+
+    .menu-items a {
+        padding: 1.5rem;
+        color: white;
+        text-decoration: none;
+        font-size: 1.5rem;
+    }
+
+    .mobile-contact {
+        margin-top: 2rem;
+        border: 1px solid white;
+        border-radius: 9999px;
+        margin: 2rem 1rem;
+    }
+</style>
+
+<script>
+    const hamburger = document.querySelector("#hamburger-menu");
+    const menuItems = document.querySelector(".menu-items");
+
+    hamburger?.addEventListener("click", () => {
+        hamburger.classList.toggle("active");
+        menuItems?.classList.toggle("active");
+    });
+
+    // Close menu when clicking a link
+    const menuLinks = document.querySelectorAll(".menu-items a");
+    menuLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+            hamburger?.classList.remove("active");
+            menuItems?.classList.remove("active");
+        });
+    });
+</script>

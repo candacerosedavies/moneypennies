@@ -1,0 +1,105 @@
+---
+interface Props {
+    images: {
+        src: string;
+        left: string;
+        top: string;
+        width: number;
+        speed: number;
+        initialOffset: number;
+    }[];
+}
+
+const { images } = Astro.props;
+---
+
+<section class="parallax-container">
+    {
+        images.map((img, index) => (
+            <div
+                class={`parallax-image-wrapper image-${index}`}
+                data-speed={img.speed}
+                data-index={index}
+                data-left={img.left}
+                data-top={img.top}
+                data-width={img.width}
+            >
+                <img
+                    src={img.src}
+                    alt={`Parallax image ${index + 1}`}
+                    class="parallax-image"
+                />
+            </div>
+        ))
+    }
+</section>
+
+<style>
+    .parallax-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        overflow: hidden;
+    }
+
+    .parallax-image-wrapper {
+        position: absolute;
+        will-change: transform;
+    }
+
+    /* Base styles for all images */
+    .parallax-image {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        border-radius: 12px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Specific image styles */
+
+    .image-0 {
+        top: 20%;
+        left: 90%;
+        width: 30rem;
+        z-index: 1;
+        animation: moveimage-0 100s linear infinite;
+    }
+
+    .image-1 {
+        top: 50%;
+        left: 60%;
+        width: 15rem;
+        z-index: 2;
+        animation: moveimage-1 50s linear infinite;
+    }
+
+    @keyframes moveimage-0 {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-400%);
+        }
+    }
+
+    @keyframes moveimage-1 {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-400%);
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        console.log("Parallax script loaded");
+        const images = document.querySelectorAll(".parallax-image-wrapper");
+        console.log("Number of images found:", images.length);
+    });
+</script>

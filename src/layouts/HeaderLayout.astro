@@ -20,20 +20,9 @@ import ContactForm from "../components/ContactForm.astro";
                 </button>
             </a>
         </div>
+
         <ContactForm />
-        <Hamburger />
+        <!-- <Hamburger /> -->
         <slot />
     </nav>
 </header>
-
-<script>
-    // Your existing header scroll behavior script here
-    const handleScroll = () => {
-        const headerScrollThreshold = window.innerHeight * 0.15;
-        const hasScrolledPastHeaderThreshold =
-            window.scrollY > headerScrollThreshold;
-        // Rest of your header state management code...
-    };
-
-    window.addEventListener("scroll", handleScroll);
-</script>

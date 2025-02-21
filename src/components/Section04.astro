@@ -1,0 +1,113 @@
+---
+import SectionLayout from "../layouts/SectionLayout.astro";
+
+interface Props {
+    h1Text: string;
+    subtitle: string;
+    para: string;
+    para2: string;
+    sub2: string;
+}
+
+const {
+    h1Text = "Reviews",
+    subtitle = "-Steven Pritchard, Director of Event Sales Royal Lancaster London.",
+    para = "I have worked with Suzanne for many years and she has supported us greatly. Her databases are always on point and she will happily work on projects to fill our need months. Quality of data has always been great and contacts all correct. ",
+    para2 = "Suzanne is absolutely fantastic. She has gone above and beyond to help me out. I would completely recommend her services!",
+    sub2 = "-Matt Wynter, Owner Fireproof Talent",
+} = Astro.props;
+---
+
+<SectionLayout
+    variant="color"
+    background="bg-[#9BB0C1]"
+    className="section04"
+    heightVariant="normal"
+>
+    <section>
+        <h1 class="h1-text">
+            {h1Text}
+        </h1>
+        <span class="review-1-wrapper">
+            <p class="para-text">
+                {para}
+                <p class="subtitle-text">
+                    {subtitle}
+                </p>
+            </p>
+        </span>
+
+        <span class="review-2-wrapper">
+            <p class="para-text-2">
+                {para2}
+                <p class="subtitle-text-2">
+                    {sub2}
+                </p>
+            </p>
+        </span>
+    </section>
+</SectionLayout>
+
+<style>
+    .h1-text {
+        position: absolute;
+        opacity: 1;
+        color: #b0a697;
+        top: 8vh;
+        font-weight: 200;
+        left: 10vw;
+        width: 70vw;
+        font-size: clamp(3rem, 13vw, 13rem);
+    }
+
+    .review-1-wrapper {
+        position: absolute;
+        left: 8vw;
+        width: 40%;
+        top: 42vh;
+        font-size: clamp(1rem, 2vw, 2rem);
+    }
+
+    .para-text {
+        position: absolute;
+        top: 10vh;
+        opacity: 0.7;
+        color: black;
+    }
+
+    .subtitle-text {
+        position: absolute;
+        opacity: 0.9;
+        color: white;
+        top: 38vh;
+        font-style: italic;
+        font-weight: 200;
+    }
+
+    .review-2-wrapper {
+        position: absolute;
+        left: 55vw;
+        width: 40%;
+        top: 30vh;
+        font-size: clamp(1rem, 2vw, 2rem);
+    }
+
+    .para-text-2 {
+        position: absolute;
+        top: 10vh;
+        opacity: 0.7;
+        color: black;
+    }
+
+    .subtitle-text-2 {
+        position: absolute;
+        opacity: 0.9;
+        color: white;
+        top: 25vh;
+        font-style: italic;
+        font-weight: 200;
+    }
+</style>
+
+position: absolute; opacity: 0.7; color: black; top: 30vh; left: 55vw; width:
+50%;

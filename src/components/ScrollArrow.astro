@@ -1,13 +1,42 @@
 ---
-// components/ScrollArrow.astro
+
 ---
 
-<i
-    class="scroll-arrow fixed bottom-12 md:bottom-12 left-12 md:left-12 text-white animate-bounce z-50 transition-opacity duration-300"
->
+<style is:global>
+    .scroll-arrow {
+        position: fixed;
+        bottom: 0.5rem;
+        left: 3rem;
+        color: white !important;
+        padding: 1rem;
+        transition: all 300ms ease-in-out;
+    }
+
+    .scroll-arrow svg {
+        height: clamp(5rem, 5vh, 5rem);
+        width: clamp(5rem, 5vh, 5rem);
+    }
+
+    @keyframes bounce {
+        0%,
+        100% {
+            transform: translateY(-25%);
+            animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+        }
+        50% {
+            transform: translateY(0);
+            animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+        }
+    }
+
+    .scroll-arrow {
+        animation: bounce 1s infinite;
+    }
+</style>
+
+<i id="scroll-arrow" class="scroll-arrow">
     <svg
         xmlns="http://www.w3.org/2000/svg"
-        class="h-32 w-32"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -21,13 +50,24 @@
 </i>
 
 <script>
-    // Arrow-specific scroll behavior
-    const handleArrowScroll = () => {
-        const arrowScrollThreshold = window.innerHeight * 0.5;
-        const hasScrolledPastArrowThreshold =
-            window.scrollY > arrowScrollThreshold;
-        // Arrow state management code...
-    };
+    (() => {
+        const arrow = document.getElementById("scroll-arrow");
 
-    window.addEventListener("scroll", handleArrowScroll);
+        //need this as was getting a typescript error
+        if (!arrow) return;
+
+        const handleArrowScroll = () => {
+            const scrollPosition = window.scrollY;
+            const viewportHeight = window.innerHeight;
+            const threshold = viewportHeight * 0.5;
+
+            arrow.style.display = scrollPosition > threshold ? "none" : "block";
+        };
+
+        // Initial check
+        handleArrowScroll();
+
+        // Add scroll event listener
+        window.addEventListener("scroll", handleArrowScroll);
+    })();
 </script>

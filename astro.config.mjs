@@ -1,12 +1,8 @@
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
-import tailwind from '@astrojs/tailwind';  // Changed this line
-
-
+import tailwind from '@astrojs/tailwind';
 
 export default defineConfig({
-  integrations: [react(), tailwind()],  // Added tailwind here
+  integrations: [react(), tailwind()],
+  publicDir: 'public',  // Add this line
 });
-
-
-

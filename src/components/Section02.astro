@@ -1,90 +1,87 @@
 ---
 import SectionLayout from "../layouts/SectionLayout.astro";
+import ParallaxImages from "../components/ParallaxImages.astro";
+import ParallaxText from "../components/ParallaxText.astro";
 
 interface Props {
-    maskedText?: string; // Required content
-    subtitle?: string; // Required content
-    background?: string;
+    h1Text: string;
+    subtitle: string;
 }
 
-const {
-    maskedText = "Calendar details",
-    subtitle = "Discover who, what, where and when.",
-    background = "bg-[#6895D2]",
-} = Astro.props;
+const { h1Text = "Discover", subtitle = "Who. What. Where. When." } =
+    Astro.props;
+
+const parallaxImage01 = {
+    src: "/images/conference/pexels-jibarofoto-2833037.jpg",
+    left: "90%", // Added left property
+    top: "20%",
+    width: 500,
+    speed: 0.3,
+    initialOffset: 0,
+};
+
+const parallaxImage02 = {
+    src: "/images/unlock/pexels-shutter-speed-ism-4767348.jpg",
+    left: "60%", // Added left property
+    top: "60%",
+    width: 250,
+    speed: 0.7,
+    initialOffset: 0,
+};
+const images = [parallaxImage01, parallaxImage02];
+console.log("Section02 - Images array:", images);
+console.log("Section02 - Image 1:", parallaxImage01);
+console.log("Section02 - Image 2:", parallaxImage02);
 ---
 
 <SectionLayout
-    {background}
     variant="color"
-    imageFolder="connect"
-    className="Section03"
+    background="bg-[#607ea8]"
+    className="section-02"
     contentPosition="right"
-    verticalAlignment="center"
+    verticalAlignment="bottom"
+    heightVariant="tall"
 >
-    <div class="masked-container">
-        <h1 class="masked-text">{maskedText}</h1>
-        <h1 class="masked-text-outline">{maskedText}</h1>
-    </div>
-
-    <div class="text-content">
-        <h2 class="title">{subtitle}</h2>
-    </div>
+    <section class="content-wrapper">
+        <ParallaxImages images={images} />
+        <ParallaxText h1Text={h1Text} subtitle={subtitle} />
+    </section>
 </SectionLayout>
 
 <style>
-    .content-wrapper {
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-        margin: 0 auto;
-    }
-
-    .masked-container {
-        position: relative;
-        margin-bottom: 2rem;
-    }
-
-    .masked-text {
-        font-size: clamp(4rem, 15vw, 12rem);
-        font-weight: 500;
-        opacity: 50;
-        background-clip: text;
-        -webkit-background-clip: text;
-        background-color: white;
-        mix-blend-mode: overlay;
-        line-height: 1;
-    }
-
-    .masked-text-outline {
+    /* 
+    .text-wrapper {
         position: absolute;
-        inset: 0;
-        font-size: clamp(4rem, 15vw, 12rem);
-        font-weight: 500;
-        color: rgba(255, 255, 255, 0.1);
-        pointer-events: none;
-        line-height: 1;
+        top: 50%; /* Start at vertical center 
+        left: 50%; /* Start at horizontal center
+        transform: translate(30%, 20%); /* Move right and down 
+        z-index: 2;
     }
 
-    .text-content {
-        z-index: 1;
-    }
 
-    .title {
-        font-size: 3rem;
-        font-weight: 300;
+    .subtitle {
+        font-size: clamp(1.5rem, 4vw, 2.5rem);
         color: white;
-        margin-bottom: 1rem;
+        margin-top: 2rem;
     }
 
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-        .content-wrapper {
-            padding: 2rem;
-        }
-
-        .title {
-            font-size: 2rem;
-        }
-    }
+     styling in parallaxText instead
+    .content-wrapper {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: stretch; /* or remove justify-content 
+        align-items: stretch; /* or remove align-items 
+        padding: 0;
+        overflow: hidden;
+    } 
+    styling in parallaxText instead
+       /* .h1-text {
+        font-size: clamp(4rem, 15vw, 12rem);
+        font-weight: 200;
+        line-height: 1;
+        color: white;
+        mix-blend-mode: difference;
+    } */
 </style>

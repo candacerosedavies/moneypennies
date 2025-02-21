@@ -1,13 +1,23 @@
 ---
 interface Props {
-  variant: "image" | "color";
+  variant?: "image" | "color";
   background?: string;
-  textStyle: "masked" | "normal";
+  textStyle?: "masked" | "normal";
   imageFolder?: string;
   imageName?: string;
   className?: string;
   contentPosition?: "left" | "center" | "right";
   verticalAlignment?: "top" | "center" | "bottom";
+  hasParallax?: boolean;
+  parallaxImages?: {
+    src: string;
+    left: string;
+    top: string;
+    width: number;
+    speed: number;
+    initialOffset: number;
+  }[];
+  heightVariant?: "tall" | "normal";
 }
 
 const {
@@ -19,6 +29,7 @@ const {
   className = "",
   contentPosition = "left",
   verticalAlignment = "center",
+  heightVariant = "normal",
 } = Astro.props;
 
 const textVariant = textStyle === "masked" ? "masked-text" : "normal-text";
@@ -47,7 +58,7 @@ const backgroundImageStyle =
 ---
 
 <section
-  class={`${sectionClass} ${className} ${uniqueImageClass} ${textVariant}`}
+  class={`${sectionClass} ${className} ${uniqueImageClass} ${textVariant} ${heightVariant === "tall" ? "tall-section" : ""}`}
 >
   <div class="overlay"></div>
   <div class={alignmentClasses}>
@@ -85,13 +96,21 @@ const backgroundImageStyle =
     font-family: "Roboto", sans-serif;
     display: flex;
     flex-direction: column;
-    padding: 2rem;
-    max-width: 2000px;
-    margin: 0 auto;
+    padding: 0; /* Remove padding */
+    max-width: 100%; /* Change from 2000px to 100% */
+    margin: 0; /* Remove auto margins */
+  }
+
+  .tall-section {
+    min-height: 100vh;
+    height: 100vh; /* Ensure exact 100vh */
+    width: 100vw;
+    overflow: hidden;
   }
 
   .masked-container {
     padding: 2rem 6rem;
+    font-family: "Roboto", sans-serif;
     max-width: 1400px;
     font-size: 3rem;
     font-weight: 700;
@@ -100,6 +119,7 @@ const backgroundImageStyle =
   .normal-text {
     font-size: 5rem;
     font-weight: 500;
+    font-family: "Roboto", sans-serif;
     color: white;
     line-height: 1;
     position: relative;
@@ -109,9 +129,10 @@ const backgroundImageStyle =
     font-size: 3rem;
     font-weight: 700;
     color: transparent;
-    background-clip: text;
+    background-image: `$textVariant`;
     -webkit-background-clip: text;
     background-color: white;
+    font-family: "Roboto", sans-serif;
     mix-blend-mode: overlay;
     line-height: 1;
   }
