@@ -36,10 +36,16 @@ const textVariant = textStyle === "masked" ? "masked-text" : "normal-text";
 
 const sectionClass =
   variant === "image" ? "section-image" : `section-color ${background}`;
-const uniqueImageClass =
-  variant === "image"
-    ? `bg-${imageFolder}-${imageName.replace(/\./g, "-")}`
-    : "";
+
+  //was getting a typescript error with const uniqueImageClass = variant === ? `bg-${imageFolder}-${imageName?.replace(/\./g, "-")}`: "";
+  //Changed to the below
+  let uniqueImageClass = "";
+if (variant === "image" && imageFolder && imageName) {
+    // We only get here if all three values exist
+    uniqueImageClass = `bg-${imageFolder}-${imageName?.replace(/\./g, "-")}`;
+}
+
+
 
 const alignmentClasses = `
   content-container

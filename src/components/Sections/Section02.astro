@@ -1,11 +1,11 @@
 ---
-import SectionLayout from "../layouts/SectionLayout.astro";
-import ParallaxImages from "../components/ParallaxImages.astro";
-import ParallaxText from "../components/ParallaxText.astro";
+import SectionLayout from "../../layouts/SectionLayout.astro";
+import ParallaxImages from "../Sections/ParallaxImages.astro";
+import ParallaxText from "../Sections/ParallaxText.astro";
 
 interface Props {
-    h1Text: string;
-    subtitle: string;
+    h1Text?: string;
+    subtitle?: string;
 }
 
 const { h1Text = "Discover", subtitle = "Who. What. Where. When." } =

@@ -1,18 +1,18 @@
 ---
-import SectionLayout from "../layouts/SectionLayout.astro";
+import SectionLayout from "../../layouts/SectionLayout.astro";
 
 interface Props {
-    h1Text: string;
-    subtitle: string;
-    para: string;
-    para2: string;
-    sub2: string;
+    h1Text?: string;
+    subtitle?: string;
+    para?: string;
+    para2?: string;
+    sub2?: string;
 }
 
 const {
     h1Text = "Reviews",
     subtitle = "-Steven Pritchard, Director of Event Sales Royal Lancaster London.",
-    para = "I have worked with Suzanne for many years and she has supported us greatly. Her databases are always on point and she will happily work on projects to fill our need months. Quality of data has always been great and contacts all correct. ",
+    para = "I have worked with Suzanne for many years and she has supported us greatly. Her databases are always on point and she will happily work on projects to fill our need months. Quality of data has always been great and contacts all correct.",
     para2 = "Suzanne is absolutely fantastic. She has gone above and beyond to help me out. I would completely recommend her services!",
     sub2 = "-Matt Wynter, Owner Fireproof Talent",
 } = Astro.props;
@@ -20,7 +20,7 @@ const {
 
 <SectionLayout
     variant="color"
-    background="bg-[#9BB0C1]"
+    background="bg-[#586976]"
     className="section04"
     heightVariant="normal"
 >
@@ -71,13 +71,13 @@ const {
     .para-text {
         position: absolute;
         top: 10vh;
-        opacity: 0.7;
+        opacity: 0.9;
         color: black;
     }
 
     .subtitle-text {
         position: absolute;
-        opacity: 0.9;
+        opacity: 0.7;
         color: white;
         top: 38vh;
         font-style: italic;
@@ -109,5 +109,4 @@ const {
     }
 </style>
 
-position: absolute; opacity: 0.7; color: black; top: 30vh; left: 55vw; width:
-50%;
+
