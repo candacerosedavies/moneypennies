@@ -1,87 +1,115 @@
 ---
 import SectionLayout from "../../layouts/SectionLayout.astro";
-import ParallaxImages from "../Sections/ParallaxImages.astro";
-import ParallaxText from "../Sections/ParallaxText.astro";
 
 interface Props {
-    h1Text?: string;
+    maskedText?: string;
     subtitle?: string;
+    textStyle?: string;
 }
 
-const { h1Text = "Discover", subtitle = "Who. What. Where. When." } =
+const { maskedText = "The event industry's best kept secret", subtitle = "" } =
     Astro.props;
-
-const parallaxImage01 = {
-    src: "/images/conference/pexels-jibarofoto-2833037.jpg",
-    left: "90%", // Added left property
-    top: "20%",
-    width: 500,
-    speed: 0.3,
-    initialOffset: 0,
-};
-
-const parallaxImage02 = {
-    src: "/images/unlock/pexels-shutter-speed-ism-4767348.jpg",
-    left: "60%", // Added left property
-    top: "60%",
-    width: 250,
-    speed: 0.7,
-    initialOffset: 0,
-};
-const images = [parallaxImage01, parallaxImage02];
-console.log("Section02 - Images array:", images);
-console.log("Section02 - Image 1:", parallaxImage01);
-console.log("Section02 - Image 2:", parallaxImage02);
 ---
 
 <SectionLayout
-    variant="color"
-    background="bg-[#607ea8]"
-    className="section-02"
+    variant="image"
+    imageFolder="secret"
+    imageName="pexels-cottonbro-6284254.jpg"
+    className="Section03"
     contentPosition="right"
-    verticalAlignment="bottom"
-    heightVariant="tall"
+    verticalAlignment="center"
 >
-    <section class="content-wrapper">
-        <ParallaxImages images={images} />
-        <ParallaxText h1Text={h1Text} subtitle={subtitle} />
+    <section>
+        <h1 class="masked-text">{maskedText}</h1>
+
+        <p class="text-content">
+            <h2 class="subtitle">{subtitle}</h2>
+        </p>
     </section>
 </SectionLayout>
 
 <style>
-    /* 
-    .text-wrapper {
-        position: absolute;
-        top: 50%; /* Start at vertical center 
-        left: 50%; /* Start at horizontal center
-        transform: translate(30%, 20%); /* Move right and down 
-        z-index: 2;
+    .section {
+        display: flex;
+        font-weight: 100;
+        flex-direction: row;
+        min-height: 100vh;
     }
 
+    .masked-text {
+        position: absolute;
+        top: 30vh;
+        left: 5vw;
+        width: 60vw;
+        font-size: clamp(4rem, 10vw, 10rem);
+        font-weight: 200;
+        color: transparent;
+    }
+
+    .masked-text {
+        position: absolute;
+        top: 30vh;
+        left: 5vw;
+        width: 60vw;
+        font-size: clamp(4rem, 10vw, 10rem);
+        font-weight: 200;
+
+        /* Masked styling */
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-stroke: 1px rgba(40, 40, 40, 0);
+        background-color: white;
+        mix-blend-mode: overlay;
+        opacity: 0.9;
+
+        text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.1);
+    }
+
+    @include for-size(desktopLg, down) {
+        .masked-text {
+            position: absolute;
+            top: 30vh;
+            left: 5vw;
+            width: 60vw;
+            font-size: clamp(4rem, 10vw, 10rem);
+            font-weight: 200;
+            color: transparent;
+
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-stroke: 1px rgba(40, 40, 40, 0);
+            background-color: white;
+            mix-blend-mode: overlay;
+            opacity: 0.9;
+        }
+    }
+
+    @include for-size(tablet, down) {
+        .masked-text {
+            display: flex;
+            position: absolute;
+            top: 30vh;
+            left: 20vw;
+            width: 60vw;
+            font-size: clamp(4rem, 18vw, 20rem);
+            font-weight: 200;
+            color: transparent;
+
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-stroke: 1px rgba(40, 40, 40, 0);
+            background-color: white;
+            mix-blend-mode: overlay;
+            opacity: 0.9;
+
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.1);
+        }
+    }
 
     .subtitle {
-        font-size: clamp(1.5rem, 4vw, 2.5rem);
+        font-size: 2rem;
+        font-weight: 300;
         color: white;
-        margin-top: 2rem;
+        margin-bottom: 1rem;
     }
-
-     styling in parallaxText instead
-    .content-wrapper {
-        position: relative;
-        width: 100%;
-        height: 100vh;
-        display: flex;
-        justify-content: stretch; /* or remove justify-content 
-        align-items: stretch; /* or remove align-items 
-        padding: 0;
-        overflow: hidden;
-    } 
-    styling in parallaxText instead
-       /* .h1-text {
-        font-size: clamp(4rem, 15vw, 12rem);
-        font-weight: 200;
-        line-height: 1;
-        color: white;
-        mix-blend-mode: difference;
-    } */
 </style>

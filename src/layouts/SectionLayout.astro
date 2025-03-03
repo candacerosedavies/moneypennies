@@ -27,9 +27,9 @@ const {
   imageFolder,
   imageName,
   className = "",
-  contentPosition = "left",
-  verticalAlignment = "center",
-  heightVariant = "normal",
+  contentPosition = "",
+  verticalAlignment = "",
+  heightVariant = "",
 } = Astro.props;
 
 const textVariant = textStyle === "masked" ? "masked-text" : "normal-text";
@@ -37,15 +37,13 @@ const textVariant = textStyle === "masked" ? "masked-text" : "normal-text";
 const sectionClass =
   variant === "image" ? "section-image" : `section-color ${background}`;
 
-  //was getting a typescript error with const uniqueImageClass = variant === ? `bg-${imageFolder}-${imageName?.replace(/\./g, "-")}`: "";
-  //Changed to the below
-  let uniqueImageClass = "";
+//was getting a typescript error with const uniqueImageClass = variant === ? `bg-${imageFolder}-${imageName?.replace(/\./g, "-")}`: "";
+//Changed to the below
+let uniqueImageClass = "";
 if (variant === "image" && imageFolder && imageName) {
-    // We only get here if all three values exist
-    uniqueImageClass = `bg-${imageFolder}-${imageName?.replace(/\./g, "-")}`;
+  // We only get here if all three values exist
+  uniqueImageClass = `bg-${imageFolder}-${imageName?.replace(/\./g, "-")}`;
 }
-
-
 
 const alignmentClasses = `
   content-container
@@ -64,7 +62,7 @@ const backgroundImageStyle =
 ---
 
 <section
-  class={`${sectionClass} ${className} ${uniqueImageClass} ${textVariant} ${heightVariant === "tall" ? "tall-section" : ""}`}
+  class={`${sectionClass} ${className} ${uniqueImageClass} ${textVariant} ${textStyle} ${heightVariant === "tall" ? "tall-section" : ""}`}
 >
   <div class="overlay"></div>
   <div class={alignmentClasses}>
@@ -109,7 +107,7 @@ const backgroundImageStyle =
 
   .tall-section {
     min-height: 100vh;
-    height: 100vh; /* Ensure exact 100vh */
+    height: 200vh; /* Ensure exact 100vh */
     width: 100vw;
     overflow: hidden;
   }

@@ -1,0 +1,87 @@
+// RESPONSIVE DESIGN MIXINS
+$breakpoints: (
+    phoneSm: 420px,
+    phone: 680px,
+    tablet: 768px,
+    tabletLg: 1024px,
+    desktop: 1025px,
+    desktopLg: 1600px
+);
+
+@mixin for-size($breakpoint, $direction: down, $orientation: null) {
+
+    // If the breakpoint exists in the map
+    @if map-has-key($breakpoints, $breakpoint) {
+        // Get the breakpoint value
+        $breakpoint-value: map-get($breakpoints, $breakpoint);
+
+        // Check if orientation is specified
+        @if $orientation ==null {
+
+            // No orientation - standard query
+            //min-width/up = this breakpoint and larger. For mobile
+            @if $direction ==up {
+                @media (min-width: $breakpoint-value) {
+                    @content;
+                }
+            }
+
+            //max-width/down = this breakpoint and smaller.
+            @else if $direction ==down {
+                @media (max-width: $breakpoint-value) {
+                    @content;
+                }
+            }
+        }
+
+        @else {
+
+            // With orientation
+            @if $direction ==up {
+                @media (min-width: $breakpoint-value) and (orientation: #{$orientation}) {
+                    @content;
+                }
+            }
+
+            @else if $direction ==down {
+                @media (max-width: $breakpoint-value) and (orientation: #{$orientation}) {
+                    @content;
+                }
+            }
+        }
+    }
+
+    // If the breakpoint doesn't exist in the map, use a manual breakpoint
+    @else {
+
+        // Similar logic for custom breakpoints with orientation
+        @if $orientation ==null {
+            @if $direction ==up {
+                @media (min-width: $breakpoint) {
+                    @content;
+                }
+            }
+
+            @else if $direction ==down {
+                @media (max-width: $breakpoint) {
+                    @content;
+                }
+            }
+        }
+
+        //no need to define what 'landscape' or 'portrait' means. CSS knows.
+        @else {
+            @if $direction ==up {
+                @media (min-width: $breakpoint) and (orientation: #{$orientation}) {
+                    @content;
+                }
+            }
+
+            @else if $direction ==down {
+                @media (max-width: $breakpoint) and (orientation: #{$orientation}) {
+                    @content;
+                }
+            }
+        }
+    }
+}

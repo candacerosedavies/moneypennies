@@ -2,93 +2,77 @@
 // components/Hamburger.astro
 ---
 
-<div class="md:hidden">
-    <!-- Only show on mobile -->
-    <div class="hamburger" id="hamburger-menu">
-        <span class="line"></span>
-        <span class="line"></span>
-    </div>
-    <div class="menu-items">
-        <a href="/">Home</a>
-        <a href="/about">Why Use Moneypennies?</a>
-        <a href="/Contact/" class="mobile-contact">Say Hello!</a>
-        <!-- Mobile version of contact button -->
-    </div>
+<button class="hamburger-button" aria-label="menu">
+  <span class="hamburger-line"></span>
+  <span class="hamburger-line"></span>
+  <span class="hamburger-line"></span>
+</button>
+
+<div class="mobile-menu">
+  <a href="/Contact/">Say Hello!</a>
 </div>
 
-<style>
-    .hamburger {
-        cursor: pointer;
-        padding: 1rem;
-        z-index: 100;
-    }
-
-    .line {
-        display: block;
-        width: 25px;
-        height: 3px;
-        margin: 5px auto;
-        background-color: white;
-        transition: all 0.3s ease-in-out;
-    }
-
-    .hamburger.active .line:nth-child(1) {
-        transform: translateY(8px) rotate(45deg);
-    }
-
-    .hamburger.active .line:nth-child(2) {
-        transform: translateY(0px) rotate(-45deg);
-    }
-
-    .menu-items {
-        position: fixed;
-        right: -100%;
-        top: 0;
-        gap: 0;
-        display: flex;
-        flex-direction: column;
-        background-color: rgba(0, 0, 0, 0.9);
-        width: 100%;
-        height: 100vh;
-        text-align: center;
-        transition: 0.3s;
-        padding-top: 4rem;
-    }
-
-    .menu-items.active {
-        right: 0;
-    }
-
-    .menu-items a {
-        padding: 1.5rem;
-        color: white;
-        text-decoration: none;
-        font-size: 1.5rem;
-    }
-
-    .mobile-contact {
-        margin-top: 2rem;
-        border: 1px solid white;
-        border-radius: 9999px;
-        margin: 2rem 1rem;
-    }
-</style>
-
 <script>
-    const hamburger = document.querySelector("#hamburger-menu");
-    const menuItems = document.querySelector(".menu-items");
+  //Mobile menu toggle
+  const hamburgerButton = document.querySelector(".hamburger-button");
+  const mobileMenu = document.querySelector(".mobile-menu");
 
-    hamburger?.addEventListener("click", () => {
-        hamburger.classList.toggle("active");
-        menuItems?.classList.toggle("active");
-    });
-
-    // Close menu when clicking a link
-    const menuLinks = document.querySelectorAll(".menu-items a");
-    menuLinks.forEach((link) => {
-        link.addEventListener("click", () => {
-            hamburger?.classList.remove("active");
-            menuItems?.classList.remove("active");
-        });
-    });
+  hamburgerButton?.addEventListener("click", () => {
+    mobileMenu?.classList.toggle("active");
+  });
 </script>
+
+<style>
+  .hamburger-button {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 24px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+
+  .hamburger-line {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background-color: white;
+    transition: all 300ms;
+  }
+
+  /* This will respond to the header-scrolled class we set on the HTML element */
+  :global(.header-scrolled) .hamburger-line {
+    background-color: rgb(28 25 23);
+  }
+
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 80px;
+    left: 0;
+    right: 0;
+    padding: 2rem;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .mobile-link {
+    color: white;
+    font-size: 1.5rem;
+    padding: 1rem;
+    text-decoration: none;
+  }
+
+  /* Show on mobile */
+  @media (max-width: 768px) {
+    .hamburger-button {
+      display: flex;
+    }
+
+    .mobile-menu.active {
+      display: flex;
+    }
+  }
+</style>
