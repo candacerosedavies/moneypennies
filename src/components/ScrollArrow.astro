@@ -2,38 +2,6 @@
 
 ---
 
-<style is:global>
-    .scroll-arrow {
-        position: fixed;
-        bottom: 0.5rem;
-        left: 3rem;
-        color: white !important;
-        padding: 1rem;
-        transition: all 300ms ease-in-out;
-    }
-
-    .scroll-arrow svg {
-        height: clamp(5rem, 5vh, 5rem);
-        width: clamp(5rem, 5vh, 5rem);
-    }
-
-    @keyframes bounce {
-        0%,
-        100% {
-            transform: translateY(-25%);
-            animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
-        }
-        50% {
-            transform: translateY(0);
-            animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
-        }
-    }
-
-    .scroll-arrow {
-        animation: bounce 1s infinite;
-    }
-</style>
-
 <i id="scroll-arrow" class="scroll-arrow">
     <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -44,7 +12,7 @@
         <path
             stroke-linecap="round"
             stroke-linejoin="round"
-            stroke-width="2"
+            stroke-width="1"
             d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
     </svg>
 </i>
@@ -71,3 +39,31 @@
         window.addEventListener("scroll", handleArrowScroll);
     })();
 </script>
+
+<style lang="scss">
+    @keyframes bounce {
+        0%,
+        100% {
+            transform: translateY(-25%);
+            animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+        }
+        50% {
+            transform: translateY(0);
+            animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+        }
+    }
+    .scroll-arrow svg {
+        position: fixed;
+        bottom: 0rem;
+        left: 0rem;
+        color: white !important;
+        margin: 0vh;
+        transition: all 300ms ease-in-out;
+        animation: bounce 1s infinite;
+    }
+
+    .scroll-arrow svg {
+        height: clamp(5rem, 20vh, 5rem);
+        width: clamp(5rem, 20vh, 5rem);
+    }
+</style>

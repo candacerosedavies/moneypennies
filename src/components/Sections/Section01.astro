@@ -8,14 +8,17 @@ interface Props {
   para?: string;
   h2Text?: string;
   para2?: string;
+  para3?: string;
 }
 
 const {
-  h1Text = "London, Manchester, Birmingham.",
-  subtitle = "Joining the dots so you don’t have to.",
-  para = "We connect you to calendar insights of over 4000 UK event buyers in...",
-  h2Text = "",
-  para2 = "",
+  h1Text = `Connect with the right clients,
+at the right time.`,
+  subtitle = "Know Who’s Available, When, & Where",
+  para = `We help event venues and suppliers connect direct with buyers of over 4,000 UK annual award and conferences. Make data-driven decisions and start booking for next year.`,
+  h2Text = "Custom reports and targeted leads",
+  para2 = "Maximise your revenue with",
+  para3 = "See the impact for yourself with a free selection of data",
 } = Astro.props;
 ---
 
@@ -26,195 +29,218 @@ const {
   className="Section01"
   heightVariant="tall"
 >
-  <section>
-    <h1 class="h1-wrapper h1-container masked">
+  <section class="section-1">
+    <h1 class="h1-wrapper masked" style="white-space: pre-line;">
       {h1Text}
     </h1>
-    <h2 class="subtitle">{subtitle}</h2>
-    <p class="normal-text para-wrapper para-container">
+    <p class="normal-text para-wrapper" style="white-space: pre-line;">
       {para}
     </p>
 
-    <h2 class="h2-wrapper">
-      {h2Text}
-    </h2>
-    <p class="para2-wrapper">
-      {para2}
-    </p>
-  </section>
+    <p class="subtitle">{subtitle}</p>
 
-  <slot />
+    <section class="section-2">
+      <p class="para2-wrapper">
+        {para2}
+      </p>
+      <h2 class="h2-wrapper">
+        {h2Text}
+      </h2>
+
+      <p class="para3-wrapper">
+        {para3}
+      </p>
+    </section>
+  </section>
 </SectionLayout>
-<ScrollArrow />
+
+<slot />
 
 <style lang="scss">
-  section {
+  .section-1 {
     display: flex;
-    font-weight: 100;
-    // flex-direction: row;
+    flex-direction: column;
+    gap: 18vh;
     min-height: 100vh;
-    // justify-content: center;
-    // align-items: center;
-    // padding: 2rem 1rem;
+    font-weight: 200;
+    align-self: center;
+    padding-left: 30%;
+    padding-right: 30%;
+    align-self: center;
+  }
+
+  .h1-wrapper {
+    // padding-left: 3vh;
+    display: flex;
+    align-self: center;
+    white-space: pre-line;
+    width: 50vh;
+    font-weight: 400;
+    font-size: clamp(2rem, 10vw, 15rem);
+    padding-top: 5vh;
+    margin-bottom: -15vh;
+    // text-align: left;
   }
 
   .para-wrapper {
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-stroke: 1px rgba(40, 40, 40, 0);
-    background-color: white;
-    mix-blend-mode: overlay;
-    opacity: 0.9;
+    align-self: center;
+    // text-align: flex-start;
 
-    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.1);
+    padding-left: 0, 3vh;
+    font-size: clamp(1rem, 3vh, 8rem);
+    width: 50vh;
+    // background-clip: text;
+    // -webkit-background-clip: text;
+    // -webkit-text-stroke: 1px rgba(40, 40, 40, 0);
+    // background-color: white;
+    // mix-blend-mode: overlay;
+    // opacity: 0.9;
+
+    // text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.1);
   }
 
   .subtitle {
+    // padding: 2vh;
+    width: 80%;
+    align-self: center;
+    color: white;
+    opacity: 0.8;
+    flex-shrink: 2rem;
+    font-size: clamp(1rem, 3vh, 8rem);
+  }
+
+  //SECTION 2
+
+  .section-2 {
+    display: flex;
+    flex-direction: column;
+    padding-top: 10vh;
+    gap: 18vh;
+    min-height: 100vh;
+    font-weight: 200;
+
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+  .para2-wrapper {
+    align-self: flex-end;
+    text-align: right;
+    width: 120%;
+    margin-bottom: -15vh;
     color: #f5efcb;
-  }
-  //first half
-  @include for-size(desktopLg, down) {
-    .h1-wrapper {
-      display: flex;
-      position: absolute;
-      opacity: 0.7;
-      color: white;
-      -webkit-background-clip: white;
-      -webkit-text-stroke: 1px white;
-      width: 200vh;
-      top: 55vh;
-      left: 10vw;
-      font-size: clamp(3rem, 8vw, 8rem);
-    }
-
-    .subtitle {
-      display: flex;
-      position: absolute;
-      opacity: 0.7;
-      color: white;
-      -webkit-background-clip: white;
-      -webkit-text-stroke: 1px white;
-      width: 200vh;
-      top: 70vh;
-      left: 10vw;
-      font-size: clamp(1.5rem, 4vw, 2rem);
-    }
-    .para-wrapper {
-      position: absolute;
-      top: 10vh;
-      left: 50%;
-      width: 70vh;
-      margin-top: 2rem;
-      font-size: clamp(1.5rem, 4vw, 5rem);
-
-      /* masked styling */
-      color: transparent;
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-stroke: 1px rgba(40, 40, 40, 0);
-      background-color: white;
-      mix-blend-mode: overlay;
-      opacity: 0.9;
-
-      text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.1);
-    }
+    flex-shrink: 2rem;
+    font-size: clamp(1rem, 4vh, 8rem);
+    opacity: 0.8;
   }
 
-  //second half
-
-  @include for-size(tablet, up) {
-    .para2-wrapper {
-      display: flex;
-      position: absolute;
-      top: 108vh;
-      left: 25vh;
-      opacity: 0.7;
-      width: 50vh;
-      color: white;
-      margin-top: 2rem;
-      font-size: clamp(1rem, 15vh, 2.5rem);
-    }
-
-    .h2-wrapper {
-      display: flex;
-      position: absolute;
-      top: 130vh;
-      left: 85vh;
-      width: 50vh;
-      opacity: 0.8;
-      color: #f7f1d1;
-      font-size: clamp(2rem, 12vw, 7rem);
-    }
+  .h2-wrapper {
+    font-size: clamp(2rem, 10vw, 15rem);
+    align-self: flex-start;
+    width: 90%;
   }
+
+  .para3-wrapper {
+    // padding: 2vh;
+    align-self: center;
+    width: 70%;
+    color: white;
+    flex-shrink: 2rem;
+    font-size: clamp(1rem, 3.5vh, 8rem);
+  }
+
+  // @include for-size(tablet, up) {
+  //   .para2-wrapper {
+  //     display: flex;
+  //     position: absolute;
+  //     top: 108vh;
+  //     left: 25vh;
+  //     opacity: 0.7;
+  //     width: 50vh;
+  //     color: white;
+  //     margin-top: 2rem;
+  //     font-size: clamp(1rem, 15vh, 2.5rem);
+  //   }
+
+  //   .h2-wrapper {
+  //     display: flex;
+  //     position: absolute;
+  //     top: 130vh;
+  //     left: 85vh;
+  //     width: 50vh;
+  //     opacity: 0.8;
+  //     color: #f7f1d1;
+  //     font-size: clamp(2rem, 12vw, 7rem);
+  //   }
+  // }
 
   //first half
 
-  @include for-size(phone, down, portrait) {
-    .h1-wrapper {
-      display: flex;
-      top: 40vh;
-      left: 8vh;
-      width: 50vh;
-      opacity: 0.8;
-      margin: 1rem auto;
-      font-size: clamp(4rem, 15vw, 10rem);
-      color: white;
-    }
+  // @include for-size(phone, down, portrait) {
+  //   .h1-wrapper {
+  //     display: flex;
+  //     top: 40vh;
+  //     left: 8vh;
+  //     width: 50vh;
+  //     opacity: 0.8;
+  //     margin: 1rem auto;
+  //     font-size: clamp(4rem, 15vw, 10rem);
+  //     color: white;
+  //   }
 
-    .para-wrapper {
-      display: flex;
-      top: 5vh;
-      left: 55%;
-      min-width: 25vh;
-      max-width: 30vh;
-      opacity: 2;
-      font-size: clamp(1rem, 10vh, 1.8rem);
-      /* masked styling */
-      color: transparent;
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-stroke: 1px rgba(40, 40, 40, 0);
-      background-color: white;
-      mix-blend-mode: overlay;
-      opacity: 0.9;
+  //   .para-wrapper {
+  //     display: flex;
+  //     top: 5vh;
+  //     left: 55%;
+  //     min-width: 25vh;
+  //     max-width: 30vh;
+  //     opacity: 2;
+  //     font-size: clamp(1rem, 10vh, 1.8rem);
+  //     /* masked styling */
+  //     color: transparent;
+  //     background-clip: text;
+  //     -webkit-background-clip: text;
+  //     -webkit-text-stroke: 1px rgba(40, 40, 40, 0);
+  //     background-color: white;
+  //     mix-blend-mode: overlay;
+  //     opacity: 0.9;
 
-      text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.1);
-    }
+  //     text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.1);
+  //   }
 
-    .subtitle {
-      display: flex;
-      top: 85vh;
-      left: 10vh;
-      width: 50vh;
-      opacity: 1;
-      margin: 1rem auto;
-      font-size: clamp(2rem, 8vw, 2rem);
-      color: #f7f1d1;
-    }
-  }
+  //   .subtitle {
+  //     display: flex;
+  //     top: 85vh;
+  //     left: 10vh;
+  //     width: 50vh;
+  //     opacity: 1;
+  //     margin: 1rem auto;
+  //     font-size: clamp(2rem, 8vw, 2rem);
+  //     color: #f7f1d1;
+  //   }
+  // }
 
-  //second half
-  @include for-size(tablet, down) {
-    .para2-wrapper {
-      display: flex;
-      position: absolute;
-      top: 105vh;
-      left: 10vh;
-      opacity: 0.8;
-      width: 45vh;
-      color: white;
-      margin-top: 2rem;
-      font-size: clamp(1rem, 15vh, 2rem);
-    }
+  // //second half
+  // @include for-size(tablet, down) {
+  //   .para2-wrapper {
+  //     display: flex;
+  //     position: absolute;
+  //     top: 105vh;
+  //     left: 10vh;
+  //     opacity: 0.8;
+  //     width: 45vh;
+  //     color: white;
+  //     margin-top: 2rem;
+  //     font-size: clamp(1rem, 15vh, 2rem);
+  //   }
 
-    .h2-wrapper {
-      display: flex;
-      position: absolute;
-      top: 130vh;
-      left: 5vh;
-      opacity: 0.8;
-      color: #f7f1d1;
-      font-size: clamp(2rem, 15vw, 9rem);
-    }
-  }
+  //   .h2-wrapper {
+  //     display: flex;
+  //     position: absolute;
+  //     top: 130vh;
+  //     left: 5vh;
+  //     opacity: 0.8;
+  //     color: #f7f1d1;
+  //     font-size: clamp(2rem, 15vw, 9rem);
+  //   }
+  // }
 </style>
