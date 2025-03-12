@@ -15,9 +15,12 @@ const {
 
 <SectionLayout variant="color" className="Section01" verticalAlignment="center">
     <section class="section-1">
-        <header>
-            <h1 class="h1-wrapper">{h1Text}</h1>
-        </header>
+        <div class="parallax-container">
+            <div class="overlay"></div>
+            <header>
+                <h1 class="heading">{h1Text}</h1>
+            </header>
+        </div>
 
         <p class="para-content">
             <h2 class="para">{para}</h2>
@@ -25,38 +28,59 @@ const {
     </section>
 </SectionLayout>
 
-<!-- <hr class="divider" /> -->
-
 <style lang="scss">
-    .divider {
-        width: 80%;
-        height: 1px;
-        background-color: #000000;
-        opacity: 0.2;
-    }
     .section-1 {
+        // background-color: #797979;
         background-color: #dbc4a4;
-        color: black;
+
+        // color: white;
         display: flex;
         flex-direction: column;
-        gap: 2vh;
+        // gap: 2vh;
         min-height: 100vh;
         text-align: left;
         font-weight: 200;
-        padding-top: 20%;
-        padding-left: 2%;
-        padding-right: 2%;
-        padding-bottom: 2%;
+    }
+
+    .parallax-container {
+        min-height: 75vh;
+        background-attachment: fixed;
+        background-image: url("/images/unlock/pexels-shutter-speed-ism-4767348.jpg");
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+
+    .overlay {
+        position: absolute;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.4);
+        // backdrop-filter: brightness(0.8); //softens background image ( don't need it here)
+    }
+
+    .heading {
+        position: relative; //ensures text is above the overlay
+        z-index: 10; //brings text to foreground
+        display: flex;
+        text-align: right;
+        color: white;
+        font-weight: 400;
+        max-width: 100%;
+        font-size: clamp(2rem, 15vw, 8rem);
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); // Add subtle text shadow for better readability
+        padding: 3rem 2rem;
     }
 
     .para {
-        font-size: clamp(1rem, 4vh, 8rem);
+        font-size: clamp(1rem, 3.5vh, 8rem);
         font-weight: 200;
         color: black;
         width: 100%;
-        text-align: right;
-        left: 5rem;
-        bottom: 3rem;
+        text-align: left;
+        padding: 2rem;
 
         // color: #292219;
         // color: #f7f1d1;
@@ -70,18 +94,6 @@ const {
         // mix-blend-mode: overlay;
         // text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.1);
         // opacity: 0.9;
-    }
-
-    .h1-wrapper {
-        display: flex;
-        text-align: left;
-        // align-self: center;
-        // white-space: pre-line;
-        // width: 50vh;
-        font-weight: 400;
-        max-width: 90%;
-
-        font-size: clamp(2rem, 20vw, 8rem);
     }
 
     // @include for-size(tablet, up) {

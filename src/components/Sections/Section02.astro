@@ -24,9 +24,12 @@ const {
   <!-- imageFolder="connect"
   imageName="pexels-didsss-2127522.jpg" -->
   <section class="section-2">
-    <h1 class="h1-wrapper">
-      {h1Text}
-    </h1>
+    <div class="parallax-container">
+      <div class="overlay"></div>
+      <h1 class="h1-wrapper">
+        {h1Text}
+      </h1>
+    </div>
     <p class="para-wrapper" style="white-space: pre-line;">
       {subtitle}
     </p>
@@ -38,42 +41,58 @@ const {
 <slot />
 
 <style lang="scss">
+  .parallax-container {
+    min-height: 30vh;
+    background-attachment: fixed;
+    background-image: url("/images/hotel/pexels-cottonbro-6474587.jpg");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    // backdrop-filter: brightness(0.8); //softens background image ( don't need it here)
+  }
+
   .section-2 {
     background-color: #dbc4a4;
-    color: black;
+    // color: white;
     display: flex;
     flex-direction: column;
-    gap: 5vh;
+    gap: 2vh;
     min-height: 100vh;
-
+    text-align: left;
     font-weight: 200;
-    align-self: center;
-    padding-left: 2%;
-    padding-right: 2%;
-    padding-top: 5%;
-    padding-bottom: 10%;
-    max-width: 100%;
   }
 
   .h1-wrapper {
+    position: relative; //ensures text is above the overlay
+    z-index: 10; //brings text to foreground
     display: flex;
     text-align: left;
-    align-self: center;
-    // white-space: pre-line;
-    // width: 50vh;
+    color: white;
     font-weight: 400;
-
-    font-size: clamp(2rem, 15vw, 8rem);
-    // padding-top: 5vh;
-    // margin-bottom: -15vh;
-    // text-align: left;
+    max-width: 100%;
+    font-size: clamp(2rem, 12vw, 8rem);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); // Add subtle text shadow for better readability
+    padding: 3rem 2rem;
   }
 
   .para-wrapper {
     align-self: center;
     text-align: right;
     // text-align: flex-start;
-    font-size: clamp(1rem, 4vh, 3rem);
+    font-size: clamp(1rem, 3.5vh, 8rem);
+    color: black;
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+    padding: 2rem;
 
     // background-clip: text;
     // -webkit-background-clip: text;
@@ -89,7 +108,10 @@ const {
     align-self: center;
     text-align: left;
     // text-align: flex-start;
-    font-size: clamp(1rem, 4vh, 8rem);
+    font-size: clamp(1rem, 3.5vh, 8rem);
+
+    color: black;
+    padding: 2rem;
   }
 
   //SECTION 2
