@@ -9,49 +9,7 @@ const { h1Text, subtitle } = Astro.props;
 
 <section class="text-container">
     <h1 class="main-text">{h1Text}</h1>
-    <p class="subtitle">{subtitle}</p>
 </section>
-
-<style>
-    .main-text {
-        position: absolute; /* REMOVED position: relative; */
-        top: 4rem;
-        left: 45rem;
-        font-size: clamp(4rem, 15vw, 12rem);
-        font-weight: 200;
-        line-height: 1;
-        color: white;
-        mix-blend-mode: difference; /* masking efft */
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        z-index: 2;
-    }
-
-    .subtitle {
-        position: absolute;
-        top: 32rem;
-        left: 10rem;
-        width: 30%;
-        font-size: clamp(1.5rem, 4vw, 4rem);
-        color: white;
-        margin-top: 1rem;
-        /* opacity: 0.9; */
-        mix-blend-mode: difference;
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        z-index: 2;
-    }
-
-    .text-container {
-    }
-
-    /* .text-container {
-        position: relative;
-        z-index: 2;
-    } 
-
-    .content-wrapper {
-        position: relative;
-    }*/
-</style>
 
 <script>
     const h1Text = document.querySelector(".main-text") as HTMLElement;
@@ -93,3 +51,54 @@ const { h1Text, subtitle } = Astro.props;
     // Initial update
     updateTextParallax();
 </script>
+
+<style>
+    .text-container {
+        /* position: relative;
+        z-index: 2; */
+        padding-left: 2%;
+        padding-right: 2%;
+        max-width: 100%;
+    }
+
+    .main-text {
+        position: absolute;
+        top: 2rem;
+        left: 5rem;
+        font-size: clamp(4rem, 8vw, 12rem);
+        font-weight: 400;
+
+        /* line-height: 1; */
+        /* max-width: 100%; */
+        color: white;
+        mix-blend-mode: difference; /* masking efft */
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        z-index: 2;
+    }
+    /* 
+    .subtitle {
+        position: absolute;
+        top: 32rem;
+        left: 10rem;
+        width: 30%;
+        font-size: clamp(1.5rem, 4vw, 4rem);
+        color: white;
+        margin-top: 1rem;
+        /opacity: 0.9; 
+        mix-blend-mode: difference;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        z-index: 2;
+    } */
+
+    .text-container {
+    }
+
+    /* .text-container {
+        position: relative;
+        z-index: 2;
+    } 
+
+    .content-wrapper {
+        position: relative;
+    }*/
+</style>

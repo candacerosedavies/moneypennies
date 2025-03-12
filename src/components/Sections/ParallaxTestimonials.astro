@@ -1,0 +1,72 @@
+---
+interface Props {
+    quote: string;
+    author: string;
+    company?: string;
+    position?: number; // For staggered positioning
+}
+
+const { quote, author, company, position = 0 } = Astro.props; //position = 0 sets the default value for index position in section04. Defensive programming, prevents errors.
+---
+
+<div class={`testimonial-card testimonial-${position}`}>
+    <blockquote>"{quote}"</blockquote>
+    <cite>{author}{company ? `, ${company}` : ""}</cite>
+</div>
+
+<style>
+    .testimonial-card {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 1.5rem;
+        border-radius: 12px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+        max-width: 25rem;
+        z-index: 1;
+        animation: movetestimonial 80s linear infinite;
+    }
+
+    /* Can vary card sizes, and amend animation speeds here */
+    .testimonial-0 {
+        top: 25%;
+        left: 80%;
+        color: black;
+    }
+
+    .testimonial-1 {
+        top: 55%;
+        left: 100%;
+        animation-delay: 1s;
+        color: black;
+    }
+
+    .testimonial-2 {
+        top: 40%;
+        left: 120%;
+        animation-delay: 2s;
+        color: black;
+    }
+
+    blockquote {
+        font-style: italic;
+        margin-bottom: 0.5rem;
+        font-size: 1rem;
+        line-height: 1.4;
+    }
+
+    cite {
+        display: block;
+        font-weight: bold;
+        text-align: right;
+        font-size: 0.9rem;
+    }
+
+    @keyframes movetestimonial {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-400%);
+        }
+    }
+</style>

@@ -1,7 +1,10 @@
 ---
+//component deals with tesimonial data
+
 import SectionLayout from "../../layouts/SectionLayout.astro";
 import ParallaxImages from "../Sections/ParallaxImages.astro";
 import ParallaxText from "../Sections/ParallaxText.astro";
+import ParallaxTestimonials from "./ParallaxTestimonials.astro";
 
 interface Props {
     h1Text?: string;
@@ -9,50 +12,91 @@ interface Props {
     heightVariant?: string;
 }
 
-const {
-    h1Text = "Discover",
-    subtitle = "Who. What. Where. When.",
-    heightVariant = "tall",
-} = Astro.props;
+//Testimonials array
+const testimonials = [
+    {
+        quote: "I have worked with Moneypennies for many years and they have supported us greatly. Their databases are always on point and they will happily work on projects to fill our needs months in advance. Quality of data has always been great and contacts all correct.",
+        author: "Client Name",
+        company: "Company Name",
+    },
+    {
+        quote: "Moneypennies is absolutely fantastic. They have gone above and beyond to help me out. I would completely recommend their services!",
+        author: "Client Name 2",
+        company: "Company Name 2",
+    },
+    {
+        quote: "Amazing, thank you Wonderwoman!",
+        author: "Mellini Gordon",
+        company: "Friends House",
+    },
+];
 
-const parallaxImage01 = {
-    src: "/images/conference/pexels-jibarofoto-2833037.jpg",
-    left: "90%", // Added left property
-    top: "20%",
-    width: 500,
-    speed: 0.3,
-    initialOffset: 0,
-};
+//accreditation logos array
+const accreditations = [
+    { src: "/images/logos/Mia-accredited.png", width: 180 },
+    // { src: "/images/logos/accred2.png", width: 150 },
+    // Add more as needed
+];
 
-const parallaxImage02 = {
-    src: "/images/unlock/pexels-shutter-speed-ism-4767348.jpg",
-    left: "60%", // Added left property
-    top: "60%",
-    width: 250,
-    speed: 0.7,
-    initialOffset: 0,
-};
-const images = [parallaxImage01, parallaxImage02];
-console.log("Section02 - Images array:", images);
-console.log("Section02 - Image 1:", parallaxImage01);
-console.log("Section02 - Image 2:", parallaxImage02);
+//Partner logos array
+const partners = [
+    { src: "/images/logos/London-Venue-2024.png", width: 180 },
+    // { src: "/images/logos/partner2.png", width: 220 },
+    // Add more as needed
+];
+
+// Combine all images for ParallaxImages
+const allLogos = [
+    ...accreditations.map((logo, i) => ({
+        src: logo.src,
+        left: `${80 + i * 40}%`,
+        top: `${20 + (i % 3) * 20}%`, //The modulo operation (i % 3) ensures logos are distributed in three vertical positions
+        width: logo.width,
+        speed: 0.3,
+        initialOffset: i * 300,
+    })),
+    ...partners.map((logo, i) => ({
+        src: logo.src,
+        left: `${120 + i * 40}%`,
+        top: `${40 + (i % 3) * 15}%`,
+        width: logo.width,
+        speed: 0.5,
+        initialOffset: i * 200 + 500,
+    })),
+];
 ---
 
 <SectionLayout
     variant="color"
-    background="bg-[#607ea8]"
-    className="section-02"
-    contentPosition="right"
-    verticalAlignment="bottom"
-    heightVariant="tall"
+    background="bg-grey-blue"
+    className="section-04"
+    heightVariant="normal"
 >
-    <section class="content-wrapper">
-        <ParallaxImages images={images} />
-        <ParallaxText h1Text={h1Text} subtitle={subtitle} />
+    <section class="section-4 sky-700">
+        <ParallaxImages images={allLogos} />
+        <ParallaxText h1Text="Trusted by Industry Leaders" subtitle="" />
+
+        <!-- params: testimonial gets each iteam from testimonialS array above, position={index} populates the 'position' prop (in parallaxTestimonials) with the value of second param (which is always index in .map). 
+     At time of writing this map returns 3 testimonial CSS classes used in parallaxTestimonials eg testimonial-1 testimonial-2  
+     THE PROPS BELOW CREATE A BRIDGE/DYNAMIC RELATIONSHIP ACROSS COMPONENT FILES
+     MAPPING OVER THE TESTIMONIALS ARRAY TO CREATE DIFFERENT TESTIMONIAL COMPONENTS ON THE PAGE -->
+        {
+            testimonials.map((testimonial, index) => (
+                <ParallaxTestimonials
+                    quote={testimonial.quote}
+                    author={testimonial.author}
+                    company={testimonial.company}
+                    position={index}
+                />
+            ))
+        }
     </section>
 </SectionLayout>
 
 <style>
+    .section-4 {
+        /* background-color: #475d7c; */
+    }
     /* 
     .text-wrapper {
         position: absolute;
@@ -69,7 +113,7 @@ console.log("Section02 - Image 2:", parallaxImage02);
         margin-top: 2rem;
     }
 
-     styling in parallaxText instead
+    styling in parallaxTestimonials instead
     .content-wrapper {
         position: relative;
         width: 100%;
@@ -80,7 +124,7 @@ console.log("Section02 - Image 2:", parallaxImage02);
         padding: 0;
         overflow: hidden;
     } 
-    styling in parallaxText instead
+    styling in parallaxTestimonials instead
        /* .h1-text {
         font-size: clamp(4rem, 15vw, 12rem);
         font-weight: 200;

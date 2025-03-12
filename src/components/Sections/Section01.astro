@@ -3,244 +3,151 @@ import SectionLayout from "../../layouts/SectionLayout.astro";
 import ScrollArrow from "../../components/ScrollArrow.astro";
 
 interface Props {
-  h1Text?: string;
-  subtitle?: string;
-  para?: string;
-  h2Text?: string;
-  para2?: string;
-  para3?: string;
+    h1Text?: string;
+    para?: string;
 }
 
 const {
-  h1Text = `Connect with the right clients,
-at the right time.`,
-  subtitle = "Know Who’s Available, When, & Where",
-  para = `We help event venues and suppliers connect direct with buyers of over 4,000 UK annual award and conferences. Make data-driven decisions and start booking for next year.`,
-  h2Text = "Custom reports and targeted leads",
-  para2 = "Maximise your revenue with",
-  para3 = "See the impact for yourself with a free selection of data",
+    h1Text = "Unlock the future of events booking",
+    para = "Say goodbye to guess work. Learn who’s available, when, & where.",
 } = Astro.props;
 ---
 
-<SectionLayout
-  variant="image"
-  imageFolder="connect"
-  imageName="pexels-didsss-2127522.jpg"
-  className="Section01"
-  heightVariant="tall"
->
-  <section class="section-1">
-    <h1 class="h1-wrapper masked" style="white-space: pre-line;">
-      {h1Text}
-    </h1>
-    <p class="normal-text para-wrapper" style="white-space: pre-line;">
-      {para}
-    </p>
+<SectionLayout variant="color" className="Section01" verticalAlignment="center">
+    <section class="section-1">
+        <header>
+            <h1 class="h1-wrapper">{h1Text}</h1>
+        </header>
 
-    <p class="subtitle">{subtitle}</p>
-
-    <section class="section-2">
-      <p class="para2-wrapper">
-        {para2}
-      </p>
-      <h2 class="h2-wrapper">
-        {h2Text}
-      </h2>
-
-      <p class="para3-wrapper">
-        {para3}
-      </p>
+        <p class="para-content">
+            <h2 class="para">{para}</h2>
+        </p>
     </section>
-  </section>
 </SectionLayout>
 
-<slot />
+<!-- <hr class="divider" /> -->
 
 <style lang="scss">
-  .section-1 {
-    display: flex;
-    flex-direction: column;
-    gap: 18vh;
-    min-height: 100vh;
-    font-weight: 200;
-    align-self: center;
-    padding-left: 30%;
-    padding-right: 30%;
-    align-self: center;
-  }
+    .divider {
+        width: 80%;
+        height: 1px;
+        background-color: #000000;
+        opacity: 0.2;
+    }
+    .section-1 {
+        background-color: #dbc4a4;
+        color: black;
+        display: flex;
+        flex-direction: column;
+        gap: 2vh;
+        min-height: 100vh;
+        text-align: left;
+        font-weight: 200;
+        padding-top: 20%;
+        padding-left: 2%;
+        padding-right: 2%;
+        padding-bottom: 2%;
+    }
 
-  .h1-wrapper {
-    // padding-left: 3vh;
-    display: flex;
-    align-self: center;
-    white-space: pre-line;
-    width: 50vh;
-    font-weight: 400;
-    font-size: clamp(2rem, 10vw, 15rem);
-    padding-top: 5vh;
-    margin-bottom: -15vh;
-    // text-align: left;
-  }
+    .para {
+        font-size: clamp(1rem, 4vh, 8rem);
+        font-weight: 200;
+        color: black;
+        width: 100%;
+        text-align: right;
+        left: 5rem;
+        bottom: 3rem;
 
-  .para-wrapper {
-    align-self: center;
-    // text-align: flex-start;
+        // color: #292219;
+        // color: #f7f1d1;
+        // opacity: 0.9;
+        // text-align: center;
+        // background-clip: text;
+        // -webkit-background-clip: text;
+        // -webkit-text-stroke: 1px rgba(40, 40, 40, 0);
+        // background-color: #f7f1d1;
+        // color: transparent;
+        // mix-blend-mode: overlay;
+        // text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.1);
+        // opacity: 0.9;
+    }
 
-    padding-left: 0, 3vh;
-    font-size: clamp(1rem, 3vh, 8rem);
-    width: 50vh;
+    .h1-wrapper {
+        display: flex;
+        text-align: left;
+        // align-self: center;
+        // white-space: pre-line;
+        // width: 50vh;
+        font-weight: 400;
+        max-width: 90%;
+
+        font-size: clamp(2rem, 20vw, 8rem);
+    }
+
+    // @include for-size(tablet, up) {
+    //     .h1-subtitle {
+    //         display: flex;
+    //         flex-direction: column;
+    //         // align-content: flex-start;
+    //         gap: 0.5rem;
+    //         padding-bottom: 25vh;
+    //         padding-left: 4vh;
+    //         // padding-right: 4vh;
+    //     }
+    // }
+
+    // @include for-size(tablet, up) {
+    //     .masked-text {
+    //         display: flex;
+
+    //         padding: 2, 7vh, 2vh;
+    //         font-size: clamp(4rem, 12vw, 25rem);
+    //         max-width: 40vh;
+    //         font-weight: 400;
+    //         /* Masked styling */
+    //         background-clip: text;
+    //         -webkit-background-clip: text;
+    //         -webkit-text-stroke: 1px rgba(40, 40, 40, 0);
+    //         background-color: #f7f1d1;
+    //         mix-blend-mode: overlay;
+    //         color: transparent;
+    //         text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.1);
+    //     }
+    // }
+
+    // @include for-size(tablet, up) {
+    //     .subtitle {
+    //         display: flex;
+    //         align-self: flex-end;
+    //         min-width: 8vh;
+    //         font-weight: 400;
+    //         font-size: clamp(1rem, 3vh, 10rem);
+    //         color: white;
+    //         opacity: 0.8;
+    //     }
+    // }
+
+    // @include for-size(tablet, up) {
+    //     .para {
+    //         display: flex;
+    //         align-self: baseline;
+    //         font-size: clamp(1rem, 5vh, 8rem);
+    //         font-weight: 200;
+    //         // color: #292219;
+    //         max-width: 80vh;
+    //         // left: 5rem;
+    //         // bottom: 4rem;
+    //         color: #f7f1d1;
+    //         opacity: 0.8;
+
     // background-clip: text;
     // -webkit-background-clip: text;
     // -webkit-text-stroke: 1px rgba(40, 40, 40, 0);
-    // background-color: white;
+    // background-color: black;
+    // color: transparent;
     // mix-blend-mode: overlay;
-    // opacity: 0.9;
-
     // text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.1);
-  }
-
-  .subtitle {
-    // padding: 2vh;
-    width: 80%;
-    align-self: center;
-    color: white;
-    opacity: 0.8;
-    flex-shrink: 2rem;
-    font-size: clamp(1rem, 3vh, 8rem);
-  }
-
-  //SECTION 2
-
-  .section-2 {
-    display: flex;
-    flex-direction: column;
-    padding-top: 10vh;
-    gap: 18vh;
-    min-height: 100vh;
-    font-weight: 200;
-
-    padding-left: 10%;
-    padding-right: 10%;
-  }
-  .para2-wrapper {
-    align-self: flex-end;
-    text-align: right;
-    width: 120%;
-    margin-bottom: -15vh;
-    color: #f5efcb;
-    flex-shrink: 2rem;
-    font-size: clamp(1rem, 4vh, 8rem);
-    opacity: 0.8;
-  }
-
-  .h2-wrapper {
-    font-size: clamp(2rem, 10vw, 15rem);
-    align-self: flex-start;
-    width: 90%;
-  }
-
-  .para3-wrapper {
-    // padding: 2vh;
-    align-self: center;
-    width: 70%;
-    color: white;
-    flex-shrink: 2rem;
-    font-size: clamp(1rem, 3.5vh, 8rem);
-  }
-
-  // @include for-size(tablet, up) {
-  //   .para2-wrapper {
-  //     display: flex;
-  //     position: absolute;
-  //     top: 108vh;
-  //     left: 25vh;
-  //     opacity: 0.7;
-  //     width: 50vh;
-  //     color: white;
-  //     margin-top: 2rem;
-  //     font-size: clamp(1rem, 15vh, 2.5rem);
-  //   }
-
-  //   .h2-wrapper {
-  //     display: flex;
-  //     position: absolute;
-  //     top: 130vh;
-  //     left: 85vh;
-  //     width: 50vh;
-  //     opacity: 0.8;
-  //     color: #f7f1d1;
-  //     font-size: clamp(2rem, 12vw, 7rem);
-  //   }
-  // }
-
-  //first half
-
-  // @include for-size(phone, down, portrait) {
-  //   .h1-wrapper {
-  //     display: flex;
-  //     top: 40vh;
-  //     left: 8vh;
-  //     width: 50vh;
-  //     opacity: 0.8;
-  //     margin: 1rem auto;
-  //     font-size: clamp(4rem, 15vw, 10rem);
-  //     color: white;
-  //   }
-
-  //   .para-wrapper {
-  //     display: flex;
-  //     top: 5vh;
-  //     left: 55%;
-  //     min-width: 25vh;
-  //     max-width: 30vh;
-  //     opacity: 2;
-  //     font-size: clamp(1rem, 10vh, 1.8rem);
-  //     /* masked styling */
-  //     color: transparent;
-  //     background-clip: text;
-  //     -webkit-background-clip: text;
-  //     -webkit-text-stroke: 1px rgba(40, 40, 40, 0);
-  //     background-color: white;
-  //     mix-blend-mode: overlay;
-  //     opacity: 0.9;
-
-  //     text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.1);
-  //   }
-
-  //   .subtitle {
-  //     display: flex;
-  //     top: 85vh;
-  //     left: 10vh;
-  //     width: 50vh;
-  //     opacity: 1;
-  //     margin: 1rem auto;
-  //     font-size: clamp(2rem, 8vw, 2rem);
-  //     color: #f7f1d1;
-  //   }
-  // }
-
-  // //second half
-  // @include for-size(tablet, down) {
-  //   .para2-wrapper {
-  //     display: flex;
-  //     position: absolute;
-  //     top: 105vh;
-  //     left: 10vh;
-  //     opacity: 0.8;
-  //     width: 45vh;
-  //     color: white;
-  //     margin-top: 2rem;
-  //     font-size: clamp(1rem, 15vh, 2rem);
-  //   }
-
-  //   .h2-wrapper {
-  //     display: flex;
-  //     position: absolute;
-  //     top: 130vh;
-  //     left: 5vh;
-  //     opacity: 0.8;
-  //     color: #f7f1d1;
-  //     font-size: clamp(2rem, 15vw, 9rem);
-  //   }
-  // }
+    // opacity: 0.9;
+    //     }
+    // }
 </style>

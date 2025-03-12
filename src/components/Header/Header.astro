@@ -1,20 +1,22 @@
 ---
-import Hamburger from "./Hamburger.astro"
+import Hamburger from "./Hamburger.astro";
 ---
 
 <!-- The javascript requires the inline styling, on the styles that will change on scroll.  -->
 <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
   <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
-    <div class="logo text-white font-light text-3xl transition-colors duration-300">
+    <div
+      class="logo text-white font-light text-3xl transition-colors duration-300"
+    >
       Moneypennies logo
     </div>
     <div class="desktop-nav">
       <a href="/Contact/">
         <button
-          class="contact-button nav-button px-4 py-2 text-white hover:text-black border font-light rounded-full border-white bg-transparent hover:bg-white hover:border-black hover:bg-opacity-10 transition-all duration-300 text-3xl"
-          aria-label="say hello"
+          class="contact-button nav-button px-4 py-2 text-white rounded-full hover:text-black border border-white bg-transparent hover:bg-white hover:border-black hover:bg-opacity-10 transition-all duration-300 text-3xl"
+          aria-label="Request Free Sample Of Data"
         >
-          Say Hello!
+          Request Free Sample
         </button>
       </a>
     </div>
@@ -23,8 +25,7 @@ import Hamburger from "./Hamburger.astro"
 </header>
 
 <script>
-//responsive styles
-
+  //responsive styles
 
   // Nav styles that change on scroll
   const header = document.querySelector("header");
@@ -103,15 +104,18 @@ import Hamburger from "./Hamburger.astro"
 
 <style>
   /* responsive nav styles for hamburger component */
-      .desktop-nav {
+
+  .desktop-nav {
     display: flex;
+  }
+
+  .header {
+    font-family: "Roboto", serif;
   }
 
   @media (max-width: 768px) {
     .desktop-nav {
       display: none !important;
     }
-  
   }
-  
 </style>

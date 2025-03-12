@@ -62,7 +62,7 @@ const backgroundImageStyle =
 ---
 
 <section
-  class={`${sectionClass} ${className} ${uniqueImageClass} ${textVariant} ${textStyle} ${heightVariant === "tall" ? "tall-section" : ""}`}
+  class={`${sectionClass} ${className} ${uniqueImageClass} ${textVariant} ${textStyle} ${heightVariant === "tall" ? "tall-section" : "normal-section"}`}
 >
   <div class="overlay"></div>
   <div class={alignmentClasses}>
@@ -108,6 +108,13 @@ const backgroundImageStyle =
   .tall-section {
     min-height: 100vh;
     height: 170vh; /* Ensure exact 100vh */
+    width: 100vw;
+    overflow: hidden;
+  }
+
+  .normal-section {
+    min-height: 100vh;
+    height: 100vh; /* Ensure exact 100vh */
     width: 100vw;
     overflow: hidden;
   }
