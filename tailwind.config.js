@@ -13,7 +13,7 @@ export default {
         'grey-blue': '#607ea8',
       },
       fontFamily: {
-        sans: ['Roboto', 'serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+        sans: ['manrope', 'serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'manrope', 'Helvetica Neue', 'Arial', 'sans-serif'],
       }
     },
   },

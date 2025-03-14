@@ -5,13 +5,18 @@ import ScrollArrow from "../../components/ScrollArrow.astro";
 interface Props {
   h1Text?: string;
   subtitle?: string;
-  para?: string;
+  para1?: string;
+  para2?: string;
 }
 
 const {
-  h1Text = "Data designed for venues and suppliers",
-  subtitle = "Discover where a client held an event last time, when they plan to run the next, and if they've secured a venue",
-  para = "We track over 4,000 annual UK association and corporate events, plus the top 500 agencies in the industry.",
+  h1Text = "Data designed for venues & suppliers ",
+  para1 = `4,000+ annual UK association and corporate events tracked
+  
+  Insights on the top 500 agencies in the market`,
+  subtitle = `Learn past event history, future schedules, and venue status
+  `,
+  para2 = "",
 } = Astro.props;
 ---
 
@@ -19,99 +24,110 @@ const {
   variant="color"
   background=""
   className="Section02"
-  heightVariant="normal"
+  heightVariant="tall"
 >
   <!-- imageFolder="connect"
   imageName="pexels-didsss-2127522.jpg" -->
   <section class="section-2">
+    <p class="subtitle-wrapper" style="white-space: pre-line;">{subtitle}</p>
     <div class="parallax-container">
       <div class="overlay"></div>
       <h1 class="h1-wrapper">
         {h1Text}
       </h1>
+      <p class="para-1" style="white-space: pre-line;">{para1}</p>
     </div>
-    <p class="para-wrapper" style="white-space: pre-line;">
-      {subtitle}
-    </p>
-
-    <p class="subtitle-wrapper">{para}</p>
   </section>
 </SectionLayout>
 
-<slot />
-
 <style lang="scss">
   .parallax-container {
-    min-height: 30vh;
+    min-height: 150vh;
     background-attachment: fixed;
     background-image: url("/images/hotel/pexels-cottonbro-6474587.jpg");
     background-size: cover;
     background-position: center;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    gap: 10vh;
+    // align-items: center;
+    // justify-content: center;
     position: relative;
+    padding: 5rem 2rem;
+    flex: 1;
+    width: 100%;
+    margin: 0;
+    box-sizing: border-box; /* Important: makes padding included in width calculation */
   }
 
   .overlay {
     position: absolute;
     inset: 0;
-    background-color: rgba(0, 0, 0, 0.3);
-    // backdrop-filter: brightness(0.8); //softens background image ( don't need it here)
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: brightness(
+      0.9
+    ); //softens background image ( don't need it here)
   }
 
   .section-2 {
-    background-color: #dbc4a4;
-    // color: white;
+    background-color: #1f2734;
     display: flex;
     flex-direction: column;
-    gap: 2vh;
     min-height: 100vh;
-    text-align: left;
-    font-weight: 200;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .Section02 {
+    box-sizing: border-box; /* Important: makes padding included in width calculation */
+    width: 100%;
+    min-width: 100%;
+    overflow: hidden;
+    margin: 0;
+    // display: flex;
+    // justify-content: center;
   }
 
   .h1-wrapper {
     position: relative; //ensures text is above the overlay
-    z-index: 10; //brings text to foreground
+    z-index: 10;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-stroke: 1px rgba(240, 219, 219, 0);
+    background-color: white;
+    mix-blend-mode: overlay;
+    // opacity: 0.9;
+
     display: flex;
-    text-align: left;
-    color: white;
-    font-weight: 400;
-    max-width: 100%;
-    font-size: clamp(2rem, 12vw, 8rem);
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); // Add subtle text shadow for better readability
-    padding: 3rem 2rem;
+    // color: white;
   }
 
-  .para-wrapper {
-    align-self: center;
-    text-align: right;
-    // text-align: flex-start;
-    font-size: clamp(1rem, 3.5vh, 8rem);
-    color: black;
-    padding-top: 5vh;
-    padding-bottom: 5vh;
-    padding: 2rem;
-
-    // background-clip: text;
-    // -webkit-background-clip: text;
-    // -webkit-text-stroke: 1px rgba(40, 40, 40, 0);
-    // background-color: white;
-    // mix-blend-mode: overlay;
-    // opacity: 0.9;
+  .para-1 {
+    position: relative; //ensures text is above the overlay
+    z-index: 10;
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+    color: white;
+    line-height: 5vh;
+    @include for-size(desktop, up) {
+      width: 60%;
+      display: flex;
+      justify-content: center;
+    }
 
     // text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.1);
   }
 
   .subtitle-wrapper {
+    // position: relative; //ensures text is above the overlay
+    // z-index: 10;
+    // text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
     align-self: center;
-    text-align: left;
-    // text-align: flex-start;
-    font-size: clamp(1rem, 3.5vh, 8rem);
-
-    color: black;
-    padding: 2rem;
+    text-align: center;
+    color: #ceb898;
+    padding: 3rem 2rem;
   }
 
   //SECTION 2

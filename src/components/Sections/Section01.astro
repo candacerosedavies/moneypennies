@@ -8,23 +8,21 @@ interface Props {
 }
 
 const {
-    h1Text = "Unlock the future of events booking",
-    para = "Say goodbye to guess work. Learn who’s available, when, & where.",
+    h1Text = "Say hello to the future of events booking",
+    para = `And goodbye to guess work`,
 } = Astro.props;
 ---
 
-<SectionLayout variant="color" className="Section01" verticalAlignment="center">
+<SectionLayout variant="color" className="Section01">
     <section class="section-1">
         <div class="parallax-container">
             <div class="overlay"></div>
             <header>
                 <h1 class="heading">{h1Text}</h1>
             </header>
-        </div>
 
-        <p class="para-content">
-            <h2 class="para">{para}</h2>
-        </p>
+            <p class="para" style="white-space: pre-line;">{para}</p>
+        </div>
     </section>
 </SectionLayout>
 
@@ -36,22 +34,23 @@ const {
         // color: white;
         display: flex;
         flex-direction: column;
-        // gap: 2vh;
+
         min-height: 100vh;
         text-align: left;
         font-weight: 200;
     }
 
     .parallax-container {
-        min-height: 75vh;
+        min-height: 150vh;
         background-attachment: fixed;
-        background-image: url("/images/unlock/pexels-shutter-speed-ism-4767348.jpg");
+        background-image: url("/images/celebrate/pexels-cottonbro-3171837.jpg");
         background-size: cover;
         background-position: center;
         display: flex;
-        align-items: center;
-        justify-content: center;
+        flex-direction: column;
         position: relative;
+        gap: 10vh;
+        padding: 6rem 2rem;
     }
 
     .overlay {
@@ -67,20 +66,23 @@ const {
         display: flex;
         text-align: right;
         color: white;
-        font-weight: 400;
         max-width: 100%;
-        font-size: clamp(2rem, 15vw, 8rem);
+        // font-size: clamp(2rem, 18vw, 10rem);
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); // Add subtle text shadow for better readability
-        padding: 3rem 2rem;
+
+        padding-top: 10vh;
     }
 
     .para {
-        font-size: clamp(1rem, 3.5vh, 8rem);
+        position: relative;
+        z-index: 10;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        // font-size: clamp(1rem, 4vh, 8rem);
         font-weight: 200;
-        color: black;
+        color: white;
         width: 100%;
         text-align: left;
-        padding: 2rem;
+        // padding: 1rem;
 
         // color: #292219;
         // color: #f7f1d1;

@@ -1,9 +1,93 @@
 @import "./mixins.scss";
 
 
-html {
-    font-family: "Roboto", serif;
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
 
+
+
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    /* Prevents horizontal scrolling */
+    width: 100%;
+    font-weight: 200;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    align-self: center;
+    letter-spacing: 0.5vh;
+    font-family: "manrope";
+}
+
+// :root {
+//     --base-font-size: 5rem;
+
+//     @include for-size(tablet, up) {
+//         --base-font-size: 5rem;
+//     }
+// }
+
+p {
+    font-size: clamp(1rem, 3vh, 4rem) !important;
+
+    @include for-size(tablet, up) {
+        font-size: clamp(1rem, 4vh, 5rem) !important;
+    }
+
+    @include for-size(desktop, up) {
+        font-size: clamp(1rem, 4vh, 4rem) !important;
+    }
+
+    font-weight: 200 !important;
+}
+
+.contact-button {
+    font-size: clamp(1rem, 3vh, 4rem) !important;
+    font-weight: 400;
+
+    @include for-size(tablet, up) {
+        font-size: clamp(1rem, 3vh, 3rem) !important;
+    }
+
+    @include for-size(desktop, up) {
+        font-size: clamp(1rem, 4vh, 4rem) !important;
+    }
+
+}
+
+button {
+    font-size: clamp(1rem, 3vh, 4rem) !important;
+
+    @include for-size(tablet, up) {
+        font-size: clamp(1rem, 4vh, 5rem) !important;
+    }
+
+    @include for-size(desktop, up) {
+        font-size: clamp(1rem, 6vh, 5rem) !important;
+    }
+
+
+
+}
+
+h1 {
+    font-size: clamp(1rem, 8vh, 8rem) !important;
+    font-weight: 200 !important;
+
+    @include for-size(tablet, up) {
+        font-size: clamp(3rem, 10vh, 10rem) !important;
+    }
+
+    @include for-size(desktop, up) {
+        font-size: clamp(4rem, 15vh, 10rem) !important;
+    }
 }
 
 // AMMEND THE BELOW
