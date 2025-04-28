@@ -1,167 +1,197 @@
 ---
 import SectionLayout from "../../layouts/SectionLayout.astro";
-import ScrollArrow from "../../components/ScrollArrow.astro";
+// import ScrollArrow from "../../components/ScrollArrow.astro";
 
 interface Props {
     h1Text?: string;
+    h2Text?: string;
     para?: string;
 }
 
 const {
-    h1Text = "Say hello to the future of events booking",
-    para = `And goodbye to guess work`,
+    h1Text = "MONEYPENNIES",
+    para = "Welcome to the future of events booking. Our data tracks past event history, future schedules, and the current venue status of 4,000+ UK annual events.",
+    h2Text = "Data designed for venues & suppliers",
 } = Astro.props;
 ---
 
 <SectionLayout variant="color" className="Section01">
-    <section class="section-1">
-        <div class="parallax-container">
-            <div class="overlay"></div>
-            <header>
-                <h1 class="heading">{h1Text}</h1>
-            </header>
+    <section class="section01">
+        <div class="section01__parallax-container">
+            <div class="section01__overlay"></div>
 
-            <p class="para" style="white-space: pre-line;">{para}</p>
+            <!-- Text container to bounce all text together -->
+            <header class="section01__header">
+                <h2 class="section01__h2-heading uppercase">{h2Text}</h2>
+                <h1 class="section01__h1-heading">{h1Text}</h1>
+                <p class="section01__para" set:html={para} />
+
+                <nav class="section01__button__container">
+                    <!-- use JS 'onclick' instead of an <a> tag. Shouldn't use <a> AND <button> together -->
+                    <button
+                        class="animated__button"
+                        onclick="window.location.href='/contact/'"
+                    >
+                        <span class="animated__span">try for free</span>
+                    </button>
+                </nav>
+            </header>
         </div>
     </section>
 </SectionLayout>
 
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Get the text container that wraps all text
+        const textContainer = document.querySelector(
+            ".section01__text-container",
+        );
+
+        if (textContainer) {
+            window.addEventListener("scroll", () => {
+                const scrollPosition = window.scrollY;
+                //Math.sin creates a bounce/wave
+                //multiplying by 0.01 controls how quickly it bounces in pixels
+                //multiplying by 15 controls how far it bounces in pixels
+                const bounceAmount = Math.sin(scrollPosition * 0.01) * 18;
+                textContainer.style.transform = `translateY(${bounceAmount}px)`;
+            });
+        }
+    });
+</script>
+
 <style lang="scss">
-    .section-1 {
-        // background-color: #797979;
+    // Mobile-first approach (base styles for mobile)
+    .section01 {
         background-color: #dbc4a4;
 
-        // color: white;
-        display: flex;
-        flex-direction: column;
-
         min-height: 100vh;
-        text-align: left;
+        text-align: center;
+        width: 100vw;
         font-weight: 200;
+        overflow: hidden;
     }
 
-    .parallax-container {
-        min-height: 150vh;
-        background-attachment: fixed;
+    .section01__parallax-container {
+        min-height: 100vh;
         background-image: url("/images/celebrate/pexels-cottonbro-3171837.jpg");
         background-size: cover;
-        background-position: center;
+        background-position: right 70% bottom 0%;
+        background-attachment: scroll; // Default for mobile stops the parallax
         display: flex;
+        flex-grow: 1;
         flex-direction: column;
         position: relative;
-        gap: 10vh;
-        padding: 6rem 2rem;
+        padding: 0rem 1rem;
+
+        // Tablet and desktop styles
+        @include for-size(tablet, up) {
+            min-height: 150vh;
+            background-attachment: fixed; //'fixed' enables the parallax scroll
+            padding: 0rem 2rem;
+        }
     }
 
-    .overlay {
+    //Dull the background image so can see text more clearly
+    .section01__overlay {
         position: absolute;
         inset: 0;
         background-color: rgba(0, 0, 0, 0.4);
-        // backdrop-filter: brightness(0.8); //softens background image ( don't need it here)
+        pointer-events: none;
     }
 
-    .heading {
-        position: relative; //ensures text is above the overlay
-        z-index: 10; //brings text to foreground
-        display: flex;
-        text-align: right;
-        color: white;
-        max-width: 100%;
-        // font-size: clamp(2rem, 18vw, 10rem);
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); // Add subtle text shadow for better readability
-
-        padding-top: 10vh;
-    }
-
-    .para {
+    // Container for all text elements to bounce together
+    .section01__header {
         position: relative;
         z-index: 10;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        // font-size: clamp(1rem, 4vh, 8rem);
-        font-weight: 200;
-        color: white;
-        width: 100%;
-        text-align: left;
-        // padding: 1rem;
+        display: inline-flex;
+        flex-direction: column;
 
-        // color: #292219;
-        // color: #f7f1d1;
-        // opacity: 0.9;
-        // text-align: center;
-        // background-clip: text;
-        // -webkit-background-clip: text;
-        // -webkit-text-stroke: 1px rgba(40, 40, 40, 0);
-        // background-color: #f7f1d1;
-        // color: transparent;
-        // mix-blend-mode: overlay;
-        // text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.1);
-        // opacity: 0.9;
+        will-change: transform;
+        transition: transform 0.1s ease-out;
+        /* Add flex grow to make container take available space */
+        flex-grow: 1;
+        justify-content: center; // Center vertically
+        margin-bottom: 10rem;
+        text-align: left;
+
+        padding: 0 0 3rem 0;
+        flex-grow: 1;
+
+        @include for-size(tablet, up) {
+            gap: 10vh;
+            // padding-bottom: 4rem 0rem;
+            margin-bottom: 30rem;
+            padding-top: 3rem;
+        }
     }
 
-    // @include for-size(tablet, up) {
-    //     .h1-subtitle {
-    //         display: flex;
-    //         flex-direction: column;
-    //         // align-content: flex-start;
-    //         gap: 0.5rem;
-    //         padding-bottom: 25vh;
-    //         padding-left: 4vh;
-    //         // padding-right: 4vh;
-    //     }
-    // }
+    .section01__h1-heading {
+        display: block;
+        margin: 0;
+        max-width: 100%; // Increased from 80% to give more room
+        // text-align: left;
+        color: white;
+        font-size: clamp(2rem, 8vw, 3rem);
+        padding: 5rem 0 0 0;
+        // overflow-wrap: break-word; /* Add property to handle overflow text */
+        font-weight: 900;
+        position: absolute;
 
-    // @include for-size(tablet, up) {
-    //     .masked-text {
-    //         display: flex;
+        @include for-size(tablet, up) {
+            font-size: clamp(3rem, 10vw, 9rem);
 
-    //         padding: 2, 7vh, 2vh;
-    //         font-size: clamp(4rem, 12vw, 25rem);
-    //         max-width: 40vh;
-    //         font-weight: 400;
-    //         /* Masked styling */
-    //         background-clip: text;
-    //         -webkit-background-clip: text;
-    //         -webkit-text-stroke: 1px rgba(40, 40, 40, 0);
-    //         background-color: #f7f1d1;
-    //         mix-blend-mode: overlay;
-    //         color: transparent;
-    //         text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.1);
-    //     }
-    // }
+            max-width: 95%;
+        }
+    }
 
-    // @include for-size(tablet, up) {
-    //     .subtitle {
-    //         display: flex;
-    //         align-self: flex-end;
-    //         min-width: 8vh;
-    //         font-weight: 400;
-    //         font-size: clamp(1rem, 3vh, 10rem);
-    //         color: white;
-    //         opacity: 0.8;
-    //     }
-    // }
+    .section01__h2-heading {
+        font-weight: 900;
+        color: white;
+        // text-align: left;
+        font-size: clamp(0.5rem, 2.6vw, 1.5rem);
+        /* Add property to handle overflow text */
+        overflow-wrap: break-word;
+        word-break: break-word;
+        position: absolute;
+        padding: 1rem 0 1.5rem 0;
 
-    // @include for-size(tablet, up) {
-    //     .para {
-    //         display: flex;
-    //         align-self: baseline;
-    //         font-size: clamp(1rem, 5vh, 8rem);
-    //         font-weight: 200;
-    //         // color: #292219;
-    //         max-width: 80vh;
-    //         // left: 5rem;
-    //         // bottom: 4rem;
-    //         color: #f7f1d1;
-    //         opacity: 0.8;
+        @include for-size(tablet, up) {
+            font-size: clamp(1.5rem, 4vw, 1.5rem);
+            padding: 1rem 0 7rem 0;
+        }
+    }
 
-    // background-clip: text;
-    // -webkit-background-clip: text;
-    // -webkit-text-stroke: 1px rgba(40, 40, 40, 0);
-    // background-color: black;
-    // color: transparent;
-    // mix-blend-mode: overlay;
-    // text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.1);
-    // opacity: 0.9;
-    //     }
-    // }
+    .section01__para {
+        width: 100%;
+
+        position: absolute;
+        padding: 13rem 0 0 0;
+
+        @include for-size(tablet, up) {
+            padding: 21rem 0 0 0;
+            width: 80vh;
+        }
+    }
+
+    .section01__button__container {
+        position: absolute;
+        padding: 28rem 1rem 0 0.5rem;
+
+        @include for-size(tablet, up) {
+            padding: 35rem 0 0 0;
+        }
+    }
+
+    //FONT STYLES
+    p {
+        font-size: clamp(0.5rem, 3vw, 1rem);
+        font-weight: 400 !important;
+        line-height: 1.2;
+
+        @include for-size(tablet, up) {
+            font-size: clamp(1rem, 4vh, 1rem);
+            line-height: 1.5;
+        }
+    }
 </style>

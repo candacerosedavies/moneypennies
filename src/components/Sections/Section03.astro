@@ -22,67 +22,53 @@ const {
 } = Astro.props;
 ---
 
-<SectionLayout
-    variant="color"
-    background=""
-    className="Section03"
-    heightVariant="tall"
->
-    <section class="section-3">
-        <h1 class="heading">
-            {h1Text}
-        </h1>
-        <div class="parallax-container">
-            <div class="overlay"></div>
-
-            <p class="para2-wrapper text-center" style="white-space: pre-line;">
-                {para2}
-            </p>
-            <a href="/contact/">
-                <div class="button-container">
-                    <button
-                        class="button px-3 py-3 text-black hover:text-black border font-light rounded-full border-black bg-transparent hover:bg-[#435875] hover:border-[#435875] hover:bg-opacity-50 transition-all duration-30"
-                        >start connecting
-                    </button>
-                </div>
-            </a>
+<SectionLayout variant="color" background="" className="Section03">
+    <section class="section03__section-3">
+        <div class="section03__parallax-container">
+            <div class="section03__overlay"></div>
+            <div class="section03__text-container">
+                <h1 class="section03__heading">
+                    {h1Text}
+                </h1>
+                <p
+                    class="section03__para2-wrapper"
+                    style="white-space: pre-line;"
+                >
+                    {para2}
+                </p>
+                <a href="/contact/">
+                    <nav class="section03__button-container">
+                        <button
+                            class="section03__button px-3 py-3 text-black hover:text-black border font-light rounded-full border-black bg-transparent hover:bg-[#435875] hover:border-[#435875] hover:bg-opacity-50 transition-all duration-30"
+                            >start connecting
+                        </button>
+                    </nav>
+                </a>
+            </div>
         </div>
     </section>
 </SectionLayout>
 <ScrollArrow />
 
-<style lang="scss">
-    .parallax-container {
-        min-height: 150vh;
-        background-attachment: fixed;
-        background-image: url("/images/connect/pexels-didsss-2127522.jpg");
-        background-size: cover;
-        background-position: center;
-        display: flex;
-        flex-direction: column;
-        gap: 5vh;
-        // align-items: center;
-        // justify-content: center;
-        position: relative;
-        padding: 6rem 2rem;
-        flex: 1;
-        width: 100%;
-        margin: 0;
-        box-sizing: border-box; /* Important: makes padding included in width calculation */
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Get the text container that wraps all text
+        const textContainer = document.querySelector(
+            ".section03__text-container",
+        );
 
-        @include for-size(desktop, up) {
-            gap: 2vh;
+        if (textContainer) {
+            window.addEventListener("scroll", () => {
+                const scrollPosition = window.scrollY;
+                const bounceAmount = Math.sin(scrollPosition * 0.01) * 18;
+                textContainer.style.transform = `translateY(${bounceAmount}px)`;
+            });
         }
-    }
+    });
+</script>
 
-    .overlay {
-        position: absolute;
-        inset: 0;
-        background-color: rgba(0, 0, 0, 0.4);
-        // backdrop-filter: brightness(0.8); //softens background image ( don't need it here)
-    }
-
-    .section-3 {
+<style lang="scss">
+    .section03__section-3 {
         background-color: #344257;
         display: flex;
         flex-direction: column;
@@ -93,11 +79,77 @@ const {
         box-sizing: border-box;
     }
 
-    // .section03 {
-    //     box-sizing: border-box;
-    // }
+    .section03__text-container {
+        position: relative;
+        z-index: 10;
+        // text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+        display: flex;
+        flex-direction: column;
+        gap: 5vh; // Reduced gap for mobile
+        will-change: transform;
+        transition: transform 0.1s ease-out;
+        /* Add flex grow to make container take available space */
+        flex-grow: 1;
+        justify-content: center; // Center vertically
+        // padding: 0 1rem;
 
-    .button {
+        @include for-size(tablet, up) {
+            gap: 10vh;
+            padding-bottom: 40%;
+            max-width: 95%;
+        }
+    }
+
+    .section03__parallax-container {
+        min-height: 100vh;
+        background-attachment: fixed;
+        background-image: url("/images/connect/pexels-didsss-2127522.jpg");
+        background-size: cover;
+        background-position: 30%;
+        background-attachment: scroll; // Default for mobile stops the parallax
+        display: flex;
+        flex-grow: 1;
+        flex-direction: column;
+        position: relative;
+        padding: 4rem 1rem;
+
+        @include for-size(tablet, up) {
+            background-attachment: fixed;
+        }
+    }
+
+    .section03__heading {
+        display: block;
+        margin: 0 auto;
+        // max-width: 50%;
+        align-self: flex-start;
+        color: #ceb898;
+        font-size: clamp(2rem, 10vw, 4rem);
+        max-width: 100%;
+        text-align: center;
+
+        @include for-size(tablet, up) {
+            font-size: clamp(3rem, 10vw, 8rem);
+            max-width: 100%;
+        }
+    }
+
+    .section03__para2-wrapper {
+        position: relative; //ensures text is above the overlay
+        z-index: 10;
+        margin: auto;
+        text-align: center;
+        max-width: 80%;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+        color: white;
+        font-size: clamp(1rem, 5vw, 1.5rem);
+
+        @include for-size(desktop, up) {
+            min-width: 20rem;
+        }
+    }
+
+    .section03__button {
         position: relative; //ensures text is above the overlay
         z-index: 10;
         text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
@@ -106,26 +158,16 @@ const {
         padding: 1rem 1rem;
     }
 
-    .button-container {
+    .section03__button-container {
         display: flex;
         justify-content: center;
-        padding-top: 20vh;
+        // padding-top: 20vh;
     }
 
-    .heading {
-        align-self: flex-start;
-        color: #ceb898;
-        padding: 4rem 2rem;
-    }
-
-    .para2-wrapper {
-        position: relative; //ensures text is above the overlay
-        z-index: 10;
-        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
-        color: white;
-
-        @include for-size(desktop, up) {
-            min-width: 20rem;
-        }
+    .section03__overlay {
+        position: absolute;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.4);
+        // backdrop-filter: brightness(0.8); //softens background image ( don't need it here)
     }
 </style>

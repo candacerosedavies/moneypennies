@@ -6,8 +6,8 @@ interface Props {
   imageFolder?: string;
   imageName?: string;
   className?: string;
-  contentPosition?: "left" | "center" | "right";
-  verticalAlignment?: "top" | "center" | "bottom";
+  // contentPosition?: "left" | "center" | "right";
+  // verticalAlignment?: "top" | "center" | "bottom";
   hasParallax?: boolean;
   parallaxImages?: {
     src: string;
@@ -27,8 +27,8 @@ const {
   imageFolder,
   imageName,
   className = "",
-  contentPosition = "",
-  verticalAlignment = "",
+  // contentPosition = "",
+  // verticalAlignment = "",
   heightVariant = "",
 } = Astro.props;
 
@@ -45,11 +45,11 @@ if (variant === "image" && imageFolder && imageName) {
   uniqueImageClass = `bg-${imageFolder}-${imageName?.replace(/\./g, "-")}`;
 }
 
-const alignmentClasses = `
-  content-container
-  items-${contentPosition === "center" ? "center" : contentPosition === "right" ? "end" : "start"}
-  justify-${verticalAlignment === "center" ? "center" : verticalAlignment === "top" ? "start" : "end"}
-`.trim();
+// const alignmentClasses = `
+//   content-container
+//   items-${contentPosition === "center" ? "center" : contentPosition === "right" ? "end" : "start"}
+//   justify-${verticalAlignment === "center" ? "center" : verticalAlignment === "top" ? "start" : "end"}
+// `.trim();
 
 const backgroundImageStyle =
   variant === "image" && imageFolder && imageName
@@ -65,15 +65,14 @@ const backgroundImageStyle =
   class={`${sectionClass} ${className} ${uniqueImageClass} ${textVariant} ${textStyle} ${heightVariant === "tall" ? "tall-section" : "normal-section"}`}
 >
   <div class="overlay"></div>
-  <div class={alignmentClasses}>
-    <slot />
-  </div>
+  <!-- <div class={alignmentClasses}> -->
+  <slot />
 </section>
 
 <style>
   .section-image {
     min-height: 100vh;
-    width: 100%;
+    /* width: 100%; */
     background-size: cover;
     background-position: center;
     position: relative;
@@ -82,7 +81,7 @@ const backgroundImageStyle =
 
   .section-color {
     min-height: 100vh;
-    width: 100%;
+    /* width: 100%; */
     position: relative;
     overflow: hidden;
   }
@@ -93,41 +92,30 @@ const backgroundImageStyle =
     background-color: rgba(0, 0, 0, 0.3);
   }
 
-  .content-container {
-    position: relative;
-    height: 100vh;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    padding: 0; /* Remove padding */
-    max-width: 100%; /* Change from 2000px to 100% */
-    margin: 0; /* Remove auto margins */
-    box-sizing: border-box;
-  }
-
   .tall-section {
     min-height: 150vh;
 
-    width: 100%;
+    /* width: 100%; */
     overflow: hidden;
   }
 
   .normal-section {
     min-height: 100vh;
     height: 100vh; /* Ensure exact 100vh */
-    width: 100%;
+    /* width: 100%; */
     overflow: hidden;
   }
 
   .masked-container {
     padding: 2rem 6rem;
-    max-width: 1400px;
-    font-size: 3rem;
+    /* max-width: 1400px; */
+
+    font-size: 1rem;
     font-weight: 700;
   }
 
   .normal-text {
-    font-size: 5rem;
+    font-size: 1rem;
     font-weight: 500;
     color: white;
     line-height: 1;
@@ -135,7 +123,7 @@ const backgroundImageStyle =
   }
 
   .masked-text {
-    font-size: 3rem;
+    font-size: 1rem;
     font-weight: 700;
     color: transparent;
     background-image: `$textVariant`;

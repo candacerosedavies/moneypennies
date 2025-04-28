@@ -1,0 +1,88 @@
+---
+const linkedIn = "https://www.linkedin.com/in/moneypennies/";
+const address = "Manchester Suite B 2 Edge Lane Manchester M21 9JF";
+const copyRight =
+    "© Oliver’s Data Holdings Ltd t/a Moneypennies. Registered Number 12547929.";
+const gdpr =
+    "GDPR Ready and Registered with the Information Commissioner’s Office, Number ZA130337"; //check if we need this
+
+const tagLine = "The future of events booking";
+---
+
+<section class="section__footer">
+    <footer>
+        <span class="footer__tagline">
+            <p class="lg__font">moneypennies</p>
+            <p class="md__font">{tagLine}</p>
+        </span>
+
+        <ul class="footer__url">
+            <li>
+                <button
+                    class="animated__button"
+                    onclick="window.location.href='www.linkedin.com/in/moneypennies/'"
+                >
+                    <span class="animated__span">linkedIn</span>
+                </button>
+            </li>
+            <li>
+                <button
+                    class="animated__button"
+                    onclick="window.location.href='/contact/'"
+                >
+                    <span class="animated__span">say hello</span>
+                </button>
+            </li>
+        </ul>
+
+        <ul class="footer__info">
+            <li><p>{copyRight}</p></li>
+            <li><p>{gdpr}</p></li>
+            <li>
+                <p>{address}</p>
+                <a href="/privacy">privacy policy</a>
+            </li>
+        </ul>
+    </footer>
+</section>
+
+<style lang="scss">
+    .section__footer {
+        background-color: #293442;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        height: 60vh;
+        padding: 1rem;
+
+        // position: relative;
+    }
+
+    .footer__tagline {
+        display: flex;
+        display: inline-block; //make the span respect width and height
+        flex-direction: row;
+
+        // position: absolute;
+        // justify-content: space-around;
+        // align-items: center;
+        // width: 100%;
+    }
+
+    .footer__info {
+        display: flex;
+        display: inline-block;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .footer__url {
+        display: flex;
+        display: inline-block;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .animated__button .animated__span {
+        font-size: clamp(0.5rem, 3vw, 1rem);
+    }
+</style>

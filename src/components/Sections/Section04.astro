@@ -1,136 +1,140 @@
 ---
-//component deals with tesimonial data
-
 import SectionLayout from "../../layouts/SectionLayout.astro";
-import ParallaxImages from "../Sections/ParallaxImages.astro";
-import ParallaxText from "../Sections/ParallaxText.astro";
-import ParallaxTestimonials from "./ParallaxTestimonials.astro";
 
 interface Props {
-    h1Text?: string;
-    subtitle?: string;
-    heightVariant?: string;
+    h2Text?: string;
 }
 
-//Testimonials array
-const testimonials = [
-    {
-        quote: "I have worked with Moneypennies for many years and they have supported us greatly. Their databases are always on point and they will happily work on projects to fill our needs months in advance. Quality of data has always been great and contacts all correct.",
-        author: "Client Name",
-        company: "Company Name",
-    },
-    {
-        quote: "Moneypennies is absolutely fantastic. They have gone above and beyond to help me out. I would completely recommend their services!",
-        author: "Client Name 2",
-        company: "Company Name 2",
-    },
-    {
-        quote: "Amazing, thank you Wonderwoman!",
-        author: "Mellini Gordon",
-        company: "Friends House",
-    },
-];
-
-//accreditation logos array
-const accreditations = [
-    { src: "/images/logos/Mia-accredited.png", width: 180 },
-    // { src: "/images/logos/accred2.png", width: 150 },
-    // Add more as needed
-];
-
-//Partner logos array
-const partners = [
-    { src: "/images/logos/London-Venue-2024.png", width: 180 },
-    // { src: "/images/logos/partner2.png", width: 220 },
-    // Add more as needed
-];
-
-// Combine all images for ParallaxImages
-const allLogos = [
-    ...accreditations.map((logo, i) => ({
-        src: logo.src,
-        left: `${80 + i * 40}%`,
-        top: `${20 + (i % 3) * 20}%`, //The modulo operation (i % 3) ensures logos are distributed in three vertical positions
-        width: logo.width,
-        speed: 0.3,
-        initialOffset: i * 300,
-    })),
-    ...partners.map((logo, i) => ({
-        src: logo.src,
-        left: `${120 + i * 40}%`,
-        top: `${40 + (i % 3) * 15}%`,
-        width: logo.width,
-        speed: 0.5,
-        initialOffset: i * 200 + 500,
-    })),
-];
+const { h2Text = "Kind words" } = Astro.props;
 ---
 
-<SectionLayout
-    variant="color"
-    background="bg-grey-blue"
-    className="section-04"
-    heightVariant="normal"
->
-    <section class="section-4 sky-700">
-        <ParallaxImages images={allLogos} />
-        <ParallaxText h1Text="Trusted by Industry Leaders" subtitle="" />
+<SectionLayout variant="color" background="" className="" heightVariant="tall">
+    <section class="section04 text-white">
+        <h2 class="section04__h2 text-white">{h2Text}</h2>
+        <article class="boxes text-white-100">
+            <!-- Testimonial 01 -->
+            <blockquote class="quotes">
+                <p class="font-bold uppercase text-white">
+                    Client Name, Company Name
+                </p>
+                <p class="font-light italic">
+                    "I have worked with Moneypennies for many years and they
+                    have supported us greatly. Their databases are always on
+                    point and they will happily work on projects to fill our
+                    needs months in advance. Quality of data has always been
+                    great and contacts all correct."
+                </p>
+            </blockquote>
 
-        <!-- params: testimonial gets each iteam from testimonialS array above, position={index} populates the 'position' prop (in parallaxTestimonials) with the value of second param (which is always index in .map). 
-     At time of writing this map returns 3 testimonial CSS classes used in parallaxTestimonials eg testimonial-1 testimonial-2  
-     THE PROPS BELOW CREATE A BRIDGE/DYNAMIC RELATIONSHIP ACROSS COMPONENT FILES
-     MAPPING OVER THE TESTIMONIALS ARRAY TO CREATE DIFFERENT TESTIMONIAL COMPONENTS ON THE PAGE -->
-        {
-            testimonials.map((testimonial, index) => (
-                <ParallaxTestimonials
-                    quote={testimonial.quote}
-                    author={testimonial.author}
-                    company={testimonial.company}
-                    position={index}
-                />
-            ))
-        }
+            <!-- Testimonial 02 -->
+            <blockquote class="quotes">
+                <p class="font-bold uppercase text-white">
+                    Client Name, Company Name
+                </p>
+                <p class="font-light italic">
+                    "Moneypennies is absolutely fantastic. They have gone above
+                    and beyond to help me out. I would completely recommend
+                    their services!"
+                </p>
+            </blockquote>
+
+            <!-- Testimonial 03 -->
+            <blockquote class="quotes">
+                <p class="font-bold uppercase text-white">
+                    Mellini Gordon, Friends House
+                </p>
+                <p class="font-light italic">
+                    "Amazing, thank you Wonderwoman!"
+                </p>
+            </blockquote>
+        </article>
     </section>
 </SectionLayout>
 
-<style>
-    .section-4 {
-        box-sizing: border-box;
-        /* background-color: #475d7c; */
-    }
-    /* 
-    .text-wrapper {
-        position: absolute;
-        top: 50%; /* Start at vertical center 
-        left: 50%; /* Start at horizontal center
-        transform: translate(30%, 20%); /* Move right and down 
-        z-index: 2;
-    }
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Get the text container that wraps all text
+        const textContainer = document.querySelector(".section_05");
 
+        if (textContainer) {
+            window.addEventListener("scroll", () => {
+                const scrollPosition = window.scrollY;
+                const bounceAmount = Math.sin(scrollPosition * 0.01) * 18;
+                textContainer.style.transform = `translateY(${bounceAmount}px)`;
+            });
+        }
+    });
+</script>
 
-    .subtitle {
-        font-size: clamp(1.5rem, 4vw, 2.5rem);
-        color: white;
-        margin-top: 2rem;
-    }
+<style lang="scss">
+    // .section04 {
+    //     display: flex;
+    //     flex-direction: column;
+    //     min-height: 100vh;
+    //     text-align: center;
+    //     width: 100vw;
+    //     font-weight: 200;
+    //     overflow: hidden;
+    // }
 
-    styling in parallaxTestimonials instead
-    .content-wrapper {
-        position: relative;
-        width: 100%;
-        height: 100vh;
+    .section04__parallax-container {
+        // min-height: 100vh;
+        // background-image: url("/images/hotel/pexels-cottonbro-6474587.jpg");
+        // background-color: #435875;
+        background-size: cover;
+        background-position: center;
         display: flex;
-        justify-content: stretch; /* or remove justify-content 
-        align-items: stretch; /* or remove align-items 
-        padding: 0;
-        overflow: hidden;
-    } 
-    styling in parallaxTestimonials instead
-       /* .h1-text {
-        font-size: clamp(4rem, 15vw, 12rem);
-        font-weight: 200;
-        line-height: 1;
-        color: white;
-        mix-blend-mode: difference;
-    } */
+        flex-direction: column;
+        position: relative;
+        /* Match Section01's padding */
+
+        /* Match exactly Section01's responsive behavior */
+        @include for-size(tablet, up) {
+            min-height: 150vh;
+            background-attachment: fixed;
+            // padding: 6rem 2rem;
+        }
+    }
+    .section04__h2 {
+        position: relative;
+        display: flex;
+        font-weight: 400;
+        font-size: clamp(2rem, 8vw, 3rem);
+        padding: 0 0 2rem 0;
+    }
+    .section04 {
+        padding: 2rem 1rem; //top bottom, left right
+        max-width: 1280px;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: #293442;
+
+        @include for-size(tablet, up) {
+            padding: 6rem 1rem; //increase top bottom padding
+        }
+    }
+
+    .boxes {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        position: relative; //allows absolute positioning of children relative to this element
+
+        @include for-size(tablet, up) {
+            flex-direction: row;
+            gap: 1rem;
+        }
+    }
+
+    .quotes {
+        background-color: grey;
+        opacity: 0.9;
+        border-radius: 1rem;
+        padding: 2rem; //all sides
+        text-align: center;
+
+        @include for-size(tablet, up) {
+            flex: 1; //boxes shrink and grow
+        }
+    }
 </style>

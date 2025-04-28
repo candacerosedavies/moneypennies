@@ -20,211 +20,140 @@ const {
 } = Astro.props;
 ---
 
-<SectionLayout
-  variant="color"
-  background=""
-  className="Section02"
-  heightVariant="tall"
->
-  <!-- imageFolder="connect"
-  imageName="pexels-didsss-2127522.jpg" -->
+<!-- Removed heightVariant="tall" to match Section01 -->
+<SectionLayout variant="color" background="bg-[#293442]" className="Section02">
   <section class="section-2">
-    <p class="subtitle-wrapper" style="white-space: pre-line;">{subtitle}</p>
-    <div class="parallax-container">
-      <div class="overlay"></div>
-      <h1 class="h1-wrapper">
-        {h1Text}
-      </h1>
-      <p class="para-1" style="white-space: pre-line;">{para1}</p>
+    <div class="section02__parallax-container">
+      <div></div>
+
+      <!-- Using header wrapper like in Section01 -->
+      <div class="section02__text-container">
+        <header>
+          <h1 class="section02__heading">{h1Text}</h1>
+        </header>
+
+        <!-- Changed to match Section01's structure -->
+        <p class="section02__subtitle" style="white-space: pre-line;">
+          {subtitle}
+        </p>
+        <p class="section02__para-1" style="white-space: pre-line;">{para1}</p>
+      </div>
     </div>
   </section>
 </SectionLayout>
 
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // Get the text container that wraps all text
+    const textContainer = document.querySelector(".section02__text-container");
+
+    if (textContainer) {
+      window.addEventListener("scroll", () => {
+        const scrollPosition = window.scrollY;
+        const bounceAmount = Math.sin(scrollPosition * 0.01) * 18;
+        textContainer.style.transform = `translateY(${bounceAmount}px)`;
+      });
+    }
+  });
+</script>
+
 <style lang="scss">
-  .parallax-container {
-    min-height: 150vh;
-    background-attachment: fixed;
-    background-image: url("/images/hotel/pexels-cottonbro-6474587.jpg");
+  // Container for all text elements to bounce together
+  .section02__text-container {
+    position: relative;
+    // display: block;
+    z-index: 10;
+    // text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 10vh; // Reduced gap for mobile
+    will-change: transform;
+    transition: transform 0.1s ease-out;
+    /* Add flex grow to make container take available space */
+    flex-grow: 1;
+    justify-content: center; // Center vertically
+
+    @include for-size(tablet, up) {
+      padding-bottom: 50vh;
+    }
+  }
+  .section-2 {
+    // background-color: #1f2734;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    text-align: center;
+    width: 100vw;
+    font-weight: 200;
+    overflow: hidden;
+  }
+
+  .section02__parallax-container {
+    min-height: 100vh;
+    // background-image: url("/images/hotel/pexels-cottonbro-6474587.jpg");
+    // background-color: #435875;
     background-size: cover;
     background-position: center;
     display: flex;
     flex-direction: column;
-    gap: 10vh;
-    // align-items: center;
-    // justify-content: center;
     position: relative;
-    padding: 5rem 2rem;
-    flex: 1;
-    width: 100%;
-    margin: 0;
-    box-sizing: border-box; /* Important: makes padding included in width calculation */
-  }
+    /* Match Section01's padding */
 
-  .overlay {
-    position: absolute;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.4);
-    backdrop-filter: brightness(
-      0.9
-    ); //softens background image ( don't need it here)
-  }
-
-  .section-2 {
-    background-color: #1f2734;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-  }
-
-  .Section02 {
-    box-sizing: border-box; /* Important: makes padding included in width calculation */
-    width: 100%;
-    min-width: 100%;
-    overflow: hidden;
-    margin: 0;
-    // display: flex;
-    // justify-content: center;
-  }
-
-  .h1-wrapper {
-    position: relative; //ensures text is above the overlay
-    z-index: 10;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-stroke: 1px rgba(240, 219, 219, 0);
-    background-color: white;
-    mix-blend-mode: overlay;
-    // opacity: 0.9;
-
-    display: flex;
-    // color: white;
-  }
-
-  .para-1 {
-    position: relative; //ensures text is above the overlay
-    z-index: 10;
-    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
-    color: white;
-    line-height: 5vh;
-    @include for-size(desktop, up) {
-      width: 60%;
-      display: flex;
-      justify-content: center;
+    /* Match exactly Section01's responsive behavior */
+    @include for-size(tablet, up) {
+      min-height: 150vh;
+      background-attachment: fixed;
+      // padding: 6rem 2rem;
     }
-
-    // text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.1);
   }
 
-  .subtitle-wrapper {
-    // position: relative; //ensures text is above the overlay
-    // z-index: 10;
-    // text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
-    align-self: center;
+  // .section02__overlay {
+  //   position: absolute;
+  //   inset: 0;
+  //   background-color: rgba(0, 0, 0, 0.4);
+  // }
+
+  /* Match Section01's heading style more closely */
+  .section02__heading {
+    position: relative;
+    z-index: 10;
+    // display: block;
+    margin: 0 auto;
+
+    font-size: clamp(2rem, 10vw, 4rem);
     text-align: center;
-    color: #ceb898;
-    padding: 3rem 2rem;
+    color: white;
+    max-width: 80%;
+    // text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+
+    @include for-size(tablet, up) {
+      font-size: clamp(3rem, 10vw, 6rem);
+      max-width: 95%;
+    }
   }
 
-  //SECTION 2
+  /* Match Section01's subtitle structure more closely */
+  .section02__subtitle {
+    position: relative;
+    z-index: 10;
+    display: block; /* Changed from flex */
+    text-align: center;
+    font-size: clamp(1rem, 5vw, 1.5rem);
+    margin: 0 auto; /* Use margin auto like Section01 */
+    max-width: 80%; /* Match Section01 width restriction */
+    color: white;
+    // text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+    /* Removed align-self and other flex properties */
+  }
 
-  // @include for-size(tablet, up) {
-  //   .para2-wrapper {
-  //     display: flex;
-  //     position: absolute;
-  //     top: 108vh;
-  //     left: 25vh;
-  //     opacity: 0.7;
-  //     width: 50vh;
-  //     color: white;
-  //     margin-top: 2rem;
-  //     font-size: clamp(1rem, 15vh, 2.5rem);
-  //   }
-
-  //   .h2-wrapper {
-  //     display: flex;
-  //     position: absolute;
-  //     top: 130vh;
-  //     left: 85vh;
-  //     width: 50vh;
-  //     opacity: 0.8;
-  //     color: #f7f1d1;
-  //     font-size: clamp(2rem, 12vw, 7rem);
-  //   }
-  // }
-
-  //first half
-
-  // @include for-size(phone, down, portrait) {
-  //   .h1-wrapper {
-  //     display: flex;
-  //     top: 40vh;
-  //     left: 8vh;
-  //     width: 50vh;
-  //     opacity: 0.8;
-  //     margin: 1rem auto;
-  //     font-size: clamp(4rem, 15vw, 10rem);
-  //     color: white;
-  //   }
-
-  //   .para-wrapper {
-  //     display: flex;
-  //     top: 5vh;
-  //     left: 55%;
-  //     min-width: 25vh;
-  //     max-width: 30vh;
-  //     opacity: 2;
-  //     font-size: clamp(1rem, 10vh, 1.8rem);
-  //     /* masked styling */
-  //     color: transparent;
-  //     background-clip: text;
-  //     -webkit-background-clip: text;
-  //     -webkit-text-stroke: 1px rgba(40, 40, 40, 0);
-  //     background-color: white;
-  //     mix-blend-mode: overlay;
-  //     opacity: 0.9;
-
-  //     text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.1);
-  //   }
-
-  //   .subtitle {
-  //     display: flex;
-  //     top: 85vh;
-  //     left: 10vh;
-  //     width: 50vh;
-  //     opacity: 1;
-  //     margin: 1rem auto;
-  //     font-size: clamp(2rem, 8vw, 2rem);
-  //     color: #f7f1d1;
-  //   }
-  // }
-
-  // //second half
-  // @include for-size(tablet, down) {
-  //   .para2-wrapper {
-  //     display: flex;
-  //     position: absolute;
-  //     top: 105vh;
-  //     left: 10vh;
-  //     opacity: 0.8;
-  //     width: 45vh;
-  //     color: white;
-  //     margin-top: 2rem;
-  //     font-size: clamp(1rem, 15vh, 2rem);
-  //   }
-
-  //   .h2-wrapper {
-  //     display: flex;
-  //     position: absolute;
-  //     top: 130vh;
-  //     left: 5vh;
-  //     opacity: 0.8;
-  //     color: #f7f1d1;
-  //     font-size: clamp(2rem, 15vw, 9rem);
-  //   }
-  // }
+  .section02__para-1 {
+    position: relative;
+    z-index: 10;
+    font-size: clamp(1rem, 5vw, 1.5rem);
+    color: white;
+    text-align: center; /* Match Section01 text alignment */
+    margin: 0 auto; /* Use margin auto like Section01 */
+    max-width: 80%; /* Match Section01 width restriction */
+    line-height: 5vh;
+  }
 </style>

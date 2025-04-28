@@ -10,20 +10,55 @@
 
 
 
+
 body,
 html {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+    display: flex;
     /* Prevents horizontal scrolling */
-    width: 100%;
+    // width: 100%;
     font-weight: 200;
     align-items: center;
     justify-content: center;
     text-align: center;
     align-self: center;
-    letter-spacing: 0.5vh;
-    font-family: "manrope";
+    letter-spacing: 0.25vh;
+    line-height: 1.2;
+
+    font-family: "manrope", sans-serif;
+
+    @include for-size(tablet, up) {
+        line-height: 1.5;
+    }
+}
+
+.lg__font {
+    font-size: clamp(2rem, 8vw, 3rem);
+
+    @include for-size (tablet, up) {
+        font-size: clamp(3rem, 10vw, 9rem);
+    }
+
+}
+
+.md__font {
+    font-size: clamp(0.5rem, 4vw, 1.5rem);
+
+
+    @include for-size (tablet, up) {
+        font-size: clamp(1.5rem, 4vw, 1.5rem);
+    }
+}
+
+.sm_font {
+    font-size: clamp(0.5rem, 3vw, 1rem);
+
+
+    @include for-size(tablet, up) {
+        line-height: 1.5;
+    }
 }
 
 // :root {
@@ -34,63 +69,63 @@ html {
 //     }
 // }
 
-p {
-    font-size: clamp(1rem, 3vh, 4rem) !important;
+// p {
+//     font-size: clamp(1rem, 3vh, 4rem) !important;
 
-    @include for-size(tablet, up) {
-        font-size: clamp(1rem, 4vh, 5rem) !important;
-    }
+//     @include for-size(tablet, up) {
+//         font-size: clamp(1rem, 4vh, 5rem) !important;
+//     }
 
-    @include for-size(desktop, up) {
-        font-size: clamp(1rem, 4vh, 4rem) !important;
-    }
+//     @include for-size(desktop, up) {
+//         font-size: clamp(1rem, 4vh, 4rem) !important;
+//     }
 
-    font-weight: 200 !important;
-}
+//     font-weight: 200 !important;
+// }
 
-.contact-button {
-    font-size: clamp(1rem, 3vh, 4rem) !important;
+// .contact-button {
+// font-size: clamp(1rem, 3vh, 4rem) !important;
+// font-weight: 400; //DON'T NEED - IT'S A HAMBURGER
+
+// @include for-size(tablet, up) {
+//     font-size: clamp(0.5rem, 2vh, 1rem) !important;
+// }
+
+// @include for-size(desktop, up) {
+//     font-size: clamp(1rem, 4vh, 4rem) !important;
+// }
+
+
+
+// button {
+//     font-size: clamp(1rem, 3vh, 4rem) !important;
+
+//     @include for-size(tablet, up) {
+//         font-size: clamp(1rem, 4vh, 5rem) !important;
+//     }
+
+//     @include for-size(desktop, up) {
+//         font-size: clamp(1rem, 6vh, 5rem) !important;
+//     }
+
+
+
+// }
+
+h1 {
+    // font-size: clamp(1rem, 8vh, 8rem);
     font-weight: 400;
 
     @include for-size(tablet, up) {
-        font-size: clamp(1rem, 3vh, 3rem) !important;
+        // font-size: clamp(3rem, 10vh, 10rem);
     }
 
     @include for-size(desktop, up) {
-        font-size: clamp(1rem, 4vh, 4rem) !important;
-    }
-
-}
-
-button {
-    font-size: clamp(1rem, 3vh, 4rem) !important;
-
-    @include for-size(tablet, up) {
-        font-size: clamp(1rem, 4vh, 5rem) !important;
-    }
-
-    @include for-size(desktop, up) {
-        font-size: clamp(1rem, 6vh, 5rem) !important;
-    }
-
-
-
-}
-
-h1 {
-    font-size: clamp(1rem, 8vh, 8rem) !important;
-    font-weight: 200 !important;
-
-    @include for-size(tablet, up) {
-        font-size: clamp(3rem, 10vh, 10rem) !important;
-    }
-
-    @include for-size(desktop, up) {
-        font-size: clamp(4rem, 15vh, 10rem) !important;
+        // font-size: clamp(4rem, 15vh, 10rem);
     }
 }
 
-// AMMEND THE BELOW
+// AMMEND THE BELOW? 
 // .hamburger {
 //     padding-right: 20px;
 //     cursor: pointer;

@@ -1,0 +1,143 @@
+---
+import Hamburger from "./Hamburger.astro";
+---
+
+<!-- The javascript requires the inline styling, on the styles that will change on scroll.  -->
+<header
+  class="fixed top-0 left-0 right-0 z-50 duration-500 transition-all ease-in"
+>
+  <ul class="header mx-auto flex justify-between items-center">
+    <!-- Single forward slash indicates home page -->
+    <li class="container__logo">
+      <a href="/">
+        <img src="/images/navImages/moneypennies-logo-no-bg.png" class="logo" />
+      </a>
+    </li>
+    <nav class="nav__button-container">
+      <li class="animated__button desktop__nav">
+        <a href="/contact/" class="animated__span">say hello</a>
+        <!-- <button onclick="window.location.href='/contact/'">
+        <span class="animated__span">say hello</span>
+      </button> -->
+      </li>
+    </nav>
+    <Hamburger />
+  </ul>
+</header>
+
+<script>
+  //responsive styles
+
+  // Nav styles that change on scroll
+  const header = document.querySelector("header");
+  // const logo = document.querySelector(".logo");
+
+  const headerStates = {
+    scrolled: {
+      add: {
+        header: ["bg-black/50", "backdrop-blur-sm", "fade-in"],
+      },
+      remove: {
+        header: ["bg-transparent"],
+      },
+    },
+    reset: {
+      add: {
+        header: ["bg-transparent"],
+      },
+      remove: {
+        header: ["bg-black/50", "backdrop-blur-sm", "fade-in"],
+      },
+    },
+  };
+
+  const handleScroll = () => {
+    const headerScrollThreshold = window.innerHeight * 0;
+    const hasScrolledPastHeaderThreshold =
+      window.scrollY > headerScrollThreshold;
+
+    const currentHeaderState = hasScrolledPastHeaderThreshold
+      ? headerStates.scrolled
+      : headerStates.reset;
+
+    // Apply header classes
+    header?.classList.add(...currentHeaderState.add.header);
+    header?.classList.remove(...currentHeaderState.remove.header);
+  };
+
+  window.addEventListener("scroll", handleScroll);
+</script>
+
+<style lang="scss">
+  //-----NAV ITEM POSITIONING-----
+  header {
+    padding: 1rem 1rem; //smaller screens
+
+    @include for-size(tablet, up) {
+      padding: 1rem 3rem; //larger screens
+    }
+  }
+
+  //-----BUTTON - LARGER SCREENS-----
+
+  .animated__button::after {
+    //  padding-bottom:
+  }
+
+  .animated__span {
+    font-weight: 900;
+  }
+
+  .animated__button .animated__span {
+    font-size: clamp(0.5rem, 2vw, 1rem);
+
+    @include for-size(tablet, up) {
+      font-size: clamp(1rem, 3vh, 1rem);
+    }
+  }
+
+  //-----LOGO-----
+
+  .container__logo {
+    display: flex;
+    // align-items: center;
+    margin-left: 1rem; // Use margin instead of padding to control position without affecting size
+
+    @include for-size(tablet, up) {
+      margin-left: 2rem;
+    }
+  }
+
+  .logo {
+    height: 7vh;
+    width: auto; //maintains aspect ratio
+    object-fit: contain; //ensure logo fits within dimensions
+
+    @include for-size(tablet, up) {
+      height: 8vh;
+    }
+  }
+
+  //nav container
+  // .items__nav {
+  //   // padding: 0;
+
+  //   @include for-size(tablet, up) {
+  //     padding: 0.5rem 4rem 0.5rem 4rem;
+  //   }
+  // }
+
+  //   /* responsive nav styles for contact button/hamburger component */
+
+  //-----HAMBURGER VISIBILITY------
+
+  .desktop__nav {
+    display: flex; //hamburger icon is visible in view mobile/tablet
+  }
+
+  @include for-size(tablet, down) {
+    .desktop__nav {
+      display: none !important; //hide desktop nav stylings smaller screens
+    }
+  }
+</style>
