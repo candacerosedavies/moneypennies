@@ -1,13 +1,23 @@
 
-![JavaScript logo]([https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB](https://img.shields.io/badge/logo-javascript-blue?logo=javascript)) 
+![JavaScript](https://img.shields.io/badge/logo-javascript-blue?logo=javascript)
 # MoneyPennies | Site Rebrand  
 
-![Original landing page](/public/images/readme-images/moneypennies-OG-landingpage.png?raw=true)
-
-## 🚀 The Mission
+### 🚀 The mission was to:
 ### ⚡ Streamline brand story<br>
 ### ⚡ Improve accessibility<br> 
-### ⚡ Impove UX<br>
+### ⚡ Improve UX<br><br>
 
-<img src="https://images.pexels.com/photos/211122/pexels-photo-211122.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" width="500px" align="center">
+### [The Journey So far - Still Under Construction!](https://moneypennies.netlify.app/)<br><br>
+
+## From this ➡️
+
+<img src="./public/images/readme-images/moneypennies-OG-landingpage.png" width="500" alt="Original landing page">
+
+## ➡️ To this 
+<img src="./public/images/readme-images/moneypennies-new-landingpage.png" width="500" alt="New landing page">
+
+
+
+
+
 
