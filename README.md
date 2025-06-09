@@ -7,7 +7,7 @@
 ### ⚡ Improve accessibility<br> 
 ### ⚡ Improve UX<br><br>
 
-### [The Journey So far - Still Under Construction!](https://moneypennies.netlify.app/)<br><br>
+### [New site - under construction!](https://moneypennies.netlify.app/)<br><br>
 
 ## From this ➡️
 
