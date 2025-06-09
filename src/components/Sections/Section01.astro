@@ -10,14 +10,14 @@ interface Props {
 
 const {
     h1Text = "MONEYPENNIES",
-    para = "Welcome to the future of events booking. Our data tracks past event history, future schedules, and the current venue status of 4,000+ UK annual events.",
-    h2Text = "Data designed for venues & suppliers",
+    para = "Know what your clients need before the first conversation. Welcome to the future of events booking.",
+    h2Text = "Data Designed for Venues and Suppliers",
 } = Astro.props;
 ---
 
 <SectionLayout variant="color" className="Section01">
-    <section class="section01">
-        <div class="section01__parallax-container">
+    <main class="section01">
+        <section class="section01__parallax-container">
             <div class="section01__overlay"></div>
 
             <!-- Text container to bounce all text together -->
@@ -32,12 +32,12 @@ const {
                         class="animated__button"
                         onclick="window.location.href='/contact/'"
                     >
-                        <span class="animated__span">try for free</span>
+                        <span class="animated__span">start now</span>
                     </button>
                 </nav>
             </header>
-        </div>
-    </section>
+        </section>
+    </main>
 </SectionLayout>
 
 <script>
