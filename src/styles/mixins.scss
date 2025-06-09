@@ -1,3 +1,5 @@
+@use "sass:map";
+
 //---RESPONSIVE DESIGN MIXINS---
 $breakpoints: (
     phoneSm: 420px,
@@ -11,9 +13,9 @@ $breakpoints: (
 @mixin for-size($breakpoint, $direction: down, $orientation: null) {
 
     // If the breakpoint exists in the map
-    @if map-has-key($breakpoints, $breakpoint) {
+    @if map.has-key($breakpoints, $breakpoint) {
         // Get the breakpoint value
-        $breakpoint-value: map-get($breakpoints, $breakpoint);
+        $breakpoint-value: map.get($breakpoints, $breakpoint);
 
         // Check if orientation is specified
         @if $orientation ==null {
