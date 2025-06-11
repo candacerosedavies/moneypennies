@@ -63,9 +63,10 @@ const backgroundImageStyle =
 
 <section
   class={`${sectionClass} ${className} ${uniqueImageClass} ${textVariant} ${textStyle} ${heightVariant === "tall" ? "tall-section" : "normal-section"}`}
+  id="main-content"
 >
   <div class="overlay"></div>
-  <!-- <div class={alignmentClasses}> -->
+
   <slot />
 </section>
 

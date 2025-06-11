@@ -2,68 +2,119 @@
 
 ---
 
-<i id="scroll-arrow" class="scroll-arrow">
+<!----- Arrow icon ----->
+<button
+    id="scroll-arrow"
+    class="scroll-arrow"
+    aria-label="Scroll to next section"
+>
     <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
+        aria-hidden="true"
     >
         <path
             stroke-linecap="round"
             stroke-linejoin="round"
-            stroke-width="1"
+            stroke-width="1.5"
             d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
     </svg>
-</i>
+</button>
 
 <script>
-    (() => {
+    document.addEventListener("DOMContentLoaded", () => {
         const arrow = document.getElementById("scroll-arrow");
-
-        //need this as was getting a typescript error
+        //----- added to prevent typescript error -----
         if (!arrow) return;
+
+        //----- scroll to next section when clicked -----
+        const handleArrowClick = () => {
+            const nextSection = document.querySelector("#section-02");
+
+            if (nextSection) {
+                //----- 'matchMedia' method to check if a CSS media query applies eg. the prefers-reducemotion @media in global.scss -----
+                const prefersReducedMotion = window.matchMedia(
+                    "(prefers-reduced-motion: reduce)",
+                ).matches; //----- ''.matches' extracts a the boolean value from this expression. Do they prefer reduced motion yes or no -----
+
+                nextSection.scrollIntoView({
+                    behavior: prefersReducedMotion ? "auto" : "smooth",
+                    block: "start",
+                });
+            }
+        };
+
+        //----- add the click event listener -----
+        arrow.addEventListener("click", handleArrowClick);
 
         const handleArrowScroll = () => {
             const scrollPosition = window.scrollY;
             const viewportHeight = window.innerHeight;
-            const threshold = viewportHeight * 0.5;
+            const threshold = viewportHeight;
 
-            arrow.style.display = scrollPosition > threshold ? "none" : "block";
+            arrow.style.opacity = scrollPosition > threshold ? "0" : "1";
+            arrow.style.pointerEvents =
+                scrollPosition > threshold ? "none" : "auto";
         };
 
-        // Initial check
+        //----- Initial check -----
         handleArrowScroll();
 
-        // Add scroll event listener
+        //----- Add the scroll event listener -----
         window.addEventListener("scroll", handleArrowScroll);
-    })();
+    });
 </script>
 
 <style lang="scss">
     @keyframes bounce {
         0%,
         100% {
-            transform: translateY(-25%);
-            animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+            transform: translateY(-15%);
+            animation-timing-function: cubic-bezier(0.2, 0, 1, 1);
         }
         50% {
             transform: translateY(0);
-            animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+            animation-timing-function: cubic-bezier(0.5, 0, 0.2, 1);
         }
     }
+
+    .scroll-arrow {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        //----- styling to ensure arrow is accessible by keyboard users/ tab key -----
+        // position: fixed; //
+        // bottom: 1rem; // Add this
+        // left: 1rem;
+        // z-index: 1000;
+
+        &:focus-visible {
+            outline: 2px solid white;
+            outline-offset: 4px;
+            border-radius: 4px;
+        }
+    }
+
     .scroll-arrow svg {
         position: fixed;
         bottom: 0rem;
         left: 0rem;
         color: white !important;
-        margin: 0vh;
-        transition: all 300ms ease-in-out;
+        margin: 1rem;
+        transition: opacity 800ms ease-in-out; // instead of 'all'
         animation: bounce 1s infinite;
     }
 
     .scroll-arrow svg {
-        height: clamp(2rem, 5vh, 3rem);
-        width: clamp(2rem, 5vh, 3rem);
+        height: clamp(3rem, 5vh, 4rem);
+        width: clamp(3rem, 5vh, 4rem);
+
+        @include for-size(tablet, up) {
+            height: clamp(4rem, 5vh, 4rem);
+            width: clamp(4rem, 5vh, 4rem);
+        }
     }
 </style>

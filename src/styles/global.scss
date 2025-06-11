@@ -5,9 +5,6 @@
 }
 
 
-
-
-
 body,
 html {
     margin: 0;
@@ -31,8 +28,33 @@ html {
     }
 }
 
+//-----ACCESSIBILITY-----
+
+//-----ensure all interactive elements show when focused----
+a,
+button,
+input,
+textarea,
+select {
+    &:focus-visible {
+        outline: 2px solid #0066cc;
+        outline-offset: 2px;
+    }
+}
+
+//-----respects users' system preferences to reduce animations-----
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+//-----hero font-----
 .lg__font {
-    font-size: clamp(2rem, 8vw, 3rem);
+    font-size: clamp(2.5rem, 8vw, 3rem);
 
     @include for-size (tablet, up) {
         font-size: clamp(3rem, 10vw, 9rem);
@@ -40,74 +62,28 @@ html {
 
 }
 
+//-----heading font-----
 .md__font {
-    font-size: clamp(0.5rem, 4vw, 1.5rem);
+    font-size: clamp(2rem, 6vw, 1.5rem);
 
 
     @include for-size (tablet, up) {
-        font-size: clamp(1.5rem, 4vw, 1.5rem);
+        font-size: clamp(2.5rem, 8vw, 4rem);
     }
 }
 
-.sm_font {
-    font-size: clamp(0.5rem, 3vw, 1rem);
+//-----para font-----
+.sm__font {
+    font-size: clamp(1rem, 3vw, 1rem);
 
 
     @include for-size(tablet, up) {
+        font-size: clamp(1.5rem, 3vw, 1.2rem);
         line-height: 1.5;
     }
 }
 
-// :root {
-//     --base-font-size: 5rem;
 
-//     @include for-size(tablet, up) {
-//         --base-font-size: 5rem;
-//     }
-// }
-
-// p {
-//     font-size: clamp(1rem, 3vh, 4rem) !important;
-
-//     @include for-size(tablet, up) {
-//         font-size: clamp(1rem, 4vh, 5rem) !important;
-//     }
-
-//     @include for-size(desktop, up) {
-//         font-size: clamp(1rem, 4vh, 4rem) !important;
-//     }
-
-//     font-weight: 200 !important;
-// }
-
-// .contact-button {
-// font-size: clamp(1rem, 3vh, 4rem) !important;
-// font-weight: 400; //DON'T NEED - IT'S A HAMBURGER
-
-// @include for-size(tablet, up) {
-//     font-size: clamp(0.5rem, 2vh, 1rem) !important;
-// }
-
-// @include for-size(desktop, up) {
-//     font-size: clamp(1rem, 4vh, 4rem) !important;
-// }
-
-
-
-// button {
-//     font-size: clamp(1rem, 3vh, 4rem) !important;
-
-//     @include for-size(tablet, up) {
-//         font-size: clamp(1rem, 4vh, 5rem) !important;
-//     }
-
-//     @include for-size(desktop, up) {
-//         font-size: clamp(1rem, 6vh, 5rem) !important;
-//     }
-
-
-
-// }
 
 h1 {
     // font-size: clamp(1rem, 8vh, 8rem);

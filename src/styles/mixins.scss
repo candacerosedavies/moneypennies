@@ -88,9 +88,9 @@ $breakpoints: (
     }
 }
 
-//---BUTTON STYLE---
+//-----button styles-----
 
-.animated__button {
+.button--animated {
     position: relative; //establish a reference point for any absolutely positioned children inside it.
     display: inline-block;
     cursor: pointer;
@@ -112,12 +112,12 @@ $breakpoints: (
 
 }
 
-.animated__button * {
+.button--animated * {
     pointer-events: none;
 
 }
 
-.animated__button .animated__span {
+.button--animated .button__text {
     position: relative; //establish a reference point for any absolutely positioned children inside it.
     display: inline-block;
     color: white;
@@ -127,10 +127,15 @@ $breakpoints: (
     text-transform: uppercase;
     pointer-events: none; //debugging: make sure span doesn't block hover events
 
-    font-size: clamp(0.5rem, 2vw, 1rem);
+    font-size: clamp(1rem, 2vw, 1rem);
+
+    &:focus-visible {
+        outline: 2px solid white;
+        outline-offset: 2px;
+    }
 
     @include for-size (tablet, up) {
-        font-size: clamp(1rem, 4vh, 1.5rem);
+        font-size: clamp(1rem, 3vw, 1.5rem);
 
     }
 
@@ -139,7 +144,7 @@ $breakpoints: (
 //ANIMATION STYLES - ORIGINAL POSITIONS
 
 //v2 BACKGROUND animation - not visible
-.animated__button::before {
+.button--animated::before {
     position: absolute; //positioned relative to their nearest positioned ancestor (which is the button element)
     content: "";
     top: 0;
@@ -152,7 +157,7 @@ $breakpoints: (
 }
 
 //v2 BORDER/UNDERLINE animation - creates a bottom border effect. 
-.animated__button::after {
+.button--animated::after {
     position: absolute;
     content: "";
     bottom: 0;
@@ -168,17 +173,17 @@ $breakpoints: (
 //ON HOVER STYLES 
 
 //on hover BACKGROUND becomes visible - slides in from the left. 
-.animated__button:hover::before {
+.button--animated:hover::before {
     left: 0; //background is visible. Travels in (-100%) from the left 
 }
 
 //On hover - border/underline moves to the left. Returns when stop hovering
-.animated__button:hover::after {
+.button--animated:hover::after {
     left: -100%; //Moves to the left on hover. 
 }
 
 //on hover: change the button text to black when the background is white
 //want the span inside to change color, so you need to use the parent-child relationship in the selectors
-.animated__button:hover .animated__span {
+.button--animated:hover .button__text {
     color: black;
 }

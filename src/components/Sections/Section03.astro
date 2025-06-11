@@ -1,6 +1,5 @@
 ---
 import SectionLayout from "../../layouts/SectionLayout.astro";
-import ScrollArrow from "../../components/ScrollArrow.astro";
 
 interface Props {
     h1Text?: string;
@@ -23,10 +22,14 @@ const {
 ---
 
 <SectionLayout variant="color" background="" className="Section03">
-    <section class="section03__section-3">
-        <div class="section03__parallax-container">
-            <div class="section03__overlay"></div>
-            <div class="section03__text-container">
+    <section class="section03__section-3" id="section-03">
+        <section
+            class="section03__parallax-container"
+            role="region"
+            aria-label="What's in it for you"
+        >
+            <section class="section03__overlay"></section>
+            <header class="section03__text-container">
                 <h1 class="section03__heading">
                     {h1Text}
                 </h1>
@@ -44,18 +47,17 @@ const {
                         </button>
                     </nav>
                 </a>
-            </div>
-        </div>
+            </header>
+        </section>
     </section>
 </SectionLayout>
-<ScrollArrow />
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
         // Get the text container that wraps all text
         const textContainer = document.querySelector(
             ".section03__text-container",
-        );
+        ) as HTMLElement;
 
         if (textContainer) {
             window.addEventListener("scroll", () => {

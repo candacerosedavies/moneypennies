@@ -1,6 +1,6 @@
 ---
 import SectionLayout from "../../layouts/SectionLayout.astro";
-// import ScrollArrow from "../../components/ScrollArrow.astro";
+import ScrollArrow from "../ScrollArrow.astro";
 
 interface Props {
     h1Text?: string;
@@ -11,33 +11,42 @@ interface Props {
 const {
     h1Text = "MONEYPENNIES",
     para = "Know what your clients need before the first conversation. Welcome to the future of events booking.",
-    h2Text = "Data Designed for Venues and Suppliers",
+    h2Text = "Designed for Venues and Suppliers",
 } = Astro.props;
 ---
 
 <SectionLayout variant="color" className="Section01">
-    <main class="section01">
-        <section class="section01__parallax-container">
-            <div class="section01__overlay"></div>
+    <section class="section01" id="section-01">
+        <section
+            class="section01__parallax-container"
+            role="banner"
+            aria-label="Hero section with celebration background"
+        >
+            <ScrollArrow />
 
             <!-- Text container to bounce all text together -->
             <header class="section01__header">
                 <h2 class="section01__h2-heading uppercase">{h2Text}</h2>
-                <h1 class="section01__h1-heading">{h1Text}</h1>
-                <p class="section01__para" set:html={para} />
+                <h1 class="section01__h1-heading lg__font">{h1Text}</h1>
+                <p class="sm__font section01__para" set:html={para} />
 
                 <nav class="section01__button__container">
                     <!-- use JS 'onclick' instead of an <a> tag. Shouldn't use <a> AND <button> together -->
                     <button
-                        class="animated__button"
+                        class="button--animated"
                         onclick="window.location.href='/contact/'"
                     >
-                        <span class="animated__span">start now</span>
+                        <span class="button__text">start now</span>
                     </button>
                 </nav>
             </header>
         </section>
-    </main>
+
+        <!----- keyboard accessibility ----->
+        <a href="#section-02" class="sr-only-focusable">
+            Skip to next section
+        </a>
+    </section>
 </SectionLayout>
 
 <script>
@@ -67,6 +76,7 @@ const {
 
         min-height: 100vh;
         text-align: center;
+
         width: 100vw;
         font-weight: 200;
         overflow: hidden;
@@ -79,12 +89,21 @@ const {
         background-position: right 70% bottom 0%;
         background-attachment: scroll; // Default for mobile stops the parallax
         display: flex;
+
         flex-grow: 1;
         flex-direction: column;
         position: relative;
         padding: 0rem 1rem;
 
-        // Tablet and desktop styles
+        //background overlay
+        &::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.4);
+            pointer-events: none;
+        }
+
         @include for-size(tablet, up) {
             min-height: 150vh;
             background-attachment: fixed; //'fixed' enables the parallax scroll
@@ -132,15 +151,13 @@ const {
         max-width: 100%; // Increased from 80% to give more room
         // text-align: left;
         color: white;
-        font-size: clamp(2rem, 8vw, 3rem);
+
         padding: 5rem 0 0 0;
         // overflow-wrap: break-word; /* Add property to handle overflow text */
         font-weight: 900;
         position: absolute;
 
         @include for-size(tablet, up) {
-            font-size: clamp(3rem, 10vw, 9rem);
-
             max-width: 95%;
         }
     }
@@ -183,15 +200,30 @@ const {
         }
     }
 
-    //FONT STYLES
-    p {
-        font-size: clamp(0.5rem, 3vw, 1rem);
-        font-weight: 400 !important;
-        line-height: 1.2;
+    //----- keyboard accessibility -----
+    .sr-only-focusable {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
 
-        @include for-size(tablet, up) {
-            font-size: clamp(1rem, 4vh, 1rem);
-            line-height: 1.5;
+        &:focus {
+            position: static;
+            width: auto;
+            height: auto;
+            padding: 0.5rem;
+            margin: 0;
+            overflow: visible;
+            clip: auto;
+            white-space: normal;
+            background: white;
+            color: black;
+            border: 2px solid black;
         }
     }
 </style>

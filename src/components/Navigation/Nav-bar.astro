@@ -2,20 +2,35 @@
 import Hamburger from "./Hamburger.astro";
 ---
 
-<!-- The javascript requires the inline styling, on the styles that will change on scroll.  -->
+<a href="#main-content" class="link--skip">Skip to main content</a>
+
+<!----- JS requires the inline styling, on the styles that will change on scroll.  ----->
 <header
   class="fixed top-0 left-0 right-0 z-50 duration-500 transition-all ease-in"
 >
   <ul class="header mx-auto flex justify-between items-center">
-    <!-- Single forward slash indicates home page -->
-    <li class="container__logo">
+    <li
+      class="container__logo"
+      role="navigation"
+      aria-label="moneypennies logo and home button"
+    >
       <a href="/">
-        <img src="/images/navImages/moneypennies-logo-no-bg.png" class="logo" />
+        <!-- Single forward slash indicates home page -->
+        <img
+          src="/images/navImages/moneypennies-logo-no-bg.png"
+          class="logo"
+          role="navigation"
+          aria-label="moneypennies logo and home button"
+        />
       </a>
     </li>
-    <nav class="nav__button-container">
-      <li class="animated__button desktop__nav">
-        <a href="/contact/" class="animated__span">say hello</a>
+    <nav
+      class="nav__button-container"
+      role="navigation"
+      aria-label="Say hello on our contact page"
+    >
+      <li class="button--animated desktop__nav">
+        <a href="/contact/" class="button__text">say hello</a>
         <!-- <button onclick="window.location.href='/contact/'">
         <span class="animated__span">say hello</span>
       </button> -->
@@ -26,8 +41,6 @@ import Hamburger from "./Hamburger.astro";
 </header>
 
 <script>
-  //responsive styles
-
   // Nav styles that change on scroll
   const header = document.querySelector("header");
   // const logo = document.querySelector(".logo");
@@ -69,6 +82,22 @@ import Hamburger from "./Hamburger.astro";
 </script>
 
 <style lang="scss">
+  //-----skip to main content styling-----
+  .link--skip {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: white;
+    color: black;
+    padding: 8px;
+    text-decoration: none;
+    z-index: 1000;
+
+    &:focus {
+      top: 6px; // Shows when tabbed to
+    }
+  }
+
   //-----NAV ITEM POSITIONING-----
   header {
     padding: 1rem 1rem; //smaller screens

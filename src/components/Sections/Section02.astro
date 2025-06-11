@@ -1,6 +1,5 @@
 ---
 import SectionLayout from "../../layouts/SectionLayout.astro";
-import ScrollArrow from "../../components/ScrollArrow.astro";
 
 interface Props {
   h1Text?: string;
@@ -10,7 +9,7 @@ interface Props {
 }
 
 const {
-  h1Text = "Data designed for venues & suppliers ",
+  h1Text = "Data designed for you",
   para1 = `4,000+ annual UK association and corporate events tracked
   
   Insights on the top 500 agencies in the market`,
@@ -22,24 +21,30 @@ const {
 
 <!-- Removed heightVariant="tall" to match Section01 -->
 <SectionLayout variant="color" background="bg-[#293442]" className="Section02">
-  <section class="section-2">
-    <div class="section02__parallax-container">
-      <div></div>
-
+  <section class="section-2" id="section-02">
+    <section
+      class="section02__parallax-container"
+      role="region"
+      aria-label="Our data gathering services explained"
+    >
       <!-- Using header wrapper like in Section01 -->
-      <div class="section02__text-container">
+      <section class="section02__text-container">
         <header>
-          <h1 class="section02__heading">{h1Text}</h1>
+          <h1 class="section02__heading md__font">{h1Text}</h1>
         </header>
 
-        <!-- Changed to match Section01's structure -->
         <p class="section02__subtitle" style="white-space: pre-line;">
           {subtitle}
         </p>
-        <p class="section02__para-1" style="white-space: pre-line;">{para1}</p>
-      </div>
-    </div>
+        <p class="section02__para-1 sm__font" style="white-space: pre-line;">
+          {para1}
+        </p>
+      </section>
+    </section>
   </section>
+
+  <!----- keyboard accessibility ----->
+  <a href="#section-03" class="sr-only-focusable"> Skip to next section </a>
 </SectionLayout>
 
 <script>
@@ -120,14 +125,12 @@ const {
     // display: block;
     margin: 0 auto;
 
-    font-size: clamp(2rem, 10vw, 4rem);
     text-align: center;
     color: white;
     max-width: 80%;
     // text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 
     @include for-size(tablet, up) {
-      font-size: clamp(3rem, 10vw, 6rem);
       max-width: 95%;
     }
   }
@@ -149,11 +152,38 @@ const {
   .section02__para-1 {
     position: relative;
     z-index: 10;
-    font-size: clamp(1rem, 5vw, 1.5rem);
+
     color: white;
     text-align: center; /* Match Section01 text alignment */
     margin: 0 auto; /* Use margin auto like Section01 */
     max-width: 80%; /* Match Section01 width restriction */
     line-height: 5vh;
+  }
+
+  //----- keyboard accessibility -----
+  .sr-only-focusable {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+
+    &:focus {
+      position: static;
+      width: auto;
+      height: auto;
+      padding: 0.5rem;
+      margin: 0;
+      overflow: visible;
+      clip: auto;
+      white-space: normal;
+      background: white;
+      color: black;
+      border: 2px solid black;
+    }
   }
 </style>
