@@ -42,8 +42,10 @@ const {
                 <a href="/contact/">
                     <nav class="section03__button-container">
                         <button
-                            class="section03__button px-3 py-3 text-black hover:text-black border font-light rounded-full border-black bg-transparent hover:bg-[#435875] hover:border-[#435875] hover:bg-opacity-50 transition-all duration-30"
-                            >start connecting
+                            class="button--animated"
+                            onclick="window.location.href='/contact/'"
+                        >
+                            <span class="button__text">start connecting</span>
                         </button>
                     </nav>
                 </a>
@@ -115,8 +117,16 @@ const {
         position: relative;
         padding: 4rem 1rem;
 
-        @include for-size(tablet, up) {
-            background-attachment: fixed;
+        dull background so text shines through &::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.4);
+            pointer-events: none;
+
+            @include for-size(tablet, up) {
+                background-attachment: fixed;
+            }
         }
     }
 
@@ -129,6 +139,7 @@ const {
         font-size: clamp(2rem, 10vw, 4rem);
         max-width: 100%;
         text-align: center;
+        position: static;
 
         @include for-size(tablet, up) {
             font-size: clamp(3rem, 10vw, 8rem);
@@ -137,7 +148,7 @@ const {
     }
 
     .section03__para2-wrapper {
-        position: relative; //ensures text is above the overlay
+        position: static; //ensures text is above the overlay
         z-index: 10;
         margin: auto;
         text-align: center;
@@ -152,7 +163,7 @@ const {
     }
 
     .section03__button {
-        position: relative; //ensures text is above the overlay
+        position: static; //ensures text is above the overlay
         z-index: 10;
         text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
         color: white;

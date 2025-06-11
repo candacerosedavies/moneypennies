@@ -54,10 +54,10 @@ select {
 
 //-----hero font-----
 .lg__font {
-    font-size: clamp(2.5rem, 8vw, 3rem);
+    font-size: clamp(2.5rem, 8vw, 2rem);
 
     @include for-size (tablet, up) {
-        font-size: clamp(3rem, 10vw, 9rem);
+        font-size: clamp(3rem, 8vw, 9rem);
     }
 
 }

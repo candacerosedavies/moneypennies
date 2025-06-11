@@ -24,12 +24,12 @@
 </button>
 
 <script>
+    //----- scroll to next section when clicked -----
     document.addEventListener("DOMContentLoaded", () => {
         const arrow = document.getElementById("scroll-arrow");
         //----- added to prevent typescript error -----
         if (!arrow) return;
 
-        //----- scroll to next section when clicked -----
         const handleArrowClick = () => {
             const nextSection = document.querySelector("#section-02");
 
@@ -37,7 +37,7 @@
                 //----- 'matchMedia' method to check if a CSS media query applies eg. the prefers-reducemotion @media in global.scss -----
                 const prefersReducedMotion = window.matchMedia(
                     "(prefers-reduced-motion: reduce)",
-                ).matches; //----- ''.matches' extracts a the boolean value from this expression. Do they prefer reduced motion yes or no -----
+                ).matches; //----- ''.matches' extracts a the boolean value from this expression. Does the user require reduced motion yes or no -----
 
                 nextSection.scrollIntoView({
                     behavior: prefersReducedMotion ? "auto" : "smooth",
@@ -46,9 +46,9 @@
             }
         };
 
-        //----- add the click event listener -----
-        arrow.addEventListener("click", handleArrowClick);
+        arrow.addEventListener("click", handleArrowClick); //-- add click event listener --
 
+        //----- arrow disappears when scrolled -----
         const handleArrowScroll = () => {
             const scrollPosition = window.scrollY;
             const viewportHeight = window.innerHeight;
@@ -85,6 +85,7 @@
         border: none;
         cursor: pointer;
         padding: 0;
+        transition: opacity 1000ms ease-in-out;
         //----- styling to ensure arrow is accessible by keyboard users/ tab key -----
         // position: fixed; //
         // bottom: 1rem; // Add this
@@ -100,12 +101,17 @@
 
     .scroll-arrow svg {
         position: fixed;
-        bottom: 0rem;
+        bottom: 1rem;
         left: 0rem;
         color: white !important;
-        margin: 1rem;
-        transition: opacity 800ms ease-in-out; // instead of 'all'
+        margin: 1.5rem;
+
         animation: bounce 1s infinite;
+        z-index: 9999;
+
+        @include for-size(tablet, up) {
+            margin: 3rem;
+        }
     }
 
     .scroll-arrow svg {
@@ -113,8 +119,8 @@
         width: clamp(3rem, 5vh, 4rem);
 
         @include for-size(tablet, up) {
-            height: clamp(4rem, 5vh, 4rem);
-            width: clamp(4rem, 5vh, 4rem);
+            height: clamp(4rem, 5vh, 5rem);
+            width: clamp(4rem, 5vh, 5rem);
         }
     }
 </style>

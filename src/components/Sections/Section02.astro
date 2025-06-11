@@ -50,7 +50,9 @@ const {
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     // Get the text container that wraps all text
-    const textContainer = document.querySelector(".section02__text-container");
+    const textContainer = document.querySelector(
+      ".section02__text-container",
+    ) as HTMLElement;
 
     if (textContainer) {
       window.addEventListener("scroll", () => {

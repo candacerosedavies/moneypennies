@@ -18,6 +18,7 @@ interface Props {
     initialOffset: number;
   }[];
   heightVariant?: "tall" | "normal";
+  allowOverflow?: boolean;
 }
 
 const {
@@ -27,6 +28,7 @@ const {
   imageFolder,
   imageName,
   className = "",
+  allowOverflow = false,
   // contentPosition = "",
   // verticalAlignment = "",
   heightVariant = "",
