@@ -30,7 +30,12 @@ const {
       <!-- Using header wrapper like in Section01 -->
       <section class="section02__text-container">
         <header>
-          <h1 class="section02__heading md__font">{h1Text}</h1>
+          <h1
+            class="section02__heading md__font section02--text--overlay"
+            data-outline={h1Text}
+          >
+            {h1Text}
+          </h1>
         </header>
 
         <p class="section02__subtitle" style="white-space: pre-line;">
@@ -134,6 +139,17 @@ const {
 
     @include for-size(tablet, up) {
       max-width: 95%;
+    }
+
+    &.section02--text--overlay {
+      color: transparent;
+      background-image: var(--bg-image);
+      background-position: var(--bg-position);
+      background-size: var(--bg-size);
+      background-attachment: fixed;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-stroke: 1px white;
     }
   }
 

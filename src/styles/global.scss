@@ -13,20 +13,24 @@ html {
     display: flex;
     /* Prevents horizontal scrolling */
     // width: 100%;
-    font-weight: 200;
+    color: white;
     align-items: center;
     justify-content: center;
     text-align: center;
     align-self: center;
     letter-spacing: 0.25vh;
     line-height: 1.2;
-
-    font-family: "manrope", sans-serif;
+    font-family: "inter", sans-serif;
 
     @include for-size(tablet, up) {
         line-height: 1.5;
     }
 }
+
+// h2,
+// h1 {
+//     font-family: "abril FatFace" sans-serif;
+// }
 
 //-----ACCESSIBILITY-----
 
@@ -56,8 +60,10 @@ select {
 .lg__font {
     font-size: clamp(2.5rem, 8vw, 2rem);
 
+
+
     @include for-size (tablet, up) {
-        font-size: clamp(3rem, 8vw, 9rem);
+        font-size: clamp(3rem, 7vw, 6rem);
     }
 
 }

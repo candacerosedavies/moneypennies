@@ -5,23 +5,22 @@ import Hamburger from "./Hamburger.astro";
 <a href="#main-content" class="link--skip">Skip to main content</a>
 
 <!----- JS requires the inline styling, on the styles that will change on scroll.  ----->
-<header
-  class="fixed top-0 left-0 right-0 z-50 duration-500 transition-all ease-in"
->
+<header class="fixed top-0 left-0 right-0 z-50">
   <ul class="header mx-auto flex justify-between items-center">
     <li
-      class="container__logo"
       role="navigation"
-      aria-label="moneypennies logo and home button"
+      aria-label="moneypennies text logo and home button"
+      class="button--nav container__logo sm__font"
     >
-      <a href="/">
+      <a href="/" class="button--nav__text"
+        >MoneyPennies
         <!-- Single forward slash indicates home page -->
-        <img
+        <!-- <img
           src="/images/navImages/moneypennies-logo-no-bg.png"
           class="logo"
           role="navigation"
           aria-label="moneypennies logo and home button"
-        />
+        /> -->
       </a>
     </li>
     <nav
@@ -29,8 +28,8 @@ import Hamburger from "./Hamburger.astro";
       role="navigation"
       aria-label="Say hello on our contact page"
     >
-      <li class="button--animated desktop__nav">
-        <a href="/contact/" class="button__text">say hello</a>
+      <li class="button--nav desktop__nav sm__font">
+        <a href="/contact/" class="button--nav__text">SAY HELLO</a>
         <!-- <button onclick="window.location.href='/contact/'">
         <span class="animated__span">say hello</span>
       </button> -->
@@ -43,29 +42,33 @@ import Hamburger from "./Hamburger.astro";
 <script>
   // Nav styles that change on scroll
   const header = document.querySelector("header");
-  // const logo = document.querySelector(".logo");
 
   const headerStates = {
     scrolled: {
       add: {
-        header: ["bg-black/50", "backdrop-blur-sm", "fade-in"],
+        header: ["bg-white/50", "backdrop-blur-sm", "fade-in"],
+        buttons: ["!text-black"],
       },
       remove: {
         header: ["bg-transparent"],
+        buttons: ["!text-white"],
       },
     },
     reset: {
       add: {
         header: ["bg-transparent"],
+        buttons: ["!text-white"],
       },
       remove: {
-        header: ["bg-black/50", "backdrop-blur-sm", "fade-in"],
+        header: ["bg-white/50", "backdrop-blur-sm", "fade-in"],
+        buttons: ["!text-black"],
       },
     },
   };
 
   const handleScroll = () => {
-    const headerScrollThreshold = window.innerHeight * 0;
+    // const headerScrollThreshold = window.innerHeight * 0;
+    const headerScrollThreshold = 1;
     const hasScrolledPastHeaderThreshold =
       window.scrollY > headerScrollThreshold;
 
@@ -76,6 +79,12 @@ import Hamburger from "./Hamburger.astro";
     // Apply header classes
     header?.classList.add(...currentHeaderState.add.header);
     header?.classList.remove(...currentHeaderState.remove.header);
+
+    const buttons = document.querySelectorAll(".button--nav__text");
+    buttons.forEach((button) => {
+      button.classList.add(...currentHeaderState.add.buttons);
+      button.classList.remove(...currentHeaderState.remove.buttons);
+    });
   };
 
   window.addEventListener("scroll", handleScroll);
@@ -109,28 +118,64 @@ import Hamburger from "./Hamburger.astro";
 
   //-----BUTTON - LARGER SCREENS-----
 
-  .animated__button::after {
-    //  padding-bottom:
-  }
+  // .button--nav::after {
+  //   //  padding-bottom:
+  // }
 
-  .animated__span {
-    font-weight: 900;
-  }
+  // .button--nav__text {
+  //   font-weight: 900;
+  // }
 
-  .animated__button .animated__span {
-    font-size: clamp(0.5rem, 2vw, 1rem);
+  // .animated__button .animated__span {
+  //   font-size: clamp(0.5rem, 2vw, 1rem);
 
-    @include for-size(tablet, up) {
-      font-size: clamp(1rem, 3vh, 1rem);
-    }
-  }
+  //   @include for-size(tablet, up) {
+  //     font-size: clamp(1rem, 3vh, 1rem);
+  //   }
+  // }
 
   //-----LOGO-----
+
+  .container__logo::after {
+    position: absolute;
+    content: "";
+    bottom: 0;
+    left: 0; //line starts 10% in from the left
+    width: 100%; //reduced to 80% from 100% so the line starts 10% further in from the right
+    height: 2px;
+    //background 3px high = looks like a border-bottom but we have more control over it/can animate
+    transition: all 0.25s ease-in;
+    z-index: 3;
+
+    /* Above everything else */
+  }
+
+  // header.scrolled .button--nav .button--nav__text {
+  //   &::after {
+  //     background-color: black !important; // Black border when scrolled
+  //   }
+
+  //   &:hover::after {
+  //     background-color: black !important; // Keep it black on hover too
+  //   }
+
+  //   &::before {
+  //     background-color: rgba(0, 0, 0, 0.1) !important; // Light black background
+  //   }
+
+  //   &:hover .button--nav__text {
+  //     color: white !important; // White text on black background when scrolled
+  //   }
+  // }
 
   .container__logo {
     display: flex;
     // align-items: center;
     margin-left: 1rem; // Use margin instead of padding to control position without affecting size
+
+    font-family: "zilla slab", sans-serif !important;
+    font-weight: 700;
+    font-style: italic;
 
     @include for-size(tablet, up) {
       margin-left: 2rem;
@@ -147,16 +192,19 @@ import Hamburger from "./Hamburger.astro";
     }
   }
 
-  //nav container
-  // .items__nav {
-  //   // padding: 0;
+  header.scrolled .button--nav {
+    .button--nav__text {
+      color: black;
+    }
 
-  //   @include for-size(tablet, up) {
-  //     padding: 0.5rem 4rem 0.5rem 4rem;
-  //   }
-  // }
+    &:hover .button--nav__text {
+      color: white;
+    }
 
-  //   /* responsive nav styles for contact button/hamburger component */
+    &:hover::after {
+      background-color: black;
+    }
+  }
 
   //-----HAMBURGER VISIBILITY------
 
