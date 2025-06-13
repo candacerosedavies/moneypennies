@@ -19,13 +19,11 @@ const {
 ---
 
 <!-- Removed heightVariant="tall" to match Section01 -->
-<SectionLayout
-  variant="color"
-  background="bg-[#293442]"
-  className="Section02"
-  heightVariant="normal"
->
-  <section class="section-2" id="section-02">
+<SectionLayout variant="color" className="Section02 " heightVariant="normal">
+  <section
+    class="bg-stone-black py-20 border-t-[0.5px] border-white"
+    id="section-02"
+  >
     <section
       class="section02__parallax-container"
       role="region"
@@ -93,6 +91,7 @@ const {
     position: relative;
     padding: 0;
     max-width: 80%;
+    // color: #16181b;
 
     @include for-size(tablet, up) {
       max-width: 95%;

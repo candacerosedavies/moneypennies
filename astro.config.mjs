@@ -10,6 +10,7 @@ export default defineConfig({
       config: { path: './tailwind.config.js' },
     })
   ],
+
   publicDir: 'public',
   vite: {
     css: {
@@ -21,5 +22,7 @@ export default defineConfig({
         }
       }
     }
-  }
+  },
+
+
 });
