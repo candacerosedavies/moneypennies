@@ -2,22 +2,17 @@
 import SectionLayout from "../../layouts/SectionLayout.astro";
 
 interface Props {
-    h1Text?: string;
-    subtitle?: string;
+    h3Text?: string;
     para?: string;
-    h2Text?: string;
     para2?: string;
     para3?: string;
 }
 
 const {
-    h1Text = "Make data driven decisions",
-    para2 = `Real-time bookings data curated to your business needs 
-  
-  Insights at a glance with a personalised analysis report 
-  
-  Feel the impact our data can have on your revenue risk free
-  `,
+    h3Text = "Make data driven decisions",
+    para1 = `Real-time bookings data curated to your business needs`,
+    para2 = ` Insights at a glance with a personalised analysis report`,
+    para3 = `  Feel the impact our data can have on your revenue risk free`,
 } = Astro.props;
 ---
 
@@ -28,6 +23,7 @@ const {
     hasParallax={true}
     parallaxSpeed={0.2}
     className="Section03"
+    heightVariant="tall"
 >
     <section class="section03__section-3" id="section-03">
         <section
@@ -37,17 +33,16 @@ const {
         >
             <section class="section03__overlay"></section>
             <header
-                class="section03__text-container flex-col items-center justify-center"
+                class="section03--container__text flex-col items-center justify-center"
             >
-                <h1 class="section03__heading lg__font">
-                    {h1Text}
-                </h1>
-                <p
-                    class="section03__para2-wrapper sm__font"
-                    style="white-space: pre-line;"
-                >
-                    {para2}
+                <h3 class="section03__heading lg__font">
+                    {h3Text}
+                </h3>
+                <p class="sm__font">
+                    {para1}
                 </p>
+                <p class="sm__font">{para2}</p>
+                <p class="sm__font">{para3}</p>
                 <a href="/contact/">
                     <nav class="section03__button-container">
                         <button
@@ -81,37 +76,26 @@ const {
 </script>
 
 <style lang="scss">
-    .section03__section-3 {
-        background-color: #344257;
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-        width: 100%;
-        margin: 0;
-        padding: 0;
-    }
-
-    .section03__text-container {
+    .section03--container__text {
         position: relative;
         z-index: 10;
-        gap: 10vh; // Reduced gap for mobile
+        gap: 8vh;
         will-change: transform;
         transition: transform 0.1s ease-out;
         flex-grow: 1;
-        // justify-content: center; // Center vertically
+        padding: 6rem 2rem;
 
         @include for-size(tablet, up) {
             gap: 10vh;
-            padding-bottom: 40%;
-            max-width: 95%;
         }
     }
 
     .section03__parallax-container {
-        min-height: 100vh;
+        min-height: 100vh !important;
         background-image: url("/images/connect/pexels-didsss-2127522.jpg");
         background-size: cover;
-        background-position: right 35% bottom 40%;
+        background-position: right 60% bottom 0%;
+        transform: scale(120%);
         display: flex;
         flex-grow: 1;
         flex-direction: column;
@@ -132,29 +116,23 @@ const {
     }
 
     .section03__heading {
+        text-transform: uppercase;
+        font-weight: 900;
         position: relative;
-        z-index: 10;
-        margin: 0 auto;
-        // text-align: center;
-        color: white;
+        padding: 0;
         max-width: 80%;
 
         @include for-size(tablet, up) {
             max-width: 95%;
         }
-    }
 
-    .section03__para2-wrapper {
-        position: static; //ensures text is above the overlay
-        z-index: 10;
-        margin: auto;
-        // text-align: center;
-        max-width: 80%;
-        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
-        color: white;
-
-        @include for-size(desktop, up) {
-            min-width: 20rem;
+        @include for-size(680px, up) {
+            font-size: clamp(
+                2rem,
+                4vw,
+                2.5rem
+            ); // Force smaller size in problem range
+            line-height: 1.1; // Tighter line spacing
         }
     }
 
@@ -168,9 +146,7 @@ const {
     }
 
     .section03__button-container {
-        display: flex;
-        // justify-content: center;
-        // padding-top: 20vh;
+        margin: 0;
     }
 
     .section03__overlay {

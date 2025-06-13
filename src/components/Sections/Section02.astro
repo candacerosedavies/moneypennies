@@ -2,25 +2,29 @@
 import SectionLayout from "../../layouts/SectionLayout.astro";
 
 interface Props {
-  h1Text?: string;
-  subtitle?: string;
+  h2Text?: string;
   para1?: string;
   para2?: string;
+  para3?: string;
 }
 
 const {
-  h1Text = "Data designed for you",
-  para1 = `4,000+ annual UK association and corporate events tracked
-  
-  Insights on the top 500 agencies in the market`,
-  subtitle = `Learn past event history, future schedules, and venue status
-  `,
-  para2 = "",
+  h2Text = "Data designed for you",
+  para1 = `Learn past event history, future schedules, and venue status
+`,
+  para2 = `4,000+ annual UK association and corporate events tracked`,
+
+  para3 = `Insights on the top 500 agencies in the market`,
 } = Astro.props;
 ---
 
 <!-- Removed heightVariant="tall" to match Section01 -->
-<SectionLayout variant="color" background="bg-[#293442]" className="Section02">
+<SectionLayout
+  variant="color"
+  background="bg-[#293442]"
+  className="Section02"
+  heightVariant="normal"
+>
   <section class="section-2" id="section-02">
     <section
       class="section02__parallax-container"
@@ -31,17 +35,18 @@ const {
         class="section02--container__text flex-col items-center justify-center"
       >
         <header>
-          <h1 class="section02__heading lg__font" data-outline={h1Text}>
-            {h1Text}
-          </h1>
+          <h2 class="section02__heading lg__font" data-outline={h2Text}>
+            {h2Text}
+          </h2>
         </header>
 
-        <p class="section02__subtitle sm__font" style="white-space: pre-line;">
-          {subtitle}
-        </p>
-        <p class="section02__para-1 sm__font" style="white-space: pre-line;">
+        <p class="section02__subtitle sm__font">
           {para1}
         </p>
+        <p class="section02__para-1 sm__font">
+          {para2}
+        </p>
+        <p class="sm__font">{para3}</p>
       </section>
     </section>
   </section>
@@ -71,48 +76,36 @@ const {
   .section02--container__text {
     position: relative;
     z-index: 10;
-    gap: 10vh; // Reduced gap for mobile
+    gap: 8vh; // Reduced gap for mobile
     will-change: transform;
     transition: transform 0.1s ease-out;
     flex-grow: 1;
+    padding: 6rem 2rem;
 
     @include for-size(tablet, up) {
-      padding-bottom: 50vh;
+      gap: 10vh;
     }
   }
 
   .section02__heading {
     text-transform: uppercase;
     font-weight: 900;
-    position: static;
+    position: relative;
     padding: 0;
+    max-width: 80%;
 
     @include for-size(tablet, up) {
       max-width: 95%;
     }
-  }
 
-  /* Match Section01's subtitle structure more closely */
-  .section02__subtitle {
-    position: relative;
-    z-index: 10;
-
-    margin: 0 auto; /* Use margin auto like Section01 */
-    max-width: 80%; /* Match Section01 width restriction */
-    color: white;
-    // text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
-    // display: block; /* Changed from flex */
-  }
-
-  .section02__para-1 {
-    position: relative;
-    z-index: 10;
-
-    color: white;
-    text-align: center; /* Match Section01 text alignment */
-    margin: 0 auto; /* Use margin auto like Section01 */
-    max-width: 80%; /* Match Section01 width restriction */
-    line-height: 5vh;
+    @include for-size(680px, up) {
+      font-size: clamp(
+        2rem,
+        4vw,
+        2.5rem
+      ); // Force smaller size in problem range
+      line-height: 1.1; // Tighter line spacing
+    }
   }
 
   //----- keyboard accessibility -----
