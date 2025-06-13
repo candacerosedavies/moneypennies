@@ -79,11 +79,11 @@ import Hamburger from "./Hamburger.astro";
     header?.classList.add(...currentHeaderState.add.header);
     header?.classList.remove(...currentHeaderState.remove.header);
 
-    const buttons = document.querySelectorAll(".button--nav__text");
-    buttons.forEach((button) => {
-      button.classList.add(...currentHeaderState.add.buttons);
-      button.classList.remove(...currentHeaderState.remove.buttons);
-    });
+    // const buttons = document.querySelectorAll(".button--nav__text");
+    // buttons.forEach((button) => {
+    //   button.classList.add(...currentHeaderState.add.buttons);
+    //   button.classList.remove(...currentHeaderState.remove.buttons);
+    // });
   };
 
   window.addEventListener("scroll", handleScroll);

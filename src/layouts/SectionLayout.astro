@@ -7,6 +7,7 @@ interface Props {
   imageName?: string;
   className?: string;
   hasParallax?: boolean;
+  parallaxSpeed?: number; // Controls parallax intensity
   parallaxImages?: {
     src: string;
     left: string;
@@ -17,7 +18,6 @@ interface Props {
   }[];
   heightVariant?: "tall" | "normal";
   allowOverflow?: boolean;
-
   textWidth?: "narrow" | "standard" | "wide" | "full";
 }
 
@@ -28,20 +28,86 @@ const {
   className = "",
   heightVariant = "",
   textWidth = "standard",
+  allowOverflow = false,
+  hasParallax = false,
+  parallaxSpeed = 0.5, // Default parallax speed
 } = Astro.props;
 
 const textVariant = textStyle === "masked" ? "masked-text" : "normal-text";
 const sectionClass =
   variant === "image" ? "section-image" : `section-color ${background}`;
 const textWidthClass = `text-width-${textWidth}`;
+const parallaxClass = hasParallax ? "has-parallax" : "";
 ---
 
 <section
-  class={`${sectionClass} ${className} ${textVariant} ${textStyle} ${heightVariant === "tall" ? "tall-section" : "normal-section"} ${textWidthClass}`}
+  class={`${sectionClass} ${className} ${textVariant} ${textStyle} ${heightVariant === "tall" ? "tall-section" : "normal-section"} ${textWidthClass} ${parallaxClass}`}
   id="main-content"
+  data-parallax-speed={hasParallax ? parallaxSpeed : null}
 >
   <slot />
 </section>
+
+{hasParallax && (
+  <script define:vars={{ parallaxSpeed }}>
+    // Parallax effect for sections with hasParallax=true
+    function initParallax() {
+      const parallaxSections = document.querySelectorAll('.has-parallax');
+      
+      if (parallaxSections.length === 0) return;
+
+      // Throttle scroll events for better performance
+      let ticking = false;
+
+      function updateParallax() {
+        const scrollY = window.pageYOffset;
+
+        parallaxSections.forEach((section) => {
+          const speed = parseFloat(section.dataset.parallaxSpeed) || 0.5;
+          const rect = section.getBoundingClientRect();
+          const sectionTop = rect.top + scrollY;
+          const sectionHeight = rect.height;
+          
+          // Only apply parallax when section is in viewport
+          if (scrollY + window.innerHeight > sectionTop && scrollY < sectionTop + sectionHeight) {
+            // Find parallax containers within this section
+            const parallaxContainers = section.querySelectorAll('[class*="parallax-container"], [class*="__parallax"]');
+            
+            parallaxContainers.forEach((container) => {
+              const offset = (scrollY - sectionTop) * speed;
+              container.style.transform = `translateY(${offset}px) scale(1.2)`;
+            });
+          }
+        });
+
+        ticking = false;
+      }
+
+      function requestTick() {
+        if (!ticking) {
+          requestAnimationFrame(updateParallax);
+          ticking = true;
+        }
+      }
+
+      // Initialize on page load
+      updateParallax();
+      
+      // Add scroll listener
+      window.addEventListener('scroll', requestTick, { passive: true });
+      
+      // Update on resize
+      window.addEventListener('resize', updateParallax, { passive: true });
+    }
+
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initParallax);
+    } else {
+      initParallax();
+    }
+  </script>
+)}
 
 <style>
   .section-image {
@@ -67,6 +133,17 @@ const textWidthClass = `text-width-${textWidth}`;
     min-height: 100vh;
     height: 100vh;
     overflow: hidden;
+  }
+
+  /* Parallax-specific styles */
+  .has-parallax {
+    overflow: hidden; /* Ensure parallax elements don't cause horizontal scroll */
+  }
+
+  .has-parallax [class*="parallax-container"],
+  .has-parallax [class*="__parallax"] {
+    will-change: transform;
+    transition: none; /* Remove transitions during parallax */
   }
 </style>
 
@@ -173,7 +250,53 @@ const textWidthClass = `text-width-${textWidth}`;
     }
   }
 
+  .allow-overflow {
+    overflow: visible !important;
+  }
+
   /* Alignment classes */
+
+  /* Flex container classes */
+.flex {
+  display: flex !important;
+}
+
+.flex-col {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.flex-row {
+  display: flex !important;
+  flex-direction: row !important;
+}
+
+/* Flex grow/shrink classes */
+.flex-grow {
+  flex-grow: 1 !important;
+}
+
+.flex-shrink-0 {
+  flex-shrink: 0 !important;
+}
+
+/* Gap classes */
+.gap-1 {
+  gap: 0.25rem !important;
+}
+
+.gap-2 {
+  gap: 0.5rem !important;
+}
+
+.gap-4 {
+  gap: 1rem !important;
+}
+
+.gap-8 {
+  gap: 2rem !important;
+}
+
   .items-start {
     align-items: flex-start !important;
   }

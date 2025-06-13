@@ -27,17 +27,16 @@ const {
       role="region"
       aria-label="Our data gathering services explained"
     >
-      <section class="section02__text-container">
+      <section
+        class="section02--container__text flex-col items-center justify-center"
+      >
         <header>
-          <h1
-            class="section02__heading lg__font section02--text--overlay"
-            data-outline={h1Text}
-          >
+          <h1 class="section02__heading lg__font" data-outline={h1Text}>
             {h1Text}
           </h1>
         </header>
 
-        <p class="section02__subtitle" style="white-space: pre-line;">
+        <p class="section02__subtitle sm__font" style="white-space: pre-line;">
           {subtitle}
         </p>
         <p class="section02__para-1 sm__font" style="white-space: pre-line;">
@@ -69,86 +68,27 @@ const {
 </script>
 
 <style lang="scss">
-  // Container for all text elements to bounce together
-  .section02__text-container {
+  .section02--container__text {
     position: relative;
-    // display: block;
     z-index: 10;
-    // text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
-    display: flex;
-    flex-direction: column;
     gap: 10vh; // Reduced gap for mobile
     will-change: transform;
     transition: transform 0.1s ease-out;
-    /* Add flex grow to make container take available space */
     flex-grow: 1;
-    justify-content: center; // Center vertically
 
     @include for-size(tablet, up) {
       padding-bottom: 50vh;
     }
   }
-  .section-2 {
-    // background-color: #1f2734;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    text-align: center;
-    width: 100vw;
-    font-weight: 200;
-    overflow: hidden;
-  }
 
-  .section02__parallax-container {
-    min-height: 100vh;
-    // background-image: url("/images/hotel/pexels-cottonbro-6474587.jpg");
-    // background-color: #435875;
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    /* Match Section01's padding */
-
-    /* Match exactly Section01's responsive behavior */
-    @include for-size(tablet, up) {
-      min-height: 150vh;
-      background-attachment: fixed;
-      // padding: 6rem 2rem;
-    }
-  }
-
-  // .section02__overlay {
-  //   position: absolute;
-  //   inset: 0;
-  //   background-color: rgba(0, 0, 0, 0.4);
-  // }
-
-  /* Match Section01's heading style more closely */
   .section02__heading {
-    position: relative;
-    z-index: 10;
-    // display: block;
-    margin: 0 auto;
-
-    text-align: center;
-    color: white;
-    max-width: 80%;
-    // text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    text-transform: uppercase;
+    font-weight: 900;
+    position: static;
+    padding: 0;
 
     @include for-size(tablet, up) {
       max-width: 95%;
-    }
-
-    &.section02--text--overlay {
-      color: transparent;
-      background-image: var(--bg-image);
-      background-position: var(--bg-position);
-      background-size: var(--bg-size);
-      background-attachment: fixed;
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-stroke: 1px white;
     }
   }
 
@@ -156,14 +96,12 @@ const {
   .section02__subtitle {
     position: relative;
     z-index: 10;
-    display: block; /* Changed from flex */
-    text-align: center;
-    font-size: clamp(1rem, 5vw, 1.5rem);
+
     margin: 0 auto; /* Use margin auto like Section01 */
     max-width: 80%; /* Match Section01 width restriction */
     color: white;
     // text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
-    /* Removed align-self and other flex properties */
+    // display: block; /* Changed from flex */
   }
 
   .section02__para-1 {

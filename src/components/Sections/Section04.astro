@@ -52,18 +52,18 @@ const { h2Text = "Kind words" } = Astro.props;
 </SectionLayout>
 
 <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        // Get the text container that wraps all text
-        const textContainer = document.querySelector(".section_05");
+    // document.addEventListener("DOMContentLoaded", () => {
+    //     // Get the text container that wraps all text
+    //     const textContainer = document.querySelector(".section_05");
 
-        if (textContainer) {
-            window.addEventListener("scroll", () => {
-                const scrollPosition = window.scrollY;
-                const bounceAmount = Math.sin(scrollPosition * 0.01) * 18;
-                textContainer.style.transform = `translateY(${bounceAmount}px)`;
-            });
-        }
-    });
+    //     if (textContainer) {
+    //         window.addEventListener("scroll", () => {
+    //             const scrollPosition = window.scrollY;
+    //             const bounceAmount = Math.sin(scrollPosition * 0.01) * 18;
+    //             textContainer.style.transform = `translateY(${bounceAmount}px)`;
+    //         });
+    //     }
+    // });
 </script>
 
 <style lang="scss">
