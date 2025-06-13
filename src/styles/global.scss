@@ -11,8 +11,9 @@ html {
     padding: 0;
     overflow-x: hidden;
     display: flex;
-    /* Prevents horizontal scrolling */
-    // width: 100%;
+
+    /* Prevent horizontal scrolling */
+    width: 100%;
     color: white;
     align-items: center;
     justify-content: center;
@@ -57,37 +58,69 @@ select {
 }
 
 //-----hero font-----
+
 .lg__font {
-    font-size: clamp(2.5rem, 8vw, 2rem);
+    font-size: clamp(1.5rem, 6vw, 2rem); // Allow scaling on mobile
 
 
 
-    @include for-size (tablet, up) {
-        font-size: clamp(3rem, 7vw, 6rem);
+    @include for-size(tablet, up) {
+        font-size: clamp(3rem, 7vw, 3.5rem);
     }
-
 }
 
+// .lg__font {
+//     font-size: clamp(2rem, 6vw, 2rem);
+
+
+
+//     @include for-size (tablet, up) {
+//         font-size: clamp(3rem, 7vw, 3.5rem);
+//     }
+
+// }
+
+
+
 //-----heading font-----
+
 .md__font {
-    font-size: clamp(2rem, 6vw, 1.5rem);
+    font-size: clamp(1.2rem, 6vw, 2rem); // Fix the backwards clamp
 
-
-    @include for-size (tablet, up) {
+    @include for-size(tablet, up) {
         font-size: clamp(2.5rem, 8vw, 4rem);
     }
 }
 
-//-----para font-----
-.sm__font {
-    font-size: clamp(1rem, 3vw, 1rem);
+// .md__font {
+//     font-size: clamp(2rem, 6vw, 1.5rem);
 
+
+//     @include for-size (tablet, up) {
+//         font-size: clamp(2.5rem, 8vw, 4rem);
+//     }
+// }
+
+//-----para font-----
+
+.sm__font {
+    font-size: clamp(0.5rem, 3vw, 1rem); // Allow slight scaling
 
     @include for-size(tablet, up) {
-        font-size: clamp(1.5rem, 3vw, 1.2rem);
-        line-height: 1.5;
+        font-size: clamp(0.8rem, 2vw, 1rem);
+        // line-height: 1.5;
     }
 }
+
+// .sm__font {
+//     font-size: clamp(1rem, 3vw, 1rem);
+
+
+//     @include for-size(tablet, up) {
+//         font-size: clamp(1.5rem, 3vw, 1.2rem);
+//         line-height: 1.5;
+//     }
+// }
 
 
 

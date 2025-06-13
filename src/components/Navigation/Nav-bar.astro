@@ -4,32 +4,25 @@ import Hamburger from "./Hamburger.astro";
 
 <a href="#main-content" class="link--skip">Skip to main content</a>
 
-<!----- JS requires the inline styling, on the styles that will change on scroll.  ----->
-<header class="fixed top-0 left-0 right-0 z-50">
-  <ul class="header mx-auto flex justify-between items-center">
+<!----- inline styling for JS  ----->
+<header class="fixed top-0 left-0 right-0 z-50 py-0">
+  <ul class="header mx-auto flex justify-between items-center px-2">
     <li
       role="navigation"
       aria-label="moneypennies text logo and home button"
       class="button--nav container__logo sm__font"
     >
-      <a href="/" class="button--nav__text"
-        >MoneyPennies
-        <!-- Single forward slash indicates home page -->
-        <!-- <img
-          src="/images/navImages/moneypennies-logo-no-bg.png"
-          class="logo"
-          role="navigation"
-          aria-label="moneypennies logo and home button"
-        /> -->
-      </a>
+      <nav class="leading-none">
+        <a href="/" class="button--nav__text">moneyPennies </a>
+      </nav>
     </li>
     <nav
-      class="nav__button-container"
+      class="nav__button-container leading-none"
       role="navigation"
       aria-label="Say hello on our contact page"
     >
       <li class="button--nav desktop__nav sm__font">
-        <a href="/contact/" class="button--nav__text">SAY HELLO</a>
+        <a href="/contact/" class="button--nav__text">say hello</a>
         <!-- <button onclick="window.location.href='/contact/'">
         <span class="animated__span">say hello</span>
       </button> -->
@@ -46,7 +39,7 @@ import Hamburger from "./Hamburger.astro";
   const headerStates = {
     scrolled: {
       add: {
-        header: ["bg-white/50", "backdrop-blur-sm", "fade-in"],
+        header: ["bg-white/30", "backdrop-blur-md", "fade-in"],
         buttons: ["!text-black"],
       },
       remove: {
@@ -60,7 +53,7 @@ import Hamburger from "./Hamburger.astro";
         buttons: ["!text-white"],
       },
       remove: {
-        header: ["bg-white/50", "backdrop-blur-sm", "fade-in"],
+        header: ["bg-white/30", "backdrop-blur-sm", "fade-in"],
         buttons: ["!text-black"],
       },
     },
@@ -116,24 +109,6 @@ import Hamburger from "./Hamburger.astro";
     }
   }
 
-  //-----BUTTON - LARGER SCREENS-----
-
-  // .button--nav::after {
-  //   //  padding-bottom:
-  // }
-
-  // .button--nav__text {
-  //   font-weight: 900;
-  // }
-
-  // .animated__button .animated__span {
-  //   font-size: clamp(0.5rem, 2vw, 1rem);
-
-  //   @include for-size(tablet, up) {
-  //     font-size: clamp(1rem, 3vh, 1rem);
-  //   }
-  // }
-
   //-----LOGO-----
 
   .container__logo::after {
@@ -150,31 +125,13 @@ import Hamburger from "./Hamburger.astro";
     /* Above everything else */
   }
 
-  // header.scrolled .button--nav .button--nav__text {
-  //   &::after {
-  //     background-color: black !important; // Black border when scrolled
-  //   }
-
-  //   &:hover::after {
-  //     background-color: black !important; // Keep it black on hover too
-  //   }
-
-  //   &::before {
-  //     background-color: rgba(0, 0, 0, 0.1) !important; // Light black background
-  //   }
-
-  //   &:hover .button--nav__text {
-  //     color: white !important; // White text on black background when scrolled
-  //   }
-  // }
-
   .container__logo {
     display: flex;
     // align-items: center;
     margin-left: 1rem; // Use margin instead of padding to control position without affecting size
 
     font-family: "zilla slab", sans-serif !important;
-    font-weight: 700;
+    font-weight: 200;
     font-style: italic;
 
     @include for-size(tablet, up) {
@@ -192,13 +149,17 @@ import Hamburger from "./Hamburger.astro";
     }
   }
 
+  .button--nav__text {
+    text-transform: none !important;
+  }
+
   header.scrolled .button--nav {
     .button--nav__text {
       color: black;
     }
 
     &:hover .button--nav__text {
-      color: white;
+      // color: white;
     }
 
     &:hover::after {

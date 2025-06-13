@@ -88,7 +88,29 @@ $breakpoints: (
     }
 }
 
-//-----button styles-----
+//----- GLOBAL ANIMATED BUTTON -----
+
+.button--animated {
+    position: relative; //establish a reference point for any absolutely positioned children inside it.
+    display: inline-block;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    overflow: hidden; //added to contain the animated element
+
+    // moved padding from span to button top right bottom left
+    border-radius: 5px;
+    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+
+    z-index: 5; //base z index for the container
+
+    @include for-size(tablet, up) {
+
+        padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+
+    }
+
+}
 
 .button--animated * {
     pointer-events: none;
@@ -99,31 +121,31 @@ $breakpoints: (
     position: relative; //establish a reference point for any absolutely positioned children inside it.
     display: inline-block;
     color: white;
-
+    // cursor: pointer;
     transition: all 0.3s ease-in;
     z-index: 2; //keep the text above the animation
-    text-transform: uppercase;
+    // text-transform: uppercase;
     pointer-events: none; //debugging: make sure span doesn't block hover events
 
-    font-size: clamp(1rem, 2vw, 1rem);
+    font-size: clamp(0.5rem, 3vw, 1rem);
 
     &:focus-visible {
-        outline: 2px solid white;
+        // outline: 2px solid white;
         outline-offset: 2px;
     }
 
     @include for-size (tablet, up) {
-        font-size: clamp(1rem, 3vw, 1.5rem);
+        font-size: clamp(0.8rem, 2vw, 1rem);
 
     }
 
 }
 
-//ANIMATION STYLES - ORIGINAL POSITIONS
+// ----- BUTTON ANIMATION STYLES - ORIGINAL POSITIONS -----
 
-//v2 BACKGROUND animation - not visible
+// ----- Background animation (not visible) -----
 .button--animated::before {
-    position: absolute; //positioned relative to their nearest positioned ancestor (which is the button element)
+    position: absolute; //positioned relative to nearest positioned ancestor (the button element)
     content: "";
     top: 0;
     left: -100%; //positioned out of sight on the left (NOT hovering)
@@ -134,12 +156,12 @@ $breakpoints: (
     z-index: 1;
 }
 
-//v2 BORDER/UNDERLINE animation - creates a bottom border effect. 
+//----- border/underline animation ------
 .button--animated::after {
-    position: absolute;
+    position: absolute; //positioned relative to nearest positioned ancestor 
     content: "";
     bottom: 0;
-    left: 0; //line starts 10% in from the left
+    left: 0;
     width: 100%; //reduced to 80% from 100% so the line starts 10% further in from the right
     height: 2px;
     background-color: white; //background 3px high = looks like a border-bottom but we have more control over it/can animate
@@ -148,7 +170,11 @@ $breakpoints: (
     /* Above everything else */
 }
 
-//ON HOVER STYLES 
+// ----- on hover styles
+//FRI 3PM DEBUGGING
+.button--animated:hover .button--animated__text {
+    color: var(--button-hover-text-color, black);
+}
 
 //on hover BACKGROUND becomes visible - slides in from the left. 
 .button--animated:hover::before {
@@ -162,6 +188,8 @@ $breakpoints: (
 
 //on hover: change the button text to black when the background is white
 //want the span inside to change color, so you need to use the parent-child relationship in the selectors
+
+
 .button--animated:hover .button__text {
     color: black;
 }

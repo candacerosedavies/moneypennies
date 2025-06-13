@@ -6,8 +6,6 @@ interface Props {
   imageFolder?: string;
   imageName?: string;
   className?: string;
-  // contentPosition?: "left" | "center" | "right";
-  // verticalAlignment?: "top" | "center" | "bottom";
   hasParallax?: boolean;
   parallaxImages?: {
     src: string;
@@ -19,63 +17,35 @@ interface Props {
   }[];
   heightVariant?: "tall" | "normal";
   allowOverflow?: boolean;
+
+  textWidth?: "narrow" | "standard" | "wide" | "full";
 }
 
 const {
   variant = "",
   textStyle = "",
   background = "",
-  imageFolder,
-  imageName,
   className = "",
-  allowOverflow = false,
-  // contentPosition = "",
-  // verticalAlignment = "",
   heightVariant = "",
+  textWidth = "standard",
 } = Astro.props;
 
 const textVariant = textStyle === "masked" ? "masked-text" : "normal-text";
-
 const sectionClass =
   variant === "image" ? "section-image" : `section-color ${background}`;
-
-//was getting a typescript error with const uniqueImageClass = variant === ? `bg-${imageFolder}-${imageName?.replace(/\./g, "-")}`: "";
-//Changed to the below
-let uniqueImageClass = "";
-if (variant === "image" && imageFolder && imageName) {
-  // We only get here if all three values exist
-  uniqueImageClass = `bg-${imageFolder}-${imageName?.replace(/\./g, "-")}`;
-}
-
-// const alignmentClasses = `
-//   content-container
-//   items-${contentPosition === "center" ? "center" : contentPosition === "right" ? "end" : "start"}
-//   justify-${verticalAlignment === "center" ? "center" : verticalAlignment === "top" ? "start" : "end"}
-// `.trim();
-
-const backgroundImageStyle =
-  variant === "image" && imageFolder && imageName
-    ? `
-    .bg-${imageFolder}-${imageName.replace(/\./g, "-")} {
-      background-image: url("/images/${imageFolder}/${imageName}");
-    }
-  `
-    : "";
+const textWidthClass = `text-width-${textWidth}`;
 ---
 
 <section
-  class={`${sectionClass} ${className} ${uniqueImageClass} ${textVariant} ${textStyle} ${heightVariant === "tall" ? "tall-section" : "normal-section"}`}
+  class={`${sectionClass} ${className} ${textVariant} ${textStyle} ${heightVariant === "tall" ? "tall-section" : "normal-section"} ${textWidthClass}`}
   id="main-content"
 >
-  <div class="overlay"></div>
-
   <slot />
 </section>
 
 <style>
   .section-image {
     min-height: 100vh;
-    /* width: 100%; */
     background-size: cover;
     background-position: center;
     position: relative;
@@ -84,61 +54,125 @@ const backgroundImageStyle =
 
   .section-color {
     min-height: 100vh;
-    /* width: 100%; */
     position: relative;
     overflow: hidden;
   }
 
-  .overlay {
-    position: absolute;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.3);
-  }
-
   .tall-section {
     min-height: 150vh;
-
-    /* width: 100%; */
     overflow: hidden;
   }
 
   .normal-section {
     min-height: 100vh;
-    height: 100vh; /* Ensure exact 100vh */
-    /* width: 100%; */
+    height: 100vh;
     overflow: hidden;
-  }
-
-  .masked-container {
-    padding: 2rem 6rem;
-    /* max-width: 1400px; */
-
-    font-size: 1rem;
-    font-weight: 700;
-  }
-
-  /* .normal-text {
-    font-size: 1rem;
-    font-weight: 500;
-    color: white;
-    line-height: 1;
-    position: relative;
-  } */
-
-  .masked-text {
-    font-size: 1rem;
-    font-weight: 700;
-    color: transparent;
-    background-image: `$textVariant`;
-    -webkit-background-clip: text;
-    background-color: white;
-    mix-blend-mode: overlay;
-    line-height: 1;
   }
 </style>
 
-<!-- All global styles in one place -->
-<style is:global>
+<style is:global lang="scss">
+  // ----- Text width control classes ----- //
+  .text-width-narrow {
+    h1,
+    h2,
+    h3,
+    p,
+    .text-element {
+      width: 70vw;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 1rem;
+
+      @include for-size(phone, up) {
+        width: 80%;
+        max-width: 600px;
+      }
+
+      @include for-size(650px, up) {
+        padding: 0 2rem;
+      }
+
+      @include for-size(tablet, up) {
+        width: 60%;
+        max-width: 600px;
+        padding: 0;
+      }
+    }
+  }
+
+  .text-width-standard {
+    h1,
+    h2,
+    h3,
+    p,
+    .text-element {
+      // Narrowest phones first
+      width: 80vw;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 1rem;
+
+      @include for-size(phone, up) {
+        width: 85%; //percentage for larger phones for more control
+        max-width: 700px; // Prevents getting too wide
+      }
+
+      @include for-size(650px, up) {
+        padding: 0 2rem; // Extra padding in this range
+      }
+
+      @include for-size(tablet, up) {
+        width: 70%;
+        max-width: 800px;
+        padding: 0; //resetting padding here, let container do it's thang
+      }
+    }
+  }
+
+  .text-width-wide {
+    h1,
+    h2,
+    h3,
+    p,
+    .text-element {
+      width: 90vw;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 1rem;
+
+      .text-width-wide {
+        // (phone, up) not essential but will ensure smooth transitions from the narrowest phone to tablets and browsers
+        @include for-size(phone, up) {
+          width: 90%;
+          max-width: 1000px; // Keep same as tablet
+        }
+      }
+
+      @include for-size(650px, up) {
+        padding: 0 2rem;
+      }
+
+      @include for-size(tablet, up) {
+        width: 80%;
+        max-width: 1000px;
+        padding: 0;
+      }
+    }
+  }
+
+  .text-width-full {
+    h1,
+    h2,
+    h3,
+    p,
+    .text-element {
+      width: 100%;
+    }
+  }
+
   /* Alignment classes */
   .items-start {
     align-items: flex-start !important;
@@ -160,6 +194,3 @@ const backgroundImageStyle =
     justify-content: flex-end !important;
   }
 </style>
-
-<!-- /* Dynamic background image styles */ -->
-{backgroundImageStyle && <style is:global set:html={backgroundImageStyle} />}
