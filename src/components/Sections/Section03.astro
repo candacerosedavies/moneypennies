@@ -21,7 +21,7 @@ const {
     allowOverflow={true}
     textWidth="standard"
     hasParallax={true}
-    parallaxSpeed={0.2}
+    parallaxSpeed={0.6}
     className="Section03"
     heightVariant="tall"
 >
@@ -79,14 +79,14 @@ const {
     .section03--container__text {
         position: relative;
         z-index: 10;
-        gap: 8vh;
+        gap: 6vh;
         will-change: transform;
         transition: transform 0.1s ease-out;
         flex-grow: 1;
         padding: 6rem 2rem;
 
         @include for-size(tablet, up) {
-            gap: 10vh;
+            gap: 8vh;
         }
     }
 
