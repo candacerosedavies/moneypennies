@@ -5,7 +5,7 @@ import Hamburger from "./Hamburger.astro";
 <a href="#main-content" class="link--skip">Skip to main content</a>
 
 <!----- inline styling for JS  ----->
-<header class="fixed top-0 left-0 right-0 z-50 py-0">
+<header class="fixed top-0 left-0 right-0 z-50">
   <ul class="header mx-auto flex justify-between items-center px-2">
     <li
       role="navigation"
@@ -13,7 +13,13 @@ import Hamburger from "./Hamburger.astro";
       class="button--nav container__logo sm__font"
     >
       <nav class="leading-none">
-        <a href="/" class="button--nav__text">moneyPennies </a>
+        <a href="/" class="button--nav__text">moneyPennies</a>
+
+        <!-- <a
+          href="/"
+          onclick="console.log('Logo clicked'); window.location.href='/'; return false;"
+          class="button--nav__text">moneyPennies</a
+        > -->
       </nav>
     </li>
     <nav
@@ -39,8 +45,8 @@ import Hamburger from "./Hamburger.astro";
   const headerStates = {
     scrolled: {
       add: {
-        header: ["bg-white/30", "backdrop-blur-md", "fade-in"],
-        buttons: ["!text-black"],
+        header: ["backdrop-blur-md", "fade-in"],
+        // buttons: ["!text-black"],
       },
       remove: {
         header: ["bg-transparent"],
@@ -53,8 +59,8 @@ import Hamburger from "./Hamburger.astro";
         buttons: ["!text-white"],
       },
       remove: {
-        header: ["bg-white/30", "backdrop-blur-sm", "fade-in"],
-        buttons: ["!text-black"],
+        header: ["backdrop-blur-sm", "fade-in"],
+        // buttons: ["!text-black"],
       },
     },
   };

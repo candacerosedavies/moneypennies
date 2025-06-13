@@ -91,6 +91,10 @@ $breakpoints: (
 //----- GLOBAL ANIMATED BUTTON -----
 
 .button--animated {
+    pointer-events: auto;
+}
+
+.button--animated {
     position: relative; //establish a reference point for any absolutely positioned children inside it.
     display: inline-block;
     cursor: pointer;
@@ -125,7 +129,7 @@ $breakpoints: (
     transition: all 0.3s ease-in;
     z-index: 2; //keep the text above the animation
     // text-transform: uppercase;
-    pointer-events: none; //debugging: make sure span doesn't block hover events
+    pointer-events: auto;
 
     font-size: clamp(0.5rem, 3vw, 1rem);
 
@@ -141,7 +145,7 @@ $breakpoints: (
 
 }
 
-// ----- BUTTON ANIMATION STYLES - ORIGINAL POSITIONS -----
+// ----- BUTTON ANIMATION -----
 
 // ----- Background animation (not visible) -----
 .button--animated::before {
@@ -195,7 +199,7 @@ $breakpoints: (
 }
 
 
-//----- nav buttons ------
+//----- ANIMATED NAV BUTTONS ------
 .button--nav {
     position: relative; //establish a reference point for any absolutely positioned children inside it.
     display: inline-block;
@@ -203,11 +207,8 @@ $breakpoints: (
     border: none;
     background-color: transparent;
     overflow: hidden; //added to contain the animated element
-
-    // moved padding from span to button top right bottom left
     border-radius: 5px;
     padding: 0.5rem 0.5rem 0.5rem 0.5rem;
-
     z-index: 5; //base z index for the container
 
     @include for-size(tablet, up) {
@@ -219,26 +220,29 @@ $breakpoints: (
 }
 
 .button--nav * {
+    //prevent child elements from triggering separate mouse events that might interrupt the animation
     pointer-events: none;
 
+}
+
+.button--nav a {
+    pointer-events: auto;
 }
 
 .button--nav .button--nav__text {
     position: relative; //establish a reference point for any absolutely positioned children inside it.
     display: inline-block;
     color: white;
-
     transition: all 0.3s ease-in;
     z-index: 2; //keep the text above the animation
-    text-transform: uppercase;
-    pointer-events: none; //debugging: make sure span doesn't block hover events
-    // font-size: clamp(1rem, 2vw, 1rem);
+    // text-transform: uppercase;
+    //debugging: make sure <a> doesn't block hover events
 
 
-    &:focus-visible {
-        outline: 2px solid white;
-        outline-offset: 2px;
-    }
+    // &:focus-visible {
+    //     // outline: 2px solid white;
+    //     // outline-offset: 2px;
+    // }
 
     @include for-size (tablet, up) {
         // font-size: clamp(1rem, 3vw, 1.5rem);
@@ -246,7 +250,7 @@ $breakpoints: (
     }
 }
 
-//v2 BACKGROUND animation - not visible
+//BACKGROUND animation - not visible
 .button--nav::before {
     position: absolute; //positioned relative to their nearest positioned ancestor (which is the button element)
     content: "";

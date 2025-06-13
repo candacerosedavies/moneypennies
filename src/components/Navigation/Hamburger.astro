@@ -4,34 +4,27 @@
 
 <!-- Animated Navigation Overlay -->
 <nav class="overlay overlay-slide-right section__nav" id="overlay">
-  <button onclick="window.location.href='/contact/'">
-    <ul class="menu--container__buttons">
-      <li class="slide-out-1" id="nav-1">
-        <!-- ----- home button ----- -->
-        <button
-          class="button--animated"
-          id="link__button"
-          onclick="window.location.href='/'"
-        >
-          <a class="button--animated__text">Home</a>
-        </button>
-      </li>
-
-      <li class="slide-out-2" id="nav-2">
-        <!-- ----- contact button ----- -->
-        <!-- data-url is a HTML5 attribute that stores data for JS to read later. This is a way to store the URL information in HTML, but control exactly when the navigation happens -->
-        <button
-          class="button--animated"
-          id="link__button"
-          onclick="window.location.href='/contact/'"
-        >
-          <a class="button--animated__text">say hello</a>
-        </button>
-      </li>
-    </ul>
-  </button>
+  <ul class="menu--container__buttons">
+    <li class="slide-out-1 button__contact" id="nav-1">
+      <button
+        class="button--animated"
+        id="link__button"
+        onclick="window.location.href='/contact/'"
+      >
+        <a class="button__text">say hello</a>
+      </button>
+    </li>
+    <li class="slide-out-2 button__home" id="nav-2">
+      <button
+        class="button--animated"
+        id="link__button"
+        onclick="window.location.href='/'"
+      >
+        <a class="button__text">home</a>
+      </button>
+    </li>
+  </ul>
 </nav>
-
 <!-- Hamburger Menu Button -->
 <div class="menu-bars" id="menu-bars" aria-label="menu">
   <div class="bar-1"></div>
@@ -136,29 +129,27 @@
     justify-content: center; /* Center children horizontally */
   }
 
+  /*--- BUTTONS ---*/
+
   .menu--container__buttons {
     display: flex; /* Create a flex container */
     flex-grow: 1;
+    flex-direction: column;
+    gap: 6em;
     justify-content: center; /* Center children horizontally */
     align-items: center; /* Center children vertically */
     height: 100vh;
     width: 100%; /* Ensure full width */
     position: absolute;
     left: 0;
-    top: 10vh;
+    top: 0;
     overflow: hidden;
     background-color: #293442;
-    padding-bottom: 20rem;
-    justify-content: center; /* Center children horizontally */
 
     @include for-size(tablet, up) {
       display: none !important; /* hide hamburger tablet larger screens*/
     }
   }
-
-  /*--- CONTACT BUTTON ---*/
-
-  /*---HAMBURGER ICON---*/
 
   /* Only display on mobile and tablet */
   .menu-bars,
@@ -172,11 +163,11 @@
       display: block;
     }
 
-    /* ----- overlay -----
+    //  ----- overlay -----
 
-fixed to prevent it from moving 
-9 brings it to the front as default elements have z index of 1
-Because navigation is a child of the overlay, add classes here to impact the nav*/
+    // fixed to prevent it from moving
+    // 9 brings it to the front as default elements have z index of 1
+    // Because navigation is a child of the overlay, add classes here to impact the nav
     .overlay {
       position: fixed;
       z-index: 60;
@@ -184,29 +175,18 @@ Because navigation is a child of the overlay, add classes here to impact the nav
       right: -100vw; // Start completely off-screen to the right
       width: 80vw; // Menu takes up 80% of screen width
       height: 100vh;
-      // transform: translateX(100vw); // Starts completely off-screen
       background-color: #293442;
-      /* Change this to start from right */
     }
+
     /* brings nav into view */
     .overlay-slide-left {
       transition: all 0.4s ease-in-out 0.1s;
       right: 0; // Slide into view from the right
-      // transition: all 0.4s ease-in-out 0.1s;
-      // transform: translateX(10vw);
-      // transform: translateX(0); // Slide fully into view
-      //       transition: all 0.4s ease-in-out 0.1s;
-      // transform: translateX(20vw); // This only shows 20% of viewport!
     }
     /* brings it out of view */
     .overlay-slide-right {
       transition: all 0.4s ease-in-out 0.1s;
       right: -100vw; // Hide off-screen to the right
-      // transition: all 0.4s ease-in-out 0.1s;
-      // transform: translateX(100vw); // Hide completely off-screen (vw not vh)
-      // transition: all 0.4s ease-in-out 0.1s;
-
-      // transform: translateX(100vh); /* 27/4 Move all the way right to hide it */
     }
 
     .slide-in-1 {
