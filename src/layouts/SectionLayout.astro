@@ -126,14 +126,16 @@ const parallaxClass = hasParallax ? "has-parallax" : "";
 
   .tall-section {
     /* min-height: 100vh; */
-    height: 100vh;
+    height: 150vh;
     overflow: hidden;
+
   }
 
   .normal-section {
     min-height: 70vh;
     /* height: 50vh; */
     overflow: hidden;
+
   }
 
   /* Parallax-specific styles */
@@ -154,6 +156,8 @@ const parallaxClass = hasParallax ? "has-parallax" : "";
     h1,
     h2,
     h3,
+    h4,
+    h5,
     p,
     .text-element {
       width: 70vw;
@@ -163,11 +167,13 @@ const parallaxClass = hasParallax ? "has-parallax" : "";
       padding: 0 1rem;
 
       @include for-size(phone, up) {
-        width: 80%;
+        width: 60%;
         max-width: 600px;
       }
 
       @include for-size(650px, up) {
+          width: 60%;
+        max-width: 600px;
         padding: 0 2rem;
       }
 
@@ -183,6 +189,8 @@ const parallaxClass = hasParallax ? "has-parallax" : "";
     h1,
     h2,
     h3,
+    h4,
+    h5,
     p,
     .text-element {
       // Narrowest phones first
@@ -210,9 +218,11 @@ const parallaxClass = hasParallax ? "has-parallax" : "";
   }
 
   .text-width-wide {
-    h1,
+     h1,
     h2,
     h3,
+    h4,
+    h5,
     p,
     .text-element {
       width: 90vw;
@@ -242,9 +252,11 @@ const parallaxClass = hasParallax ? "has-parallax" : "";
   }
 
   .text-width-full {
-    h1,
+     h1,
     h2,
     h3,
+    h4,
+    h5,
     p,
     .text-element {
       width: 100%;

@@ -1,41 +1,32 @@
 ---
 import Hamburger from "./Hamburger.astro";
+import LogoBrandNav from "../MoneypenniesLogo/LogoBrandNav.astro";
 ---
 
 <a href="#main-content" class="link--skip">Skip to main content</a>
 
 <!----- inline styling for JS  ----->
 <header class="fixed top-0 left-0 right-0 z-50">
-  <ul class="header mx-auto flex justify-between items-center px-2">
-    <li
-      role="navigation"
-      aria-label="moneypennies text logo and home button"
-      class="button--nav container__logo sm__font"
-    >
-      <nav class="leading-none">
-        <a href="/" class="button--nav__text">moneyPennies</a>
+  <div class="header mx-auto flex justify-between items-center px-2">
+    <!-- Hamburger: only visible on mobile/tablet -->
+    <Hamburger />
+    <LogoBrandNav showTagline={false} />
 
-        <!-- <a
-          href="/"
-          onclick="console.log('Logo clicked'); window.location.href='/'; return false;"
-          class="button--nav__text">moneyPennies</a
-        > -->
-      </nav>
-    </li>
     <nav
       class="nav__button-container leading-none"
       role="navigation"
       aria-label="Say hello on our contact page"
     >
       <li class="button--nav desktop__nav sm__font">
-        <a href="/contact/" class="button--nav__text">say hello</a>
+        <a href="/contact/" class="contact--button--position button--nav__text"
+          >CONNECT</a
+        >
         <!-- <button onclick="window.location.href='/contact/'">
         <span class="animated__span">say hello</span>
       </button> -->
       </li>
     </nav>
-    <Hamburger />
-  </ul>
+  </div>
 </header>
 
 <script>
@@ -90,6 +81,11 @@ import Hamburger from "./Hamburger.astro";
 </script>
 
 <style lang="scss">
+  // Logo positioning
+  :global(.button--nav) {
+    // On mobile/tablet: moves to right side since hamburger takes left
+    // On desktop: moves to left side since hamburger is hidden
+  }
   //-----skip to main content styling-----
   .link--skip {
     position: absolute;
@@ -176,12 +172,24 @@ import Hamburger from "./Hamburger.astro";
   //-----HAMBURGER VISIBILITY------
 
   .desktop__nav {
-    display: flex; //hamburger icon is visible in view mobile/tablet
+    display: none; // Hidden on mobile/tablet
+
+    @include for-size(tablet, up) {
+      display: flex; // Shows on desktop
+    }
   }
 
   @include for-size(tablet, down) {
     .desktop__nav {
       display: none !important; //hide desktop nav stylings smaller screens
+    }
+  }
+
+  .contact--button--position {
+    display: none;
+
+    @include for-size(tablet, up) {
+      display: block;
     }
   }
 </style>

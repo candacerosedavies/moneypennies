@@ -69,73 +69,58 @@ select {
     }
 }
 
-// .lg__font {
-//     font-size: clamp(2rem, 6vw, 2rem);
-
-
-
-//     @include for-size (tablet, up) {
-//         font-size: clamp(3rem, 7vw, 3.5rem);
-//     }
-
-// }
-
-
 
 //-----heading font-----
 
 .md__font {
-    font-size: clamp(1.2rem, 6vw, 2rem); // Fix the backwards clamp
+    font-size: clamp(1.2rem, 3vw, 1.8rem); // Fix the backwards clamp
 
     @include for-size(tablet, up) {
-        font-size: clamp(2.5rem, 8vw, 4rem);
+        font-size: clamp(2rem, 3vw, 3.5rem);
     }
 }
-
-// .md__font {
-//     font-size: clamp(2rem, 6vw, 1.5rem);
-
-
-//     @include for-size (tablet, up) {
-//         font-size: clamp(2.5rem, 8vw, 4rem);
-//     }
-// }
 
 //-----para font-----
 
 .sm__font {
-    font-size: clamp(0.5rem, 3vw, 1rem); // Allow slight scaling
+    font-size: clamp(0.8rem, 3vw, 1.2rem); // Allow slight scaling
 
     @include for-size(tablet, up) {
-        font-size: clamp(0.8rem, 2vw, 1rem);
+        font-size: clamp(0.8rem, 3vw, 1rem);
         // line-height: 1.5;
     }
 }
 
-// .sm__font {
-//     font-size: clamp(1rem, 3vw, 1rem);
-
-
-//     @include for-size(tablet, up) {
-//         font-size: clamp(1.5rem, 3vw, 1.2rem);
-//         line-height: 1.5;
-//     }
-// }
-
-
-
-h1 {
-    // font-size: clamp(1rem, 8vh, 8rem);
-    font-weight: 400;
+.tn__font {
+    font-size: clamp(0.5rem, 2svw, 0.8rem); // Allow slight scaling
 
     @include for-size(tablet, up) {
-        // font-size: clamp(3rem, 10vh, 10rem);
-    }
-
-    @include for-size(desktop, up) {
-        // font-size: clamp(4rem, 15vh, 10rem);
+        font-size: clamp(0.8rem, 3vw, 1rem);
+        // line-height: 1.5;
     }
 }
+
+
+.md__hr {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    // border-color: rgb(218, 218, 218);
+    background-color: rgb(241, 241, 241);
+    // height: 0.5px;
+    border-width: 0.01em;
+}
+
+// .lg__hr {
+//     width: 100%;
+//     // margin-left: auto;
+//     // margin-right: auto;
+//     border-color: white;
+//     background-color: white;
+//     height: 0.3px;
+//     padding-top: 5rem;
+//     padding-bottom: 5rem;
+// }
 
 // AMMEND THE BELOW? 
 // .hamburger {

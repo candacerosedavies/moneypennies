@@ -6,12 +6,14 @@ interface Props {
     h1Text?: string;
     h2Text?: string;
     para?: string;
+    para2?: string;
 }
 
 const {
-    h1Text = "The future of events booking",
-    para = "Understand the needs of your clients before the first conversation",
-    h2Text = "MoneyPennies",
+    h1Text = "connections that count",
+    para = "Turn your empty dates into firm booking.",
+    // We connect you with buyers while they're still looking.
+    para2 = "Venues | Agencies | Suppliers",
 } = Astro.props;
 ---
 
@@ -19,7 +21,7 @@ const {
     variant="color"
     className="Section01"
     allowOverflow={true}
-    textWidth="standard"
+    textWidth="narrow"
     hasParallax={true}
     parallaxSpeed={0.3}
 >
@@ -33,9 +35,6 @@ const {
             <header
                 class="section01--container__text flex-col items-center justify-center"
             >
-                <!-- <h2 class="section01__h2-heading md__font">
-                    {h2Text}
-                </h2> -->
                 <section class="wrapper__banner--text">
                     <h1
                         class="section01__h1--heading uppercase lg__font text-overlay"
@@ -43,18 +42,10 @@ const {
                     >
                         {h1Text}
                     </h1>
+                    <p class="sm__font mt-4">{para2}</p>
                 </section>
-                <p class="sm__font section01__para" set:html={para} />
 
-                <nav class="section01__button__container leading-none">
-                    <!-- use JS 'onclick' instead of an <a> tag. Shouldn't use <a> AND <button> together -->
-                    <button
-                        class="button--animated"
-                        onclick="window.location.href='/contact/'"
-                    >
-                        <a class="button__text">start now</a>
-                    </button>
-                </nav>
+                <p class="sm__font section01__para" set:html={para} />
             </header>
         </section>
 
@@ -108,7 +99,7 @@ const {
     }
 
     .wrapper__banner--text {
-        margin-bottom: 12rem;
+        margin-bottom: 6rem;
 
         @media (min-width: 678px) {
             margin-bottom: 15rem;
@@ -133,8 +124,12 @@ const {
             background-attachment: fixed;
             background-clip: text;
             -webkit-background-clip: text;
-            -webkit-text-stroke: 2px white;
+            -webkit-text-stroke: 1px white;
             // z-index: 50;
+
+            @include for-size(tablet, up) {
+                -webkit-text-stroke: 1.5px white;
+            }
         }
 
         @include for-size(680px, up) {
@@ -190,19 +185,4 @@ const {
             border: 2px solid black;
         }
     }
-
-    // .section01__h2-heading {
-    //     font-family: "zilla slab", sans-serif !important;
-    //     font-weight: 200;
-    //     font-style: italic;
-    //     overflow-wrap: break-word;
-    //     word-break: break-word;
-    //     position: static;
-    //     padding: 0;
-    //     margin: 0;
-    //     // order: 1;
-
-    //     @include for-size(tablet, up) {
-    //     }
-    // }
 </style>

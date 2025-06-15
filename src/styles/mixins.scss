@@ -88,6 +88,12 @@ $breakpoints: (
     }
 }
 
+// ------------------------------------------------------------------------------------------------------------------------------
+
+// ----- LINE BREAK -----
+
+
+
 //----- GLOBAL ANIMATED BUTTON -----
 
 .button--animated {
@@ -291,20 +297,4 @@ $breakpoints: (
 
 // .button--nav:hover::after {
 //     background-color: white; // Show white border on hover
-// }
-
-
-//v2 DON'T NEED BORDER/UNDERLINE animation - creates a bottom border effect. 
-// .button--nav::after {
-//     position: absolute;
-//     content: "";
-//     bottom: 0;
-//     left: 0; //line starts 10% in from the left
-//     width: 100%; //reduced to 80% from 100% so the line starts 10% further in from the right
-//     height: 2px;
-//     background-color: transparent; //background 3px high = looks like a border-bottom but we have more control over it/can animate
-//     border-bottom: 0.5px solid black;
-//     transition: all 0.25s ease-in;
-//     z-index: 3;
-//     /* Above everything else */
 // }

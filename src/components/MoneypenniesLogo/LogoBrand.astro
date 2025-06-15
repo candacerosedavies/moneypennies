@@ -1,0 +1,233 @@
+---
+export interface Props {
+    class?: string;
+    showTagline?: boolean;
+    layout?: "horizontal" | "vertical";
+}
+
+const {
+    class: className = "",
+    showTagline = true,
+    layout = "horizontal",
+} = Astro.props;
+
+const flexDirection = layout === "vertical" ? "flex-col" : "items-center";
+---
+
+<div
+    class={`flex items-center justify-center gap-[0.5vw] ${flexDirection} ${className}`}
+>
+    <svg
+        class="brand-logo text-current"
+        viewBox="0 0 200 200"
+        xmlns="http://www.w3.org/2000/svg"
+    >
+        <!-- Your SVG content -->
+        <circle
+            cx="100"
+            cy="100"
+            r="80"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"></circle>
+        <circle cx="100" cy="60" r="8" fill="currentColor"></circle>
+        <circle cx="130" cy="85" r="8" fill="currentColor"></circle>
+        <circle cx="130" cy="115" r="8" fill="currentColor"></circle>
+        <circle cx="100" cy="140" r="8" fill="currentColor"></circle>
+        <circle cx="70" cy="115" r="8" fill="currentColor"></circle>
+        <circle cx="70" cy="85" r="8" fill="currentColor"></circle>
+        <line
+            x1="100"
+            y1="60"
+            x2="130"
+            y2="85"
+            stroke="currentColor"
+            stroke-width="2"></line>
+        <line
+            x1="130"
+            y1="85"
+            x2="130"
+            y2="115"
+            stroke="currentColor"
+            stroke-width="2"></line>
+        <line
+            x1="130"
+            y1="115"
+            x2="100"
+            y2="140"
+            stroke="currentColor"
+            stroke-width="2"></line>
+        <line
+            x1="100"
+            y1="140"
+            x2="70"
+            y2="115"
+            stroke="currentColor"
+            stroke-width="2"></line>
+        <line
+            x1="70"
+            y1="115"
+            x2="70"
+            y2="85"
+            stroke="currentColor"
+            stroke-width="2"></line>
+        <line
+            x1="70"
+            y1="85"
+            x2="100"
+            y2="60"
+            stroke="currentColor"
+            stroke-width="2"></line>
+        <circle cx="100" cy="100" r="6" fill="currentColor"></circle>
+        <line
+            x1="100"
+            y1="60"
+            x2="100"
+            y2="94"
+            stroke="currentColor"
+            stroke-width="2"></line>
+        <line
+            x1="130"
+            y1="85"
+            x2="106"
+            y2="100"
+            stroke="currentColor"
+            stroke-width="2"></line>
+        <line
+            x1="130"
+            y1="115"
+            x2="106"
+            y2="100"
+            stroke="currentColor"
+            stroke-width="2"></line>
+        <line
+            x1="100"
+            y1="140"
+            x2="100"
+            y2="106"
+            stroke="currentColor"
+            stroke-width="2"></line>
+        <line
+            x1="70"
+            y1="115"
+            x2="94"
+            y2="100"
+            stroke="currentColor"
+            stroke-width="2"></line>
+        <line
+            x1="70"
+            y1="85"
+            x2="94"
+            y2="100"
+            stroke="currentColor"
+            stroke-width="2"></line>
+    </svg>
+    <div class="flex flex-col justify-center items-start brand-text">
+        <h2 class="italic brand-name tracking-wider leading-[0.9]">
+            moneypennies
+        </h2>
+        {
+            showTagline && (
+                <p class="brand-tagline tracking-wide opacity-80 leading-tight">
+                    stay booked with connections that count
+                </p>
+            )
+        }
+    </div>
+</div>
+
+<style lang="scss">
+    @import "@/styles/mixins";
+
+    // REMOVE the container width controls - we're not using those
+    // REMOVE all the .brand-text margin-left rules
+
+    .brand-logo {
+        // KEEP all your existing logo sizing
+        width: 2.3rem;
+        height: 2.3rem;
+
+        @include for-size(phoneSm, up) {
+            width: 2.5rem;
+            height: 2.5rem;
+        }
+
+        @include for-size(phone, up) {
+            width: 3rem;
+            height: 3rem;
+        }
+
+        @include for-size(tablet, up) {
+            width: 3.5rem;
+            height: 3.5rem;
+        }
+
+        @include for-size(desktop, up) {
+            width: 4.5rem;
+            height: 4.5rem;
+        }
+    }
+
+    // REMOVE the entire .brand-text section with all the margin-left rules
+
+    .brand-name {
+        // KEEP all your font sizing exactly as is
+        font-size: 5.9vw;
+        font-family: "inter", sans-serif;
+        font-weight: 600;
+
+        @include for-size(phoneSm, up) {
+            font-size: 5.6vw;
+        }
+
+        @include for-size(phone, up) {
+            font-size: 6.5vw;
+        }
+
+        @include for-size(tablet, up) {
+            font-size: 4.5vw;
+        }
+
+        @include for-size(tabletLg, up) {
+            font-size: 4vw;
+        }
+
+        @include for-size(desktop, up) {
+            font-size: 3.6vw;
+        }
+
+        @include for-size(desktopLg, up) {
+            font-size: 3vw;
+        }
+    }
+
+    .brand-tagline {
+        // KEEP all your font sizing exactly as is
+        font-size: 2vw;
+        font-weight: 350;
+
+        @include for-size(phoneSm, up) {
+            font-size: 1.9vw;
+        }
+
+        @include for-size(phone, up) {
+            font-size: 2.14vw;
+        }
+
+        @include for-size(tablet, up) {
+            font-size: 1.5vw;
+        }
+
+        @include for-size(tabletLg, up) {
+            font-size: 1.3vw;
+        }
+
+        @include for-size(desktop, up) {
+            font-size: 1.2vw;
+        }
+
+        @include for-size(desktopLg, up) {
+            font-size: 1vw;
+        }
+    }
+</style>
