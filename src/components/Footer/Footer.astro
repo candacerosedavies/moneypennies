@@ -2,10 +2,19 @@
 import SectionLayout from "@/layouts/SectionLayout.astro";
 import LogoBrand from "../MoneypenniesLogo/LogoBrand.astro";
 
-const linkedIn = "https://www.linkedin.com/in/moneypennies/";
+// const linkedIn = "https://www.linkedin.com/in/moneypennies/";
+
+const inputPara =
+    "GET UPDATES ON COOL STUFF YOU PROBABLY WANT TO KNOW IN YOUR INBOX";
+const terms = "terms";
+const cookies = "cookies";
+const privacy = "privacy";
+const helpH2 = "Help";
+const contactH2 = "contact";
+const email = "email";
+const number = "call";
+const copyright = "© 2025 Oliver’s Data Holdings Ltd t/a Moneypennies ";
 const address = "Manchester Suite B 2 Edge Lane Manchester M21 9JF";
-const copyRight = "© Oliver’s Data Holdings Ltd t/a Moneypennies";
-const gdpr = ""; //check if we need this
 
 // const tagLine = "connections that count";
 const logo = "";
@@ -15,117 +24,193 @@ const logo = "";
     variant="color"
     allowOverflow={true}
     textWidth="full"
-    className="Section03"
+    className="Section_05_footer"
     heightVariant="normal"
 >
+    <!-- CLASS OF THIS PARENT WILL BE STYLED FLEX-COL FOR MOBILE/ FLEX ROW FOR LARGE SCREENS -->
+    <!-- COLUMN 1 -->
     <footer
         class="section__footer bg-stone-black py-20 border-t-[0.5px] border-white"
     >
-        <section
-            class="container__tagline uppercase font-light flex-col items-center justify-center"
-        >
-            <LogoBrand />
-            <h5 class="lg__font footer__logo">{logo}</h5>
-            <!-- <p class="lg__font footer__tagline">{tagLine}</p> -->
+        <section class="footer--container__01">
+            <LogoBrand class="" />
+            <nav class="newsletter--container">
+                <h2 class="lg__font footer__logo">{logo}</h2>
+                <p class="sm__font">{inputPara}</p>
+                <form action="get">
+                    <input
+                        type="text"
+                        placeholder="write your email"
+                        id="email"
+                    />
+                    <nav class="checkbox--container">
+                        <input
+                            type="checkbox"
+                            name="agree privacy"
+                            id="agree privacy"
+                        />
+                        <label for="agree privacy"
+                            >I agree with the privacy policy</label
+                        >
+                    </nav>
+                </form>
+            </nav>
+            <!-- COLUMN 2 -->
         </section>
-        <hr class="md__hr" />
-        <section class="footer--container__button">
-            <ul
-                class="footer__url flex flex-row items-center justify-between px-8 py-8"
-            >
-                <li class="flex-end">
-                    <a
-                        class="button--nav"
-                        onclick="window.location.href='/contact/'"
-                    >
-                        <span class="button--nav__text">connect</span>
-                    </a>
-                </li>
-                <li class="flex-start">
-                    <a
-                        class="button--nav"
-                        onclick="window.location.href='www.linkedin.com/in/moneypennies/'"
-                    >
-                        <span class="button--nav__text">linkedIn</span>
-                    </a>
-                </li>
-            </ul>
-        </section>
-        <hr class="md__hr" />
 
-        <section>
-            <ul class="footer__info flex-row justify-between tn__font">
-                <li><p>{copyRight}</p></li>
-                <li><p>{gdpr}</p></li>
-                <li>
-                    <p>{address}</p>
-                    <a href="/privacy">privacy policy</a>
-                </li>
-            </ul>
+        <section class="footer--links__container">
+            <section class="footer--links">
+                <ul class="footer--container__02">
+                    <li>
+                        <h2 class="lg__font uppercase h2__help">{helpH2}</h2>
+                    </li>
+                    <li class="button--nav">
+                        <a href="" class="sm__font button--nav__text"
+                            >{privacy}</a
+                        >
+                    </li>
+                    <li class="button--nav">
+                        <a href="" class="sm__fon button--nav__text">{terms}</a>
+                    </li>
+                    <li class="button--nav">
+                        <a href="" class="sm__font button--nav__text"
+                            >{cookies}</a
+                        >
+                    </li>
+                </ul>
+            </section>
+
+            <!-- COLUMN 3 -->
+            <section class="">
+                <ul class="footer--container__03">
+                    <li>
+                        <h2 class="lg__font uppercase h2__contact">
+                            {contactH2}
+                        </h2>
+                    </li>
+                    <li class="button--nav">
+                        <a
+                            class="button--nav__text"
+                            href="mailto: suzanne@moneypennies.biz"
+                            >{email}
+                        </a>
+                    </li>
+
+                    <li class="button--nav">
+                        <a
+                            class="button--nav__text"
+                            href="tel:+44 07967 826 038">{number}</a
+                        >
+                    </li>
+                    <li class="">
+                        <a
+                            href="https://www.linkedin.com/in/moneypennies/"
+                            target="_blank"
+                        >
+                            <img
+                                class="linkedin__icon"
+                                src="/public/images/icons/linkedin_icon_white.png"
+                                alt="linkedin logo"
+                            /></a
+                        >
+                    </li>
+                </ul>
+            </section>
         </section>
     </footer>
+
+    <!-- INFO AT BOTTOM FLEX ROW -->
+    <section>
+        <p class="tn__font">{copyright}</p>
+        <p class="tn__font">{address}</p>
+    </section>
 </SectionLayout>
 
 <style lang="scss">
-    // .footer__logo {
-    //     width: 10rem;
-    //     height: 10rem;
-    // }
-    .container__tagline {
-        position: relative;
-        gap: 5vw;
-        padding: 0rem 2rem 5rem 2rem;
-        flex-grow: 1;
-        will-change: transform;
-        transition: transform 0.1s ease-out;
-    }
-
-    // .footer--container__button {
-    //     display: flex;
-    //     flex-direction: column;
-    //     justify-content: flex-start;
-    //     position: relative;
-    // }
     .section__footer {
-        // background-color: #293442;
-        // display: flex;
-        // flex-direction: row;
-        // align-items: center;
-        // align-self: center;
-        // // height: 60vh;
-        // padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+
+        @include for-size(tablet, up) {
+            flex-direction: row;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
     }
 
-    .footer__logo {
-        position: relative;
+    .newsletter--container {
+        padding-top: 4rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        @include for-size(tablet, up) {
+            align-items: start;
+        }
     }
 
-    .footer__tagline {
-        // display: flex;
-        // display: inline-block; //make the span respect width and height
-        // flex-direction: row;
-
-        // position: relative;
-        // justify-content: space-around;
-        // align-items: center;
-        // width: 100%;
+    .checkbox--container {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        @include for-size(tablet, up) {
+            align-items: start;
+        }
     }
 
-    .footer__info {
-        // display: flex;
-        // display: inline-block;
-        // flex-direction: column;
-        // justify-content: space-between;
+    .footer--container__01 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+
+        @include for-size(tablet, up) {
+            flex: 1 1 50%;
+            align-items: start;
+        }
     }
 
-    .footer__url {
-        // display: flex;
-        // display: inline-block;
-        // flex-direction: column;
-        // justify-content: space-between;
+    .footer--links__container {
+        @include for-size(tablet, up) {
+            flex: 1 1 50%;
+            display: flex;
+            flex-direction: row;
+            gap: 4rem;
+        }
     }
 
-    .button--nav:hover .button--nav__text {
-        color: var(--button-hover-text-color, black);
+    .footer--links {
+        @include for-size(tablet, up) {
+            flex: 1;
+        }
+    }
+
+    .footer--container__02,
+    .footer--container__03 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.25rem;
+        list-style: none;
+        padding-top: 4rem;
+        margin: 0;
+
+        @include for-size(tablet, up) {
+            flex: 1; // Add this
+            align-items: start;
+        }
+    }
+
+    h2 {
+        padding-bottom: 1rem;
+    }
+
+    .linkedin__icon {
+        height: 25px;
+        width: 25px;
+        color: white;
+        margin-left: 1vw;
     }
 </style>
