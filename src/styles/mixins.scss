@@ -298,3 +298,38 @@ $breakpoints: (
 // .button--nav:hover::after {
 //     background-color: white; // Show white border on hover
 // }
+
+// ----- FONTS -----
+
+// In mixins.scss
+@mixin lg__font {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+
+    @include for-size(tablet, up) {
+        font-size: clamp(3rem, 7vw, 3.5rem);
+    }
+}
+
+@mixin md__font {
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+
+    @include for-size(tablet, up) {
+        font-size: clamp(2rem, 3vw, 3.5rem);
+    }
+}
+
+@mixin sm__font {
+    font-size: clamp(0.8rem, 3vw, 1.2rem);
+
+    @include for-size(tablet, up) {
+        font-size: clamp(0.8rem, 3vw, 1rem);
+    }
+}
+
+@mixin tn__font {
+    font-size: clamp(0.5rem, 2vw, 0.8rem);
+
+    @include for-size(tablet, up) {
+        font-size: clamp(0.5rem, 2vw, 0.8rem);
+    }
+}

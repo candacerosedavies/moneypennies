@@ -59,56 +59,21 @@ select {
 
 //-----hero font-----
 
+// classes for inline HTML use
 .lg__font {
-    font-size: clamp(1.5rem, 6vw, 2rem); // Allow scaling on mobile
-
-
-
-    @include for-size(tablet, up) {
-        font-size: clamp(3rem, 7vw, 3.5rem);
-    }
+    @include lg__font;
 }
-
-
-//-----heading font-----
 
 .md__font {
-    font-size: clamp(1.2rem, 3vw, 1.8rem); // Fix the backwards clamp
-
-    @include for-size(tablet, up) {
-        font-size: clamp(2rem, 3vw, 3.5rem);
-    }
+    @include md__font;
 }
 
-//-----para font-----
-
 .sm__font {
-    font-size: clamp(0.8rem, 3vw, 1.2rem); // Allow slight scaling
-
-    @include for-size(tablet, up) {
-        font-size: clamp(0.8rem, 3vw, 1rem);
-        // line-height: 1.5;
-    }
+    @include sm__font;
 }
 
 .tn__font {
-    font-size: clamp(0.5rem, 2svw, 0.8rem); // Allow slight scaling
-
-    @include for-size(tablet, up) {
-        font-size: clamp(0.8rem, 3vw, 1rem);
-        // line-height: 1.5;
-    }
-}
-
-
-.md__hr {
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-    // border-color: rgb(218, 218, 218);
-    background-color: rgb(241, 241, 241);
-    // height: 0.5px;
-    border-width: 0.01em;
+    @include tn__font;
 }
 
 // .lg__hr {

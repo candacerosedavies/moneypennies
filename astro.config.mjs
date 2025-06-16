@@ -18,7 +18,8 @@ export default defineConfig({
         scss: {
           // Important! makes mixins available globally in components, use with style tags as per reg CSS.
           //the 'as *' makes all mixins avaailable without needing to prefix them eg use @include for-size() instead of @include mixins.for-size()
-          additionalData: `@use "./src/styles/mixins.scss" as *;`
+          additionalData: ` @use "./src/styles/mixins.scss" as *;
+         `
         }
       }
     }
