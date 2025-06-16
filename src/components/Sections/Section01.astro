@@ -11,7 +11,7 @@ interface Props {
 
 const {
     h1Text = "connections that count",
-    para = "Turn your empty dates into firm booking.",
+    para = "Reach buyers while they're still looking and turn empty dates into firm bookings",
     // We connect you with buyers while they're still looking.
     para2 = "Venues | Agencies | Suppliers",
 } = Astro.props;
@@ -132,14 +132,14 @@ const {
             }
         }
 
-        @include for-size(680px, up) {
-            font-size: clamp(
-                2rem,
-                4vw,
-                2.5rem
-            ); // Force smaller size in problem range
-            line-height: 1.1; // Tighter line spacing
-        }
+        // @include for-size(680px, up) {
+        //     font-size: clamp(
+        //         2rem,
+        //         4vw,
+        //         2.5rem
+        //     ); // Force smaller size in problem range
+        //     line-height: 1.1; // Tighter line spacing
+        // }
     }
 
     .section01__para {

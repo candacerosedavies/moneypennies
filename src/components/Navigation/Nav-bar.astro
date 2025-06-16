@@ -10,7 +10,8 @@ import LogoBrandNav from "../MoneypenniesLogo/LogoBrandNav.astro";
   <div class="header mx-auto flex justify-between items-center px-2">
     <!-- Hamburger: only visible on mobile/tablet -->
     <Hamburger />
-    <LogoBrandNav showTagline={false} />
+    <LogoBrandNav showTagline={true} abbreviated={false} />
+    <!-- abreviate for smaller screens. tag line in the center? -->
 
     <nav
       class="nav__button-container leading-none"
@@ -19,7 +20,7 @@ import LogoBrandNav from "../MoneypenniesLogo/LogoBrandNav.astro";
     >
       <li class="button--nav desktop__nav sm__font">
         <a href="/contact/" class="contact--button--position button--nav__text"
-          >CONNECT</a
+          >SAY HELLO</a
         >
         <!-- <button onclick="window.location.href='/contact/'">
         <span class="animated__span">say hello</span>
