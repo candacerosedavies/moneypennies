@@ -16,7 +16,7 @@ const {
 
 <a
     href={href}
-    class={`button--nav button--nav__text flex items-center gap-[0.2vw] ${className}`}
+    class={` nav-brand-position button--nav button--nav__text flex items-center gap-[0.2vw] ${className}`}
     role="navigation"
     aria-label="moneypennies logo and home button"
 >
@@ -126,18 +126,19 @@ const {
             stroke-width="2"></line>
     </svg>
 
-    <div class="button--nav__text flex flex-col justify-between items-start">
-        <h2 class="italic brand-name tracking-wider leading-[0.9]">
+    <nav class="button--nav__text flex flex-col justify-between items-start">
+        <h2 class="sm__font brand-name tracking-wider leading-[0.9]">
             {abbreviated ? "MP" : "MONEYPENNIES"}
         </h2>
-        {
+        <!-- {
             showTagline && (
-                <p class="uppercase brand-tagline tracking-wide opacity-80 leading-tight">
-                    connections that count
+                <p class=" brand-tagline tracking-wide opacity-80 leading-tight">
+                    {" "}
+                    {" "}
                 </p>
             )
-        }
-    </div>
+        } -->
+    </nav>
 </a>
 
 <style lang="scss">
@@ -149,10 +150,18 @@ const {
     //     top: 1rem;
     //     right: 2rem;
     //     z-index: 70;
+    //     left: 60vw;
+    //     right: auto;
+    //     // padding: 0rem 2rem 0rem 0rem;
+
+    //     @include for-size(smPhone, up) {
+    //         left: 50vw;
+    //         // padding: 0rem 2rem 0rem 0rem;
+    //     }
 
     //     // Tablet and up: top left
     //     @include for-size(tablet, up) {
-    //         left: 2rem;
+    //         left: 0;
     //         right: auto;
     //     }
     // }
@@ -183,41 +192,42 @@ const {
         }
     }
 
-    .brand-name {
-        // Smaller font sizes for navbar
-        font-size: 3.5vw;
-        font-family: "inter", sans-serif;
-        font-weight: 400;
+    // .brand-name {
+    //     // Smaller font sizes for navbar
+    //     // font-size: 3.5vw;
+    //     font-family: "inter", sans-serif;
+    //     font-weight: 400;
 
-        @include for-size(phoneSm, up) {
-            font-size: 2.8vw;
-        }
+    //     @include for-size(phoneSm, up) {
+    //         font-size: 2.8vw;
+    //     }
 
-        @include for-size(phone, up) {
-            font-size: 2.5vw;
-        }
+    //     @include for-size(phone, up) {
+    //         font-size: 2.5vw;
+    //     }
 
-        @include for-size(tablet, up) {
-            font-size: 2.2vw;
-        }
+    //     @include for-size(tablet, up) {
+    //         font-size: 2.2vw;
+    //     }
 
-        @include for-size(tabletLg, up) {
-            font-size: 2vw;
-        }
+    //     @include for-size(tabletLg, up) {
+    //         font-size: 2vw;
+    //     }
 
-        @include for-size(desktop, up) {
-            font-size: 1.8vw;
-        }
+    //     @include for-size(desktop, up) {
+    //         font-size: 1.8vw;
+    //     }
 
-        @include for-size(desktopLg, up) {
-            font-size: 1.5vw;
-        }
-    }
+    //     @include for-size(desktopLg, up) {
+    //         font-size: 1.5vw;
+    //     }
+    // }
 
     .brand-tagline {
         // Even smaller tagline for navbar
         font-size: 2vw;
         font-weight: 350;
+        font-style: italic;
 
         @include for-size(phoneSm, up) {
             font-size: 1.63vw;

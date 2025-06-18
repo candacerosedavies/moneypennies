@@ -7,7 +7,7 @@ import LogoBrandNav from "../MoneypenniesLogo/LogoBrandNav.astro";
 
 <!----- inline styling for JS  ----->
 <header class="fixed top-0 left-0 right-0 z-50">
-  <div class="header mx-auto flex justify-between items-center px-2">
+  <section class="header mx-auto nav-grid">
     <!-- Hamburger: only visible on mobile/tablet -->
     <Hamburger />
     <LogoBrandNav showTagline={true} abbreviated={false} />
@@ -27,7 +27,7 @@ import LogoBrandNav from "../MoneypenniesLogo/LogoBrandNav.astro";
       </button> -->
       </li>
     </nav>
-  </div>
+  </section>
 </header>
 
 <script>
@@ -87,6 +87,52 @@ import LogoBrandNav from "../MoneypenniesLogo/LogoBrandNav.astro";
     // On mobile/tablet: moves to right side since hamburger takes left
     // On desktop: moves to left side since hamburger is hidden
   }
+
+  .nav-grid {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    padding: 1rem;
+
+    @include for-size(tablet, up) {
+      padding: 2rem;
+    }
+
+    // Mobile: hamburger on left, logo on right
+    @media (max-width: 768px) {
+      grid-template-areas: "hamburger . logo";
+
+      :global(.menu-bars) {
+        grid-area: hamburger;
+      }
+
+      :global(.nav-brand-position) {
+        grid-area: logo;
+      }
+
+      .nav__button-container {
+        display: none;
+      }
+    }
+
+    // Desktop: logo on left, contact on right
+    @include for-size(tablet, up) {
+      grid-template-areas: "logo . contact";
+
+      :global(.menu-bars) {
+        display: none;
+      }
+
+      :global(.nav-brand-position) {
+        grid-area: logo;
+      }
+
+      .nav__button-container {
+        grid-area: contact;
+        display: block;
+      }
+    }
+  }
   //-----skip to main content styling-----
   .link--skip {
     position: absolute;
@@ -104,43 +150,43 @@ import LogoBrandNav from "../MoneypenniesLogo/LogoBrandNav.astro";
   }
 
   //-----NAV ITEM POSITIONING-----
-  header {
-    padding: 1rem 1rem; //smaller screens
+  // header {
+  //   // padding: 1rem 1rem; //smaller screens
 
-    @include for-size(tablet, up) {
-      padding: 1rem 3rem; //larger screens
-    }
-  }
+  //   @include for-size(tablet, up) {
+  //     padding: 2rem 2rem; //larger screens
+  //   }
+  // }
 
   //-----LOGO-----
 
-  .container__logo::after {
-    position: absolute;
-    content: "";
-    bottom: 0;
-    left: 0; //line starts 10% in from the left
-    width: 100%; //reduced to 80% from 100% so the line starts 10% further in from the right
-    height: 2px;
-    //background 3px high = looks like a border-bottom but we have more control over it/can animate
-    transition: all 0.25s ease-in;
-    z-index: 3;
+  // .container__logo::after {
+  //   position: absolute;
+  //   content: "";
+  //   bottom: 0;
+  //   left: 0; //line starts 10% in from the left
+  //   width: 100%; //reduced to 80% from 100% so the line starts 10% further in from the right
+  //   height: 2px;
+  //   //background 3px high = looks like a border-bottom but we have more control over it/can animate
+  //   transition: all 0.25s ease-in;
+  //   z-index: 3;
 
-    /* Above everything else */
-  }
+  //   /* Above everything else */
+  // }
 
-  .container__logo {
-    display: flex;
-    // align-items: center;
-    margin-left: 1rem; // Use margin instead of padding to control position without affecting size
+  // .container__logo {
+  //   display: flex;
+  //   // align-items: center;
+  //   margin-left: 1rem; // Use margin instead of padding to control position without affecting size
 
-    font-family: "zilla slab", sans-serif !important;
-    font-weight: 200;
-    font-style: italic;
+  //   font-family: "zilla slab", sans-serif !important;
+  //   font-weight: 200;
+  //   font-style: italic;
 
-    @include for-size(tablet, up) {
-      margin-left: 2rem;
-    }
-  }
+  //   @include for-size(tablet, up) {
+  //     margin-left: 2rem;
+  //   }
+  // }
 
   .logo {
     height: 7vh;
@@ -175,7 +221,7 @@ import LogoBrandNav from "../MoneypenniesLogo/LogoBrandNav.astro";
   .desktop__nav {
     display: none; // Hidden on mobile/tablet
 
-    @include for-size(tablet, up) {
+    @include for-size(phone, up) {
       display: flex; // Shows on desktop
     }
   }
