@@ -3,151 +3,110 @@
 ---
 
 <!-- Animated Navigation Overlay -->
-<nav class="overlay overlay-slide-right section__nav" id="overlay">
+<nav
+  class="overlay section__nav opacity-0 transition-opacity duration-300 ease-in-out"
+  id="overlay"
+>
   <ul class="menu--container__buttons">
-    <li class="slide-out-1 button__contact" id="nav-1">
+    <li class="button__contact" id="nav-1">
       <button
         class="button--animated"
-        id="link__button"
         onclick="window.location.href='/contact/'"
       >
-        <a class="button__text">say hello</a>
+        <span class="button__text">say hello</span>
       </button>
     </li>
-    <li class="slide-out-2 button__home" id="nav-2">
-      <button
-        class="button--animated"
-        id="link__button"
-        onclick="window.location.href='/'"
-      >
-        <a class="button__text">home</a>
+    <li class="button__home" id="nav-2">
+      <button class="button--animated" onclick="window.location.href='/'">
+        <span class="button__text">home</span>
       </button>
     </li>
   </ul>
 </nav>
+
 <!-- Hamburger Menu Button -->
 <div class="menu-bars" id="menu-bars" aria-label="menu">
   <div class="bar-1"></div>
-  <div class="bar-2"></div>
+  <!-- <div class="bar-2"></div> -->
   <div class="bar-3"></div>
 </div>
 
 <script>
-  // Animation Functions
-  const menuBars = document.getElementById("menu-bars");
-  const overlay = document.getElementById("overlay");
-  const nav1 = document.getElementById("nav-1");
-  const nav2 = document.getElementById("nav-2");
-  const linkButton = document.getElementById("link__button");
+  class HamburgerMenu {
+    isOpen: boolean;
+    menuBars: HTMLElement | null;
+    overlay: HTMLElement | null;
 
-  const navItems = [nav1, nav2];
+    constructor() {
+      this.isOpen = false;
+      this.menuBars = document.getElementById("menu-bars");
+      this.overlay = document.getElementById("overlay");
 
-  //DELAY NAVIGATION LINK
-
-  function handleAnimatedButtonClick(e) {
-    //target the html button url
-    //currentTarget - 1. refers to the element the event listener is attached to. 2. access attributes of parent element even when child is clicked. eg. data-url is attribute of <button> but using curreTarget means we still get the url even if the <span>
-    //event listener onClick has been removed from HTML but this function knows to listen for a click because of the JS eventListener below linkButton?.addEventListener("click", handleAnimatedButtonClick);
-    const targetUrl = e.currentTarget.getAttribute("data-url");
-
-    // ----- Add a class to force the animation state. the mixin button is :hover -----
-    e.currentTarget.classList.add("button-clicked");
-
-    // ----- Call the toggleNav function so the menu closes after the animation/change to new url -----
-    toggleNav();
-
-    //wait for animation to complete
-    setTimeout(function () {
-      window.location.assign(targetUrl);
-    }, 400);
-
-    // Prevent any default actions
-    if (e.preventDefault) {
-      e.preventDefault();
+      this.bindEvents();
     }
 
-    // Return false to ensure no other handlers run
-    return false;
-  }
+    bindEvents() {
+      this.menuBars?.addEventListener("click", () => this.toggle());
+    }
 
-  // Control navigation animation
+    toggle() {
+      this.isOpen = !this.isOpen;
+      this.updateMenu();
+    }
 
-  function navAnimation(direction1, direction2) {
-    navItems.forEach((nav, i) => {
-      if (nav) {
-        nav.classList.replace(
-          `slide-${direction1}-${i + 1}`,
-          `slide-${direction2}-${i + 1}`,
-        );
+    updateMenu() {
+      if (this.isOpen) {
+        // Show menu
+        this.overlay?.classList.remove("opacity-0");
+        this.overlay?.classList.add("opacity-100");
+        this.overlay?.setAttribute("aria-hidden", "false");
+
+        // Transform hamburger to X
+        this.menuBars?.classList.add("change");
+      } else {
+        // Hide menu
+        this.overlay?.classList.remove("opacity-100");
+        this.overlay?.classList.add("opacity-0");
+        this.overlay?.setAttribute("aria-hidden", "true");
+
+        // Transform X back to hamburger
+        this.menuBars?.classList.remove("change");
       }
-    });
-  }
-
-  // Toggle Nav Function
-  function toggleNav() {
-    // Toggle menu bars open/closed
-    // Necessary question mark! Means if menuBars is null or undefined, the expression short-circuits and returns undefined instead of throwing an error.
-    menuBars?.classList.toggle("change");
-
-    // Toggle menu active
-    overlay?.classList.toggle("overlay-active");
-
-    if (overlay?.classList.contains("overlay-active")) {
-      // Animate In - Overlay
-      overlay.classList.replace("overlay-slide-right", "overlay-slide-left");
-
-      // Animate In - Nav Items
-      navAnimation("out", "in");
-    } else {
-      // Animate Out - Nav Items
-      navAnimation("in", "out");
-
-      // Animate Out - Overlay
-      overlay?.classList.replace("overlay-slide-left", "overlay-slide-right");
     }
   }
 
-  // Wait for DOM to be fully loaded before attaching event listeners
-  document.addEventListener("DOMContentLoaded", function () {
-    //---EVENT LISTENERS---
-    menuBars?.addEventListener("click", toggleNav);
-    //add click event for the new animated button
-    linkButton?.addEventListener("click", handleAnimatedButtonClick);
-
-    navItems.forEach((nav) => {
-      nav?.addEventListener("click", toggleNav);
-    });
+  // Initialize when DOM is loaded
+  document.addEventListener("DOMContentLoaded", () => {
+    new HamburgerMenu();
   });
 </script>
 
 <style lang="scss">
   .section__nav {
-    /* anchor point for other elements */
     position: relative;
     display: flex;
-    width: 100%; /* Ensure full width - some elements/containers don't know their width  */
-    justify-content: center; /* Center children horizontally */
+    width: 100%;
+    justify-content: center;
   }
 
-  /*--- BUTTONS ---*/
-
   .menu--container__buttons {
-    display: flex; /* Create a flex container */
+    display: flex;
     flex-grow: 1;
     flex-direction: column;
-    gap: 6em;
-    justify-content: flex-start; /* Center children horizontally */
-    align-items: left; /* Center children vertically */
+    gap: 2em;
+    justify-content: flex-start;
+    align-items: flex-end;
     height: 100vh;
-    width: 100%; /* Ensure full width */
+    width: 100%;
     position: absolute;
     left: 0;
     top: 0;
     overflow: hidden;
     background-color: #293442;
+    padding: 10rem 2rem 0rem 0rem;
 
     @include for-size(tablet, up) {
-      display: none !important; /* hide hamburger tablet larger screens*/
+      display: none !important;
     }
   }
 
@@ -163,86 +122,21 @@
       display: block;
     }
 
-    //  ----- overlay -----
-
-    // position fixed to prevent it from moving
-    // 9 brings it to the front as default elements have z index of 1
-    // Because navigation is a child of the overlay, add classes here to impact the nav
     .overlay {
       position: fixed;
       z-index: 60;
       top: 0;
-      right: -100vw; // Start completely off-screen to the right
-      width: 40vw; // Menu takes up 80% of screen width
+      right: 0;
+      // width: 40vw;
       height: 100vh;
       background-color: #293442;
+      /* Now uses opacity instead of sliding */
     }
 
-    /* brings nav into view */
-    .overlay-slide-left {
-      transition: all 0.4s ease-in-out 0.1s;
-      right: 0; // Slide into view from the right
-    }
-    /* brings it out of view */
-    .overlay-slide-right {
-      transition: all 0.4s ease-in-out 0.1s;
-      right: -100vw; // Hide off-screen to the right
-    }
-
-    .slide-in-1 {
-      animation: slide-in 0s ease-in 0s both;
-    }
-
-    .slide-in-2 {
-      animation: slide-in 0s linear 0.1s both;
-    }
-
-    //  The browser knows what slide-in-1 and 2 are because of the function. Earlier iteration (before refactoring) had the below in the JS ::selection
-    // nav1.classList.remove('slide-in-1')
-    //     nav1.classList.add('slide-out-1')
-    //     nav2.classList.remove('slide-in-2')
-    //     nav2.classList.add('slide-out-2')
-
-    // This has now been replaced with the navAnimation function which includes template literal
-    // `slide-${direction1}-${i + 1}`
-
-    /* creating actual animation/ we are declaring an animation here like a function */
-    @keyframes slide-in {
-      from {
-        transform: translateX(
-          100%
-        ); /* changed from -100% to 100 so it starts from right */
-      }
-      to {
-        transform: translateX(0);
-      }
-    }
-
-    /* slide out animation */
-
-    .slide-out-1 {
-      animation: slide-out 0.2s linear both;
-    }
-
-    .slide-out-2 {
-      animation: slide-out 0.2s linear 1.5s both;
-    }
-
-    @keyframes slide-out {
-      from {
-        transform: translateX(0);
-      }
-      to {
-        transform: translateX(100%); /* 27/4 Move to right */
-      }
-    }
-
-    /* ---Hamburger Menu ---*/
-
-    /* animated hamburger icon from w3 schools */
+    /* Hamburger Menu */
     .menu-bars {
       position: fixed;
-      top: 1rem;
+      top: 2rem;
       left: 2rem;
       z-index: 70;
       display: inline;
@@ -250,6 +144,7 @@
     }
 
     .bar-1,
+    // .bar-2,
     .bar-3 {
       width: 35px;
       height: 2px;
@@ -258,33 +153,27 @@
       transition: 0.4s;
     }
 
-    /* Rotate first bar */
+    /* Hamburger to X animation */
     .change .bar-1 {
-      /* transform: translate(-7px, 8px) rotate(-45deg); */
-      transform: translate(0, 11px) rotate(-45deg);
+      transform: translate(0, 5px) rotate(-45deg);
     }
 
-    .change .bar-2 {
-      /* Fade out the second bar */
-      opacity: 0;
-    }
+    // .change .bar-2 {
+    //   opacity: 0;
+    // }
 
-    /* Rotate last bar */
     .change .bar-3 {
-      transform: translate(0, -11px) rotate(45deg);
+      transform: translate(0, -5px) rotate(45deg);
     }
   }
 
-  /* Header scrolled state */
+  /* Header scrolled states */
   :global(.header-scrolled) .bar-1,
   :global(.header-scrolled) .bar-2,
   :global(.header-scrolled) .bar-3 {
     background-color: rgb(28 25 23);
   }
 
-  /* Header scrolled transition */
-  /* :global styles are scoped by default, meaning they only apply to elements within that component. 
-  The :global() directive tells Astro that this selector should apply outside this component's scope. */
   :global(.bg-white\/30) .bar-1,
   :global(.bg-white\/30) .bar-2,
   :global(.bg-white\/30) .bar-3 {

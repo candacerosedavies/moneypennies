@@ -20,7 +20,7 @@ const testimonials = [
 ---
 
 <section
-    class="bg-stone-black text-white md:px-12 py-20 border-t-[0.5px] border-white"
+    class="testimonial--section bg-stone-black text-white md:px-12 py-20 border-t-[0.5px] border-white"
     aria-labelledby="testimonials-heading"
 >
     <section class="max-w-6xl mx-auto px-10">
@@ -70,10 +70,10 @@ const testimonials = [
                 <h2 id="testimonials-heading" class="lg__font font-light">
                     TESTIMONIALS
                 </h2>
-                <p class="mt-5 sm__font font-light">
+                <!-- <p class="mt-5 sm__font font-light">
                     How our partnerships transformed our client's outreach and
                     engagement
-                </p>
+                </p> -->
             </header>
         </div>
         <div
@@ -111,6 +111,11 @@ const testimonials = [
 
 <script>
     class TestimonialSlider {
+        currentIndex: number;
+        testimonials: NodeListOf<Element>;
+        totalTestimonials: number;
+        prevBtn: HTMLElement | null;
+        nextBtn: HTMLElement | null;
         constructor() {
             this.currentIndex = 0;
             this.testimonials = document.querySelectorAll(".testimonial-slide");
@@ -131,7 +136,7 @@ const testimonials = [
             this.prevBtn?.addEventListener("click", () => this.prev());
 
             // Optional: Auto-advance every 8 seconds
-            // setInterval(() => this.next(), 8000);
+            setInterval(() => this.next(), 8000);
 
             // Keyboard navigation
             document.addEventListener("keydown", (e) => {
@@ -191,6 +196,10 @@ const testimonials = [
 </script>
 
 <style>
+    .testimonial--section {
+        /* padding-top: 4rem; */
+    }
+
     h2 {
         text-transform: uppercase;
         /* font-weight: 900; */
