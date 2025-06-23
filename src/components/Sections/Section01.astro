@@ -1,0 +1,188 @@
+---
+import SectionLayout from "../../layouts/SectionLayout.astro";
+import ScrollArrow from "../ScrollArrow.astro";
+
+interface Props {
+    h1Text?: string;
+    h2Text?: string;
+    para?: string;
+    para2?: string;
+}
+
+const {
+    h1Text = "connections that count",
+    para = "Reach buyers while they're still looking and turn empty dates into firm bookings",
+    // We connect you with buyers while they're still looking.
+    para2 = "Venues | Agencies | Suppliers",
+} = Astro.props;
+---
+
+<SectionLayout
+    variant="color"
+    className="Section01"
+    allowOverflow={true}
+    textWidth="narrow"
+    hasParallax={true}
+    parallaxSpeed={0.3}
+>
+    <section class="section01" id="section-01">
+        <ScrollArrow />
+        <section
+            class="section01__parallax-container"
+            role="banner"
+            aria-label="Hero section with celebration background"
+        >
+            <header
+                class="section01--container__text flex-col items-center justify-center"
+            >
+                <section class="wrapper__banner--text">
+                    <h1
+                        class="section01__h1--heading uppercase lg__font text-overlay"
+                        data-outline={h1Text}
+                    >
+                        {h1Text}
+                    </h1>
+                    <p class="sm__font mt-4">{para2}</p>
+                </section>
+
+                <p class="sm__font section01__para" set:html={para} />
+            </header>
+        </section>
+
+        <!----- keyboard accessibility ----->
+        <a href="#section-02" class="sr-only-focusable">
+            Skip to next section
+        </a>
+    </section>
+</SectionLayout>
+
+<style lang="scss">
+    // ----- base styles for mobile -----
+    // .section01 {
+    //     background-color: #0a1112;
+    // }
+
+    .section01__parallax-container {
+        min-height: 100vh !important;
+        background-image: url("/images/emotive/pexels-rahulp9800-3052307.jpg");
+        background-size: cover;
+        background-position: right 60% bottom 0%;
+        transform: scale(120%);
+        display: flex;
+        flex-grow: 1;
+        flex-direction: column;
+        position: relative;
+
+        //background overlay
+        &::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            pointer-events: none;
+        }
+
+        @include for-size(tablet, up) {
+            background-attachment: scroll;
+            background-position: right 60% bottom 50%;
+        }
+    }
+
+    // Container for all text elements
+    .section01--container__text {
+        position: relative;
+        z-index: 10;
+        flex-grow: 1;
+        margin-bottom: 0;
+        max-width: 100vw;
+        padding: 6rem 2rem 2rem 2rem;
+    }
+
+    .wrapper__banner--text {
+        margin-bottom: 6rem;
+
+        @media (min-width: 678px) {
+            margin-bottom: 15rem;
+        }
+
+        @include for-size(tablet, up) {
+        }
+    }
+
+    //Hero text
+    .section01__h1--heading {
+        font-weight: 900;
+        position: static;
+        padding: 0;
+
+        // ----- Text overlay effect - using HTML data-outline -----
+        &.text-overlay {
+            color: transparent;
+            background-image: var(--bg-image);
+            background-position: var(--bg-position);
+            background-size: var(--bg-size);
+            background-attachment: fixed;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-stroke: 1px white;
+            // z-index: 50;
+
+            @include for-size(tablet, up) {
+                -webkit-text-stroke: 1.5px white;
+            }
+        }
+
+        // @include for-size(680px, up) {
+        //     font-size: clamp(
+        //         2rem,
+        //         4vw,
+        //         2.5rem
+        //     ); // Force smaller size in problem range
+        //     line-height: 1.1; // Tighter line spacing
+        // }
+    }
+
+    .section01__para {
+        width: 80vw;
+        position: static;
+        padding-bottom: 0;
+        margin-bottom: 2rem;
+    }
+
+    .section01__button__container {
+        // position: absolute;
+        margin: 0;
+        // order: 4;
+    }
+
+    .button--nav:hover .button--nav__text {
+        color: var(--button-hover-text-color, black);
+    }
+
+    //----- keyboard accessibility -----
+    .sr-only-focusable {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+
+        &:focus {
+            position: static;
+            width: auto;
+            height: auto;
+            padding: 0.5rem;
+            margin: 0;
+            overflow: visible;
+            clip: auto;
+            white-space: normal;
+            background: white;
+            color: black;
+            border: 2px solid black;
+        }
+    }
+</style>

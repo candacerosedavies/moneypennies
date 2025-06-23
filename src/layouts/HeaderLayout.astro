@@ -1,0 +1,28 @@
+<!-- ---
+// layouts/HeaderLayout.astro
+
+import Hamburger from "../components/Header/Hamburger.astro";
+import ContactForm from "../components/Contact/ContactForm.astro";
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <nav class="container mx-auto px-6 py-6 flex justify-between items-center">
+        <div class="logo text-white text-5xl transition-colors duration-300">
+            Moneypennies logo
+        </div>
+        <div class="space-x-4">
+            <a href="/Contact/">
+                <button
+                    class="contact-button nav-button px-8 py-6 text-white hover:text-black border rounded-full border-white bg-transparent hover:bg-white hover:border-black hover:bg-opacity-10 transition-all duration-300 text-4xl"
+                    aria-label="sign up"
+                >
+                    Say Hello!
+                </button>
+            </a>
+        </div>
+
+        <ContactForm />
+        <Hamburger /> 
+        <slot />
+    </nav>
+</header>  -->

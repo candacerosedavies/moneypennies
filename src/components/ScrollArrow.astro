@@ -1,0 +1,133 @@
+---
+
+---
+
+<!----- Arrow icon ----->
+<button
+    id="scroll-arrow"
+    class="scroll-arrow"
+    aria-label="Scroll to next section"
+>
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        aria-hidden="true"
+    >
+        <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1"
+            d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+    </svg>
+</button>
+
+<script>
+    //----- scroll to next section when clicked -----
+    document.addEventListener("DOMContentLoaded", () => {
+        const arrow = document.getElementById("scroll-arrow");
+        //----- added to prevent typescript error -----
+        if (!arrow) return;
+
+        const handleArrowClick = () => {
+            const nextSection = document.querySelector("#section-02");
+
+            if (nextSection) {
+                //----- 'matchMedia' method to check if a CSS media query applies eg. the prefers-reducemotion @media in global.scss -----
+                const prefersReducedMotion = window.matchMedia(
+                    "(prefers-reduced-motion: reduce)",
+                ).matches; //----- ''.matches' extracts a the boolean value from this expression. Does the user require reduced motion yes or no -----
+
+                nextSection.scrollIntoView({
+                    behavior: prefersReducedMotion ? "auto" : "smooth",
+                    block: "start",
+                });
+            }
+        };
+
+        arrow.addEventListener("click", handleArrowClick); //-- add click event listener --
+
+        //----- arrow disappears when scrolled -----
+        const handleArrowScroll = () => {
+            const scrollPosition = window.scrollY;
+            const viewportHeight = window.innerHeight;
+            const threshold = viewportHeight;
+
+            arrow.style.opacity = scrollPosition > threshold ? "0" : "1";
+            arrow.style.pointerEvents =
+                scrollPosition > threshold ? "none" : "auto";
+        };
+
+        //----- Initial check -----
+        handleArrowScroll();
+
+        //----- Add the scroll event listener -----
+        window.addEventListener("scroll", handleArrowScroll);
+    });
+</script>
+
+<style lang="scss">
+    @keyframes bounce {
+        0%,
+        100% {
+            transform: translateY(-15%);
+            animation-timing-function: cubic-bezier(0.2, 0, 1, 1);
+        }
+        50% {
+            transform: translateY(0);
+            animation-timing-function: cubic-bezier(0.5, 0, 0.2, 1);
+        }
+    }
+
+    .scroll-arrow {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        transition: opacity 1000ms ease-in-out;
+        //----- styling to ensure arrow is accessible by keyboard users/ tab key -----
+        // position: fixed; //
+        // bottom: 1rem; // Add this
+        // left: 1rem;
+        // z-index: 1000;
+
+        &:focus-visible {
+            outline: 2px solid white;
+            outline-offset: 4px;
+            border-radius: 4px;
+        }
+    }
+
+    .scroll-arrow svg {
+        position: fixed;
+        bottom: 2rem;
+        left: 2rem;
+        color: white !important;
+        // margin: 1.5rem;
+        animation: bounce 1s infinite;
+        z-index: 9999;
+
+        @include for-size(phone, up) {
+            bottom: 2.5rem;
+            left: 2.5rem;
+            // margin: 2rem;
+        }
+
+        @include for-size(tablet, up) {
+            bottom: 4rem;
+            left: 4rem;
+            // margin: 2rem;
+        }
+    }
+
+    .scroll-arrow svg {
+        height: clamp(2em, 3vh, 2.5rem);
+        width: clamp(2rem, 3vh, 2.5rem);
+
+        @include for-size(tablet, up) {
+            height: clamp(3rem, 4vh, 3.5rem);
+            width: clamp(3.5rem, 4vh, 3.5rem);
+        }
+    }
+</style>

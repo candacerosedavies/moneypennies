@@ -1,0 +1,140 @@
+---
+import SectionLayout from "../../layouts/SectionLayout.astro";
+
+interface Props {
+    h2Text?: string;
+}
+
+const { h2Text = "Kind words" } = Astro.props;
+---
+
+<SectionLayout variant="color" background="" className="" heightVariant="tall">
+    <section class="section04 text-white">
+        <h2 class="section04__h2 text-white">{h2Text}</h2>
+        <article class="boxes text-white-100">
+            <!-- Testimonial 01 -->
+            <blockquote class="quotes">
+                <p class="font-bold uppercase text-white">
+                    Client Name, Company Name
+                </p>
+                <p class="font-light italic">
+                    "I have worked with Moneypennies for many years and they
+                    have supported us greatly. Their databases are always on
+                    point and they will happily work on projects to fill our
+                    needs months in advance. Quality of data has always been
+                    great and contacts all correct."
+                </p>
+            </blockquote>
+
+            <!-- Testimonial 02 -->
+            <blockquote class="quotes">
+                <p class="font-bold uppercase text-white">
+                    Client Name, Company Name
+                </p>
+                <p class="font-light italic">
+                    "Moneypennies is absolutely fantastic. They have gone above
+                    and beyond to help me out. I would completely recommend
+                    their services!"
+                </p>
+            </blockquote>
+
+            <!-- Testimonial 03 -->
+            <blockquote class="quotes">
+                <p class="font-bold uppercase text-white">
+                    Mellini Gordon, Friends House
+                </p>
+                <p class="font-light italic">
+                    "Amazing, thank you Wonderwoman!"
+                </p>
+            </blockquote>
+        </article>
+    </section>
+</SectionLayout>
+
+<script>
+    // document.addEventListener("DOMContentLoaded", () => {
+    //     // Get the text container that wraps all text
+    //     const textContainer = document.querySelector(".section_05");
+
+    //     if (textContainer) {
+    //         window.addEventListener("scroll", () => {
+    //             const scrollPosition = window.scrollY;
+    //             const bounceAmount = Math.sin(scrollPosition * 0.01) * 18;
+    //             textContainer.style.transform = `translateY(${bounceAmount}px)`;
+    //         });
+    //     }
+    // });
+</script>
+
+<style lang="scss">
+    // .section04 {
+    //     display: flex;
+    //     flex-direction: column;
+    //     min-height: 100vh;
+    //     text-align: center;
+    //     width: 100vw;
+    //     font-weight: 200;
+    //     overflow: hidden;
+    // }
+
+    .section04__parallax-container {
+        // min-height: 100vh;
+        // background-image: url("/images/hotel/pexels-cottonbro-6474587.jpg");
+        // background-color: #435875;
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        /* Match Section01's padding */
+
+        /* Match exactly Section01's responsive behavior */
+        @include for-size(tablet, up) {
+            min-height: 150vh;
+            background-attachment: fixed;
+            // padding: 6rem 2rem;
+        }
+    }
+    .section04__h2 {
+        position: relative;
+        display: flex;
+        font-weight: 400;
+        font-size: clamp(2rem, 8vw, 3rem);
+        padding: 0 0 2rem 0;
+    }
+    .section04 {
+        padding: 2rem 1rem; //top bottom, left right
+        max-width: 1280px;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: #293442;
+
+        @include for-size(tablet, up) {
+            padding: 6rem 1rem; //increase top bottom padding
+        }
+    }
+
+    .boxes {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        position: relative; //allows absolute positioning of children relative to this element
+
+        @include for-size(tablet, up) {
+            flex-direction: row;
+            gap: 1rem;
+        }
+    }
+
+    .quotes {
+        background-color: grey;
+        opacity: 0.9;
+        border-radius: 1rem;
+        padding: 2rem; //all sides
+        text-align: center;
+
+        @include for-size(tablet, up) {
+            flex: 1; //boxes shrink and grow
+        }
+    }
+</style>

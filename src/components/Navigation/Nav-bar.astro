@@ -1,0 +1,242 @@
+---
+import Hamburger from "./Hamburger.astro";
+import LogoBrandNav from "../MoneypenniesLogo/LogoBrandNav.astro";
+---
+
+<a href="#main-content" class="link--skip">Skip to main content</a>
+
+<!----- inline styling for JS  ----->
+<header class="fixed top-0 left-0 right-0 z-50">
+  <section class="header mx-auto nav-grid">
+    <!-- Hamburger: only visible on mobile/tablet -->
+    <Hamburger />
+    <LogoBrandNav showTagline={true} abbreviated={false} />
+    <!-- abreviate for smaller screens. tag line in the center? -->
+
+    <nav
+      class="nav__button-container leading-none"
+      role="navigation"
+      aria-label="Say hello on our contact page"
+    >
+      <li class="button--nav desktop__nav sm__font">
+        <a href="/contact/" class="contact--button--position button--nav__text"
+          >SAY HELLO</a
+        >
+        <!-- <button onclick="window.location.href='/contact/'">
+        <span class="animated__span">say hello</span>
+      </button> -->
+      </li>
+    </nav>
+  </section>
+</header>
+
+<script>
+  // Nav styles that change on scroll
+  const header = document.querySelector("header");
+
+  const headerStates = {
+    scrolled: {
+      add: {
+        header: ["backdrop-blur-md", "fade-in"],
+        // buttons: ["!text-black"],
+      },
+      remove: {
+        header: ["bg-transparent"],
+        buttons: ["!text-white"],
+      },
+    },
+    reset: {
+      add: {
+        header: ["bg-transparent"],
+        buttons: ["!text-white"],
+      },
+      remove: {
+        header: ["backdrop-blur-sm", "fade-in"],
+        // buttons: ["!text-black"],
+      },
+    },
+  };
+
+  const handleScroll = () => {
+    // const headerScrollThreshold = window.innerHeight * 0;
+    const headerScrollThreshold = 1;
+    const hasScrolledPastHeaderThreshold =
+      window.scrollY > headerScrollThreshold;
+
+    const currentHeaderState = hasScrolledPastHeaderThreshold
+      ? headerStates.scrolled
+      : headerStates.reset;
+
+    // Apply header classes
+    header?.classList.add(...currentHeaderState.add.header);
+    header?.classList.remove(...currentHeaderState.remove.header);
+
+    // const buttons = document.querySelectorAll(".button--nav__text");
+    // buttons.forEach((button) => {
+    //   button.classList.add(...currentHeaderState.add.buttons);
+    //   button.classList.remove(...currentHeaderState.remove.buttons);
+    // });
+  };
+
+  window.addEventListener("scroll", handleScroll);
+</script>
+
+<style lang="scss">
+  // Logo positioning
+  :global(.button--nav) {
+    // On mobile/tablet: moves to right side since hamburger takes left
+    // On desktop: moves to left side since hamburger is hidden
+  }
+
+  .nav-grid {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    padding: 1rem;
+
+    @include for-size(tablet, up) {
+      padding: 2rem;
+    }
+
+    // Mobile: hamburger on left, logo on right
+    @media (max-width: 768px) {
+      grid-template-areas: "hamburger . logo";
+
+      :global(.menu-bars) {
+        grid-area: hamburger;
+      }
+
+      :global(.nav-brand-position) {
+        grid-area: logo;
+      }
+
+      .nav__button-container {
+        display: none;
+      }
+    }
+
+    // Desktop: logo on left, contact on right
+    @include for-size(tablet, up) {
+      grid-template-areas: "logo . contact";
+
+      :global(.menu-bars) {
+        display: none;
+      }
+
+      :global(.nav-brand-position) {
+        grid-area: logo;
+      }
+
+      .nav__button-container {
+        grid-area: contact;
+        display: block;
+      }
+    }
+  }
+  //-----skip to main content styling-----
+  .link--skip {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: white;
+    color: black;
+    padding: 8px;
+    text-decoration: none;
+    z-index: 1000;
+
+    &:focus {
+      top: 6px; // Shows when tabbed to
+    }
+  }
+
+  //-----NAV ITEM POSITIONING-----
+  // header {
+  //   // padding: 1rem 1rem; //smaller screens
+
+  //   @include for-size(tablet, up) {
+  //     padding: 2rem 2rem; //larger screens
+  //   }
+  // }
+
+  //-----LOGO-----
+
+  // .container__logo::after {
+  //   position: absolute;
+  //   content: "";
+  //   bottom: 0;
+  //   left: 0; //line starts 10% in from the left
+  //   width: 100%; //reduced to 80% from 100% so the line starts 10% further in from the right
+  //   height: 2px;
+  //   //background 3px high = looks like a border-bottom but we have more control over it/can animate
+  //   transition: all 0.25s ease-in;
+  //   z-index: 3;
+
+  //   /* Above everything else */
+  // }
+
+  // .container__logo {
+  //   display: flex;
+  //   // align-items: center;
+  //   margin-left: 1rem; // Use margin instead of padding to control position without affecting size
+
+  //   font-family: "zilla slab", sans-serif !important;
+  //   font-weight: 200;
+  //   font-style: italic;
+
+  //   @include for-size(tablet, up) {
+  //     margin-left: 2rem;
+  //   }
+  // }
+
+  .logo {
+    height: 7vh;
+    width: auto; //maintains aspect ratio
+    object-fit: contain; //ensure logo fits within dimensions
+
+    @include for-size(tablet, up) {
+      height: 8vh;
+    }
+  }
+
+  .button--nav__text {
+    text-transform: none !important;
+  }
+
+  header.scrolled .button--nav {
+    .button--nav__text {
+      color: black;
+    }
+
+    &:hover .button--nav__text {
+      // color: white;
+    }
+
+    &:hover::after {
+      background-color: black;
+    }
+  }
+
+  //-----HAMBURGER VISIBILITY------
+
+  .desktop__nav {
+    display: none; // Hidden on mobile/tablet
+
+    @include for-size(phone, up) {
+      display: flex; // Shows on desktop
+    }
+  }
+
+  @include for-size(tablet, down) {
+    .desktop__nav {
+      display: none !important; //hide desktop nav stylings smaller screens
+    }
+  }
+
+  .contact--button--position {
+    display: none;
+
+    @include for-size(tablet, up) {
+      display: block;
+    }
+  }
+</style>

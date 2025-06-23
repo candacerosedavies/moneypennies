@@ -1,0 +1,136 @@
+---
+import SectionLayout from "../../layouts/SectionLayout.astro";
+
+interface Props {
+  h2Text?: string;
+  para1?: string;
+  para2?: string;
+  para3?: string;
+}
+
+const {
+  h2Text = "Data designed for you",
+  para1 = `Learn past event history, future schedules, and venue status
+`,
+  para2 = `4,000+ annual UK association and corporate events tracked`,
+
+  para3 = `Insights on the top 500 agencies in the market`,
+} = Astro.props;
+---
+
+<!-- Removed heightVariant="tall" to match Section01 -->
+<SectionLayout variant="color" className="Section02 " heightVariant="normal">
+  <section
+    class="bg-stone-black py-20 border-t-[0.5px] border-white"
+    id="section-02"
+  >
+    <section
+      class="section02__parallax-container"
+      role="region"
+      aria-label="Our data gathering services explained"
+    >
+      <section
+        class="section02--container__text flex-col items-center justify-center"
+      >
+        <header>
+          <h2 class="section02__heading lg__font" data-outline={h2Text}>
+            {h2Text}
+          </h2>
+        </header>
+
+        <p class="section02__subtitle sm__font">
+          {para1}
+        </p>
+        <p class="section02__para-1 sm__font">
+          {para2}
+        </p>
+        <p class="sm__font">{para3}</p>
+      </section>
+    </section>
+  </section>
+
+  <!----- keyboard accessibility ----->
+  <a href="#section-03" class="sr-only-focusable"> Skip to next section </a>
+</SectionLayout>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // Get the text container that wraps all text
+    const textContainer = document.querySelector(
+      ".section02__text-container",
+    ) as HTMLElement;
+
+    if (textContainer) {
+      window.addEventListener("scroll", () => {
+        const scrollPosition = window.scrollY;
+        const bounceAmount = Math.sin(scrollPosition * 0.01) * 18;
+        textContainer.style.transform = `translateY(${bounceAmount}px)`;
+      });
+    }
+  });
+</script>
+
+<style lang="scss">
+  .section02--container__text {
+    position: relative;
+    z-index: 10;
+    gap: 6vh; // Reduced gap for mobile
+    will-change: transform;
+    transition: transform 0.1s ease-out;
+    flex-grow: 1;
+    padding: 6rem 2rem;
+
+    @include for-size(tablet, up) {
+      gap: 8vh;
+    }
+  }
+
+  .section02__heading {
+    text-transform: uppercase;
+    font-weight: 300;
+    position: relative;
+    padding: 0;
+    max-width: 80%;
+    // color: #16181b;
+
+    @include for-size(tablet, up) {
+      max-width: 95%;
+    }
+
+    @include for-size(680px, up) {
+      font-size: clamp(
+        2rem,
+        4vw,
+        2.5rem
+      ); // Force smaller size in problem range
+      line-height: 1.1; // Tighter line spacing
+    }
+  }
+
+  //----- keyboard accessibility -----
+  .sr-only-focusable {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+
+    &:focus {
+      position: static;
+      width: auto;
+      height: auto;
+      padding: 0.5rem;
+      margin: 0;
+      overflow: visible;
+      clip: auto;
+      white-space: normal;
+      background: white;
+      color: black;
+      border: 2px solid black;
+    }
+  }
+</style>

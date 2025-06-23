@@ -1,0 +1,335 @@
+@use "sass:map";
+
+//---RESPONSIVE DESIGN MIXINS---
+$breakpoints: (
+    phoneSm: 420px,
+    phone: 680px,
+    tablet: 770px,
+    tabletLg: 1024px,
+    desktop: 1025px,
+    desktopLg: 1600px
+);
+
+@mixin for-size($breakpoint, $direction: down, $orientation: null) {
+
+    // If the breakpoint exists in the map
+    @if map.has-key($breakpoints, $breakpoint) {
+        // Get the breakpoint value
+        $breakpoint-value: map.get($breakpoints, $breakpoint);
+
+        // Check if orientation is specified
+        @if $orientation ==null {
+
+            // No orientation - standard query
+            //min-width/up = this breakpoint and larger. For mobile
+            @if $direction ==up {
+                @media (min-width: $breakpoint-value) {
+                    @content;
+                }
+            }
+
+            //max-width/down = this breakpoint and smaller.
+            @else if $direction ==down {
+                @media (max-width: $breakpoint-value) {
+                    @content;
+                }
+            }
+        }
+
+        @else {
+
+            // With orientation
+            @if $direction ==up {
+                @media (min-width: $breakpoint-value) and (orientation: #{$orientation}) {
+                    @content;
+                }
+            }
+
+            @else if $direction ==down {
+                @media (max-width: $breakpoint-value) and (orientation: #{$orientation}) {
+                    @content;
+                }
+            }
+        }
+    }
+
+    // If the breakpoint doesn't exist in the map, use a manual breakpoint
+    @else {
+
+        // Similar logic for custom breakpoints with orientation
+        @if $orientation ==null {
+            @if $direction ==up {
+                @media (min-width: $breakpoint) {
+                    @content;
+                }
+            }
+
+            @else if $direction ==down {
+                @media (max-width: $breakpoint) {
+                    @content;
+                }
+            }
+        }
+
+        //no need to define what 'landscape' or 'portrait' means. CSS knows.
+        @else {
+            @if $direction ==up {
+                @media (min-width: $breakpoint) and (orientation: #{$orientation}) {
+                    @content;
+                }
+            }
+
+            @else if $direction ==down {
+                @media (max-width: $breakpoint) and (orientation: #{$orientation}) {
+                    @content;
+                }
+            }
+        }
+    }
+}
+
+// ------------------------------------------------------------------------------------------------------------------------------
+
+// ----- LINE BREAK -----
+
+
+
+//----- GLOBAL ANIMATED BUTTON -----
+
+.button--animated {
+    pointer-events: auto;
+}
+
+.button--animated {
+    position: relative; //establish a reference point for any absolutely positioned children inside it.
+    display: inline-block;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    overflow: hidden; //added to contain the animated element
+
+    // moved padding from span to button top right bottom left
+    border-radius: 5px;
+    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+
+    z-index: 5; //base z index for the container
+
+    @include for-size(tablet, up) {
+
+        padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+
+    }
+
+}
+
+.button--animated * {
+    pointer-events: none;
+
+}
+
+.button--animated .button__text {
+    position: relative; //establish a reference point for any absolutely positioned children inside it.
+    display: inline-block;
+    color: white;
+    // cursor: pointer;
+    transition: all 0.3s ease-in;
+    z-index: 2; //keep the text above the animation
+    // text-transform: uppercase;
+    pointer-events: auto;
+
+    font-size: clamp(0.5rem, 3vw, 1rem);
+
+    &:focus-visible {
+        // outline: 2px solid white;
+        outline-offset: 2px;
+    }
+
+    @include for-size (tablet, up) {
+        font-size: clamp(0.8rem, 2vw, 1rem);
+
+    }
+
+}
+
+// ----- BUTTON ANIMATION -----
+
+// ----- Background animation (not visible) -----
+.button--animated::before {
+    position: absolute; //positioned relative to nearest positioned ancestor (the button element)
+    content: "";
+    top: 0;
+    left: -100%; //positioned out of sight on the left (NOT hovering)
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    transition: all 0.3s ease-in;
+    z-index: 1;
+}
+
+//----- border/underline animation ------
+.button--animated::after {
+    position: absolute; //positioned relative to nearest positioned ancestor 
+    content: "";
+    bottom: 0;
+    left: 0;
+    width: 100%; //reduced to 80% from 100% so the line starts 10% further in from the right
+    height: 2px;
+    background-color: white; //background 3px high = looks like a border-bottom but we have more control over it/can animate
+    transition: all 0.25s ease-in;
+    z-index: 3;
+    /* Above everything else */
+}
+
+// ----- on hover styles
+//FRI 3PM DEBUGGING
+.button--animated:hover .button--animated__text {
+    color: var(--button-hover-text-color, black);
+}
+
+//on hover BACKGROUND becomes visible - slides in from the left. 
+.button--animated:hover::before {
+    left: 0; //background is visible. Travels in (-100%) from the left 
+}
+
+//On hover - border/underline moves to the left. Returns when stop hovering
+.button--animated:hover::after {
+    left: -100%; //Moves to the left on hover. 
+}
+
+//on hover: change the button text to black when the background is white
+//want the span inside to change color, so you need to use the parent-child relationship in the selectors
+
+
+.button--animated:hover .button__text {
+    color: black !important;
+}
+
+
+//----- ANIMATED NAV BUTTONS ------
+.button--nav {
+    position: relative; //establish a reference point for any absolutely positioned children inside it.
+    display: inline-block;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    overflow: hidden; //added to contain the animated element
+    border-radius: 5px;
+    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+    z-index: 5; //base z index for the container
+
+    @include for-size(tablet, up) {
+
+        padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+
+    }
+
+}
+
+.button--nav * {
+    //prevent child elements from triggering separate mouse events that might interrupt the animation
+    pointer-events: none;
+
+}
+
+.button--nav a {
+    pointer-events: auto;
+}
+
+.button--nav .button--nav__text {
+    position: relative; //establish a reference point for any absolutely positioned children inside it.
+    display: inline-block;
+    color: white;
+    transition: all 0.3s ease-in;
+    z-index: 2; //keep the text above the animation
+    // text-transform: uppercase;
+    //debugging: make sure <a> doesn't block hover events
+
+
+    // &:focus-visible {
+    //     // outline: 2px solid white;
+    //     // outline-offset: 2px;
+    // }
+
+    @include for-size (tablet, up) {
+        // font-size: clamp(1rem, 3vw, 1.5rem);
+
+    }
+}
+
+//BACKGROUND animation - not visible
+.button--nav::before {
+    position: absolute; //positioned relative to their nearest positioned ancestor (which is the button element)
+    content: "";
+    top: 0;
+    left: -100%; //positioned out of sight on the left (NOT hovering)
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: black;
+
+    // border: 0.5px solid black;
+    transition: all 0.3s ease-in;
+    z-index: 1;
+}
+
+
+//ON HOVER STYLES 
+
+.button--nav:hover .button--nav__text {
+    color: var(--button-hover-text-color, black);
+}
+
+//on hover BACKGROUND becomes visible - slides in from the left. 
+.button--nav:hover::before {
+    left: 0; //background is visible. Travels in (-100%) from the left 
+
+}
+
+//On hover - border/underline moves to the left. Returns when stop hovering
+.button--nav:hover::after {
+    left: -100%; //Moves to the left on hover. 
+}
+
+
+// .button--nav:hover .button--nav__text {
+//     color: black; // Text turns black on hover
+// }
+
+// .button--nav:hover::after {
+//     background-color: white; // Show white border on hover
+// }
+
+// ----- FONTS -----
+
+// In mixins.scss
+@mixin lg__font {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+
+    @include for-size(tablet, up) {
+        font-size: clamp(3rem, 7vw, 3.5rem);
+    }
+}
+
+@mixin md__font {
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+
+    @include for-size(tablet, up) {
+        font-size: clamp(2rem, 3vw, 3.5rem);
+    }
+}
+
+@mixin sm__font {
+    font-size: clamp(0.8rem, 3vw, 1.2rem);
+
+    @include for-size(tablet, up) {
+        font-size: clamp(0.8rem, 3vw, 1rem);
+    }
+}
+
+@mixin tn__font {
+    font-size: clamp(0.5rem, 2vw, 0.8rem);
+
+    @include for-size(tablet, up) {
+        font-size: clamp(0.5rem, 2vw, 0.8rem);
+    }
+}

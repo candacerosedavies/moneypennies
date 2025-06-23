@@ -1,0 +1,104 @@
+<!-- ---
+interface Props {
+    h1Text?: string;
+    subtitle?: string;
+}
+
+const { h1Text, subtitle } = Astro.props;
+---
+
+<section class="text-container">
+    <h1 class="main-text">{h1Text}</h1>
+</section>
+
+<script>
+    const h1Text = document.querySelector(".main-text") as HTMLElement;
+    const subtitleText = document.querySelector(".subtitle") as HTMLElement;
+    let lastScrollY = window.scrollY;
+    let ticking = false;
+
+    function updateTextParallax() {
+        if (h1Text && subtitleText) {
+            const scrolled = window.scrollY;
+            const h1Speed = 0.1;
+            const subtitleSpeed = 0.1;
+
+            // calculate movement
+            const h1Movement = scrolled * h1Speed;
+            const subtitleMovement = scrolled * subtitleSpeed;
+
+            h1Text.style.transform = `translateY(${h1Movement}px)`;
+            subtitleText.style.transform = `translateY(${subtitleMovement}px)`;
+        }
+        ticking = false;
+    }
+
+    // Throttled scroll handler
+    window.addEventListener(
+        "scroll",
+        () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    updateTextParallax();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        },
+        { passive: true },
+    );
+
+    // Initial update
+    updateTextParallax();
+</script>
+
+<style>
+    .text-container {
+        /* position: relative;
+        z-index: 2; */
+        padding-left: 2%;
+        padding-right: 2%;
+        max-width: 100%;
+    }
+
+    .main-text {
+        position: absolute;
+        top: 2rem;
+        left: 5rem;
+        font-size: clamp(4rem, 8vw, 12rem);
+        font-weight: 400;
+
+        /* line-height: 1; */
+        /* max-width: 100%; */
+        color: white;
+        mix-blend-mode: difference; /* masking efft */
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        z-index: 2;
+    }
+    /* 
+    .subtitle {
+        position: absolute;
+        top: 32rem;
+        left: 10rem;
+        width: 30%;
+        font-size: clamp(1.5rem, 4vw, 4rem);
+        color: white;
+        margin-top: 1rem;
+        /opacity: 0.9; 
+        mix-blend-mode: difference;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        z-index: 2;
+    } */
+
+    .text-container {
+    }
+
+    /* .text-container {
+        position: relative;
+        z-index: 2;
+    } 
+
+    .content-wrapper {
+        position: relative;
+    }*/
+</style> -->

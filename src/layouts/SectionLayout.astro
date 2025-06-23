@@ -1,0 +1,332 @@
+---
+interface Props {
+  variant?: "image" | "color";
+  background?: string;
+  textStyle?: "masked" | "normal";
+  imageFolder?: string;
+  imageName?: string;
+  className?: string;
+  hasParallax?: boolean;
+  parallaxSpeed?: number; // Controls parallax intensity
+  parallaxImages?: {
+    src: string;
+    left: string;
+    top: string;
+    width: number;
+    speed: number;
+    initialOffset: number;
+  }[];
+  heightVariant?: "tall" | "normal";
+  allowOverflow?: boolean;
+  textWidth?: "narrow" | "standard" | "wide" | "full";
+}
+
+const {
+  variant = "",
+  textStyle = "",
+  background = "",
+  className = "",
+  heightVariant = "",
+  textWidth = "standard",
+  allowOverflow = false,
+  hasParallax = false,
+  parallaxSpeed = 0.5, // Default parallax speed
+} = Astro.props;
+
+const textVariant = textStyle === "masked" ? "masked-text" : "normal-text";
+const sectionClass =
+  variant === "image" ? "section-image" : `section-color ${background}`;
+const textWidthClass = `text-width-${textWidth}`;
+const parallaxClass = hasParallax ? "has-parallax" : "";
+---
+
+<section
+  class={`${sectionClass} ${className} ${textVariant} ${textStyle} ${heightVariant === "tall" ? "tall-section" : "normal-section"} ${textWidthClass} ${parallaxClass}`}
+  id="main-content"
+  data-parallax-speed={hasParallax ? parallaxSpeed : null}
+>
+  <slot />
+</section>
+
+{hasParallax && (
+  <script define:vars={{ parallaxSpeed }}>
+    // Parallax effect for sections with hasParallax=true
+    function initParallax() {
+      const parallaxSections = document.querySelectorAll('.has-parallax');
+      
+      if (parallaxSections.length === 0) return;
+
+      // Throttle scroll events for better performance
+      let ticking = false;
+
+      function updateParallax() {
+        const scrollY = window.pageYOffset;
+
+        parallaxSections.forEach((section) => {
+          const speed = parseFloat(section.dataset.parallaxSpeed) || 0.5;
+          const rect = section.getBoundingClientRect();
+          const sectionTop = rect.top + scrollY;
+          const sectionHeight = rect.height;
+          
+          // Only apply parallax when section is in viewport
+          if (scrollY + window.innerHeight > sectionTop && scrollY < sectionTop + sectionHeight) {
+            // Find parallax containers within this section
+            const parallaxContainers = section.querySelectorAll('[class*="parallax-container"], [class*="__parallax"]');
+            
+            parallaxContainers.forEach((container) => {
+              const offset = (scrollY - sectionTop) * speed;
+              container.style.transform = `translateY(${offset}px) scale(1.2)`;
+            });
+          }
+        });
+
+        ticking = false;
+      }
+
+      function requestTick() {
+        if (!ticking) {
+          requestAnimationFrame(updateParallax);
+          ticking = true;
+        }
+      }
+
+      // Initialize on page load
+      updateParallax();
+      
+      // Add scroll listener
+      window.addEventListener('scroll', requestTick, { passive: true });
+      
+      // Update on resize
+      window.addEventListener('resize', updateParallax, { passive: true });
+    }
+
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initParallax);
+    } else {
+      initParallax();
+    }
+  </script>
+)}
+
+<style>
+  .section-image {
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .section-color {
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tall-section {
+    /* min-height: 100vh; */
+    height: 150vh;
+    overflow: hidden;
+
+  }
+
+  .normal-section {
+    min-height: 70vh;
+    /* height: 50vh; */
+    overflow: hidden;
+
+  }
+
+  /* Parallax-specific styles */
+  .has-parallax {
+    overflow: hidden; /* Ensure parallax elements don't cause horizontal scroll */
+  }
+
+  .has-parallax [class*="parallax-container"],
+  .has-parallax [class*="__parallax"] {
+    will-change: transform;
+    transition: none; /* Remove transitions during parallax */
+  }
+</style>
+
+<style is:global lang="scss">
+  // ----- Text width control classes ----- //
+  .text-width-narrow {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    p,
+    .text-element {
+      width: 70vw;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 1rem;
+
+      @include for-size(phone, up) {
+        width: 60%;
+        max-width: 600px;
+      }
+
+      @include for-size(650px, up) {
+          width: 60%;
+        max-width: 600px;
+        padding: 0 2rem;
+      }
+
+      @include for-size(tablet, up) {
+        width: 60%;
+        max-width: 600px;
+        padding: 0;
+      }
+    }
+  }
+
+  .text-width-standard {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    p,
+    .text-element {
+      // Narrowest phones first
+      width: 80vw;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 1rem;
+
+      @include for-size(phone, up) {
+        width: 85%; //percentage for larger phones for more control
+        max-width: 700px; // Prevents getting too wide
+      }
+
+      @include for-size(650px, up) {
+        padding: 0 2rem; // Extra padding in this range
+      }
+
+      @include for-size(tablet, up) {
+        width: 70%;
+        max-width: 800px;
+        padding: 0; //resetting padding here, let container do it's thang
+      }
+    }
+  }
+
+  .text-width-wide {
+     h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    p,
+    .text-element {
+      width: 90vw;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 1rem;
+
+      .text-width-wide {
+        // (phone, up) not essential but will ensure smooth transitions from the narrowest phone to tablets and browsers
+        @include for-size(phone, up) {
+          width: 90%;
+          max-width: 1000px; // Keep same as tablet
+        }
+      }
+
+      @include for-size(650px, up) {
+        padding: 0 2rem;
+      }
+
+      @include for-size(tablet, up) {
+        width: 80%;
+        max-width: 1000px;
+        padding: 0;
+      }
+    }
+  }
+
+  .text-width-full {
+     h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    p,
+    .text-element {
+      width: 100%;
+    }
+  }
+
+  .allow-overflow {
+    overflow: visible !important;
+  }
+
+  /* Alignment classes */
+
+  /* Flex container classes */
+.flex {
+  display: flex !important;
+}
+
+.flex-col {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.flex-row {
+  display: flex !important;
+  flex-direction: row !important;
+}
+
+/* Flex grow/shrink classes */
+.flex-grow {
+  flex-grow: 1 !important;
+}
+
+.flex-shrink-0 {
+  flex-shrink: 0 !important;
+}
+
+/* Gap classes */
+.gap-1 {
+  gap: 0.25rem !important;
+}
+
+.gap-2 {
+  gap: 0.5rem !important;
+}
+
+.gap-4 {
+  gap: 1rem !important;
+}
+
+.gap-8 {
+  gap: 2rem !important;
+}
+
+  .items-start {
+    align-items: flex-start !important;
+  }
+  .items-center {
+    align-items: center !important;
+  }
+  .items-end {
+    align-items: flex-end !important;
+  }
+
+  .justify-start {
+    justify-content: flex-start !important;
+  }
+  .justify-center {
+    justify-content: center !important;
+  }
+  .justify-end {
+    justify-content: flex-end !important;
+  }
+</style>

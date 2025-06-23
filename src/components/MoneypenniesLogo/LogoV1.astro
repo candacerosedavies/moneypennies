@@ -1,0 +1,123 @@
+---
+export interface Props {
+    class?: string;
+    width?: string;
+    height?: string;
+}
+
+const { class: className = "", width = "200", height = "200" } = Astro.props;
+---
+
+<svg
+    width={width}
+    height={height}
+    viewBox="0 0 200 200"
+    xmlns="http://www.w3.org/2000/svg"
+    class={className}
+>
+    <!-- Main container circle -->
+    <circle
+        cx="100"
+        cy="100"
+        r="80"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="3"></circle>
+
+    <!-- Data nodes -->
+    <circle cx="100" cy="60" r="8" fill="currentColor"></circle>
+    <circle cx="130" cy="85" r="8" fill="currentColor"></circle>
+    <circle cx="130" cy="115" r="8" fill="currentColor"></circle>
+    <circle cx="100" cy="140" r="8" fill="currentColor"></circle>
+    <circle cx="70" cy="115" r="8" fill="currentColor"></circle>
+    <circle cx="70" cy="85" r="8" fill="currentColor"></circle>
+
+    <!-- Connection lines -->
+    <line
+        x1="100"
+        y1="60"
+        x2="130"
+        y2="85"
+        stroke="currentColor"
+        stroke-width="2"></line>
+    <line
+        x1="130"
+        y1="85"
+        x2="130"
+        y2="115"
+        stroke="currentColor"
+        stroke-width="2"></line>
+    <line
+        x1="130"
+        y1="115"
+        x2="100"
+        y2="140"
+        stroke="currentColor"
+        stroke-width="2"></line>
+    <line
+        x1="100"
+        y1="140"
+        x2="70"
+        y2="115"
+        stroke="currentColor"
+        stroke-width="2"></line>
+    <line
+        x1="70"
+        y1="115"
+        x2="70"
+        y2="85"
+        stroke="currentColor"
+        stroke-width="2"></line>
+    <line
+        x1="70"
+        y1="85"
+        x2="100"
+        y2="60"
+        stroke="currentColor"
+        stroke-width="2"></line>
+
+    <!-- Center connection hub -->
+    <circle cx="100" cy="100" r="6" fill="currentColor"></circle>
+    <line
+        x1="100"
+        y1="60"
+        x2="100"
+        y2="94"
+        stroke="currentColor"
+        stroke-width="2"></line>
+    <line
+        x1="130"
+        y1="85"
+        x2="106"
+        y2="100"
+        stroke="currentColor"
+        stroke-width="2"></line>
+    <line
+        x1="130"
+        y1="115"
+        x2="106"
+        y2="100"
+        stroke="currentColor"
+        stroke-width="2"></line>
+    <line
+        x1="100"
+        y1="140"
+        x2="100"
+        y2="106"
+        stroke="currentColor"
+        stroke-width="2"></line>
+    <line
+        x1="70"
+        y1="115"
+        x2="94"
+        y2="100"
+        stroke="currentColor"
+        stroke-width="2"></line>
+    <line
+        x1="70"
+        y1="85"
+        x2="94"
+        y2="100"
+        stroke="currentColor"
+        stroke-width="2"></line>
+</svg>

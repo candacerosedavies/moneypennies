@@ -1,0 +1,158 @@
+---
+import SectionLayout from "../../layouts/SectionLayout.astro";
+
+interface Props {
+    h3Text?: string;
+    para?: string;
+    para2?: string;
+    para3?: string;
+}
+
+const {
+    h3Text = "Make data driven decisions",
+    para1 = `Real-time bookings data curated to your business needs`,
+    para2 = ` Insights at a glance with a personalised analysis report`,
+    para3 = `  Feel the impact our data can have on your revenue risk free`,
+} = Astro.props;
+---
+
+<SectionLayout
+    variant="color"
+    allowOverflow={true}
+    textWidth="standard"
+    hasParallax={true}
+    parallaxSpeed={0.3}
+    className="Section03 lg__hr py-20 border-t-[0.5px] border-white"
+    heightVariant="tall"
+>
+    <section class="section03__section-3 bg-stone-black" id="section-03">
+        <section
+            class="section03__parallax-container"
+            role="region"
+            aria-label="What's in it for you"
+        >
+            <section class="section03__overlay"></section>
+            <header
+                class="section03--container__text flex-col items-center justify-center"
+            >
+                <h3 class="section03__heading lg__font">
+                    {h3Text}
+                </h3>
+                <p class="sm__font">
+                    {para1}
+                </p>
+                <p class="sm__font">{para2}</p>
+                <p class="sm__font">{para3}</p>
+                <a href="/contact/">
+                    <nav class="section03__button-container">
+                        <button
+                            class="button--animated"
+                            onclick="window.location.href='/contact/'"
+                        >
+                            <span class="button__text">start connecting</span>
+                        </button>
+                    </nav>
+                </a>
+            </header>
+        </section>
+    </section>
+</SectionLayout>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Get the text container that wraps all text
+        const textContainer = document.querySelector(
+            ".section03__text-container",
+        ) as HTMLElement;
+
+        if (textContainer) {
+            window.addEventListener("scroll", () => {
+                const scrollPosition = window.scrollY;
+                const bounceAmount = Math.sin(scrollPosition * 0.01) * 18;
+                textContainer.style.transform = `translateY(${bounceAmount}px)`;
+            });
+        }
+    });
+</script>
+
+<style lang="scss">
+    .section03--container__text {
+        position: relative;
+        z-index: 10;
+        gap: 6vh;
+        will-change: transform;
+        transition: transform 0.1s ease-out;
+        flex-grow: 1;
+        padding: 6rem 2rem;
+
+        @include for-size(tablet, up) {
+            gap: 8vh;
+        }
+    }
+
+    .section03__parallax-container {
+        min-height: 100vh !important;
+        background-image: url("/images/connect/pexels-didsss-2127522.jpg");
+        background-size: cover;
+        background-position: right 60% bottom 0%;
+        transform: scale(120%);
+        display: flex;
+        flex-grow: 1;
+        flex-direction: column;
+        position: relative;
+
+        //background overlay
+        &::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.4);
+            pointer-events: none;
+        }
+
+        @include for-size(tablet, up) {
+            background-attachment: scroll;
+        }
+    }
+
+    .section03__heading {
+        text-transform: uppercase;
+        font-weight: 300;
+        position: relative;
+        padding: 0;
+        max-width: 80%;
+
+        @include for-size(tablet, up) {
+            max-width: 95%;
+        }
+
+        @include for-size(680px, up) {
+            font-size: clamp(
+                2rem,
+                4vw,
+                2.5rem
+            ); // Force smaller size in problem range
+            line-height: 1.1; // Tighter line spacing
+        }
+    }
+
+    .section03__button {
+        position: static; //ensures text is above the overlay
+        z-index: 10;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+        color: white;
+        border-color: white;
+        padding: 1rem 1rem;
+    }
+
+    .section03__button-container {
+        margin: 0;
+    }
+
+    .section03__overlay {
+        position: absolute;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.4);
+        // backdrop-filter: brightness(0.8); //softens background image ( don't need it here)
+    }
+</style>

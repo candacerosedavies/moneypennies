@@ -1,0 +1,407 @@
+---
+// import Header from "../Header/Header.astro";
+---
+
+<section class="contact-section">
+    <div class="parallax-container">
+        <!-- Single overlay for the entire section -->
+        <div class="overlay"></div>
+
+        <!-- Container for all content -->
+        <div class="content-container">
+            <div class="copy-container">
+                <!-- Heading -->
+                <h1 class="heading">Request your free sample</h1>
+                <p class="para">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam
+                    impedit dolore excepturi ullam?
+                </p>
+            </div>
+
+            <!-- Form container -->
+            <div class="form-container">
+                <form method="POST" id="form" class="contact-form">
+                    <input
+                        type="hidden"
+                        name="access_key"
+                        value="92c59d11-5b7e-4cfb-89b6-51c8d2e1ba5f"
+                    />
+                    <input
+                        type="hidden"
+                        name="subject"
+                        value="New Submission from Moneypennies"
+                    />
+                    <input type="checkbox" name="botcheck" class="hidden" />
+
+                    <div class="form-grid">
+                        <!-- Name field -->
+                        <div class="form-field">
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                placeholder="Name"
+                                required
+                            />
+                        </div>
+
+                        <!-- Email field -->
+                        <div class="form-field">
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="Email"
+                                required
+                            />
+                        </div>
+
+                        <!-- Phone field -->
+                        <div class="form-field">
+                            <input
+                                type="tel"
+                                id="phone"
+                                name="phone"
+                                placeholder="Phone"
+                                required
+                            />
+                        </div>
+
+                        <!-- Company field (optional) -->
+                        <!-- <div class="form-field">
+                            <input
+                                type="text"
+                                id="company"
+                                name="company"
+                                placeholder="Company"
+                            />
+                        </div> -->
+
+                        <!-- Message field (spans both columns) -->
+                        <div class="form-field message-field">
+                            <textarea
+                                id="message"
+                                name="message"
+                                placeholder="Message"
+                                rows="3"
+                                required></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Submit button -->
+                    <div class="button-container">
+                        <button type="submit" class="submit-button">
+                            start connecting
+                        </button>
+                    </div>
+
+                    <!-- Result message (initially hidden) -->
+                    <div id="result" class="result-message hidden"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style lang="scss">
+    .contact-section {
+        position: relative;
+    }
+
+    .parallax-container {
+        min-height: 100vh;
+        background-attachment: fixed;
+        background-image: url("/images/connect/pexels-didsss-2127522.jpg");
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        flex: 1;
+        width: 100%;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    .overlay {
+        position: absolute;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .content-container {
+        position: relative;
+        z-index: 10;
+        min-width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        // @include for-size(tablet, up) {
+        //     padding: 6rem 2rem;
+        //     margin: 1rem;
+        // }
+        padding: 2rem 1rem;
+
+        @include for-size(tablet, up) {
+            padding: 3rem 2rem;
+        }
+        @include for-size(desktop, up) {
+            flex-direction: row-reverse;
+            justify-content: flex-start;
+            gap: 10rem;
+            padding: 2rem 3rem;
+
+            // flex: 0 0 30%;
+        }
+    }
+
+    .copy-container {
+        @include for-size(desktop, up) {
+            justify-content: flex-start;
+            padding-bottom: 80vh;
+            // padding-right: 5rem;
+            flex: 0 0 50%;
+        }
+    }
+
+    .form-container {
+        // width: 80%;
+        min-width: 90%;
+
+        @include for-size(tablet, up) {
+            min-width: 80%;
+        }
+
+        @include for-size(desktop, up) {
+            min-width: 30%;
+            justify-content: flex-end;
+            padding-top: 55vh;
+        }
+    }
+
+    .heading {
+        font-size: clamp(1rem, 14vw, 8rem) !important;
+        font-weight: 400;
+        color: white;
+        text-align: right;
+        line-height: 4rem;
+        padding-top: 4rem;
+        padding-bottom: 1.5rem;
+        min-width: 100%;
+
+        @include for-size(tablet, up) {
+            font-size: clamp(2rem, 15vw, 8rem);
+            margin-bottom: 3rem;
+            text-align: left;
+            line-height: 6rem;
+        }
+
+        @include for-size(desktop, up) {
+            font-size: clamp(2rem, 10vw, 3rem) !important;
+            // align-self: self-start;
+            text-align: right;
+            margin-bottom: 0;
+            padding-bottom: 0vh;
+        }
+    }
+
+    .para {
+        font-size: clamp(1rem, 3vh, 3rem) !important;
+        // THIS IS NOT WORKING font-weight: 200;
+        color: white;
+        min-width: 100%;
+
+        @include for-size(tablet, up) {
+            // margin-bottom: 3rem;
+            text-align: right;
+            max-width: 80%;
+        }
+
+        @include for-size(desktop, up) {
+            text-align: right;
+            margin-bottom: 0;
+        }
+    }
+
+    // .contact-form {
+    //     width: 100%;
+    // }
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+
+        @include for-size(tablet, up) {
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        @include for-size(desktop, up) {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+    }
+
+    .form-field {
+        border-bottom: 0.5px solid white;
+        padding-bottom: 0.25rem;
+        transition: border-color 0.3s;
+
+        &:focus-within {
+            border-color: white;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            background-color: transparent;
+            color: white;
+            font-size: clamp(1rem, 2vh, 4rem);
+            padding: 0.5rem 0;
+
+            &::placeholder {
+                color: white;
+                opacity: 0.6;
+            }
+
+            &:focus {
+                outline: none;
+            }
+            @include for-size(tablet, up) {
+                font-size: clamp(1rem, 3vh, 4rem);
+            }
+            @include for-size(desktop, up) {
+                font-size: clamp(1rem, 6vh, 5rem);
+            }
+        }
+
+        textarea {
+            resize: none;
+        }
+    }
+
+    .message-field {
+        grid-template-columns: span 1;
+        @include for-size(tablet, up) {
+            grid-column: span 1;
+        }
+
+        @include for-size(desktop, up) {
+            grid-column: span 1;
+        }
+    }
+
+    .button-container {
+        margin-top: 0.5rem;
+        display: flex;
+        justify-content: center;
+
+        @include for-size(desktop, up) {
+            margin-top: 0.5rem;
+        }
+    }
+
+    .submit-button {
+        background-color: transparent;
+        font-size: clamp(1rem, 3vh, 8rem) !important;
+        margin-bottom: 2rem;
+        margin-top: 2rem;
+        align-item: center;
+        color: white;
+        font-weight: 500;
+        padding: 0.5rem 1rem;
+        border: 0.5px solid #a9a9ac;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            // opacity: 0.6;
+            color: black;
+            border: 1px solid white;
+        }
+
+        @include for-size(tablet, up) {
+            font-size: clamp(1rem, 3vh, 4rem);
+            align-self: center;
+        }
+        @include for-size(desktop, up) {
+            font-size: clamp(1rem, 3.5vh, 4rem);
+            align-self: center;
+        }
+    }
+
+    .result-message {
+        margin-top: 1rem;
+        padding: 0.75rem;
+        text-align: center;
+
+        &.hidden {
+            display: none;
+        }
+    }
+
+    // Helper class that will be applied by JS
+    .text-yellow-300 {
+        color: #fde047;
+    }
+
+    .text-green-300 {
+        color: #86efac;
+    }
+
+    .text-red-300 {
+        color: #fca5a5;
+    }
+</style>
+
+<script>
+    const form = document.getElementById("form");
+    const result = document.getElementById("result");
+
+    form?.addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        if (!form || !result) return;
+
+        const formData = new FormData(form as HTMLFormElement);
+        const object = Object.fromEntries(formData);
+        const json = JSON.stringify(object);
+
+        result.innerHTML = "Please wait...";
+        result.className = "result-message text-yellow-300";
+        result.style.display = "block";
+
+        try {
+            const response = await fetch("https://api.web3forms.com/submit", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                },
+                body: json,
+            });
+
+            const responseData = await response.json();
+
+            if (response.status === 200) {
+                result.innerHTML = responseData.message;
+                result.className = "result-message text-green-300";
+            } else {
+                console.log(response);
+                result.innerHTML = responseData.message;
+                result.className = "result-message text-red-300";
+            }
+        } catch (error) {
+            console.log(error);
+            result.innerHTML = "Something went wrong!";
+            result.className = "result-message text-red-300";
+        }
+
+        form.reset();
+        setTimeout(() => {
+            result.style.display = "none";
+        }, 5000);
+    });
+</script>

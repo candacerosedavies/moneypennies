@@ -1,0 +1,174 @@
+---
+// import ContactSection from "./ContactSection.astro";
+---
+
+<section
+    class="paralax-container relative min-h-screen flex items-center justify-center bg-fixed bg-parallax-test bg-cover bg-center"
+>
+    <!-- Dark overlay for better contrast -->
+    <div class="absolute inset-0 bg-black/30"></div>
+
+    <!-- Form container -->
+    <div class="relative z-10 w-full max-w-sm px-4 py-16">
+        <!-- Heading -->
+        <!-- <h1 class="text-6xl font-bold text-white mb-4">SEND US A MESSAGE</h1> -->
+
+        <!-- Short description or tagline -->
+        <!-- <p class="text-gray-300 mb-12 max-w-xl">
+            Because Every Moment Matters. Get in touch with our team for more
+            information about our services.
+        </p> -->
+
+        <!-- Contact form -->
+        <form
+            method="POST"
+            id="form"
+            class="grid grid-cols-1 md:grid-cols-2 gap-8"
+        >
+            <input
+                type="hidden"
+                name="access_key"
+                value="92c59d11-5b7e-4cfb-89b6-51c8d2e1ba5f"
+            />
+            <input
+                type="hidden"
+                name="subject"
+                value="New Submission from Moneypennies"
+            />
+            <input type="checkbox" name="botcheck" class="hidden" />
+
+            <!-- Name field -->
+            <div
+                class="border-b border-gray-600 pb-2 focus-within:border-white transition-colors"
+            >
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Name"
+                    required
+                    class="w-full bg-transparent text-white placeholder-gray-500 focus:outline-none"
+                />
+            </div>
+
+            <!-- Email field -->
+            <div
+                class="border-b border-gray-600 pb-2 focus-within:border-white transition-colors"
+            >
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Email"
+                    required
+                    class="w-full bg-transparent text-white placeholder-gray-500 focus:outline-none"
+                />
+            </div>
+
+            <!-- Phone field -->
+            <div
+                class="border-b border-gray-600 pb-2 focus-within:border-white transition-colors"
+            >
+                <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    placeholder="Phone"
+                    required
+                    class="w-full bg-transparent text-white placeholder-gray-500 focus:outline-none"
+                />
+            </div>
+
+            <!-- Company field (optional) -->
+            <div
+                class="border-b border-gray-600 pb-2 focus-within:border-white transition-colors"
+            >
+                <input
+                    type="text"
+                    id="company"
+                    name="company"
+                    placeholder="Company"
+                    class="w-full bg-transparent text-white placeholder-gray-500 focus:outline-none"
+                />
+            </div>
+
+            <!-- Message field (spans both columns) -->
+            <div
+                class="border-b border-gray-600 pb-2 focus-within:border-white transition-colors md:col-span-2"
+            >
+                <textarea
+                    id="message"
+                    name="message"
+                    placeholder="Message"
+                    rows="4"
+                    required
+                    class="w-full bg-transparent text-white placeholder-gray-500 focus:outline-none resize-none"
+                ></textarea>
+            </div>
+
+            <!-- Submit button -->
+            <div class="md:col-span-2 mt-6">
+                <button
+                    type="submit"
+                    class="px-8 py-3 bg-white text-black font-medium hover:bg-gray-200 transition-colors"
+                >
+                    Submit
+                </button>
+            </div>
+
+            <!-- Result message (initially hidden) -->
+            <div id="result" class="hidden mt-4 p-4 rounded-md md:col-span-2">
+            </div>
+        </form>
+    </div>
+</section>
+
+<script>
+    const form = document.getElementById("form");
+    const result = document.getElementById("result");
+
+    form?.addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        if (!form || !result) return;
+
+        const formData = new FormData(form as HTMLFormElement);
+        const object = Object.fromEntries(formData);
+        const json = JSON.stringify(object);
+
+        result.innerHTML = "Please wait...";
+        result.className = "mt-4 p-4 text-yellow-300 md:col-span-2";
+        result.style.display = "block";
+
+        try {
+            const response = await fetch("https://api.web3forms.com/submit", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                },
+                body: json,
+            });
+
+            const responseData = await response.json();
+
+            if (response.status === 200) {
+                result.innerHTML = responseData.message;
+                result.className = "mt-4 p-4 text-green-300 md:col-span-2";
+            } else {
+                console.log(response);
+                result.innerHTML = responseData.message;
+                result.className = "mt-4 p-4 text-red-300 md:col-span-2";
+            }
+        } catch (error) {
+            console.log(error);
+            result.innerHTML = "Something went wrong!";
+            result.className = "mt-4 p-4 text-red-300 md:col-span-2";
+        }
+
+        form.reset();
+        setTimeout(() => {
+            result.style.display = "none";
+        }, 5000);
+    });
+</script>

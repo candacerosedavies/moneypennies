@@ -1,0 +1,103 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    display: flex;
+
+    /* Prevent horizontal scrolling */
+    width: 100%;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    align-self: center;
+    letter-spacing: 0.25vh;
+    line-height: 1.2;
+    font-family: "inter", sans-serif;
+
+    @include for-size(tablet, up) {
+        line-height: 1.5;
+    }
+}
+
+// h2,
+// h1 {
+//     font-family: "abril FatFace" sans-serif;
+// }
+
+//-----ACCESSIBILITY-----
+
+//-----ensure all interactive elements show when focused----
+a,
+button,
+input,
+textarea,
+select {
+    &:focus-visible {
+        outline: 2px solid #0066cc;
+        outline-offset: 2px;
+    }
+}
+
+//-----respects users' system preferences to reduce animations-----
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+//-----hero font-----
+
+// classes for inline HTML use
+.lg__font {
+    @include lg__font;
+}
+
+.md__font {
+    @include md__font;
+}
+
+.sm__font {
+    @include sm__font;
+}
+
+.tn__font {
+    @include tn__font;
+}
+
+// .lg__hr {
+//     width: 100%;
+//     // margin-left: auto;
+//     // margin-right: auto;
+//     border-color: white;
+//     background-color: white;
+//     height: 0.3px;
+//     padding-top: 5rem;
+//     padding-bottom: 5rem;
+// }
+
+// AMMEND THE BELOW? 
+// .hamburger {
+//     padding-right: 20px;
+//     cursor: pointer;
+//     display: none;
+// }
+
+// .hamburger .line {
+//     display: block;
+//     width: 40px;
+//     height: 5px;
+//     margin-bottom: 10px;
+//     background-color: #ff9776;
+// }

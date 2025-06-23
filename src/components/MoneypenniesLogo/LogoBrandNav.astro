@@ -1,0 +1,256 @@
+---
+export interface Props {
+    class?: string;
+    showTagline?: boolean;
+    abbreviated?: boolean;
+    href?: string; // Add href prop
+}
+
+const {
+    class: className = "",
+    showTagline = true,
+    abbreviated = false,
+    href = "/", // Default to home
+} = Astro.props;
+---
+
+<a
+    href={href}
+    class={` nav-brand-position button--nav button--nav__text flex items-center gap-[0.2vw] ${className}`}
+    role="navigation"
+    aria-label="moneypennies logo and home button"
+>
+    <svg
+        class="button--nav__text brand-logo text-current"
+        viewBox="0 0 200 200"
+        xmlns="http://www.w3.org/2000/svg"
+    >
+        <!-- Your SVG content -->
+        <circle
+            cx="100"
+            cy="100"
+            r="80"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"></circle>
+        <circle cx="100" cy="60" r="8" fill="currentColor"></circle>
+        <circle cx="130" cy="85" r="8" fill="currentColor"></circle>
+        <circle cx="130" cy="115" r="8" fill="currentColor"></circle>
+        <circle cx="100" cy="140" r="8" fill="currentColor"></circle>
+        <circle cx="70" cy="115" r="8" fill="currentColor"></circle>
+        <circle cx="70" cy="85" r="8" fill="currentColor"></circle>
+        <line
+            x1="100"
+            y1="60"
+            x2="130"
+            y2="85"
+            stroke="currentColor"
+            stroke-width="2"></line>
+        <line
+            x1="130"
+            y1="85"
+            x2="130"
+            y2="115"
+            stroke="currentColor"
+            stroke-width="2"></line>
+        <line
+            x1="130"
+            y1="115"
+            x2="100"
+            y2="140"
+            stroke="currentColor"
+            stroke-width="2"></line>
+        <line
+            x1="100"
+            y1="140"
+            x2="70"
+            y2="115"
+            stroke="currentColor"
+            stroke-width="2"></line>
+        <line
+            x1="70"
+            y1="115"
+            x2="70"
+            y2="85"
+            stroke="currentColor"
+            stroke-width="2"></line>
+        <line
+            x1="70"
+            y1="85"
+            x2="100"
+            y2="60"
+            stroke="currentColor"
+            stroke-width="2"></line>
+        <circle cx="100" cy="100" r="6" fill="currentColor"></circle>
+        <line
+            x1="100"
+            y1="60"
+            x2="100"
+            y2="94"
+            stroke="currentColor"
+            stroke-width="2"></line>
+        <line
+            x1="130"
+            y1="85"
+            x2="106"
+            y2="100"
+            stroke="currentColor"
+            stroke-width="2"></line>
+        <line
+            x1="130"
+            y1="115"
+            x2="106"
+            y2="100"
+            stroke="currentColor"
+            stroke-width="2"></line>
+        <line
+            x1="100"
+            y1="140"
+            x2="100"
+            y2="106"
+            stroke="currentColor"
+            stroke-width="2"></line>
+        <line
+            x1="70"
+            y1="115"
+            x2="94"
+            y2="100"
+            stroke="currentColor"
+            stroke-width="2"></line>
+        <line
+            x1="70"
+            y1="85"
+            x2="94"
+            y2="100"
+            stroke="currentColor"
+            stroke-width="2"></line>
+    </svg>
+
+    <nav class="button--nav__text flex flex-col justify-between items-start">
+        <h2 class="sm__font brand-name tracking-wider leading-[0.9]">
+            {abbreviated ? "MP" : "MONEYPENNIES"}
+        </h2>
+        <!-- {
+            showTagline && (
+                <p class=" brand-tagline tracking-wide opacity-80 leading-tight">
+                    {" "}
+                    {" "}
+                </p>
+            )
+        } -->
+    </nav>
+</a>
+
+<style lang="scss">
+    @use "@/styles/mixins";
+
+    // .nav-brand-position {
+    //     // Mobile/tablet: top right
+    //     // position: fixed;
+    //     top: 1rem;
+    //     right: 2rem;
+    //     z-index: 70;
+    //     left: 60vw;
+    //     right: auto;
+    //     // padding: 0rem 2rem 0rem 0rem;
+
+    //     @include for-size(smPhone, up) {
+    //         left: 50vw;
+    //         // padding: 0rem 2rem 0rem 0rem;
+    //     }
+
+    //     // Tablet and up: top left
+    //     @include for-size(tablet, up) {
+    //         left: 0;
+    //         right: auto;
+    //     }
+    // }
+
+    .brand-logo {
+        // Much smaller for navbar
+        width: 1.2rem;
+        height: 1.2rem;
+
+        @include for-size(phoneSm, up) {
+            width: 1.4rem;
+            height: 1.4rem;
+        }
+
+        @include for-size(phone, up) {
+            width: 1.6rem;
+            height: 1.6rem;
+        }
+
+        @include for-size(tablet, up) {
+            width: 1.8rem;
+            height: 1.8rem;
+        }
+
+        @include for-size(desktop, up) {
+            width: 2rem;
+            height: 2rem;
+        }
+    }
+
+    // .brand-name {
+    //     // Smaller font sizes for navbar
+    //     // font-size: 3.5vw;
+    //     font-family: "inter", sans-serif;
+    //     font-weight: 400;
+
+    //     @include for-size(phoneSm, up) {
+    //         font-size: 2.8vw;
+    //     }
+
+    //     @include for-size(phone, up) {
+    //         font-size: 2.5vw;
+    //     }
+
+    //     @include for-size(tablet, up) {
+    //         font-size: 2.2vw;
+    //     }
+
+    //     @include for-size(tabletLg, up) {
+    //         font-size: 2vw;
+    //     }
+
+    //     @include for-size(desktop, up) {
+    //         font-size: 1.8vw;
+    //     }
+
+    //     @include for-size(desktopLg, up) {
+    //         font-size: 1.5vw;
+    //     }
+    // }
+
+    .brand-tagline {
+        // Even smaller tagline for navbar
+        font-size: 2vw;
+        font-weight: 350;
+        font-style: italic;
+
+        @include for-size(phoneSm, up) {
+            font-size: 1.63vw;
+        }
+
+        @include for-size(phone, up) {
+            font-size: 1.43vw;
+        }
+
+        @include for-size(tablet, up) {
+            font-size: 1.27vw;
+        }
+
+        @include for-size(tabletLg, up) {
+            font-size: 1.51vw;
+        }
+
+        @include for-size(desktop, up) {
+            font-size: 1.03vw;
+        }
+
+        @include for-size(desktopLg, up) {
+            font-size: 0.6vw;
+        }
+    }
+</style>
