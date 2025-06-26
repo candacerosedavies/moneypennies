@@ -10,9 +10,10 @@ interface Props {
 
 const {
     h3Text = "Make data driven decisions",
-    para1 = `Real-time bookings data curated to your business needs`,
-    para2 = ` Insights at a glance with a personalised analysis report`,
-    para3 = `  Feel the impact our data can have on your revenue risk free`,
+    para1 = "        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestias consequatur itaque earum? Veniam vitae dicta totam omnis incidunt consequatur repellat optio, recusandae exercitationem animi, maiores architecto enim reiciendis voluptate assumenda?",
+    // para1 = `Real-time bookings data curated to your business needs`,
+    // para2 = ` Insights at a glance with a personalised analysis report`,
+    // para3 = `  Feel the impact our data can have on your revenue risk free`,
 } = Astro.props;
 ---
 
@@ -23,7 +24,7 @@ const {
     hasParallax={true}
     parallaxSpeed={0.3}
     className="Section03 lg__hr py-20 border-t-[0.5px] border-white"
-    heightVariant="tall"
+    heightVariant="normal"
 >
     <section class="section03__section-3 bg-stone-black" id="section-03">
         <section
@@ -41,8 +42,8 @@ const {
                 <p class="sm__font">
                     {para1}
                 </p>
-                <p class="sm__font">{para2}</p>
-                <p class="sm__font">{para3}</p>
+                <!-- <p class="sm__font">{para2}</p>
+                <p class="sm__font">{para3}</p> -->
                 <a href="/contact/">
                     <nav class="section03__button-container">
                         <button
@@ -94,8 +95,8 @@ const {
         min-height: 100vh !important;
         background-image: url("/images/connect/pexels-didsss-2127522.jpg");
         background-size: cover;
-        background-position: right 60% bottom 0%;
-        transform: scale(120%);
+        background-position: right 80% bottom 0%;
+        transform: scale(100%);
         display: flex;
         flex-grow: 1;
         flex-direction: column;

@@ -132,14 +132,14 @@ const {
             }
         }
 
-        // @include for-size(680px, up) {
-        //     font-size: clamp(
-        //         2rem,
-        //         4vw,
-        //         2.5rem
-        //     ); // Force smaller size in problem range
-        //     line-height: 1.1; // Tighter line spacing
-        // }
+        @include for-size(680px, up) {
+            font-size: clamp(
+                2rem,
+                4vw,
+                2.5rem
+            ); // Force smaller size in problem range
+            line-height: 1.1; // Tighter line spacing
+        }
     }
 
     .section01__para {

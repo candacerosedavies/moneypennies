@@ -12,7 +12,6 @@ import LogoBrandNav from "../MoneypenniesLogo/LogoBrandNav.astro";
     <Hamburger />
     <LogoBrandNav showTagline={true} abbreviated={false} />
     <!-- abreviate for smaller screens. tag line in the center? -->
-
     <nav
       class="nav__button-container leading-none"
       role="navigation"
@@ -22,16 +21,13 @@ import LogoBrandNav from "../MoneypenniesLogo/LogoBrandNav.astro";
         <a href="/contact/" class="contact--button--position button--nav__text"
           >SAY HELLO</a
         >
-        <!-- <button onclick="window.location.href='/contact/'">
-        <span class="animated__span">say hello</span>
-      </button> -->
       </li>
     </nav>
   </section>
 </header>
 
 <script>
-  // Nav styles that change on scroll
+  // Nav bar styles that change on scroll
   const header = document.querySelector("header");
 
   const headerStates = {
@@ -82,12 +78,12 @@ import LogoBrandNav from "../MoneypenniesLogo/LogoBrandNav.astro";
 </script>
 
 <style lang="scss">
-  // Logo positioning
-  :global(.button--nav) {
-    // On mobile/tablet: moves to right side since hamburger takes left
-    // On desktop: moves to left side since hamburger is hidden
-  }
+  // Logo positioning -  this styling was for when logo swapped sides. Delete? 26/06
+  // :global(.button--nav) {
 
+  // }
+
+  //Changed to using grid for flexibility on nav item positioning
   .nav-grid {
     display: grid;
     grid-template-columns: auto 1fr auto;
@@ -95,12 +91,12 @@ import LogoBrandNav from "../MoneypenniesLogo/LogoBrandNav.astro";
     padding: 1rem;
 
     @include for-size(tablet, up) {
-      padding: 2rem;
+      padding: 0.5rem 1rem;
     }
 
     // Mobile: hamburger on left, logo on right
     @media (max-width: 768px) {
-      grid-template-areas: "hamburger . logo";
+      grid-template-areas: "logo . hamburger";
 
       :global(.menu-bars) {
         grid-area: hamburger;
@@ -148,15 +144,6 @@ import LogoBrandNav from "../MoneypenniesLogo/LogoBrandNav.astro";
       top: 6px; // Shows when tabbed to
     }
   }
-
-  //-----NAV ITEM POSITIONING-----
-  // header {
-  //   // padding: 1rem 1rem; //smaller screens
-
-  //   @include for-size(tablet, up) {
-  //     padding: 2rem 2rem; //larger screens
-  //   }
-  // }
 
   //-----LOGO-----
 
