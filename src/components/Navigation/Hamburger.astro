@@ -122,6 +122,9 @@
       display: block;
     }
 
+    //.overlay is a base class that defines the default or 'closed' state of the element.
+    //these styles are for when the hamburger menu is closed/ not open.
+
     .overlay {
       position: fixed;
       z-index: 60;
@@ -130,7 +133,11 @@
       // width: 40vw;
       height: 100vh;
       background-color: #293442;
-      /* Now uses opacity instead of sliding */
+      pointer-events: none; //Don't capture clicks when closed - UPDATED BECAUSE LINKS NOT WORKING IN MOBILE VIEW
+    }
+
+    .overlay.opacity-100 {
+      pointer-events: auto; // Only capture clicks when visible - UPDATED BECAUSE LINKS NOT WORKING IN MOBILE VIEW
     }
 
     /* Hamburger Menu */

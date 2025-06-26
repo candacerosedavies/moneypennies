@@ -1,0 +1,289 @@
+---
+import SectionLayout from "@/layouts/SectionLayout.astro";
+
+interface Props {
+    h1Text?: string;
+    heading01?: string;
+    heading02?: string;
+    heading03?: string;
+    privacyNotice?: string;
+    terms?: string;
+    cookies?: string;
+}
+
+const {
+    h1Text = "Help",
+    heading01 = "Privacy",
+    heading02 = "Terms",
+    heading03 = "Cookies",
+    privacyNotice = "Privacy Policy This privacy policy sets out how Moneypennies uses and protects any information that you give Moneypennies when you use this website. Moneypennies is committed to ensuring that your privacy is protected. Should we ask you to provide certain information by which you can be identified when using this website, then you can be assured that it will only be used in accordance with this privacy statement. Moneypennies may change this policy from time to time by updating this page. You should check this page from time to time to ensure that you are happy with any changes. This policy is effective from 01/01/2010. What we collect We may collect the following information: • name and job title • contact information including email address • demographic information such as postcode, preferences and interests • other information relevant to customer surveys and/or offers. What we do with the information we gather We require this information to understand your needs and provide you with a better service, and in particular for the following reasons: Internal record keeping. We may use the information to improve our products and services. We may periodically send promotional emails about new products, special offers or other information which we think you may find interesting using the email address which you have provided. From time to time, we may also use your information to contact you for market research purposes. We may contact you by email, phone, fax or mail. We may use the information to customise the website according to your interests. Security We are committed to ensuring that your information is secure. In order to prevent unauthorised access or disclosure, we have put in place suitable physical, electronic and managerial procedures to safeguard and secure the information we collect online.",
+    cookies = "How we use cookies A cookie is a small file which asks permission to be placed on your computer's hard drive. Once you agree, the file is added and the cookie helps analyse web traffic or lets you know when you visit a particular site. Cookies allow web applications to respond to you as an individual. The web application can tailor its operations to your needs, likes and dislikes by gathering and remembering information about your preferences. We use traffic log cookies to identify which pages are being used. This helps us analyse data about webpage traffic and improve our website in order to tailor it to customer needs. We only use this information for statistical analysis purposes and then the data is removed from the system. Overall, cookies help us provide you with a better website by enabling us to monitor which pages you find useful and which you do not. A cookie in no way gives us access to your computer or any information about you, other than the data you choose to share with us. You can choose to accept or decline cookies. Most web browsers automatically accept cookies, but you can usually modify your browser setting to decline cookies if you prefer. This may prevent you from taking full advantage of the website. Links to other websites Our website may contain links to other websites of interest. However, once you have used these links to leave our site, you should note that we do not have any control over that other website. Therefore, we cannot be responsible for the protection and privacy of any information which you provide whilst visiting such sites and such sites are not governed by this privacy statement. You should exercise caution and look at the privacy statement applicable to the website in question. Controlling your personal information You may choose to restrict the collection or use of your personal information in the following ways: whenever you are asked to fill in a form on the website, look for the box that you can click to indicate that you do not want the information to be used by anybody for direct marketing purposes if you have previously agreed to us using your personal information for direct marketing purposes, you may change your mind at any time by writing to or emailing us at suzanne@moneypennies.biz We will not sell, distribute or lease your personal information to third parties unless we have your permission or are required by law to do so. We may use your personal information to send you promotional information about third parties which we think you may find interesting if you tell us that you wish this to happen. You may request details of personal information which we hold about you under the Data Protection Act 1998. A small fee will be payable. If you would like a copy of the information held on you please write to Suzanne Woolf , Oliver's Data Holdings (T/A Moneypennies), Suite B, 2 Edge Lane, Chorlton, Manchester M21 9JF If you believe that any information we are holding on you is incorrect or incomplete, please write to or email us as soon as possible at the above address. We will promptly correct any information found to be incorrect.",
+} = Astro.props;
+---
+
+<SectionLayout allowOverflow={true} textWidth="full">
+    <section class="help-page">
+        <header class="help-header">
+            <h1 class="lg__font">{h1Text}</h1>
+        </header>
+
+        <article class="help-layout">
+            <!-- Left Navigation -->
+            <nav class="help-nav">
+                <ul class="help-nav-list">
+                    <li class="button--animated">
+                        <button
+                            class="help-nav-link md__font button__text"
+                            data-target="privacy"
+                        >
+                            {heading01}
+                        </button>
+                    </li>
+
+                    <li class="button--animated">
+                        <button
+                            class="help-nav-link md__font button__text"
+                            data-target="cookies"
+                        >
+                            {heading03}
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Right Content -->
+            <main class="help-content">
+                <aside class="help-content-inner">
+                    <section id="privacy" class="help-section">
+                        <h2 class="md__font">{heading01}</h2>
+                        <p class="sm__font">{privacyNotice}</p>
+                    </section>
+
+                    <section id="cookies" class="help-section">
+                        <h2 class="md__font">{heading03}</h2>
+                        <p class="sm__font">{cookies}</p>
+                    </section>
+                </aside>
+            </main>
+        </article>
+    </section>
+</SectionLayout>
+
+<script>
+    // Add smooth scrolling navigation
+    document.addEventListener("DOMContentLoaded", () => {
+        const navLinks = document.querySelectorAll(".help-nav-link");
+
+        //loop through each button
+        navLinks.forEach((link) => {
+            //e is the click event
+            link.addEventListener("click", (e) => {
+                //stop button default behaviour
+                e.preventDefault();
+                //get the value assigned to heading 'data-target' eg 'privacy' or 'cookies'
+                const target = link.getAttribute("data-target");
+
+                //targetElement  <section id="privacy"> find the element with id='privacy' in this case the privacy para not the heading.
+                if (target) {
+                    //added to prevent typescript error. "only proceed if 'target' is not null"
+                    const targetElement = document.getElementById(target);
+
+                    //if element with id-'privacy', scroll to that section/para.
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start",
+                        });
+
+                        // ----- VISUALLY IDENFITY WHICH SECTION HAS BEEN CLICKED BY ADDING/REMOVING CSS CLASS 'active' -----
+                        // (still inside the click handler) update the 'active' state. 'nl' and 'link' params represent the same thing, using nl so browser doesn't explode.
+                        navLinks.forEach((nl) => {
+                            //is this current button the same as the button that was clicked?
+                            if (nl === link) {
+                                // If it IS the same button that was clicked - add the CSS class 'active'
+                                nl.classList.add("active");
+                            } else {
+                                // It is NOT the button that was clicked -remove the CSS class
+                                nl.classList.remove("active");
+                            }
+                        });
+                    }
+                }
+            });
+        });
+
+        //-----VISUALLY IDENFITY ACTIVE SECTION BASED ON SCROLL POSITION (in addition to clicking as above)-----
+
+        //Find ALL para sections (privacy para, cookies para)
+        const sections = document.querySelectorAll(".help-section");
+        //Find the container of the para sections- use to define the scrolling area
+        const scrollContainer = document.querySelector(".help-content");
+
+        //----- 'IntersectionObserver' watches for when elements come into view!
+        // It automatically creates an object with several built in properties including 'target'
+        const observer = new IntersectionObserver(
+            //'entries' represents a list of sections that just became visible or invisible (eg bottom of privacy, top of cookies)
+            (entries) => {
+                //'entry' Loop through one specific para at a time
+                entries.forEach((entry) => {
+                    //isIntersecting is true if section is visible, false if it disappeared
+                    if (entry.isIntersecting) {
+                        //entry object + target = entire DOM element + id = specifies each individual para sections
+                        const id = entry.target.id;
+
+                        //-----Visually update the navigation links by adding/removing CSS class 'active'-----
+                        // Remember: navLinks is the name of our click handler!
+                        navLinks.forEach((link) => {
+                            // Find the button who's data-target matches the visible section's id
+                            if (link.getAttribute("data-target") === id) {
+                                //  Add the 'active' CSS class to that matching button
+                                link.classList.add("active");
+                                // Remove 'active' class from all links
+                            } else {
+                                link.classList.remove("active");
+                            }
+                        });
+                    }
+                });
+            },
+            {
+                root: scrollContainer, // Use the scrolling container as root
+                threshold: 0.3, //trigger when 30% of a section is visible
+            },
+        );
+
+        sections.forEach((section) => observer.observe(section)); //tells the IntersectionObserver to watch EACH para section
+    });
+</script>
+
+<style lang="scss">
+    @use "@/styles/mixins" as *;
+
+    .help-page {
+        min-height: 100vh;
+        background: var(--stone-black, #1a1a1a);
+        padding-top: 5rem;
+        width: 100%;
+    }
+
+    .help-header {
+        padding: 0 1rem;
+        margin-bottom: 2rem;
+        text-align: center;
+
+        @include for-size(tablet, up) {
+            padding: 0 2rem;
+            text-align: left;
+        }
+    }
+
+    .help-layout {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        height: calc(100vh - 12rem);
+        gap: 0;
+
+        @include for-size(phone, down) {
+            grid-template-columns: 80px 1fr;
+            height: auto;
+            min-height: calc(100vh - 12rem);
+        }
+
+        @include for-size(tablet, up) {
+            grid-template-columns: 1fr 3fr;
+        }
+    }
+
+    .help-nav {
+        padding: 1rem;
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+
+        @include for-size(tablet, up) {
+            padding: 2rem;
+        }
+    }
+
+    .help-nav-list {
+        position: sticky;
+        top: 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        @include for-size(phone, down) {
+            position: static;
+            gap: 0.5rem;
+        }
+    }
+
+    .help-nav-link {
+        background: none;
+        border: none;
+        color: inherit;
+        text-align: left;
+        width: 100%;
+        cursor: pointer;
+        transition: color 0.2s ease;
+        padding: 0.5rem 0;
+
+        &:hover {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        &.active {
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+
+            &::before {
+                // content: "→ ";
+                content: "➞";
+                // color: rgba(255, 255, 255, 0.6);
+            }
+        }
+
+        @include for-size(phone, down) {
+            font-size: 0.75rem;
+            padding: 0.25rem 0;
+        }
+    }
+
+    .help-content {
+        overflow-y: auto;
+        padding: 1rem;
+
+        @include for-size(phone, down) {
+            overflow-y: visible;
+            height: auto;
+        }
+
+        @include for-size(tablet, up) {
+            padding: 2rem;
+        }
+    }
+
+    .help-content-inner {
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+
+        width: 70vw;
+        max-width: 70vw;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0 1rem;
+    }
+
+    .help-section {
+        h2 {
+            margin-bottom: 1.5rem;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+    }
+</style>
