@@ -4,13 +4,13 @@ import Footer from "../Footer/Footer.astro";
 import { Content as Privacy } from "./Privacy.md";
 import { Content as Cookies } from "./Cookies.md";
 
-const privacyNotice = Object.values(
-    import.meta.glob("./Help/*.md", { eager: true }),
-);
+// const privacyNotice = Object.values(
+//     import.meta.glob("./Help/*.md", { eager: true }),
+// );
 
-const cookies = Object.values(
-    import.meta.glob("./Help/Cookies.md", { eager: true }),
-);
+// const cookies = Object.values(
+//     import.meta.glob("./Help/Cookies.md", { eager: true }),
+// );
 
 interface Props {
     h1Text?: string;
@@ -158,7 +158,7 @@ const {
             },
             {
                 root: scrollContainer, // Use the scrolling container as root
-                threshold: 0.2, //trigger when 30% of a section is visible
+                threshold: 0.05, //trigger when 30% of a section is visible
             },
         );
 
@@ -177,7 +177,7 @@ const {
     }
 
     .help--header {
-        padding: 1rem 1rem 3rem 1rem;
+        padding: 1rem 1rem 1rem 1rem;
         // margin-bottom: 2rem;
         text-align: center;
         position: sticky;
@@ -239,7 +239,8 @@ const {
     .help--nav__list {
         list-style: none;
         margin: 0;
-        padding-bottom: 3rem;
+        padding-bottom: 1rem;
+        padding-top: 1rem;
         max-width: 20vw;
         align-items: center;
 
