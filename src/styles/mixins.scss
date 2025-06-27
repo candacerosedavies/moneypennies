@@ -284,7 +284,7 @@ $breakpoints: (
 
 // In mixins.scss
 @mixin lg__font {
-    font-size: clamp(1.5rem, 6vw, 2rem);
+    font-size: clamp(2rem, 8vw, 4rem);
 
     @include for-size(tablet, up) {
         font-size: clamp(3rem, 7vw, 3.5rem);
