@@ -26,7 +26,9 @@ const address = "Manchester Suite B 2 Edge Lane Manchester M21 9JF";
     heightVariant="normal"
 >
     <!-- COLUMN 1 -->
-    <footer class="bg-stone-black py-20 border-t-[0.5px] border-white">
+    <footer
+        class="bg-stone-black py-20 border-t-[0.5px] border-white footer--container"
+    >
         <LogoBrand class="footer--logo" />
         <section class="section__footer">
             <!-- 
@@ -138,6 +140,11 @@ const address = "Manchester Suite B 2 Edge Lane Manchester M21 9JF";
 
 <style lang="scss">
     @use "@/styles/mixins";
+
+    .footer--container {
+        // position: fixed;
+        bottom: 0;
+    }
 
     .copyright {
         display: flex;

@@ -26,7 +26,7 @@ const {
     h1Text = "HELP",
     heading01 = "Privacy",
     // heading02 = "Terms",
-    heading03 = "Cookies",
+    heading02 = "Cookies",
 } = Astro.props;
 ---
 
@@ -54,7 +54,7 @@ const {
                             class="help--nav__link sm__font button--nav__text"
                             data-target="cookies"
                         >
-                            {heading03}
+                            {heading02}
                         </button>
                     </li>
                 </ul>
@@ -63,13 +63,13 @@ const {
             <!-- Right Content -->
             <main class="help--content">
                 <aside class="help--content__inner">
-                    <section id="privacy" class="help--section">
-                        <h2 class="lg__font">{heading01}</h2>
+                    <section class="help--section heading--01">
+                        <h2 id="privacy" class="lg__font">{heading01}</h2>
                         <p class="sm__font"><Privacy /></p>
                     </section>
 
-                    <section id="cookies" class="help--section">
-                        <h2 class="lg__font">{heading03}</h2>
+                    <section id="cookies" class="help--section heading--02">
+                        <h2 class="lg__font">{heading02}</h2>
                         <p class="sm__font"><Cookies /></p>
                     </section>
                 </aside>
@@ -158,7 +158,7 @@ const {
             },
             {
                 root: scrollContainer, // Use the scrolling container as root
-                threshold: 0.05, //trigger when 30% of a section is visible
+                threshold: 0.3, //trigger when 30% of a section is visible
             },
         );
 
@@ -169,156 +169,143 @@ const {
 <style lang="scss">
     @use "@/styles/mixins" as *;
 
+    // @include for-size(phone, down) {
+    //     .help--header--links {
+    //         // position: fixed;
+    //         // z-index: 999; /* So that it is not under the other elements */
+    //         // // background: #1c2454; /* It was transparent */
+    //     }
+    // }
+
     .help--page {
         min-height: 100vh;
         background: var(--stone-black, #1a1a1a);
-        padding: 6rem 2rem;
+        padding-top: 5rem;
+        padding-bottom: 10rem;
         width: 100%;
     }
 
     .help--header {
-        padding: 1rem 1rem 1rem 1rem;
-        // margin-bottom: 2rem;
+        margin-bottom: 2rem;
         text-align: center;
         position: sticky;
         top: 0;
         background: var(--stone-black, #1a1a1a);
         z-index: 10;
-        // padding: 1rem;
+        padding: 1rem;
 
         @include for-size(tablet, up) {
-            position: static; // Remove sticky on larger screens
-            padding: 0 2rem 5rem 2rem;
-            text-align: center;
+            position: static;
+            padding: 0 2rem;
+            text-align: left;
         }
     }
 
     //GRID CONTAINER FOR ALL CONTENT APART FROM HEADER.
     .help--grid {
-        // Mobile: a scrollable container
-        @include for-size(phone, down) {
-            display: flex;
-            flex-direction: column;
-            height: calc(100vh - 12rem);
-            gap: 0;
-            justify-content: center;
-            align-items: center;
-        }
+        // Mobile: Create a scrollable container
+        display: flex;
+        flex-direction: column;
+        height: calc(100vh - 12rem); // Fixed height for scrolling
+        gap: 0;
 
-        // max-width: 20vw;
-
-        //larger screens: grid
-        @include for-size(phone, up) {
+        @include for-size(tablet, up) {
             display: grid;
-            grid-template-columns: 1fr 5fr;
+            grid-template-columns: 1fr 2fr;
             grid-template-rows: none;
             height: calc(100vh - 12rem);
             gap: 0;
         }
 
         @include for-size(desktop, up) {
-            grid-template-columns: 1fr 5fr;
+            grid-template-columns: 1fr 3fr;
         }
     }
 
-    //NAV LINKS CONTAINER (CHILD OF .help--grid)
     .help--nav {
-        padding: 0 1rem 1rem 1rem;
+        // Mobile: Fixed height section with sticky content
+        padding: 1rem;
         border-right: 1px solid rgba(255, 255, 255, 0.1);
         flex-shrink: 0; // Don't shrink on mobile
-        justify-content: center;
 
         @include for-size(tablet, up) {
             padding: 2rem;
             flex-shrink: 1;
-            padding: 0 2rem 2rem 2rem;
         }
     }
+    //UL CLASS FOR NAV LINKS (CHILD OF .help-layout GRID)
 
-    //UL CLASS FOR NAV LINKS (CHILD OF .help--nav)
     .help--nav__list {
         list-style: none;
         margin: 0;
-        padding-bottom: 1rem;
-        padding-top: 1rem;
-        max-width: 20vw;
-        align-items: center;
-
-        // Mobile: sticky vertical navigation
+        padding: 0;
         position: sticky;
         top: 1rem;
         display: flex;
         flex-direction: column;
-        gap: 1rem;
+        align-items: center;
+        gap: 0.5rem;
+        background: rgba(26, 26, 26, 0.95); // Semi-transparent background
+        z-index: 10;
 
         @include for-size(tablet, up) {
             top: 2rem;
             gap: 1rem;
-            // Ensure it stays vertical on all larger screens
-            flex-direction: column;
+            background: transparent;
         }
     }
-
     //-----INDIVIDUAL NAV LINKS. NOT A CONTAINER FOR ALL LINKS-----
     .help--nav__link {
         background: none;
         border: none;
         color: inherit;
-        text-align: center;
+        text-align: left; //keep content left aligned
         width: 100%;
         cursor: pointer;
         transition: color 0.2s ease;
-        padding: 0.25rem 0;
+        padding: 0.25rem 0.5rem; //padding L/R
+        // font-size: 0.75rem; /* Smaller on mobile */
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
 
         @include for-size(tablet, up) {
-            text-align: left;
+            text-align: left; /* Left align on larger screens */
             padding: 0.5rem 0;
-            font-size: inherit;
-            white-space: normal; // Allow wrapping
+            font-size: inherit; /* Normal size on larger screens */
+            white-space: normal; /* Allow wrapping */
         }
 
         &:hover {
-            // color: rgba(255, 255, 255, 0.8);
+            color: rgba(255, 255, 255, 0.8);
 
-            // @include sm__font;
+            @include sm__font;
         }
 
         &.active {
             color: white;
-            // font-weight: 600;
+            font-weight: 600;
 
-            // @include md__font;
+            @include md__font;
 
-            // &::before {
-            //     // content: "→ ";
-            //     // background-color: rgba(255, 255, 255, 0.6);
-            // }
+            &::before {
+                // content: "→ ";
+                // background-color: rgba(255, 255, 255, 0.6);
+            }
         }
     }
 
     //-----CONTAINER FOR MAIN CONTENT-----
     .help--content {
+        // Mobile: This becomes the scrollable area
         flex: 1;
         overflow-y: auto;
-        // padding: 1rem;
+        padding: 1rem;
         box-sizing: border-box;
-        padding: 3rem 0;
-        width: 100%;
-        border-top: 0.5px solid white;
         text-align: left;
 
         @include for-size(tablet, up) {
-            // padding: 2rem; /* More padding on larger screens */
-            padding: 2rem 0;
-            border-top: 0px;
-            // border-top: 0.5px solid white;
-            border-left: 0.5px solid white;
-        }
-
-        @include for-size(desktop, up) {
+            padding: 2rem;
         }
     }
 
@@ -329,12 +316,12 @@ const {
     }
 
     .help--section {
-        // h2 {
-        //     margin-bottom: 1.5rem;
-        // }
+        h2 {
+            // margin-bottom: 1.5rem;
+        }
 
-        // p {
-        //     line-height: 1.6;
-        // }
+        p {
+            // line-height: 1.6;
+        }
     }
 </style>
