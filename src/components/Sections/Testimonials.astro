@@ -23,7 +23,7 @@ const testimonials = [
 
 <SectionLayout className="testimonial--section ">
     <section
-        class="bg-stone-black text-white md:px-12 py-20 border-t-[0.5px] border-white"
+        class="md:px-12 py-20 border-t-[0.5px] border-mp-blue"
         aria-labelledby="testimonials-heading"
     >
         <section class="max-w-6xl mx-auto px-10">
@@ -97,11 +97,11 @@ const testimonials = [
                             aria-hidden={index !== 0 ? "true" : "false"}
                         >
                             <div class="text-center max-w-4xl mx-auto px-4 sm__font">
-                                <blockquote class=" sm__font font-light  mb-12 text-gray-100">
+                                <blockquote class=" sm__font font-light  mb-12 ">
                                     <p>"{testimonial.quote}"</p>
                                 </blockquote>
                                 <footer class="space-y-2">
-                                    <cite class="sm__font  text-white not-italic">
+                                    <cite class="sm__font   not-italic">
                                         {testimonial.name}
                                     </cite>
                                     <p class="sm__font text-gray-400 ">
@@ -205,7 +205,8 @@ const testimonials = [
 
 <style>
     .testimonial--section {
-        /* padding-top: 4rem; */
+        background: #f6f0e7;
+        color: #22219b !important;
     }
 
     h2 {
@@ -214,11 +215,11 @@ const testimonials = [
     }
 
     .testimonial-nav-btn {
-        @apply p-2 rounded-full border border-white hover:border-white transition-all duration-300;
+        @apply p-2 rounded-full hover:border-mp-blue transition-all duration-300;
     }
 
     .testimonial-nav-btn:hover {
-        background-color: #293442;
+        background-color: #22219b;
     }
 
     .testimonial-container {

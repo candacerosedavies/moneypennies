@@ -14,24 +14,30 @@ html {
 
     /* Prevent horizontal scrolling */
     width: 100%;
-    color: white;
+    color: #22219b;
+    background: #f6f0e7;
     align-items: center;
     justify-content: center;
     text-align: center;
     align-self: center;
     letter-spacing: 0.25vh;
     line-height: 1.2;
-    font-family: "inter", sans-serif;
+    font-family: 'jetBrains Mono', sans-serif;
 
     @include for-size(tablet, up) {
         line-height: 1.5;
     }
 }
 
-// h2,
-// h1 {
-//     font-family: "abril FatFace" sans-serif;
-// }
+h2,
+h1 {
+    font-family: "josefin sans", sans-serif;
+    font-weight: 500;
+}
+
+p {
+    font-family: 'jetBrains mono', sans-serif;
+}
 
 //-----ACCESSIBILITY-----
 

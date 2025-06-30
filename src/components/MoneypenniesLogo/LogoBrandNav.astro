@@ -20,12 +20,12 @@ const {
     role="navigation"
     aria-label="moneypennies logo and home button"
 >
-    <svg
+    <!-- <svg
         class="button--nav__text brand-logo text-current"
         viewBox="0 0 200 200"
         xmlns="http://www.w3.org/2000/svg"
     >
-        <!-- Your SVG content -->
+        Your SVG content 
         <circle
             cx="100"
             cy="100"
@@ -124,11 +124,11 @@ const {
             y2="100"
             stroke="currentColor"
             stroke-width="2"></line>
-    </svg>
+    </svg> -->
 
     <nav class="button--nav__text flex flex-col justify-between items-start">
         <h2 class="sm__font brand-name tracking-wider leading-[0.9]">
-            {abbreviated ? "MP" : "MONEYPENNIES"}
+            {abbreviated ? "MP" : "moneypennies"}
         </h2>
         <!-- {
             showTagline && (
@@ -144,28 +144,10 @@ const {
 <style lang="scss">
     @use "@/styles/mixins";
 
-    // .nav-brand-position {
-    //     // Mobile/tablet: top right
-    //     // position: fixed;
-    //     top: 1rem;
-    //     right: 2rem;
-    //     z-index: 70;
-    //     left: 60vw;
-    //     right: auto;
-    //     // padding: 0rem 2rem 0rem 0rem;
-
-    //     @include for-size(smPhone, up) {
-    //         left: 50vw;
-    //         // padding: 0rem 2rem 0rem 0rem;
-    //     }
-
-    //     // Tablet and up: top left
-    //     @include for-size(tablet, up) {
-    //         left: 0;
-    //         right: auto;
-    //     }
-    // }
-
+    h2 {
+        font-family: "yeseva one", sans-serif;
+        font-style: italic;
+    }
     .brand-logo {
         // Much smaller for navbar
         width: 1.2rem;
