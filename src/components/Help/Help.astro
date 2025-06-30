@@ -77,9 +77,7 @@ const {
         </article>
     </section>
     <Footer />
-</SectionLayout>
-
-<script>
+</SectionLayout><script>
     // Add smooth scrolling navigation
     document.addEventListener("DOMContentLoaded", () => {
         const navLinks = document.querySelectorAll(".help--nav__link");
@@ -100,10 +98,25 @@ const {
 
                     //if element with id-'privacy', scroll to that section/para.
                     if (targetElement) {
-                        targetElement.scrollIntoView({
-                            behavior: "smooth",
-                            block: "start",
-                        });
+                        // NEW: Better scroll calculation to prevent overshooting
+                        const scrollContainer =
+                            document.querySelector(".help--content");
+                        const contentInner = document.querySelector(
+                            ".help--content__inner",
+                        );
+
+                        if (scrollContainer && contentInner) {
+                            // Get the position of the target relative to the content inner container
+                            const targetPosition =
+                                targetElement.offsetTop -
+                                contentInner.offsetTop;
+                            const headerOffset = 50; // Smaller offset since sticky is working
+
+                            scrollContainer.scrollTo({
+                                top: targetPosition - headerOffset,
+                                behavior: "smooth",
+                            });
+                        }
 
                         // ----- VISUALLY IDENFITY WHICH SECTION HAS BEEN CLICKED BY ADDING/REMOVING CSS CLASS 'active' -----
                         // (still inside the click handler) update the 'active' state. 'nl' and 'link' params represent the same thing, using nl so browser doesn't explode.
@@ -158,14 +171,13 @@ const {
             },
             {
                 root: scrollContainer, // Use the scrolling container as root
-                threshold: 0.05, //trigger when 30% of a section is visible
+                threshold: 0.05, //trigger when 5% of a section is visible
             },
         );
 
         sections.forEach((section) => observer.observe(section)); //tells the IntersectionObserver to watch EACH para section
     });
 </script>
-
 <style lang="scss">
     @use "@/styles/mixins" as *;
 
