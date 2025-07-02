@@ -1,26 +1,88 @@
 ---
-// import Header from "../Header/Header.astro";
+import SectionLayout from "@/layouts/SectionLayout.astro";
+
+const contactHeading = "Start Connecting";
+const contactPara =
+    " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam impedit dolore excepturi ullam?";
 ---
 
-<section class="contact-section">
-    <div class="parallax-container">
-        <!-- Single overlay for the entire section -->
-        <div class="overlay"></div>
+<SectionLayout variant="color">
+    <!-- Pop up message submitted message -->
 
-        <!-- Container for all content -->
-        <div class="content-container">
-            <div class="copy-container">
-                <!-- Heading -->
-                <h1 class="heading">Request your free sample</h1>
-                <p class="para">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam
-                    impedit dolore excepturi ullam?
+    <!-- <dialog class="submit--modal">
+        <article class="submit--container">
+            <dotlottie-player
+                class="tiger-animation"
+                alt="roaring-geometric-colorful-tiger"
+                src="https://lottie.host/5de71444-5f88-4614-b67f-e428ffcca953/bTHZNrMBkU.lottie"
+                background="transparent"
+                speed="1"
+                style="width: 300px; height: 300px"
+                loop
+                autoplay></dotlottie-player>
+          <img src="images/lost.gif" alt="crying-face-gif" /> 
+            <h2>Game Over!</h2>
+            <p>The correct word was:</p>
+            <button class="play-again">Play Again</button>
+        </article>
+    </dialog> 
+    
+    TEMPORARY POPUP-->
+
+    <div id="modal-overlay" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button id="close-modal" class="close-button">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="success-icon">✓</div>
+                <h3>Connections That Count</h3>
+                <p id="modal-message">
+                    Sit back and relax while we prepare your bespoke set of
+                    connection data. We'll be in touch very soon.
                 </p>
             </div>
+            <div class="modal-footer">
+                <button id="modal-ok" class="modal-button">Perfect!</button>
+            </div>
+        </div>
+    </div>
 
-            <!-- Form container -->
-            <div class="form-container">
-                <form method="POST" id="form" class="contact-form">
+    <section class="contact-section">
+        <!-- parallax not currently in use -->
+        <!-- <section class="parallax-container"> -->
+        <!-- Main content wrapper -->
+        <main class="content-container">
+            <!-- Header section with heading and description -->
+            <header class="copy-container">
+                <h1 class="heading">{contactHeading}</h1>
+                <p class="para">
+                    {contactPara}
+                </p>
+            </header>
+
+            <!-- Contact form section -->
+            <section class="form-container">
+                <!-- INVISIBLE FORM FIELDS - CONFIGURE FORM TO WORK WITH WEB3FORMS, SET SUBMISSION SUBJECT LINE, PREVENT SPAM
+                 <form> action - defines the location (URL) where the form's collected data should be sent when it is submitted.
+                 <input> 1 -  type is hidden/ input hosts the Web3Forms access key and a unique identifier
+                 <input> 2 -  type is hidded/ sets the email subject line received when form is submitted. Currently set to 'new submission from moneypennies'
+                 <input> 3 - type is checkbox. Purpose is spam prevention. Hidden from real users but bots might fill it out allowing Web3Forms to filter out spam submissions. 
+                 (Spam prevention not as sophisticated as a reCAPTCHA check box. Will need to amend if Suzanne receives spam.)
+                 <div> is hcaptcha form-->
+
+                <form
+                    action="https://api.web3forms.com/submit"
+                    method="POST"
+                    id="form"
+                    class="contact-form"
+                >
+                    <input
+                        type="hidden"
+                        name="replyto"
+                        value="candacerosedavies@gmail.com"
+                    />
+
                     <input
                         type="hidden"
                         name="access_key"
@@ -29,21 +91,29 @@
                     <input
                         type="hidden"
                         name="subject"
-                        value="New Submission from Moneypennies"
+                        value="New Submission From Moneypennies site 2.0"
                     />
                     <input type="checkbox" name="botcheck" class="hidden" />
 
-                    <div class="form-grid">
+                    <!-- VISIBLE FORM FIELDS-->
+                    <fieldset class="form-grid">
+                        <legend class="sr-only">Contact Information</legend>
+
                         <!-- Name field -->
-                        <div class="form-field">
+                        <p class="form-field">
+                            <label for="name" class="sr-only">Name</label>
                             <input
-                              
-                            
+                                type="text"
+                                id="name"
+                                name="name"
+                                placeholder="Name"
+                                required
                             />
-                        </div>
+                        </p>
 
                         <!-- Email field -->
-                        <div class="form-field">
+                        <p class="form-field">
+                            <label for="email" class="sr-only">Email</label>
                             <input
                                 type="email"
                                 id="email"
@@ -51,10 +121,11 @@
                                 placeholder="Email"
                                 required
                             />
-                        </div>
+                        </p>
 
                         <!-- Phone field -->
-                        <div class="form-field">
+                        <p class="form-field">
+                            <label for="phone" class="sr-only">Phone</label>
                             <input
                                 type="tel"
                                 id="phone"
@@ -62,45 +133,276 @@
                                 placeholder="Phone"
                                 required
                             />
-                        </div>
-
-                        <!-- Company field (optional) -->
-                        <!-- <div class="form-field">
-                            <input
-                                type="text"
-                                id="company"
-                                name="company"
-                                placeholder="Company"
-                            />
-                        </div> -->
+                        </p>
 
                         <!-- Message field (spans both columns) -->
-                        <div class="form-field message-field">
+                        <p class="form-field message-field">
+                            <label for="message" class="sr-only">Message</label>
                             <textarea
                                 id="message"
                                 name="message"
-                                placeholder="Message"
+                                placeholder="How can we help?"
                                 rows="3"
                                 required></textarea>
-                        </div>
-                    </div>
+                        </p>
+                    </fieldset>
 
                     <!-- Submit button -->
-                    <div class="button-container">
+                    <footer class="button-container">
                         <button type="submit" class="submit-button">
                             start connecting
                         </button>
-                    </div>
+                    </footer>
 
                     <!-- Result message (initially hidden) -->
-                    <div id="result" class="result-message hidden"></div>
+                    <p
+                        id="result"
+                        class="result-message hidden"
+                        role="status"
+                        aria-live="polite"
+                    >
+                    </p>
                 </form>
-            </div>
-        </div>
-    </div>
-</section>
+            </section>
+        </main>
+        <!-- closing parallax container tag not currently in use -->
+        <!-- </section> -->
+    </section>
+</SectionLayout>
+
+<script src="https://web3forms.com/client/script.js" async defer></script>
+
+<script>
+    const form = document.getElementById("form");
+    const result = document.getElementById("result");
+
+    // Define modal functions OUTSIDE the form submit handler
+    function showModal(message, type) {
+        const modal = document.getElementById("modal-overlay");
+        const messageEl = document.getElementById("modal-message");
+        const icon = document.querySelector(".success-icon");
+
+        // Add null checks
+        if (!modal || !messageEl || !icon) {
+            console.error("Modal elements not found");
+            return;
+        }
+
+        messageEl.textContent = message;
+
+        if (type === "error") {
+            icon.textContent = "⚠";
+            icon.style.color = "#ef4444";
+        } else {
+            icon.textContent = "✓";
+            icon.style.color = "#10b981";
+        }
+
+        modal.classList.remove("hidden");
+    }
+
+    function closeModal() {
+        const modal = document.getElementById("modal-overlay");
+        if (modal) {
+            modal.classList.add("hidden");
+        }
+    }
+
+    // Form submit handler with proper type checking
+    if (form) {
+        form.addEventListener("submit", async function (e) {
+            e.preventDefault(); // This prevents the redirect
+
+            // Type assertion for form
+            const formElement = form;
+            if (!(formElement instanceof HTMLFormElement)) {
+                console.error("Form element is not a valid form");
+                return;
+            }
+
+            const formData = new FormData(formElement);
+            const object = Object.fromEntries(formData);
+            const json = JSON.stringify(object);
+
+            // Check if result element exists before using it
+            if (result) {
+                result.innerHTML = "Sending message...";
+                result.className = "result-message text-yellow-300";
+                result.style.display = "block";
+            }
+
+            try {
+                const response = await fetch(
+                    "https://api.web3forms.com/submit",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            Accept: "application/json",
+                        },
+                        body: json,
+                    },
+                );
+
+                const responseData = await response.json();
+
+                // Hide the inline result message
+                if (result) {
+                    result.style.display = "none";
+                }
+
+                // Show modal instead
+                if (response.status === 200) {
+                    showModal(
+                        "Sit back and relax while we prepare your bespoke set of connection data. We'll be in touch very soon.",
+                        "success",
+                    );
+                    // Type assertion for reset method
+                    if (formElement instanceof HTMLFormElement) {
+                        formElement.reset();
+                    }
+                } else {
+                    showModal(
+                        responseData.message ||
+                            "Something went wrong. Please try again.",
+                        "error",
+                    );
+                }
+            } catch (error) {
+                console.log(error);
+                if (result) {
+                    result.style.display = "none";
+                }
+                showModal(
+                    "Network error. Please check your connection and try again.",
+                    "error",
+                );
+            }
+        });
+    }
+
+    // Add event listeners for closing modal (wait for DOM to be ready)
+    document.addEventListener("DOMContentLoaded", function () {
+        // Modal close event listeners with null checks
+        const closeButton = document.getElementById("close-modal");
+        const okButton = document.getElementById("modal-ok");
+        const modalOverlay = document.getElementById("modal-overlay");
+
+        if (closeButton) {
+            closeButton.addEventListener("click", closeModal);
+        }
+
+        if (okButton) {
+            okButton.addEventListener("click", closeModal);
+        }
+
+        if (modalOverlay) {
+            modalOverlay.addEventListener("click", function (e) {
+                if (e.target === this) closeModal(); // Close when clicking outside
+            });
+        }
+    });
+
+    // Clear form when page loads (handles back button)
+    window.addEventListener("pageshow", function (event) {
+        if (event.persisted) {
+            const formElement = document.getElementById("form");
+            if (formElement instanceof HTMLFormElement) {
+                formElement.reset();
+            }
+        }
+    });
+
+    // Also clear form on page load
+    document.addEventListener("DOMContentLoaded", function () {
+        const formElement = document.getElementById("form");
+        if (formElement instanceof HTMLFormElement) {
+            formElement.reset();
+        }
+    });
+</script>
 
 <style lang="scss">
+    // TEMPORARY POPUP STYLES
+
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+
+        &.hidden {
+            display: none;
+        }
+    }
+
+    .modal-content {
+        background: white;
+        border-radius: 12px;
+        padding: 2rem;
+        max-width: 400px;
+        width: 90%;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        position: relative;
+    }
+
+    .modal-header {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+    }
+
+    .close-button {
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        color: #999;
+
+        &:hover {
+            color: #333;
+        }
+    }
+
+    .success-icon {
+        font-size: 3rem;
+        color: #10b981;
+        margin-bottom: 1rem;
+    }
+
+    .modal-body h3 {
+        margin-bottom: 1rem;
+        color: #333;
+    }
+
+    .modal-body p {
+        margin-bottom: 1.5rem;
+        color: #666;
+    }
+
+    .modal-button {
+        background-color: var(--mp-blue, #22219b);
+        color: white;
+        border: none;
+        padding: 0.75rem 2rem;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 1rem;
+
+        &:hover {
+            opacity: 0.9;
+        }
+    }
+
+    //TEMP STYLES END
+
     .contact-section {
         position: relative;
     }
@@ -108,7 +410,7 @@
     .parallax-container {
         min-height: 100vh;
         background-attachment: fixed;
-        background-image: url("/images/connect/pexels-didsss-2127522.jpg");
+        // background-image: url("/images/connect/pexels-didsss-2127522.jpg");
         background-size: cover;
         background-position: center;
         display: flex;
@@ -121,7 +423,7 @@
     .overlay {
         position: absolute;
         inset: 0;
-        background-color: rgba(0, 0, 0, 0.4);
+        // background-color: rgba(0, 0, 0, 0.4);
     }
 
     .content-container {
@@ -178,7 +480,7 @@
     .heading {
         font-size: clamp(1rem, 14vw, 8rem) !important;
         font-weight: 400;
-        color: white;
+        // color: white;
         text-align: right;
         line-height: 4rem;
         padding-top: 4rem;
@@ -204,7 +506,7 @@
     .para {
         font-size: clamp(1rem, 3vh, 3rem) !important;
         // THIS IS NOT WORKING font-weight: 200;
-        color: white;
+        // color: white;
         min-width: 100%;
 
         @include for-size(tablet, up) {
@@ -240,24 +542,24 @@
     }
 
     .form-field {
-        border-bottom: 0.5px solid white;
+        border-bottom: 0.5px solid var(--mp-blue, #22219b);
         padding-bottom: 0.25rem;
         transition: border-color 0.3s;
 
         &:focus-within {
-            border-color: white;
+            // border-color: white;
         }
 
         input,
         textarea {
             width: 100%;
             background-color: transparent;
-            color: white;
+            // color: white;
             font-size: clamp(1rem, 2vh, 4rem);
             padding: 0.5rem 0;
 
             &::placeholder {
-                color: white;
+                // color: white;
                 opacity: 0.6;
             }
 
@@ -304,7 +606,7 @@
         margin-bottom: 2rem;
         margin-top: 2rem;
         align-item: center;
-        color: white;
+        // color: white;
         font-weight: 500;
         padding: 0.5rem 1rem;
         border: 0.5px solid #a9a9ac;
@@ -313,10 +615,10 @@
         transition: background-color 0.3s;
 
         &:hover {
-            background-color: rgba(255, 255, 255, 0.3);
+            // background-color: rgba(255, 255, 255, 0.3);
             // opacity: 0.6;
             color: black;
-            border: 1px solid white;
+            border: 1px solid var(--mp-blue, #22219b);
         }
 
         @include for-size(tablet, up) {
@@ -352,53 +654,3 @@
         color: #fca5a5;
     }
 </style>
-
-<script>
-    const form = document.getElementById("form");
-    const result = document.getElementById("result");
-
-    form?.addEventListener("submit", async function (e) {
-        e.preventDefault();
-
-        if (!form || !result) return;
-
-        const formData = new FormData(form as HTMLFormElement);
-        const object = Object.fromEntries(formData);
-        const json = JSON.stringify(object);
-
-        result.innerHTML = "Please wait...";
-        result.className = "result-message text-yellow-300";
-        result.style.display = "block";
-
-        try {
-            const response = await fetch("https://api.web3forms.com/submit", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Accept: "application/json",
-                },
-                body: json,
-            });
-
-            const responseData = await response.json();
-
-            if (response.status === 200) {
-                result.innerHTML = responseData.message;
-                result.className = "result-message text-green-300";
-            } else {
-                console.log(response);
-                result.innerHTML = responseData.message;
-                result.className = "result-message text-red-300";
-            }
-        } catch (error) {
-            console.log(error);
-            result.innerHTML = "Something went wrong!";
-            result.className = "result-message text-red-300";
-        }
-
-        form.reset();
-        setTimeout(() => {
-            result.style.display = "none";
-        }, 5000);
-    });
-</script>

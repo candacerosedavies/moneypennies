@@ -3,6 +3,7 @@
 import "../styles/tailwind.css";
 import "../styles/global.scss";
 import Navigation from "../components/Navigation/Nav-bar.astro";
+import Footer from "@/components/Footer/Footer.astro";
 // import Footer from "@/components/Footer/Footer.astro";
 
 interface Props {
@@ -40,7 +41,9 @@ const { title, description = "Default description" } = Astro.props;
     <body class="min-h-screen flex">
         <main class="flex-grow w-full">
             <Navigation />
+
             <slot />
+            <Footer />
         </main>
     </body>
 </html>
