@@ -23,7 +23,7 @@ const {
     textWidth="standard"
     hasParallax={true}
     parallaxSpeed={0.3}
-    className="Section03 lg__hr py-20 border-t-[0.5px] border-white"
+    className="Section03 lg__hr py-20 border-t-[0.5px] border-mp-blue"
     heightVariant="normal"
 >
     <section class="section03__section-3 bg-stone-black" id="section-03">
@@ -91,30 +91,30 @@ const {
         }
     }
 
-    .section03__parallax-container {
-        min-height: 100vh !important;
-        background-image: url("/images/connect/pexels-didsss-2127522.jpg");
-        background-size: cover;
-        background-position: right 80% bottom 0%;
-        transform: scale(100%);
-        display: flex;
-        flex-grow: 1;
-        flex-direction: column;
-        position: relative;
+    // .section03__parallax-container {
+    //     min-height: 100vh !important;
+    //     background-image: url("/images/connect/pexels-didsss-2127522.jpg");
+    //     background-size: cover;
+    //     background-position: right 80% bottom 0%;
+    //     transform: scale(100%);
+    //     display: flex;
+    //     flex-grow: 1;
+    //     flex-direction: column;
+    //     position: relative;
 
-        //background overlay
-        &::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background-color: rgba(0, 0, 0, 0.4);
-            pointer-events: none;
-        }
+    //     //background overlay
+    //     &::before {
+    //         content: "";
+    //         position: absolute;
+    //         inset: 0;
+    //         background-color: rgba(0, 0, 0, 0.4);
+    //         pointer-events: none;
+    //     }
 
-        @include for-size(tablet, up) {
-            background-attachment: scroll;
-        }
-    }
+    //     @include for-size(tablet, up) {
+    //         background-attachment: scroll;
+    //     }
+    // }
 
     .section03__heading {
         text-transform: uppercase;
@@ -144,7 +144,8 @@ const {
     .section03__overlay {
         position: absolute;
         inset: 0;
-        background-color: rgba(0, 0, 0, 0.4);
+        // background-color: rgba(0, 0, 0, 0.4);
+        background: #f6f0e7;
         // backdrop-filter: brightness(0.8); //softens background image ( don't need it here)
     }
 </style>

@@ -13,6 +13,8 @@ export default {
         'grey-blue': '#607ea8',
         // 'stone-black': '#0f1012',
         'stone-black': '#16181b',
+        'off-white': '#f6f0e7',
+        'mp-blue': '#22219b',
       },
       fontFamily: {
         sans: ['manrope', 'serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'manrope', 'Helvetica Neue', 'Arial', 'sans-serif'],

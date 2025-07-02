@@ -42,7 +42,7 @@ const {
                     >
                         {h1Text}
                     </h1>
-                    <p class="sm__font mt-4">{para2}</p>
+                    <p class="sm__font mt-4 section01__para__02">{para2}</p>
                 </section>
 
                 <p class="sm__font section01__para" set:html={para} />
@@ -57,10 +57,10 @@ const {
 </SectionLayout>
 
 <style lang="scss">
-    // ----- base styles for mobile -----
-    // .section01 {
-    //     background-color: #0a1112;
-    // }
+    p,
+    h1 {
+        color: #f6f0e7 !important;
+    }
 
     .section01__parallax-container {
         min-height: 100vh !important;
@@ -111,7 +111,6 @@ const {
 
     //Hero text
     .section01__h1--heading {
-        font-weight: 900;
         position: static;
         padding: 0;
 
@@ -142,6 +141,12 @@ const {
         }
     }
 
+    .section01__para__02 {
+        // font-family: "josefin sans", sans-serif;
+        font-weight: 200;
+        text-transform: uppercase;
+    }
+
     .section01__para {
         width: 80vw;
         position: static;
@@ -153,10 +158,6 @@ const {
         // position: absolute;
         margin: 0;
         // order: 4;
-    }
-
-    .button--nav:hover .button--nav__text {
-        color: var(--button-hover-text-color, black);
     }
 
     //----- keyboard accessibility -----

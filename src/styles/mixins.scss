@@ -130,7 +130,7 @@ $breakpoints: (
 .button--animated .button__text {
     position: relative; //establish a reference point for any absolutely positioned children inside it.
     display: inline-block;
-    color: white;
+    color: #22219b;
     // cursor: pointer;
     transition: all 0.3s ease-in;
     z-index: 2; //keep the text above the animation
@@ -161,7 +161,8 @@ $breakpoints: (
     left: -100%; //positioned out of sight on the left (NOT hovering)
     width: 100%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.9);
+    // background-color: rgba(255, 255, 255, 0.9);
+    background: #22219b;
     transition: all 0.3s ease-in;
     z-index: 1;
 }
@@ -174,16 +175,16 @@ $breakpoints: (
     left: 0;
     width: 100%; //reduced to 80% from 100% so the line starts 10% further in from the right
     height: 2px;
-    background-color: white; //background 3px high = looks like a border-bottom but we have more control over it/can animate
+    background-color: #22219b; //background 3px high = looks like a border-bottom but we have more control over it/can animate
     transition: all 0.25s ease-in;
     z-index: 3;
     /* Above everything else */
 }
 
 // ----- on hover styles
-//FRI 3PM DEBUGGING
 .button--animated:hover .button--animated__text {
-    color: var(--button-hover-text-color, black);
+    color: var(--button-hover-text-color, #f6f0e7);
+
 }
 
 //on hover BACKGROUND becomes visible - slides in from the left. 
@@ -265,7 +266,7 @@ $breakpoints: (
 //ON HOVER STYLES 
 
 .button--nav:hover .button--nav__text {
-    color: var(--button-hover-text-color, black);
+    color: var(--button-hover-text-color, #f6f0e7);
 }
 
 //on hover BACKGROUND becomes visible - slides in from the left. 

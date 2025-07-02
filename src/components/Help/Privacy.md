@@ -6,7 +6,7 @@ title: Privacy Policy
     
 This privacy policy sets out how Moneypennies uses and protects any information that you give Moneypennies when you use this website. Moneypennies is committed to ensuring that your privacy is protected. Should we ask you to provide certain information by which you can be identified when using this website, then you can be assured that it will only be used in accordance with this privacy statement. Moneypennies may change this policy from time to time by updating this page. You should check this page from time to time to ensure that you are happy with any changes. This policy is effective from 01/01/2010. <br><br><br><br>
     
-# **WHAT WE COLLECT**<br><br>
+# **WHAT WE COLLECT** <br><br>
     
 We may collect the following:<br> 
 -Name and job title <br>
@@ -20,4 +20,4 @@ We require this information to understand your needs and provide you with a bett
     
 # **SECURITY** <br><br>
     
-We are committed to ensuring that your information is secure. In order to prevent unauthorised access or disclosure, we have put in place suitable physical, electronic and managerial procedures to safeguard and secure the information we collect online.<br><br>
+We are committed to ensuring that your information is secure. In order to prevent unauthorised access or disclosure, we have put in place suitable physical, electronic and managerial procedures to safeguard and secure the information we collect online.
