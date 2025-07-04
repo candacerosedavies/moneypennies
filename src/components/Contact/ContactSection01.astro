@@ -1,0 +1,64 @@
+---
+//CONTACT PAGE COMPONENT
+
+import SectionLayout from "@/layouts/SectionLayout.astro";
+
+const contactHeading = "Hello";
+const contactPara =
+  " Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam impedit dolore excepturi ullam?";
+---
+
+<SectionLayout
+  variant="color"
+  heightVariant="tall"
+  textWidth="standard"
+  className="section--contact01"
+>
+  <main class="true-parallax-contact" data-parallax data-parallax-speed="0.5">
+    <section class="section__contact01">
+      <h1 class="lg__font">{contactHeading}</h1>
+      <p class="sm__font">{contactPara}</p>
+    </section>
+  </main>
+</SectionLayout>
+
+<style lang="scss">
+  @use "@/styles/mixins";
+  @use "@/styles/parallax-mixins" as parallax;
+
+  .true-parallax-contact {
+    @include parallax.true-parallax-background(
+      "/images/connect/pexels-didsss-2127522.jpg",
+      center,
+      rgba(0, 0, 0, 0.5),
+      0.5
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+
+  .contact-content {
+    text-align: center;
+    color: white;
+  }
+
+  // .contact01--container {
+  //   @include parallax.parallax-background-advanced(
+  //     "/images/connect/pexels-didsss-2127522.jpg",
+  //     center,
+  //     rgba(0, 0, 0, 0.5)
+  //   );
+
+  //   display: flex;
+  //   align-items: center;
+  //   justify-content: center;
+  //   padding: 2rem;
+  // }
+
+  .section__contact01 {
+    // text-align: center;
+    color: var(--off-white, #f6f0e7);
+  }
+</style>

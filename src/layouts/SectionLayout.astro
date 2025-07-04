@@ -3,8 +3,7 @@ interface Props {
   variant?: "image" | "color";
   background?: string;
   textStyle?: "masked" | "normal";
-  imageFolder?: string;
-  imageName?: string;
+style?: string;
   className?: string;
   hasParallax?: boolean;
   parallaxSpeed?: number; // Controls parallax intensity
@@ -26,6 +25,7 @@ const {
   textStyle = "",
   background = "",
   className = "",
+    style = "",
   heightVariant = "",
   textWidth = "standard",
   allowOverflow = false,
@@ -43,7 +43,7 @@ const parallaxClass = hasParallax ? "has-parallax" : "";
 <section
   class={`${sectionClass} ${className} ${textVariant} ${textStyle} ${heightVariant === "tall" ? "tall-section" : "normal-section"} ${textWidthClass} ${parallaxClass}`}
   id="main-content"
-  data-parallax-speed={hasParallax ? parallaxSpeed : null}
+  data-parallax-speed={hasParallax ? parallaxSpeed : null} style={style}
 >
   <slot />
 </section>

@@ -1,0 +1,90 @@
+---
+
+---
+
+<script>
+  function initTrueParallax() {
+    // Find all elements that use true parallax mixins
+    const parallaxElements = document.querySelectorAll(
+      '[data-parallax], [class*="true-parallax"]',
+    );
+
+    if (parallaxElements.length === 0) return;
+
+    let ticking = false;
+    let windowHeight = window.innerHeight;
+
+    function updateParallax() {
+      const scrollY = window.pageYOffset;
+
+      parallaxElements.forEach((element) => {
+        const rect = element.getBoundingClientRect();
+        const elementTop = rect.top + scrollY;
+        const elementHeight = rect.height;
+        const elementBottom = elementTop + elementHeight;
+
+        // Check if element is in viewport (with some buffer)
+        const buffer = windowHeight * 0.5;
+        if (
+          scrollY + windowHeight + buffer > elementTop &&
+          scrollY - buffer < elementBottom
+        ) {
+          // Get parallax speed from data attribute or calculate from class
+          let speed = parseFloat(element.dataset.parallaxSpeed);
+          if (!speed) {
+            // Default speeds based on usage
+            if (element.classList.toString().includes("hero")) speed = 0.3;
+            else if (element.classList.toString().includes("section"))
+              speed = 0.4;
+            else speed = 0.5;
+          }
+
+          // Calculate how far through the viewport we've scrolled this element
+          const progress =
+            (scrollY - elementTop + windowHeight) /
+            (windowHeight + elementHeight);
+
+          // Calculate parallax offset (negative for upward movement)
+          const parallaxOffset = (scrollY - elementTop) * speed;
+
+          // Apply the transform using CSS custom property
+          element.style.setProperty("--parallax-offset", `${parallaxOffset}px`);
+        }
+      });
+
+      ticking = false;
+    }
+
+    function requestTick() {
+      if (!ticking) {
+        requestAnimationFrame(updateParallax);
+        ticking = true;
+      }
+    }
+
+    function handleResize() {
+      windowHeight = window.innerHeight;
+      updateParallax();
+    }
+
+    // Initialize
+    updateParallax();
+
+    // Add event listeners
+    window.addEventListener("scroll", requestTick, { passive: true });
+    window.addEventListener("resize", handleResize, { passive: true });
+
+    // Cleanup function
+    return () => {
+      window.removeEventListener("scroll", requestTick);
+      window.removeEventListener("resize", handleResize);
+    };
+  }
+
+  // Initialize when DOM is ready
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initTrueParallax);
+  } else {
+    initTrueParallax();
+  }
+</script>
