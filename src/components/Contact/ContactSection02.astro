@@ -24,7 +24,7 @@ import SectionLayout from "@/layouts/SectionLayout.astro";
     </dialog>
 
     <!-- Contact form -->
-    <main class="form-container">
+    <main>
         <!-- INVISIBLE FORM FIELDS - CONFIGURE FORM TO WORK WITH WEB3FORMS, SET SUBMISSION SUBJECT LINE, PREVENT SPAM
                  <form> action - defines the location (URL) where the form's collected data should be sent when it is submitted.
                  <input> 1 -  type is hidden/ input hosts the Web3Forms access key
@@ -32,11 +32,25 @@ import SectionLayout from "@/layouts/SectionLayout.astro";
                  <input> 3 - type is checkbox. Purpose is spam prevention. Hidden from real users but bots might fill it out allowing Web3Forms to filter out spam submissions. 
                  (Spam prevention not as sophisticated as a hcaptcha check box (but less annoying). Will update if Suzanne receives spam.)-->
         <section class="section__contact02">
+            <!--contact info -->
+            <section class="contact--contact-headings">
+                <aside class="contact--heading">
+                    <h2 class="md__font">CONTACT</h2>
+                    <p>suzanne@moneypennies.biz</p>
+                    <p>07967 826 038</p>
+                </aside>
+
+                <aside class="based--heading">
+                    <h2 class="md__font">BASED IN</h2>
+                    <p>Manchester, UK</p>
+                </aside>
+            </section>
+
             <form
                 action="https://api.web3forms.com/submit"
                 method="POST"
                 id="form"
-                class="contact-form"
+                class="form-container"
             >
                 <input
                     type="hidden"
@@ -97,23 +111,21 @@ import SectionLayout from "@/layouts/SectionLayout.astro";
                     </p>
 
                     <!-- Message field -->
-                    <p class="form-field message-field">
+                    <p class="form-field 10">
                         <label for="message" class="sr-only">Message</label>
                         <textarea
                             id="message"
                             name="message"
                             placeholder="How can we help?"
-                            rows="3"
+                            rows="6"
                             required></textarea>
                     </p>
                 </fieldset>
 
                 <!-- Submit button -->
-                <footer class="button-container">
-                    <button type="submit" class="submit-button">
-                        start connecting
-                    </button>
-                </footer>
+                <button class="button--nav">
+                    <a type="submit" class="button--nav__text"> CONNECT </a>
+                </button>
 
                 <!-- Result message (initially hidden) -->
                 <p
@@ -124,27 +136,248 @@ import SectionLayout from "@/layouts/SectionLayout.astro";
                 >
                 </p>
             </form>
-
-            <!--contact info -->
-            <section>
-                <aside>
-                    <h2>CONTACT</h2>
-                    <p>moneypennies</p>
-                    <p>07967 826 038</p>
-                </aside>
-
-                <aside>
-                    <h2>BASED IN</h2>
-                    <p>Manchester, UK</p>
-                </aside>
-            </section>
         </section>
     </main>
 </SectionLayout>
-<!-- closing parallax container tag not currently in use -->
-<!-- </section> -->
 
-<!-- <script src="https://web3forms.com/client/script.js" async defer></script> -->
+<style lang="scss">
+    @use "@/styles/mixins" as *;
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body,
+    html {
+        margin: 0;
+        padding: 0;
+    }
+
+    .section__contact02 {
+        display: flex;
+        flex-direction: column;
+        gap: 4rem;
+        align-items: center;
+        min-height: auto;
+        border: 1px solid red;
+
+        @include for-size(tablet, up) {
+            gap: 0;
+            flex-direction: row;
+            align-items: flex-start; // Align tops of columns
+        }
+    }
+
+    .form-container {
+        // display: flex;
+        max-width: 90%;
+        padding: 0;
+        margin: 0;
+
+        @include for-size(tablet, up) {
+            flex: 1;
+        }
+
+        @include for-size(desktop, up) {
+            flex: 1;
+            justify-content: flex-end;
+            // padding-top: 55vh;
+        }
+    }
+
+    .button--nav {
+        // padding: 0;
+    }
+
+    .contact--contact-headings {
+        display: flex;
+        flex-direction: column;
+        max-width: 90%;
+        gap: 4rem;
+        padding: 1rem 0 0 0;
+        margin: 0;
+        font-weight: 600 !important;
+
+        @include for-size(tablet, up) {
+            flex: 1;
+            gap: 6rem;
+        }
+
+        @include for-size(desktop, up) {
+            flex: 1;
+            justify-content: flex-end;
+            // padding-top: 55vh;
+        }
+    }
+
+    h2 {
+        padding-bottom: 1rem;
+    }
+
+    .contact--heading {
+        // width: 80%;
+    }
+
+    //-----FORM STYLES-----
+    .form-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        // padding: 2rem;
+
+        @include for-size(tablet, up) {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @include for-size(desktop, up) {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+    }
+
+    .form-field {
+        border-bottom: 1px solid var(--mp-blue, #22219b);
+        padding-bottom: 0.25rem;
+        transition: border-color 0.3s;
+
+        &:focus-within {
+            // border-color: white;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            background-color: transparent;
+            // color: white;
+
+            padding: 0.5rem 0;
+
+            &::placeholder {
+                color: rgb(34, 33, 155);
+                opacity: 0.6;
+            }
+
+            &:focus {
+                outline: none;
+            }
+            // @include for-size(tablet, up) {
+            //     font-size: clamp(1rem, 3vh, 4rem);
+            // }
+            // @include for-size(desktop, up) {
+            //     font-size: clamp(1rem, 6vh, 5rem);
+            // }
+        }
+
+        textarea {
+            resize: none;
+        }
+    }
+
+    .message-field {
+        grid-template-columns: span 1;
+        @include for-size(tablet, up) {
+            grid-column: span 1;
+        }
+
+        @include for-size(desktop, up) {
+            grid-column: span 1;
+        }
+    }
+
+    .result-message {
+        margin-top: 1rem;
+        padding: 0.75rem;
+        text-align: center;
+
+        &.hidden {
+            display: none;
+        }
+    }
+
+    //-----MODAL STYLES-----
+
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--mp-blue, #22219b);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+
+        &.hidden {
+            display: none;
+        }
+    }
+
+    .modal-content {
+        background: var(--off-white, #f6f0e7);
+        color: var(--mp-blue, #22219b);
+        border-radius: 12px;
+        padding: 2rem;
+        max-width: 400px;
+        width: 90%;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        position: relative;
+    }
+
+    .modal-header {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+    }
+
+    .close-button {
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        color: var(--mp-blue, #22219b);
+
+        &:hover {
+            color: rgba(34, 33, 155, 0.5);
+        }
+    }
+
+    .success-icon {
+        font-size: 3rem;
+        color: #f6f0e7;
+        margin-bottom: 1rem;
+    }
+
+    .modal-body h3 {
+        margin-bottom: 1rem;
+        color: var(--mp-blue, #22219b);
+    }
+
+    .modal-body p {
+        margin-bottom: 1.5rem;
+        color: var(--mp-blue, #22219b);
+    }
+
+    .modal-button {
+        background-color: var(--mp-blue, #22219b);
+        color: var(--off-white, #f6f0e7);
+        border: none;
+        padding: 0.75rem 2rem;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 1rem;
+
+        &:hover {
+            background-color: var(--off-white, #f6f0e7);
+            color: var(--mp-blue, #22219b);
+            border: 1px solid #22219b;
+        }
+    }
+</style>
 
 <script>
     import Button from "@/UI/Button.astro";
@@ -193,7 +426,7 @@ import SectionLayout from "@/layouts/SectionLayout.astro";
         }
     }
 
-    // Form submit handler
+    //-----FORM SUBMIT HANDLER-----
     if (form) {
         form.addEventListener("submit", async function (e) {
             e.preventDefault();
@@ -305,355 +538,3 @@ import SectionLayout from "@/layouts/SectionLayout.astro";
         // ----- TO DO Clear form on network error back button? -----
     });
 </script>
-
-<style lang="scss">
-    @use "@/styles/mixins" as *;
-
-    .section__contact02 {
-        display: flex;
-        flex-direction: column;
-        gap: 2rem;
-
-        @include for-size(tablet, up) {
-            flex-direction: row;
-            align-items: flex-start; // Align tops of columns
-        }
-    }
-
-    .modal-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: var(--mp-blue, #22219b);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 9999;
-
-        &.hidden {
-            display: none;
-        }
-    }
-
-    .modal-content {
-        background: var(--off-white, #f6f0e7);
-        color: var(--mp-blue, #22219b);
-        border-radius: 12px;
-        padding: 2rem;
-        max-width: 400px;
-        width: 90%;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        text-align: center;
-        position: relative;
-    }
-
-    .modal-header {
-        position: absolute;
-        top: 10px;
-        right: 15px;
-    }
-
-    .close-button {
-        background: none;
-        border: none;
-        font-size: 24px;
-        cursor: pointer;
-        color: var(--mp-blue, #22219b);
-
-        &:hover {
-            color: rgba(34, 33, 155, 0.5);
-        }
-    }
-
-    .success-icon {
-        font-size: 3rem;
-        color: #f6f0e7;
-        margin-bottom: 1rem;
-    }
-
-    .modal-body h3 {
-        margin-bottom: 1rem;
-        color: var(--mp-blue, #22219b);
-    }
-
-    .modal-body p {
-        margin-bottom: 1.5rem;
-        color: var(--mp-blue, #22219b);
-    }
-
-    .modal-button {
-        background-color: var(--mp-blue, #22219b);
-        color: var(--off-white, #f6f0e7);
-        border: none;
-        padding: 0.75rem 2rem;
-        border-radius: 6px;
-        cursor: pointer;
-        font-size: 1rem;
-
-        &:hover {
-            background-color: var(--off-white, #f6f0e7);
-            color: var(--mp-blue, #22219b);
-            border: 1px solid #22219b;
-        }
-    }
-
-    //TEMP STYLES END
-
-    .contact-section {
-        position: relative;
-    }
-
-    .parallax-container {
-        min-height: 100vh;
-        background-attachment: fixed;
-        // background-image: url("/images/connect/pexels-didsss-2127522.jpg");
-        background-size: cover;
-        background-position: center;
-        display: flex;
-        flex: 1;
-        width: 100%;
-        margin: 0;
-        box-sizing: border-box;
-    }
-
-    .overlay {
-        position: absolute;
-        inset: 0;
-        // background-color: rgba(0, 0, 0, 0.4);
-    }
-
-    .content-container {
-        position: relative;
-        z-index: 10;
-        min-width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-        // @include for-size(tablet, up) {
-        //     padding: 6rem 2rem;
-        //     margin: 1rem;
-        // }
-        padding: 2rem 1rem;
-
-        @include for-size(tablet, up) {
-            padding: 3rem 2rem;
-        }
-        @include for-size(desktop, up) {
-            flex-direction: row-reverse;
-            justify-content: flex-start;
-            gap: 10rem;
-            padding: 2rem 3rem;
-
-            // flex: 0 0 30%;
-        }
-    }
-
-    .copy-container {
-        @include for-size(desktop, up) {
-            justify-content: flex-start;
-            padding-bottom: 80vh;
-            // padding-right: 5rem;
-            flex: 0 0 50%;
-        }
-    }
-
-    .form-container {
-        // width: 80%;
-        min-width: 90%;
-
-        @include for-size(tablet, up) {
-            min-width: 80%;
-        }
-
-        @include for-size(desktop, up) {
-            min-width: 30%;
-            justify-content: flex-end;
-            padding-top: 55vh;
-        }
-    }
-
-    .heading {
-        font-size: clamp(1rem, 14vw, 8rem) !important;
-        font-weight: 400;
-        // color: white;
-        text-align: right;
-        line-height: 4rem;
-        padding-top: 4rem;
-        padding-bottom: 1.5rem;
-        min-width: 100%;
-
-        @include for-size(tablet, up) {
-            font-size: clamp(2rem, 15vw, 8rem);
-            margin-bottom: 3rem;
-            text-align: left;
-            line-height: 6rem;
-        }
-
-        @include for-size(desktop, up) {
-            font-size: clamp(2rem, 10vw, 3rem) !important;
-            // align-self: self-start;
-            text-align: right;
-            margin-bottom: 0;
-            padding-bottom: 0vh;
-        }
-    }
-
-    .para {
-        font-size: clamp(1rem, 3vh, 3rem) !important;
-        // THIS IS NOT WORKING font-weight: 200;
-        // color: white;
-        min-width: 100%;
-
-        @include for-size(tablet, up) {
-            // margin-bottom: 3rem;
-            text-align: right;
-            max-width: 80%;
-        }
-
-        @include for-size(desktop, up) {
-            text-align: right;
-            margin-bottom: 0;
-        }
-    }
-
-    // .contact-form {
-    //     width: 100%;
-    // }
-
-    .form-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 2rem;
-        padding: 2rem;
-
-        @include for-size(tablet, up) {
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-
-        @include for-size(desktop, up) {
-            grid-template-columns: 1fr;
-            gap: 1rem;
-        }
-    }
-
-    .form-field {
-        border-bottom: 0.5px solid var(--mp-blue, #22219b);
-        padding-bottom: 0.25rem;
-        transition: border-color 0.3s;
-
-        &:focus-within {
-            // border-color: white;
-        }
-
-        // label {
-        //     @include md__font;
-        // }
-
-        input,
-        textarea {
-            width: 100%;
-            background-color: transparent;
-            // color: white;
-
-            padding: 0.5rem 0;
-
-            &::placeholder {
-                color: rgb(34, 33, 155);
-                opacity: 0.6;
-            }
-
-            &:focus {
-                outline: none;
-            }
-            // @include for-size(tablet, up) {
-            //     font-size: clamp(1rem, 3vh, 4rem);
-            // }
-            // @include for-size(desktop, up) {
-            //     font-size: clamp(1rem, 6vh, 5rem);
-            // }
-        }
-
-        textarea {
-            resize: none;
-        }
-    }
-
-    .message-field {
-        grid-template-columns: span 1;
-        @include for-size(tablet, up) {
-            grid-column: span 1;
-        }
-
-        @include for-size(desktop, up) {
-            grid-column: span 1;
-        }
-    }
-
-    .button-container {
-        margin-top: 0.5rem;
-        display: flex;
-        justify-content: center;
-
-        @include for-size(desktop, up) {
-            margin-top: 0.5rem;
-        }
-    }
-
-    .submit-button {
-        background-color: transparent;
-        font-size: clamp(1rem, 3vh, 8rem) !important;
-        margin-bottom: 2rem;
-        margin-top: 2rem;
-        align-item: center;
-        // color: white;
-        font-weight: 500;
-        padding: 0.5rem 1rem;
-        border: 0.5px solid #a9a9ac;
-        border-radius: 30px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-
-        &:hover {
-            // background-color: rgba(255, 255, 255, 0.3);
-            // opacity: 0.6;
-            color: black;
-            border: 1px solid var(--mp-blue, #22219b);
-        }
-
-        @include for-size(tablet, up) {
-            font-size: clamp(1rem, 3vh, 4rem);
-            align-self: center;
-        }
-        @include for-size(desktop, up) {
-            font-size: clamp(1rem, 3.5vh, 4rem);
-            align-self: center;
-        }
-    }
-
-    .result-message {
-        margin-top: 1rem;
-        padding: 0.75rem;
-        text-align: center;
-
-        &.hidden {
-            display: none;
-        }
-    }
-
-    // Helper class that will be applied by JS
-    // .text-yellow-300 {
-    //     color: #fde047;
-    // }
-
-    // .text-green-300 {
-    //     color: #86efac;
-    // }
-
-    // .text-red-300 {
-    //     color: #fca5a5;
-    // }
-</style>

@@ -235,7 +235,7 @@ $breakpoints: (
 .button--nav .button--nav__text {
     position: relative; //establish a reference point for any absolutely positioned children inside it.
     display: inline-block;
-    color: white;
+    color: var(--mp-blue, #22219b);
     transition: all 0.3s ease-in;
     z-index: 2; //keep the text above the animation
 
@@ -254,7 +254,7 @@ $breakpoints: (
     left: -100%; //positioned out of sight on the left (NOT hovering)
     width: 100%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: var(--mp-blue, #22219b);
     color: black;
 
     // border: 0.5px solid black;
@@ -285,7 +285,7 @@ $breakpoints: (
 
 // In mixins.scss
 @mixin lg__font {
-    font-size: clamp(2rem, 8vw, 4rem);
+    font-size: clamp(2rem, 6vw, 3rem);
 
     @include for-size(tablet, up) {
         font-size: clamp(3rem, 7vw, 3.5rem);
