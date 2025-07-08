@@ -1,83 +1,82 @@
 ---
-
+//HAMBURGER COMPONENT
 ---
 
 <!-- Animated Navigation Overlay -->
 <nav
-  class="overlay section__nav opacity-0 transition-opacity duration-300 ease-in-out"
+  class="overlay overlay--02 section__nav opacity-0 transition-opacity duration-300 ease-in-out"
   id="overlay"
 >
   <ul class="menu--container__buttons">
-    <li class="button__contact" id="nav-1">
-      <button
-        class="button--animated"
-        onclick="window.location.href='/contact/'"
-      >
-        <span class="button__text">say hello</span>
+    <li class="button__contact">
+      <button class="button--02" onclick="window.location.href='/contact/'">
+        <span class="button--02__text">say hello</span>
       </button>
     </li>
-    <li class="button__home" id="nav-2">
-      <button class="button--animated" onclick="window.location.href='/'">
-        <span class="button__text">home</span>
+    <li class="button__home">
+      <button class="button--02" onclick="window.location.href='/'">
+        <span class="button--02__text">home</span>
       </button>
     </li>
   </ul>
 </nav>
 
 <!-- Hamburger Menu Button -->
-<div class="menu-bars" id="menu-bars" aria-label="menu">
-  <div class="bar-1"></div>
+<button class="menu-bars" id="menu-bars" aria-label="menu">
+  <aside class="bar-1 bar-1__closed"></aside>
   <!-- <div class="bar-2"></div> -->
-  <div class="bar-3"></div>
-</div>
+  <aside class="bar-2 bar-2__closed"></aside>
+</button>
 
 <script>
-  class HamburgerMenu {
-    isOpen: boolean;
-    menuBars: HTMLElement | null;
-    overlay: HTMLElement | null;
+  document.addEventListener("DOMContentLoaded", () => {
+    // Get the elements we need
+    const menuBars = document.getElementById("menu-bars");
+    const overlay = document.getElementById("overlay");
+    const bar01 = document.querySelector(".bar-1");
+    const bar02 = document.querySelector(".bar-2");
 
-    constructor() {
-      this.isOpen = false;
-      this.menuBars = document.getElementById("menu-bars");
-      this.overlay = document.getElementById("overlay");
+    //Track the menu state
+    let isMenuOpen = false;
 
-      this.bindEvents();
-    }
+    // Toggle the menu
+    function toggleMenu() {
+      //Make the toggle work by setting isMenuOpen to the opposite of whatever it currently is (true becomes false, false becomes true)
+      //starting state is false, user clicks, this runs "isMenuOpen = !isMenuOpen;", false becomes true. And so on
+      isMenuOpen = !isMenuOpen;
 
-    bindEvents() {
-      this.menuBars?.addEventListener("click", () => this.toggle());
-    }
-
-    toggle() {
-      this.isOpen = !this.isOpen;
-      this.updateMenu();
-    }
-
-    updateMenu() {
-      if (this.isOpen) {
-        // Show menu
-        this.overlay?.classList.remove("opacity-0");
-        this.overlay?.classList.add("opacity-100");
-        this.overlay?.setAttribute("aria-hidden", "false");
+      if (isMenuOpen === true) {
+        // Show the menu
+        overlay?.classList.remove("opacity-0");
+        overlay?.classList.add("opacity-100");
+        overlay?.setAttribute("aria-hidden", "false");
 
         // Transform hamburger to X
-        this.menuBars?.classList.add("change");
+        menuBars?.classList.add("change");
+
+        //Switch bars to blue class
+        bar01.classList.remove("bar-1__closed");
+        bar01.classList.add("bar-1__open");
+
+        bar02.classList.remove("bar-2__closed");
+        bar02.classList.add("bar-2__open");
       } else {
         // Hide menu
-        this.overlay?.classList.remove("opacity-100");
-        this.overlay?.classList.add("opacity-0");
-        this.overlay?.setAttribute("aria-hidden", "true");
+        overlay?.classList.remove("opacity-100");
+        overlay?.classList.add("opacity-0");
+        overlay?.setAttribute("aria-hidden", "true");
 
         // Transform X back to hamburger
-        this.menuBars?.classList.remove("change");
+        menuBars?.classList.remove("change");
+
+        if (window.updateHamburgerColors) {
+          window.updateHamburgerColors();
+        }
       }
     }
-  }
 
-  // Initialize when DOM is loaded
-  document.addEventListener("DOMContentLoaded", () => {
-    new HamburgerMenu();
+    // Add the click listener
+    menuBars?.addEventListener("click", toggleMenu);
   });
 </script>
 
@@ -86,7 +85,6 @@
     position: relative;
     display: flex;
     width: 100%;
-    // justify-content: center;
   }
 
   .menu--container__buttons {
@@ -95,15 +93,15 @@
     flex-direction: column;
     gap: 5rem;
     justify-content: flex-start;
-    align-items: flex-end;
+    align-items: center;
     height: 100vh;
     width: 100%;
     position: absolute;
     left: 0;
     top: 0;
     overflow: hidden;
-    background-color: #293442;
-    padding: 10rem 2rem 0rem 0rem;
+    background-color: var(--off-white, #f6f0e7);
+    padding: 10rem 0rem 0rem 0rem;
 
     @include for-size(tablet, up) {
       display: none !important;
@@ -122,8 +120,7 @@
       display: block;
     }
 
-    //.overlay is a base class that defines the default or 'closed' state of the element.
-    //these styles are for when the hamburger menu is closed/ not open.
+    //.overlay is a parent class that defines the default or 'closed' state of the element.
 
     .overlay {
       position: fixed;
@@ -132,8 +129,9 @@
       right: 0;
       // width: 40vw;
       height: 100vh;
-      background-color: white;
-      pointer-events: none; //Don't capture clicks when closed - UPDATED BECAUSE LINKS NOT WORKING IN MOBILE VIEW
+      // background-color: var(--off-white, #f6f0e7);
+
+      pointer-events: none; //Don't capture clicks when closed - UPDATED BECAUSE LINKS WERE NOT WORKING IN MOBILE VIEW
     }
 
     .overlay.opacity-100 {
@@ -150,40 +148,45 @@
       cursor: pointer;
     }
 
-    .bar-1,
-    // .bar-2,
-    .bar-3 {
+    //-----TARGETTING COMBINED CLASSES - for use with the JS in Nav-Bar
+    .bar-1.bar-1__closed,
+    .bar-2.bar-2__closed {
       width: 35px;
       height: 2px;
-      background-color: #fff;
+      background-color: var(--off-white, #f6f0e7);
+      margin: 5px 0;
+      transition: 0.4s;
+    }
+
+    .bar-1.bar-1__open,
+    .bar-2.bar-2__open {
+      width: 35px;
+      height: 2px;
+      background-color: var(--mp-blue, #22219b);
       margin: 5px 0;
       transition: 0.4s;
     }
 
     /* Hamburger to X animation */
     .change .bar-1 {
-      transform: translate(0, 5px) rotate(-45deg);
+      transform: translate(0, 3.5px) rotate(-45deg);
     }
 
-    // .change .bar-2 {
-    //   opacity: 0;
-    // }
-
-    .change .bar-3 {
-      transform: translate(0, -5px) rotate(45deg);
+    .change .bar-2 {
+      transform: translate(0, -3.5px) rotate(45deg);
     }
   }
 
   /* Header scrolled states */
-  :global(.header-scrolled) .bar-1,
-  :global(.header-scrolled) .bar-2,
-  :global(.header-scrolled) .bar-3 {
-    background-color: rgb(28 25 23);
-  }
+  // :global(.header-scrolled) .bar-1,
+  // :global(.header-scrolled) .bar-2,
+  // :global(.header-scrolled) .bar-3 {
+  //   background-color: rgb(28 25 23);
+  // }
 
-  :global(.bg-white\/30) .bar-1,
-  :global(.bg-white\/30) .bar-2,
-  :global(.bg-white\/30) .bar-3 {
-    background-color: rgb(28 25 23);
-  }
+  // :global(.bg-white\/30) .bar-1,
+  // :global(.bg-white\/30) .bar-2,
+  // :global(.bg-white\/30) .bar-3 {
+  //   background-color: rgb(28 25 23);
+  // }
 </style>

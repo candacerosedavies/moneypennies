@@ -88,197 +88,6 @@ $breakpoints: (
     }
 }
 
-// ------------------------------------------------------------------------------------------------------------------------------
-
-// ----- LINE BREAK -----
-
-
-
-//----- GLOBAL ANIMATED BUTTON -----
-
-.button--animated {
-    pointer-events: auto;
-}
-
-.button--animated {
-    position: relative; //establish a reference point for any absolutely positioned children inside it.
-    display: inline-block;
-    cursor: pointer;
-    border: none;
-    background-color: transparent;
-    overflow: hidden; //added to contain the animated element
-
-    // moved padding from span to button top right bottom left
-    border-radius: 5px;
-    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
-
-    z-index: 5; //base z index for the container
-
-    @include for-size(tablet, up) {
-
-        padding: 0.5rem 0.5rem 0.5rem 0.5rem;
-
-    }
-
-}
-
-.button--animated * {
-    pointer-events: none;
-
-}
-
-.button--animated .button__text {
-    position: relative; //establish a reference point for any absolutely positioned children inside it.
-    display: inline-block;
-    color: #22219b;
-    // cursor: pointer;
-    transition: all 0.3s ease-in;
-    z-index: 2; //keep the text above the animation
-    // text-transform: uppercase;
-    pointer-events: auto;
-
-    font-size: clamp(0.5rem, 3vw, 1rem);
-
-    &:focus-visible {
-        // outline: 2px solid white;
-        outline-offset: 2px;
-    }
-
-    @include for-size (tablet, up) {
-        font-size: clamp(0.8rem, 2vw, 1rem);
-
-    }
-
-}
-
-// ----- BUTTON ANIMATION -----
-
-// ----- Background animation (not visible) -----
-.button--animated::before {
-    position: absolute; //positioned relative to nearest positioned ancestor (the button element)
-    content: "";
-    top: 0;
-    left: -100%; //positioned out of sight on the left (NOT hovering)
-    width: 100%;
-    height: 100%;
-    // background-color: rgba(255, 255, 255, 0.9);
-    background: #22219b;
-    transition: all 0.3s ease-in;
-    z-index: 1;
-}
-
-//----- border/underline animation ------
-.button--animated::after {
-    position: absolute; //positioned relative to nearest positioned ancestor 
-    content: "";
-    bottom: 0;
-    left: 0;
-    width: 100%; //reduced to 80% from 100% so the line starts 10% further in from the right
-    height: 2px;
-    background-color: #22219b; //background 3px high = looks like a border-bottom but we have more control over it/can animate
-    transition: all 0.25s ease-in;
-    z-index: 3;
-    /* Above everything else */
-}
-
-// ----- on hover styles
-.button--animated:hover .button--animated__text {
-    color: var(--button-hover-text-color, #f6f0e7);
-
-}
-
-//on hover BACKGROUND becomes visible - slides in from the left. 
-.button--animated:hover::before {
-    left: 0; //background is visible. Travels in (-100%) from the left 
-}
-
-//On hover - border/underline moves to the left. Returns when stop hovering
-.button--animated:hover::after {
-    left: -100%; //Moves to the left on hover. 
-}
-
-//on hover: change the button text to black when the background is white
-//want the span inside to change color, so you need to use the parent-child relationship in the selectors
-
-.button--animated:hover .button__text {
-    color: black !important;
-}
-
-
-//----- ANIMATED NAV BUTTONS ------
-.button--nav {
-    position: relative; //establish a reference point for any absolutely positioned children inside it.
-    display: inline-block;
-    cursor: pointer;
-    border: none;
-    background-color: transparent;
-    overflow: hidden; //added to contain the animated element
-    border-radius: 5px;
-    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
-    z-index: 5; //base z index for the container
-
-    @include for-size(tablet, up) {
-
-        padding: 0.5rem 0.5rem 0.5rem 0.5rem;
-
-    }
-
-}
-
-
-.button--nav::before,
-.button--nav::after {
-    pointer-events: none; // Only disable on pseudo-elements
-}
-
-
-.button--nav .button--nav__text {
-    position: relative; //establish a reference point for any absolutely positioned children inside it.
-    display: inline-block;
-    color: var(--mp-blue, #22219b);
-    transition: all 0.3s ease-in;
-    z-index: 2; //keep the text above the animation
-
-
-    @include for-size (tablet, up) {
-        // font-size: clamp(1rem, 3vw, 1.5rem);
-
-    }
-}
-
-//BACKGROUND animation - not visible
-.button--nav::before {
-    position: absolute; //positioned relative to their nearest positioned ancestor (which is the button element)
-    content: "";
-    top: 0;
-    left: -100%; //positioned out of sight on the left (NOT hovering)
-    width: 100%;
-    height: 100%;
-    background-color: var(--mp-blue, #22219b);
-    color: black;
-
-    // border: 0.5px solid black;
-    transition: all 0.3s ease-in;
-    z-index: 1;
-}
-
-
-//ON HOVER STYLES 
-
-.button--nav:hover .button--nav__text {
-    color: var(--button-hover-text-color, #f6f0e7);
-}
-
-//on hover BACKGROUND becomes visible - slides in from the left. 
-.button--nav:hover::before {
-    left: 0; //background is visible. Travels in (-100%) from the left 
-
-}
-
-//On hover - border/underline moves to the left. Returns when stop hovering
-.button--nav:hover::after {
-    left: -100%; //Moves to the left on hover. 
-}
 
 
 // ----- FONTS -----
@@ -313,5 +122,196 @@ $breakpoints: (
 
     @include for-size(tablet, up) {
         font-size: clamp(0.5rem, 2vw, 0.8rem);
+    }
+}
+
+//BUTTON MIXINS
+//----- ANIMATED NAV BUTTONS ------
+.button--01 {
+    position: relative; //establish a reference point for any absolutely positioned children inside it.
+    display: inline-block;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    overflow: hidden; //added to contain the animated element
+    border-radius: 5px;
+    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+    z-index: 5; //base z index for the container
+
+    @include for-size(tablet, up) {
+
+        padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+
+    }
+
+}
+
+
+.button--01::before,
+.button--01::after {
+    pointer-events: none; // Only disable on pseudo-elements
+}
+
+
+.button--01 .button--01__text {
+    position: relative; //establish a reference point for any absolutely positioned children inside it.
+    display: inline-block;
+    color: var(--off-white, #f6f0e7);
+    transition: all 0.3s ease-in;
+    z-index: 2; //keep the text above the animation
+    @include sm__font;
+
+
+    @include for-size (tablet, up) {
+        // font-size: clamp(1rem, 3vw, 1.5rem);
+
+    }
+}
+
+//BACKGROUND animation - not visible
+.button--01::before {
+    position: absolute; //positioned relative to their nearest positioned ancestor (which is the button element)
+    content: "";
+    top: 0;
+    left: -100%; //positioned out of sight on the left (NOT hovering)
+    width: 100%;
+    height: 100%;
+    background-color: var(--off-white, #f6f0e7);
+
+
+
+    // border: 0.5px solid black;
+    transition: all 0.3s ease-in;
+    z-index: 1;
+}
+
+
+//ON HOVER STYLES 
+
+.button--01:hover .button--01__text {
+    // color: var(--off-white, #f6f0e7);
+    color: #22219b;
+
+}
+
+//on hover BACKGROUND becomes visible - slides in from the left. 
+.button--01:hover::before {
+    left: 0; //background is visible. Travels in (-100%) from the left 
+
+}
+
+//On hover - border/underline moves to the left. Returns when stop hovering
+.button--01:hover::after {
+    left: -100%; //Moves to the left on hover. 
+}
+
+
+//----- BUTTON 02 -----
+
+.button--02 {
+    position: relative; //establish reference point for any absolute positioned children
+    display: inline-block;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    overflow: hidden; //added to contain the animated element
+    border-radius: 5px;
+    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+    z-index: 5; //base z index for the container
+
+    @include for-size(tablet, up) {
+
+        padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+
+
+    }
+
+    // Active state for mobile (works with JS in button component)
+    &.animate-active {
+        .button--02__text {
+            color: var(--off-white, #f6f0e7);
+        }
+
+        &::before {
+            left: 0;
+        }
+
+        &::after {
+            left: -100%;
+        }
+    }
+
+}
+
+//-----BORDER UNDERLINE ANIMATIONE-----
+.button--02::before,
+.button--02::after {
+    position: absolute; //positioned relative to nearest positioned ancestor 
+    content: "";
+    bottom: 0;
+    left: 0;
+    width: 100%; //reduced to 80% from 100% so the line starts 10% further in from the right
+    height: 2px;
+    background-color: #22219b; //background 3px high = looks like a border-bottom but we have more control over it/can animate
+    transition: all 0.25s ease-in;
+    z-index: 3;
+
+    pointer-events: none; // Only disable on pseudo-elements
+
+}
+
+
+.button--02 .button--02__text {
+    position: relative; //establish a reference point for any absolutely positioned children inside it.
+    display: inline-block;
+    color: var(--mpblue, #22219b);
+    transition: all 0.3s ease-in;
+    z-index: 2; //keep the text above the animation
+
+    @include sm__font;
+
+
+    @include for-size (tablet, up) {
+        // font-size: clamp(1rem, 3vw, 1.5rem);
+
+    }
+}
+
+//BACKGROUND animation - not visible
+.button--02::before {
+    position: absolute; //positioned relative to their nearest positioned ancestor (which is the button element)
+    content: "";
+    top: 0;
+    left: -100%; //positioned out of sight on the left (NOT hovering)
+    width: 100%;
+    height: 100%;
+
+
+    background-color: var(--mpblue, #22219b);
+
+
+
+    // border: 0.5px solid black;
+    transition: all 0.3s ease-in;
+    z-index: 1;
+}
+
+
+//ON HOVER STYLES 
+@include for-size(tablet, up) {
+    .button--02:hover .button--02__text {
+        color: var(--off-white, #f6f0e7);
+
+    }
+
+    //on hover BACKGROUND becomes visible - slides in from the left. 
+    .button--02:hover::before {
+        left: 0; //background is visible. Travels in (-100%) from the left 
+
+    }
+
+    //On hover - border/underline moves to the left. Returns when stop hovering
+    .button--02:hover::after {
+        left: -100%; //Moves to the left on hover. 
     }
 }

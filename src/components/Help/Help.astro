@@ -1,6 +1,6 @@
 ---
 import SectionLayout from "@/layouts/SectionLayout.astro";
-import Footer from "../Footer/Footer.astro";
+
 import { Content as Privacy } from "./Privacy.md";
 import { Content as Cookies } from "./Cookies.md";
 
@@ -40,18 +40,18 @@ const {
             <!-- Left Navigation -->
             <nav class="help--nav">
                 <ul class="help--nav__list">
-                    <li class="button--nav">
+                    <li class="button--01">
                         <button
-                            class="help--nav__link sm__font button--nav__text"
+                            class="help--nav__link sm__font button--01__text"
                             data-target="privacy"
                         >
                             {heading01}
                         </button>
                     </li>
 
-                    <li class="button--nav">
+                    <li class="button--01">
                         <button
-                            class="help--nav__link sm__font button--nav__text"
+                            class="help--nav__link sm__font button--01__text"
                             data-target="cookies"
                         >
                             {heading02}
@@ -76,7 +76,6 @@ const {
             </main>
         </article>
     </section>
-    <Footer />
 </SectionLayout><script>
     // Add smooth scrolling navigation
     document.addEventListener("DOMContentLoaded", () => {

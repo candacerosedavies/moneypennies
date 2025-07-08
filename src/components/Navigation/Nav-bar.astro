@@ -1,4 +1,6 @@
 ---
+//NAV-BAR
+
 import Hamburger from "./Hamburger.astro";
 import LogoBrandNav from "../MoneypenniesLogo/LogoBrandNav.astro";
 
@@ -19,11 +21,8 @@ import Help from "../Help/Help.astro";
       role="navigation"
       aria-label="Say hello on our contact page"
     >
-      <!-- <li>
-       <Help /> 
-      </li> -->
-      <li class="button--nav desktop__nav sm__font">
-        <a href="/contact/" class="contact--button--position button--nav__text"
+      <li class="button--01 desktop__nav sm__font">
+        <a href="/contact/" class="contact--button--position button--01__text"
           >SAY HELLO</a
         >
       </li>
@@ -32,54 +31,174 @@ import Help from "../Help/Help.astro";
 </header>
 
 <script>
-  // Nav bar styles that change on scroll
+  // Nav bar styles that change on scroll - using scroll percentage
   const header = document.querySelector("header");
 
-  const headerStates = {
-    scrolled: {
-      add: {
-        header: ["backdrop-blur-md", "fade-in"],
-        // buttons: ["!text-black"],
-      },
-      remove: {
-        header: ["bg-transparent"],
-        buttons: ["!text-white"],
-      },
-    },
-    reset: {
-      add: {
-        header: ["bg-transparent"],
-        buttons: ["!text-white"],
-      },
-      remove: {
-        header: ["backdrop-blur-sm", "fade-in"],
-        // buttons: ["!text-black"],
-      },
-    },
+  //-----SHARED HELPER FUNCTION - CALCULATE SCROLL DISTANCE AS A PERCENTAGE-----
+  function getScrollData() {
+    const headerScrollThreshold = window.innerHeight * 0.8; //window.innerHeight: height of the broswer viewport * 0.8 (80%)/ headerScrollThreshold: 80% of viewport height, or innerHeight (innerHeight is the section of the page currently looking at)
+    const currentScrollY = window.scrollY; //How far down have we scrolled? window.scrollY: scrollY is a property of the window interface, returns no. of pixels by which the document is currentl scrolled vertically
+    const maxScroll = document.body.scrollHeight - window.innerHeight; //Calculate the maximum possible scrolling distance use 'document.body.scrollHeight' (height of the ENTIRE page). scrollHeight is a property of the 'element' interface, it's a measurement of the height of an element's content. Here we're referring to the <body> element found in BaseLayout... Minus the viewport height(differs per device) in the calculation to account for the fact our viewport takes up space. The actual scrollable distance is always less than the total content height!)
+    const scrollPercentage = (currentScrollY / maxScroll) * 100; //To get the percentage: take how far down the page we've scrolled, divide by the maximum distance we can SCROLL, times by 100
+
+    return {
+      headerScrollThreshold,
+      currentScrollY,
+      maxScroll,
+      scrollPercentage,
+    };
+  }
+
+  //----- CHANGE HAMBURGER COLORS ON SCROLL: global so Hamburger.astro can use it
+  // window.updateHamburgerColors = function () { CHANGED TO BELOW, TYPESCRIPT!
+  window["updateHamburgerColors"] = function () {
+    const {
+      headerScrollThreshold,
+      currentScrollY,
+      scrollPercentage,
+      maxScroll,
+    } = getScrollData();
+
+    const bar01 = document.querySelector(".bar-1");
+    const bar02 = document.querySelector(".bar-2");
+
+    if (bar01 && bar02) {
+      //Helper functions to minimise repetition
+      //added the ? to eliminate typescript error. First verify the element exists, then do the thing.
+      function setWhiteBars() {
+        bar01?.classList.remove("bar-1__open");
+        bar01?.classList.add("bar-1__closed");
+        bar02?.classList.remove("bar-2__open");
+        bar02?.classList.add("bar-2__closed");
+      }
+
+      function setBlueBars() {
+        bar01?.classList.remove("bar-1__closed");
+        bar01?.classList.add("bar-1__open");
+        bar02?.classList.remove("bar-2__closed");
+        bar02?.classList.add("bar-2__open");
+      }
+
+      if (scrollPercentage > 85) {
+        setWhiteBars(); // Footer state
+      } else if (currentScrollY > headerScrollThreshold) {
+        setBlueBars(); // Main content state
+      } else {
+        setWhiteBars(); // Hero state
+      }
+    }
   };
 
+  //-----CHANGE NAV ELEMENT COLORS ON SCROLL-----
   const handleScroll = () => {
-    // const headerScrollThreshold = window.innerHeight * 0;
-    const headerScrollThreshold = 1;
-    const hasScrolledPastHeaderThreshold =
-      window.scrollY > headerScrollThreshold;
+    const {
+      headerScrollThreshold,
+      currentScrollY,
+      scrollPercentage,
+      maxScroll,
+    } = getScrollData();
+    //get nav button container
+    const navButton = document.querySelector(".nav__button-container li");
+    const navButtonText = document.querySelector(".contact--button--position");
 
-    const currentHeaderState = hasScrolledPastHeaderThreshold
-      ? headerStates.scrolled
-      : headerStates.reset;
+    //get nav logo
+    const navLogo = document.querySelector(".logo--text__nav");
 
-    // Apply header classes
-    header?.classList.add(...currentHeaderState.add.header);
-    header?.classList.remove(...currentHeaderState.remove.header);
+    //get individual menu bars
+    const bar01 = document.querySelector(".bar-1");
+    const bar02 = document.querySelector(".bar-2");
 
-    // const buttons = document.querySelectorAll(".button--nav__text");
-    // buttons.forEach((button) => {
-    //   button.classList.add(...currentHeaderState.add.buttons);
-    //   button.classList.remove(...currentHeaderState.remove.buttons);
-    // });
+    // DEBUG 08/07/25: Log values to console
+    console.log({
+      currentScrollY,
+      headerScrollThreshold,
+      scrollPercentage: Math.round(scrollPercentage),
+      maxScroll,
+      state:
+        scrollPercentage > 85
+          ? "FOOTER"
+          : currentScrollY > headerScrollThreshold
+            ? "MAIN"
+            : "HERO",
+    });
+
+    //-----IF SCROLLED MORE THAN 95% DOWN THE PAGE (the footer) use button--01 -----
+    if (scrollPercentage > 85) {
+      console.log("🔵 FOOTER STATE - White button");
+
+      header?.classList.add("backdrop-blur-md", "fade-in");
+      header?.classList.remove("bg-transparent");
+
+      //----NAV-BAR BUTTON apply button--01 class (light)
+      if (navButton) {
+        navButton.className = "button--01 desktop__nav sm__font";
+      }
+      //----NAV-BAR BUTTON apply button--01__text (light)
+      if (navButtonText) {
+        navButtonText.className = "contact--button--position button--01__text";
+      }
+
+      //----NAV-BAR LOGO apply light style
+      if (navLogo) {
+        navLogo.classList.remove("logo--dark");
+        navLogo.classList.add("logo--light");
+      }
+
+      //window.updateHamburgerColors(); CHANGED TO BELOW - TYPESCRIPT!
+      window["updateHamburgerColors"]();
+    } else if (currentScrollY > headerScrollThreshold) {
+      //-----MAIN CONTENT STATE (LIGHT BACKGROUND/BLUE BUTTON)
+      console.log("🔴 MAIN CONTENT STATE - Blue button");
+
+      header?.classList.add("backdrop-blur-md", "fade-in");
+      header?.classList.remove("bg-transparent");
+
+      if (navButton) {
+        navButton.className = "button--02 desktop__nav sm__font";
+      }
+      if (navButtonText) {
+        navButtonText.className = "contact--button--position button--02__text";
+      }
+
+      //----NAV-BAR LOGO apply dark style
+      if (navLogo) {
+        navLogo.classList.remove("logo--light");
+        navLogo.classList.add("logo--dark");
+      }
+
+      //window.updateHamburgerColors(); CHANGED TO BELOW - TYPESCRIPT!
+      window["updateHamburgerColors"]();
+    } else {
+      // HERO SECTION STATE (DARK BACKGROUND/WHITE BUTTON)
+      console.log("⚪ HERO STATE - White button");
+
+      header?.classList.add("bg-transparent");
+      header?.classList.remove("backdrop-blur-md", "fade-in");
+
+      if (navButton) {
+        navButton.className = "button--01 desktop__nav sm__font";
+      }
+      if (navButtonText) {
+        navButtonText.className = "contact--button--position button--01__text";
+      }
+
+      //----NAV-BAR LOGO apply light style
+      if (navLogo) {
+        navLogo.classList.remove("logo--dark");
+        navLogo.classList.add("logo--light");
+      }
+
+      //----HAMBURGER apply white hamburger style
+      if (bar01 && bar02) {
+      }
+
+      //window.updateHamburgerColors(); CHANGED TO BELOW - TYPESCRIPT!
+      window["updateHamburgerColors"]();
+    }
   };
 
   window.addEventListener("scroll", handleScroll);
+  handleScroll(); //set initial state
 </script>
 
 <style lang="scss">
@@ -190,23 +309,24 @@ import Help from "../Help/Help.astro";
     }
   }
 
-  .button--nav__text {
-    text-transform: none !important;
+  .button--01:hover .button--01__text {
+    // color: var(--off-white, #f6f0e7);
+    color: #22219b;
+    // color: white;
   }
 
-  header.scrolled .button--nav {
-    .button--nav__text {
-      color: black;
-    }
+  // // header.scrolled .button--01 {
+  // //   .button--01__text {
+  // //     color: black;
+  // //   }
 
-    &:hover .button--nav__text {
-      // color: white;
-    }
+  // &:hover .button--01__text {
+  //   color: var(--mp-blue, #22219b);
+  // }
 
-    &:hover::after {
-      background-color: black;
-    }
-  }
+  // &:hover::after {
+  //   background-color: black;
+  // }
 
   //-----HAMBURGER VISIBILITY------
 

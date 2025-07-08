@@ -117,24 +117,28 @@ import SectionLayout from "@/layouts/SectionLayout.astro";
                             id="message"
                             name="message"
                             placeholder="How can we help?"
-                            rows="6"
+                            rows="4"
                             required></textarea>
                     </p>
+
+                    <!-- Submit button -->
+                    <aside class="form--button__container">
+                        <button class="button--02">
+                            <a type="submit" class="button--02__text">
+                                CONNECT
+                            </a>
+                        </button>
+                    </aside>
+
+                    <!-- Result message (initially hidden) -->
+                    <p
+                        id="result"
+                        class="result-message hidden"
+                        role="status"
+                        aria-live="polite"
+                    >
+                    </p>
                 </fieldset>
-
-                <!-- Submit button -->
-                <button class="button--nav">
-                    <a type="submit" class="button--nav__text"> CONNECT </a>
-                </button>
-
-                <!-- Result message (initially hidden) -->
-                <p
-                    id="result"
-                    class="result-message hidden"
-                    role="status"
-                    aria-live="polite"
-                >
-                </p>
             </form>
         </section>
     </main>
@@ -152,7 +156,6 @@ import SectionLayout from "@/layouts/SectionLayout.astro";
     body,
     html {
         margin: 0;
-        padding: 0;
     }
 
     .section__contact02 {
@@ -160,19 +163,21 @@ import SectionLayout from "@/layouts/SectionLayout.astro";
         flex-direction: column;
         gap: 4rem;
         align-items: center;
-        min-height: auto;
-        border: 1px solid red;
+
+        // min-height: auto;
 
         @include for-size(tablet, up) {
             gap: 0;
             flex-direction: row;
+            width: 100%;
             align-items: flex-start; // Align tops of columns
         }
     }
 
     .form-container {
         // display: flex;
-        max-width: 90%;
+        // max-width: 80%;
+
         padding: 0;
         margin: 0;
 
@@ -187,8 +192,12 @@ import SectionLayout from "@/layouts/SectionLayout.astro";
         }
     }
 
-    .button--nav {
-        // padding: 0;
+    .form--button__container {
+        padding: 4rem;
+
+        @include for-size(tablet, up) {
+            padding: 3rem;
+        }
     }
 
     .contact--contact-headings {
@@ -239,12 +248,17 @@ import SectionLayout from "@/layouts/SectionLayout.astro";
     }
 
     .form-field {
-        border-bottom: 1px solid var(--mp-blue, #22219b);
+        border-bottom: 2px solid var(--mp-blue, #22219b);
         padding-bottom: 0.25rem;
         transition: border-color 0.3s;
+        width: 100%;
 
-        &:focus-within {
-            // border-color: white;
+        // &:focus-within {
+        //     // border-color: white;
+        // }
+
+        @include for-size(tablet, up) {
+            width: 60%;
         }
 
         input,

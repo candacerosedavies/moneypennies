@@ -1,0 +1,55 @@
+---
+//JS for button--02. See animation before navigating to page
+---
+
+<script>
+    function initMobileButtonAnimation() {
+        const buttons = document.querySelectorAll(".button--02, .button--01");
+
+        buttons.forEach((button) => {
+            let isAnimating = false;
+
+            button.addEventListener("click", function (e) {
+                // Check if we're on mobile (screen width < 768px)
+                const isMobile = window.innerWidth < 768;
+
+                if (isMobile && !isAnimating) {
+                    // Prevent immediate navigation
+                    e.preventDefault();
+
+                    // Start animation
+                    isAnimating = true;
+                    this.classList.add("animate-active");
+
+                    // Get the original href or onclick behavior
+                    const href = this.getAttribute("href");
+                    const onclick = this.getAttribute("onclick");
+
+                    // Wait 2 seconds, then navigate
+                    setTimeout(() => {
+                        this.classList.remove("animate-active");
+                        isAnimating = false;
+
+                        // Navigate after animation
+                        if (href) {
+                            window.location.href = href;
+                        } else if (onclick) {
+                            // Execute the original onclick function
+                            eval(onclick);
+                        }
+                    }, 2000); // 2 second delay
+                }
+            });
+        });
+    }
+
+    // Initialize when DOM is loaded
+    document.addEventListener("DOMContentLoaded", initMobileButtonAnimation);
+
+    // Reinitialize on window resize to handle orientation changes
+    window.addEventListener("resize", function () {
+        // Debounce resize events
+        clearTimeout(this.resizeTimer);
+        this.resizeTimer = setTimeout(initMobileButtonAnimation, 250);
+    });
+</script>

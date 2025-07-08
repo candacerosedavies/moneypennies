@@ -46,11 +46,10 @@ const {
                 <p class="sm__font">{para3}</p> -->
                 <a href="/contact/">
                     <nav class="section03__button-container">
-                        <button
-                            class="button--animated"
-                            onclick="window.location.href='/contact/'"
-                        >
-                            <span class="button__text">start connecting</span>
+                        <button class="button--02">
+                            <a class="button--02__text" href="/contact/"
+                                >start connecting</a
+                            >
                         </button>
                     </nav>
                 </a>
@@ -91,31 +90,6 @@ const {
         }
     }
 
-    // .section03__parallax-container {
-    //     min-height: 100vh !important;
-    //     background-image: url("/images/connect/pexels-didsss-2127522.jpg");
-    //     background-size: cover;
-    //     background-position: right 80% bottom 0%;
-    //     transform: scale(100%);
-    //     display: flex;
-    //     flex-grow: 1;
-    //     flex-direction: column;
-    //     position: relative;
-
-    //     //background overlay
-    //     &::before {
-    //         content: "";
-    //         position: absolute;
-    //         inset: 0;
-    //         background-color: rgba(0, 0, 0, 0.4);
-    //         pointer-events: none;
-    //     }
-
-    //     @include for-size(tablet, up) {
-    //         background-attachment: scroll;
-    //     }
-    // }
-
     .section03__heading {
         text-transform: uppercase;
         font-weight: 300;
@@ -135,10 +109,6 @@ const {
             ); // Force smaller size in problem range
             line-height: 1.1; // Tighter line spacing
         }
-    }
-
-    .section03__button-container {
-        margin: 0;
     }
 
     .section03__overlay {
