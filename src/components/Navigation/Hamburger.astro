@@ -1,5 +1,8 @@
 ---
 //HAMBURGER COMPONENT
+
+const contact = "SAY HELLO";
+const home = "HOME";
 ---
 
 <!-- Animated Navigation Overlay -->
@@ -9,14 +12,15 @@
 >
   <ul class="menu--container__buttons">
     <li class="button__contact">
-      <button class="button--02" onclick="window.location.href='/contact/'">
-        <span class="button--02__text">say hello</span>
-      </button>
+      <a class="button--02" href="/contact/" aria-label="Go-to-contact-page">
+        <span class="button--02__text md__font">{contact}</span></a
+      >
     </li>
+
     <li class="button__home">
-      <button class="button--02" onclick="window.location.href='/'">
-        <span class="button--02__text">home</span>
-      </button>
+      <a class="button--02" href="/" aria-label="Go-to-home-page">
+        <span class="button--02__text md__font">{home}</span>
+      </a>
     </li>
   </ul>
 </nav>

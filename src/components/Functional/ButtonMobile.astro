@@ -1,55 +1,73 @@
 ---
-//JS for button--02. See animation before navigating to page
+//JS for button--02. See the gorgey animation before navigating to page in mobile/tablet (animation is 'on hover' in dekstop)
 ---
 
 <script>
+    //-----MAIN FUNCTION TO INITIALIZE MOBILE BUTTON ANIMATIONS-----
     function initMobileButtonAnimation() {
-        const buttons = document.querySelectorAll(".button--02, .button--01");
+        //using document.querySelectorAll to return a NodeList of ALL elements that match the specified CSS selectors. (anchor tag with those class names) // use querySelector when targetting one specific element
+        //document keyword always creates a NodeList which looks like and can be manipulated like an array (to a point), making it possible to loop through all the a.button--01 and 02
+        const buttons = document.querySelectorAll("a.button--02, a.button--01");
 
+        //-----CREATE INDIVIDUAL EVENT LISTENER 'FOREACH' BUTTON FOUND ON THE PAGE-----
+        //forEach: executes a function for each element (button) in the NodeList.
         buttons.forEach((button) => {
-            let isAnimating = false;
+            let hasAnimated = false; //Track whether this specific button has already been animated (to prevent needing to click twice! Once for animation, once for navigation)
 
+            //attach an event handler to the button element. 'click' means this function runs when the button is clicked. The 'e' parameter is the event object containing information about the click
             button.addEventListener("click", function (e) {
-                // Check if we're on mobile (screen width < 768px)
-                const isMobile = window.innerWidth < 768;
+                const isMobile = window.innerWidth <= 1024; //window.innerWidth: returns the interior width of the window in pixels (viewport width). Set to 'less than or equal to' because 1024px captures all tablets, plus some small desktops. No one misses out on the animation! innerWidth always returns a number in pixels (as with innerHeight and scrollY)
 
-                if (isMobile && !isAnimating) {
-                    // Prevent immediate navigation
+                //Check if we're on mobile/tablet AND this button hasn't been animated yet. (&& means both conditions must be true before proceeding)
+                if (isMobile && !hasAnimated) {
+                    //DEBUG 09/07/25
+                    console.log(
+                        "Starting mobile animation for:",
+                        button.href, //button.href: the URL that this link points to
+                    );
+
+                    //e.preventDefault(): stops the browser's default behavior for this event eg navigating immediately.
                     e.preventDefault();
 
-                    // Start animation
-                    isAnimating = true;
-                    this.classList.add("animate-active");
+                    //Set flag to true before we go any furuther. (prevents this button from being clicked again which would start a new animatione/cause an overlap. The animate starts as soon as user clicks and this variable is set to true)
+                    hasAnimated = true;
 
-                    // Get the original href or onclick behavior
-                    const href = this.getAttribute("href");
-                    const onclick = this.getAttribute("onclick");
+                    //classList.add(): adds a CSS class to the element. 'animate-active' triggers the CSS animation defined in button mixins
+                    //using button not buttons as referencing each element/button in the forEach loop
+                    button.classList.add("animate-active");
 
-                    // Wait 2 seconds, then navigate
+                    //button.href: gets the URL from the href attribute of the <a> tag. This is where we'll navigate after the animation
+                    const href = button.href;
+
+                    //setTimeout: executes a function after the specified delay (in milliseconds). This creates the pause between animation start and navigation
                     setTimeout(() => {
-                        this.classList.remove("animate-active");
-                        isAnimating = false;
+                        //classList.remove(): removes the CSS class that triggered the animation, returning the button to its original state
+                        button.classList.remove("animate-active");
 
-                        // Navigate after animation
+                        //Check if href exists (it should, since we're targeting <a> tags, but good to be safe)
                         if (href) {
+                            console.log("🚀 Navigating to:", href);
+                            //window.location.href: changes the current page URL, causing the browser to navigate to the specified address
                             window.location.href = href;
-                        } else if (onclick) {
-                            // Execute the original onclick function
-                            eval(onclick);
                         }
-                    }, 2000); // 2 second delay
+                    }, 350); //350 milliseconds = 0.35 seconds delay before navigation
                 }
             });
         });
     }
 
-    // Initialize when DOM is loaded
+    //-----EVENT LISTENERS FOR INITIALIZATION-----
+    //document.addEventListener: attaches an event listener to the entire document. 'DOMContentLoaded' fires when the HTML document has been completely loaded and parsed, ensuring all our button elements exist before we try to find them
     document.addEventListener("DOMContentLoaded", initMobileButtonAnimation);
 
-    // Reinitialize on window resize to handle orientation changes
+    //-----REINITIALIZE ON SCREEN ORIENTATION CHANGES-----
+    //Variable to store the timeout ID for debouncing resize events (prevents function from running too many times during window resize!)
+    let resizeTimer;
+    //window.addEventListener: attaches event listener to the browser window. 'resize' fires when the window size changes (like rotating phone from portrait to landscape)
     window.addEventListener("resize", function () {
-        // Debounce resize events
-        clearTimeout(this.resizeTimer);
-        this.resizeTimer = setTimeout(initMobileButtonAnimation, 250);
+        //clearTimeout: cancels any previously set timeout to prevent multiple executions
+        clearTimeout(resizeTimer);
+        //setTimeout with 250ms delay: waits for resize events to stop before reinitializing. This prevents the function from running dozens of times during a single resize action
+        resizeTimer = setTimeout(initMobileButtonAnimation, 250);
     });
 </script>

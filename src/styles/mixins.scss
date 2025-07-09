@@ -126,7 +126,7 @@ $breakpoints: (
 }
 
 //BUTTON MIXINS
-//----- ANIMATED NAV BUTTONS ------
+//----- BUTTON LIGHT (FOR DARK BACKGROUNDS) ------
 .button--01 {
     position: relative; //establish a reference point for any absolutely positioned children inside it.
     display: inline-block;
@@ -144,7 +144,24 @@ $breakpoints: (
 
     }
 
+    &.animate-active {
+        .button--01__text {
+            color: var(--mp-blue, #22219b);
+
+        }
+
+        &::before {
+            left: 0;
+        }
+
+        &::after {
+            left: -100%;
+        }
+    }
+
 }
+
+
 
 
 .button--01::before,
@@ -206,7 +223,7 @@ $breakpoints: (
 }
 
 
-//----- BUTTON 02 -----
+//----- BUTTON DARK (FOR LIGHT BACKGROUNDS) -----
 
 .button--02 {
     position: relative; //establish reference point for any absolute positioned children

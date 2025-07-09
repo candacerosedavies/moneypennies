@@ -31,7 +31,7 @@ const {
 ---
 
 <SectionLayout allowOverflow={true}>
-    <section class="help--page bg-stone-black">
+    <section class="help--page">
         <header class="help--header">
             <h1 class="lg__font">{h1Text}</h1>
         </header>
@@ -40,18 +40,18 @@ const {
             <!-- Left Navigation -->
             <nav class="help--nav">
                 <ul class="help--nav__list">
-                    <li class="button--01">
+                    <li class="button--02">
                         <button
-                            class="help--nav__link sm__font button--01__text"
+                            class="help--nav__link sm__font button--02__text"
                             data-target="privacy"
                         >
                             {heading01}
                         </button>
                     </li>
 
-                    <li class="button--01">
+                    <li class="button--02">
                         <button
-                            class="help--nav__link sm__font button--01__text"
+                            class="help--nav__link sm__font button--02__text"
                             data-target="cookies"
                         >
                             {heading02}
@@ -190,7 +190,7 @@ const {
 
     .help--page {
         min-height: 100vh;
-        background: var(--stone-black, #1a1a1a);
+        background: var(--off-white, #f6f0e7);
         padding-top: 5rem;
         padding-bottom: 10rem;
         width: 100%;
@@ -256,7 +256,10 @@ const {
         flex-direction: column;
         align-items: center;
         gap: 0.5rem;
-        background: rgba(26, 26, 26, 0.95); // Semi-transparent background
+        // background: rgba(26, 26, 26, 0.95); // Semi-transparent background
+        background: var(--off-white, #f6f0e7);
+        // color: var(--mp-blue, #22219b);
+
         z-index: 10;
 
         @include for-size(tablet, up) {

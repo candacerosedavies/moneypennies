@@ -1,4 +1,6 @@
 ---
+//FOOTER
+
 import SectionLayout from "@/layouts/SectionLayout.astro";
 import LogoBrand from "../MoneypenniesLogo/LogoBrand.astro";
 
@@ -70,18 +72,28 @@ const address = "Manchester Suite B 2 Edge Lane Manchester M21 9JF";
                                 {helpH2}
                             </h2>
                         </li>
-                        <li class="button--01">
+                        <li>
                             <a
                                 href="/help-page/"
-                                class="sm__font button--01__text">{privacy}</a
+                                class="button--01 sm__font"
+                                aria-label="Read our privacy policy"
                             >
+                                <span class="button--01__text sm__font">
+                                    {privacy}</span
+                                >
+                            </a>
                         </li>
 
-                        <li class="button--01">
+                        <li>
                             <a
                                 href="/help-page/"
-                                class="sm__font button--01__text">{cookies}</a
+                                class="button--01 sm__font"
+                                aria-label="Read our cookie policy"
                             >
+                                <span class="button--01__text sm__font">
+                                    {cookies}</span
+                                >
+                            </a>
                         </li>
                     </ul>
                 </section>
@@ -94,31 +106,42 @@ const address = "Manchester Suite B 2 Edge Lane Manchester M21 9JF";
                                 {contactH2}
                             </h2>
                         </li>
-                        <li class="button--01">
+                        <li>
                             <a
-                                class="button--01__text"
-                                href="mailto: suzanne@moneypennies.biz"
-                                >{email}
+                                href="mailto:suzanne@moneypennies.biz"
+                                class="button--01"
+                                aria-label="Send us an email"
+                            >
+                                <span class="button--01__text sm__font">
+                                    {email}</span
+                                >
                             </a>
                         </li>
 
-                        <li class="button--01">
+                        <li>
                             <a
-                                class="button--01__text"
-                                href="tel:+44 07967 826 038">{number}</a
+                                href="tel:+44 07967 826 038"
+                                class="button--01"
+                                aria-label="Call us at +44 07967 826 038"
                             >
+                                <span class="button--01__text sm__font"
+                                    >{number}</span
+                                >
+                            </a>
                         </li>
-                        <li class="">
+                        <li>
                             <a
                                 href="https://www.linkedin.com/in/moneypennies/"
                                 target="_blank"
+                                aria-label="Visit our LinkedIn profile (opens in new tab)"
+                                rel="noopener noreferrer"
                             >
                                 <img
                                     class="linkedin__icon"
                                     src="/images/icons/linkedin_icon_white.png"
-                                    alt="linkedin logo"
-                                /></a
-                            >
+                                    alt="LinkedIn logo"
+                                />
+                            </a>
                         </li>
                     </ul>
                 </section>

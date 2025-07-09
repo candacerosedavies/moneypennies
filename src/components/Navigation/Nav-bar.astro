@@ -36,10 +36,14 @@ import Help from "../Help/Help.astro";
 
   //-----SHARED HELPER FUNCTION - CALCULATE SCROLL DISTANCE AS A PERCENTAGE-----
   function getScrollData() {
-    const headerScrollThreshold = window.innerHeight * 0.8; //window.innerHeight: height of the broswer viewport * 0.8 (80%)/ headerScrollThreshold: 80% of viewport height, or innerHeight (innerHeight is the section of the page currently looking at)
-    const currentScrollY = window.scrollY; //How far down have we scrolled? window.scrollY: scrollY is a property of the window interface, returns no. of pixels by which the document is currentl scrolled vertically
-    const maxScroll = document.body.scrollHeight - window.innerHeight; //Calculate the maximum possible scrolling distance use 'document.body.scrollHeight' (height of the ENTIRE page). scrollHeight is a property of the 'element' interface, it's a measurement of the height of an element's content. Here we're referring to the <body> element found in BaseLayout... Minus the viewport height(differs per device) in the calculation to account for the fact our viewport takes up space. The actual scrollable distance is always less than the total content height!)
-    const scrollPercentage = (currentScrollY / maxScroll) * 100; //To get the percentage: take how far down the page we've scrolled, divide by the maximum distance we can SCROLL, times by 100
+    //window.innerHeight: height of the broswer viewport * 0.8 (80%)/ headerScrollThreshold: 80% of viewport height, or innerHeight (innerHeight is the section of the page currently looking at)
+    const headerScrollThreshold = window.innerHeight * 0.8;
+    //How far down have we scrolled? window.scrollY: scrollY is a property of the window interface, returns no. of pixels by which the document is currentl scrolled vertically
+    const currentScrollY = window.scrollY;
+    //Calculate the maximum possible scrolling distance use 'document.body.scrollHeight' (height of the ENTIRE page). scrollHeight is a property of the 'element' interface, it's a measurement of the height of an element's content. Here we're referring to the <body> element found in BaseLayout... Minus the viewport height(differs per device) in the calculation to account for the fact our viewport takes up space. The actual scrollable distance is always less than the total content height!)
+    const maxScroll = document.body.scrollHeight - window.innerHeight;
+    //To get the percentage: take how far down the page we've scrolled, divide by the maximum distance we can SCROLL, times by 100
+    const scrollPercentage = (currentScrollY / maxScroll) * 100;
 
     return {
       headerScrollThreshold,
