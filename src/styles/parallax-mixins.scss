@@ -3,7 +3,7 @@
 // True JavaScript parallax - creates actual background movement
 @mixin true-parallax-background($image-url,
     $position: center,
-    $overlay: rgba(0, 0, 0, 0.4),
+    $overlay: rgba(0, 0, 0, ),
     $speed: 0.5) {
     position: relative;
     min-height: 100vh;

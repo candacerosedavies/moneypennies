@@ -185,26 +185,40 @@ const {
     * {
         color: var(--off-white, #f6f0e7);
     }
+
+    h1 {
+        text-align: center;
+
+        @include for-size(tablet, up) {
+            text-align: left;
+        }
+    }
     .help--page {
         min-height: 100vh;
         background: var(--mp-blue, #22219b);
-        padding-top: 5rem;
-        padding-bottom: 10rem;
+        // padding-bottom: 2rem; DEBUG
+        padding: 0; //DEBUG
         width: 100%;
+
+        // @include for-size(tablet, up) {
+        //     padding-top: 5rem;
+        // }
     }
 
     .help--header {
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
         text-align: center;
         position: sticky;
         top: 0;
         // background: var(--stone-black, #1a1a1a);
         z-index: 10;
-        padding: 1rem;
+        // padding: 1rem; DEBUG
+
+        padding: 0; //DEBUG
 
         @include for-size(tablet, up) {
             position: static;
-            padding: 0 2rem;
+            // padding: 0 2rem; DEBUG
             text-align: left;
         }
     }
@@ -214,8 +228,9 @@ const {
         // Mobile: Create a scrollable container
         display: flex;
         flex-direction: column;
-        height: calc(100vh - 12rem); // Fixed height for scrolling
+        height: calc(100vh - 6rem); // Fixed height for scrolling
         gap: 0;
+        padding: 0; //DEBUG
 
         @include for-size(tablet, up) {
             display: grid;
@@ -223,21 +238,23 @@ const {
             grid-template-rows: none;
             height: calc(100vh - 12rem);
             gap: 0;
+            padding: 0; //DEBUG
         }
 
         @include for-size(desktop, up) {
             grid-template-columns: 1fr 3fr;
+            padding: 0; //DEBUG
         }
     }
 
     .help--nav {
-        // Mobile: Fixed height section with sticky content
-        padding: 1rem;
-
+        // padding: 1rem; DEBUG
+        padding: 0; //DEBUG
         flex-shrink: 0; // Don't shrink on mobile
 
         @include for-size(tablet, up) {
-            padding: 2rem;
+            // padding: 2rem; DEBUG
+            padding: 0; //DEBUG
             flex-shrink: 1;
             border-right: 1px solid var(--off-white, #f6f0e7);
         }
@@ -254,7 +271,7 @@ const {
         flex-direction: column;
         align-items: center;
         gap: 0.5rem;
-        // background: rgba(26, 26, 26, 0.95); // Semi-transparent background
+
         background: var(--mp-blue, #22219b);
 
         z-index: 10;
@@ -274,21 +291,23 @@ const {
         width: 100%;
         cursor: pointer;
         transition: color 0.2s ease;
-        padding: 0.25rem 0.5rem; //padding L/R
+        // padding: 0.25rem 0.5rem; DEBUG //padding L/R
         // font-size: 0.75rem; /* Smaller on mobile */
+        padding: 0;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
 
         @include for-size(tablet, up) {
             text-align: left; /* Left align on larger screens */
-            padding: 0.5rem 0;
+            // padding: 0.5rem 0; DEBUG
+            padding: 0;
             font-size: inherit; /* Normal size on larger screens */
             white-space: normal; /* Allow wrapping */
         }
 
         &:hover {
-            color: rgba(255, 255, 255, 0.8);
+            // color: rgba(255, 255, 255, 0.8);
 
             @include sm__font;
         }
@@ -301,7 +320,7 @@ const {
 
             &::before {
                 // content: "→ ";
-                // background-color: rgba(255, 255, 255, 0.6);
+                background-color: rgba(255, 255, 255, 0.6);
             }
         }
     }
@@ -311,35 +330,21 @@ const {
         // Mobile: This becomes the scrollable area
         flex: 1;
         overflow-y: auto;
-        padding: 2rem 2rem 0 2rem;
+        padding: 2rem 2rem 2rem 2rem;
         box-sizing: border-box;
         text-align: left;
         position: relative;
+        background-color: var(--off-white, #f6f0e7);
 
         @include for-size(tablet, down) {
-            border-top: 2px solid var(--off-white, #f6f0e7);
+            // border-top: 2px solid var(--off-white, #f6f0e7);
+            // border-bottom: 2px solid var(--off-white, #f6f0e7);
             margin: 2rem 2rem 0 2rem; // This creates the "narrower" effect
             padding-top: 2rem;
         }
 
-        // @include for-size(tablet, down) {
-        //     position: relative;
-
-        //     &::before {
-        //         content: "";
-        //         position: absolute;
-        //         top: 0;
-        //         left: 2rem; // 5px from left edge
-        //         right: 2rem; // 5px from right edge
-        //         height: 1px;
-        //         background-color: var(--off-white, #f6f0e7);
-        //         z-index: 10; // Ensure it stays above content
-        //         pointer-events: none; // Don't interfere with scrolling
-        //     }
-        // }
-
         @include for-size(tablet, up) {
-            padding: 2rem;
+            margin-right: 5rem;
         }
     }
 
@@ -350,8 +355,10 @@ const {
     }
 
     .help--section {
+        color: var(--mp-blue, #22219b);
         h2 {
-            // margin-bottom: 1.5rem;
+            text-align: center;
+            color: var(--mp-blue, #22219b);
         }
 
         p {
