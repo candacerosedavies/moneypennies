@@ -30,7 +30,7 @@ const {
 } = Astro.props;
 ---
 
-<SectionLayout allowOverflow={true}>
+<SectionLayout allowOverflow={true} variant="color" textWidth="full">
     <section class="help--page">
         <header class="help--header">
             <h1 class="lg__font">{h1Text}</h1>
@@ -40,18 +40,18 @@ const {
             <!-- Left Navigation -->
             <nav class="help--nav">
                 <ul class="help--nav__list">
-                    <li class="button--02">
+                    <li class="button--01">
                         <button
-                            class="help--nav__link sm__font button--02__text"
+                            class="help--nav__link sm__font button--01__text"
                             data-target="privacy"
                         >
                             {heading01}
                         </button>
                     </li>
 
-                    <li class="button--02">
+                    <li class="button--01">
                         <button
-                            class="help--nav__link sm__font button--02__text"
+                            class="help--nav__link sm__font button--01__text"
                             data-target="cookies"
                         >
                             {heading02}
@@ -61,7 +61,7 @@ const {
             </nav>
 
             <!-- Right Content -->
-            <main class="help--content">
+            <main class="help--content help--border">
                 <aside class="help--content__inner">
                     <section class="help--section heading--01">
                         <h2 id="privacy" class="lg__font">{heading01}</h2>
@@ -93,7 +93,9 @@ const {
                 //targetElement  <section id="privacy"> find the element with id='privacy' in this case the privacy para not the heading.
                 if (target) {
                     //added to prevent typescript error. "only proceed if 'target' is not null"
-                    const targetElement = document.getElementById(target);
+                    const targetElement = document.getElementById(
+                        target,
+                    ) as HTMLElement;
 
                     //if element with id-'privacy', scroll to that section/para.
                     if (targetElement) {
@@ -180,17 +182,12 @@ const {
 <style lang="scss">
     @use "@/styles/mixins" as *;
 
-    // @include for-size(phone, down) {
-    //     .help--header--links {
-    //         // position: fixed;
-    //         // z-index: 999; /* So that it is not under the other elements */
-    //         // // background: #1c2454; /* It was transparent */
-    //     }
-    // }
-
+    * {
+        color: var(--off-white, #f6f0e7);
+    }
     .help--page {
         min-height: 100vh;
-        background: var(--off-white, #f6f0e7);
+        background: var(--mp-blue, #22219b);
         padding-top: 5rem;
         padding-bottom: 10rem;
         width: 100%;
@@ -236,12 +233,13 @@ const {
     .help--nav {
         // Mobile: Fixed height section with sticky content
         padding: 1rem;
-        border-right: 1px solid rgba(255, 255, 255, 0.1);
+
         flex-shrink: 0; // Don't shrink on mobile
 
         @include for-size(tablet, up) {
             padding: 2rem;
             flex-shrink: 1;
+            border-right: 1px solid var(--off-white, #f6f0e7);
         }
     }
     //UL CLASS FOR NAV LINKS (CHILD OF .help-layout GRID)
@@ -257,8 +255,7 @@ const {
         align-items: center;
         gap: 0.5rem;
         // background: rgba(26, 26, 26, 0.95); // Semi-transparent background
-        background: var(--off-white, #f6f0e7);
-        // color: var(--mp-blue, #22219b);
+        background: var(--mp-blue, #22219b);
 
         z-index: 10;
 
@@ -314,9 +311,32 @@ const {
         // Mobile: This becomes the scrollable area
         flex: 1;
         overflow-y: auto;
-        padding: 1rem;
+        padding: 2rem 2rem 0 2rem;
         box-sizing: border-box;
         text-align: left;
+        position: relative;
+
+        @include for-size(tablet, down) {
+            border-top: 2px solid var(--off-white, #f6f0e7);
+            margin: 2rem 2rem 0 2rem; // This creates the "narrower" effect
+            padding-top: 2rem;
+        }
+
+        // @include for-size(tablet, down) {
+        //     position: relative;
+
+        //     &::before {
+        //         content: "";
+        //         position: absolute;
+        //         top: 0;
+        //         left: 2rem; // 5px from left edge
+        //         right: 2rem; // 5px from right edge
+        //         height: 1px;
+        //         background-color: var(--off-white, #f6f0e7);
+        //         z-index: 10; // Ensure it stays above content
+        //         pointer-events: none; // Don't interfere with scrolling
+        //     }
+        // }
 
         @include for-size(tablet, up) {
             padding: 2rem;
