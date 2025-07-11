@@ -74,6 +74,12 @@ const {
                     </section>
                 </aside>
             </main>
+
+            <button class="back-to-top">
+                <a href="" class="button--01" id="back-to-top"
+                    ><span class="button--01__text">Back to top</span></a
+                ></button
+            >
         </article>
     </section>
 </SectionLayout><script>
@@ -89,6 +95,7 @@ const {
                 e.preventDefault();
                 //get the value assigned to heading 'data-target' eg 'privacy' or 'cookies'
                 const target = link.getAttribute("data-target");
+                const backTop = document.getElementById("back-to-top");
 
                 //targetElement  <section id="privacy"> find the element with id='privacy' in this case the privacy para not the heading.
                 if (target) {
@@ -99,7 +106,7 @@ const {
 
                     //if element with id-'privacy', scroll to that section/para.
                     if (targetElement) {
-                        // NEW: Better scroll calculation to prevent overshooting
+                        //  scroll calculation to prevent overshooting
                         const scrollContainer =
                             document.querySelector(".help--content");
                         const contentInner = document.querySelector(
@@ -117,6 +124,16 @@ const {
                                 top: targetPosition - headerOffset,
                                 behavior: "smooth",
                             });
+
+                            // ----- BACK TO TOP BUTTON -----
+                            if (backTop) {
+                                const topTargetPosition =
+                                    backTop.offsetTop - contentInner.offsetTop;
+                                scrollContainer.scrollTo({
+                                    top: targetPosition - headerOffset,
+                                    behavior: "smooth",
+                                });
+                            }
                         }
 
                         // ----- VISUALLY IDENFITY WHICH SECTION HAS BEEN CLICKED BY ADDING/REMOVING CSS CLASS 'active' -----
@@ -202,7 +219,7 @@ const {
     }
 
     .help--header {
-        margin-bottom: 2rem; // Space between header and nav links
+        margin-bottom: 01rem; // Space between header and nav links
         text-align: center;
         position: sticky;
         top: 0;
@@ -223,8 +240,9 @@ const {
         // Mobile: Create a scrollable container
         display: flex;
         flex-direction: column;
-        height: calc(100vh - 4rem); // Account for page padding
+        height: calc(100vh - 1rem); // Account for page padding
         gap: 0;
+        padding: 0;
 
         @include for-size(tablet, up) {
             display: grid;
@@ -239,14 +257,26 @@ const {
         }
     }
 
+    .back-to-top {
+        padding: 4rem;
+
+        @include for-size(tablet, up) {
+            display: none;
+        }
+    }
+
     .help--nav {
-        padding: 4rem; //match with MARGIN of main content so h1 and main content remain top
+        padding: 2rem 2rem 1rem 2rem;
         display: flex;
         flex-direction: column;
         flex-shrink: 0; // Don't shrink on mobile
-    }
-    //UL CLASS FOR NAV LINKS (CHILD OF .help-layout GRID)
 
+        @include for-size(tablet, up) {
+            padding: 4rem; //match with MARGIN of main content so h1 and main content remain top
+        }
+    }
+
+    //UL CLASS FOR NAV LINKS (CHILD OF .help-layout GRID)
     .help--nav__list {
         list-style: none;
         margin: 0;
@@ -255,10 +285,10 @@ const {
         top: 1rem;
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center; //buttons center in mobile
         gap: 0.5rem;
 
-        background: var(--mp-blue, #22219b);
+        background: var(--mp-blue);
 
         z-index: 10;
 
@@ -266,6 +296,7 @@ const {
             top: 2rem;
             gap: 1rem;
             background: transparent;
+            align-items: flex-start; //buttons left aligned larger screens
         }
     }
     //-----INDIVIDUAL NAV LINKS. NOT A CONTAINER FOR ALL LINKS-----
@@ -273,12 +304,10 @@ const {
         background: none;
         border: none;
         color: inherit;
-        text-align: left; //keep content left aligned
         width: 100%;
         cursor: pointer;
         transition: color 0.2s ease;
-        // padding: 0.25rem 0.5rem; DEBUG //padding L/R
-        // font-size: 0.75rem; /* Smaller on mobile */
+
         padding: 0;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -314,25 +343,26 @@ const {
     //-----CONTAINER FOR MAIN CONTENT-----
     .help--content {
         // Mobile: This becomes the scrollable area
-        padding: 2rem;
-        margin-top: 4rem; //match with P of .help--grid so content and h1 remain aligned
+
         flex: 1;
         overflow-y: auto;
         padding: 2rem 2rem 2rem 2rem;
         box-sizing: border-box;
         text-align: left;
         position: relative;
+        border-radius: 5px;
         background-color: var(--off-white, #f6f0e7);
 
         @include for-size(tablet, down) {
             // border-top: 2px solid var(--off-white, #f6f0e7);
             // border-bottom: 2px solid var(--off-white, #f6f0e7);
-            margin: 0 2rem 0 2rem; // This creates the "narrower" effect
+            margin: 0 0.5rem 0 0.5rem; // This creates the "narrower" effect
             padding-top: 2rem;
         }
 
         @include for-size(tablet, up) {
-            margin-right: 5rem;
+            margin-right: 1rem;
+            margin-top: 4rem; //match with P of .help--grid so content and h1 remain aligned
         }
     }
 
