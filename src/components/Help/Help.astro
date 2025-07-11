@@ -73,13 +73,12 @@ const {
                         <p class="sm__font"><Cookies /></p>
                     </section>
                 </aside>
+                <button class="back-to-top">
+                    <as href="" class="button--02" id="back-to-top"
+                        ><span class="button--02__text">Back to top</span></as
+                    ></button
+                >
             </main>
-
-            <button class="back-to-top">
-                <a href="" class="button--01" id="back-to-top"
-                    ><span class="button--01__text">Back to top</span></a
-                ></button
-            >
         </article>
     </section>
 </SectionLayout><script>
@@ -95,7 +94,6 @@ const {
                 e.preventDefault();
                 //get the value assigned to heading 'data-target' eg 'privacy' or 'cookies'
                 const target = link.getAttribute("data-target");
-                const backTop = document.getElementById("back-to-top");
 
                 //targetElement  <section id="privacy"> find the element with id='privacy' in this case the privacy para not the heading.
                 if (target) {
@@ -124,16 +122,6 @@ const {
                                 top: targetPosition - headerOffset,
                                 behavior: "smooth",
                             });
-
-                            // ----- BACK TO TOP BUTTON -----
-                            if (backTop) {
-                                const topTargetPosition =
-                                    backTop.offsetTop - contentInner.offsetTop;
-                                scrollContainer.scrollTo({
-                                    top: targetPosition - headerOffset,
-                                    behavior: "smooth",
-                                });
-                            }
                         }
 
                         // ----- VISUALLY IDENFITY WHICH SECTION HAS BEEN CLICKED BY ADDING/REMOVING CSS CLASS 'active' -----
@@ -151,6 +139,20 @@ const {
                     }
                 }
             });
+
+            // ----- BACK TO TOP BUTTON -----
+            const backTop = document.getElementById("back-to-top");
+            const scrollContainer = document.querySelector(".help--content");
+            if (backTop && scrollContainer) {
+                backTop.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    scrollContainer.scrollTo({
+                        top: 0,
+                        behavior: "smooth",
+                    });
+                });
+                //get position of the button relative to the content inner container
+            }
         });
 
         //-----VISUALLY IDENFITY ACTIVE SECTION BASED ON SCROLL POSITION (in addition to clicking as above)-----
@@ -213,7 +215,7 @@ const {
     .help--page {
         min-height: 100vh;
         background: var(--mp-blue, #22219b);
-        padding: 2rem 0;
+        padding: 1rem 0;
 
         width: 100%;
     }
@@ -248,7 +250,7 @@ const {
             display: grid;
             grid-template-columns: 1fr 2fr;
             grid-template-rows: none; //DO I NEED THIS?
-            height: calc(100vh - 4rem); //4rem
+            height: calc(100vh - 2rem); //4rem
             gap: 0;
         }
 
