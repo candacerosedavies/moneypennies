@@ -61,7 +61,7 @@ const {
             </nav>
 
             <!-- Right Content -->
-            <main class="help--content help--border">
+            <main class="help--content help--border scrollbar-color">
                 <aside class="help--content__inner">
                     <section class="help--section heading--01">
                         <h2 id="privacy" class="lg__font">{heading01}</h2>
@@ -214,7 +214,7 @@ const {
     }
     .help--page {
         min-height: 100vh;
-        background: var(--mp-blue, #22219b);
+        background: #00218b;
         padding: 1rem 0;
 
         width: 100%;
@@ -260,7 +260,8 @@ const {
     }
 
     .back-to-top {
-        padding: 4rem;
+        padding-top: 2rem;
+        align-self: center;
 
         @include for-size(tablet, up) {
             display: none;
@@ -343,6 +344,7 @@ const {
     }
 
     //-----CONTAINER FOR MAIN CONTENT-----
+
     .help--content {
         // Mobile: This becomes the scrollable area
 
@@ -354,11 +356,28 @@ const {
         position: relative;
         border-radius: 5px;
         background-color: var(--off-white, #f6f0e7);
+        // scrollbar-color: var(--mp-blue, #22219b);
+
+        // ::-webkit-scrollbar {
+        //     width: 10px;
+        // }
+
+        // ::-webkit-scrollbar-track {
+        //     background: var(--mp-blue, #22219b);
+        // }
+
+        // ::-webkit-scrollbar-thumb {
+        //     background: var(--mp-blue, #22219b);
+        // }
+
+        // ::-webkit-scrollbar-thumb:hover {
+        //     background: var(--mp-blue, #22219b);
+        // }
 
         @include for-size(tablet, down) {
             // border-top: 2px solid var(--off-white, #f6f0e7);
             // border-bottom: 2px solid var(--off-white, #f6f0e7);
-            margin: 0 0.5rem 0 0.5rem; // This creates the "narrower" effect
+            margin: 0 1rem 0 1rem; // This creates the "narrower" effect
             padding-top: 2rem;
         }
 
@@ -376,13 +395,14 @@ const {
 
     .help--section {
         color: var(--mp-blue, #22219b);
-        h2 {
-            text-align: center;
-            color: var(--mp-blue, #22219b);
-        }
 
-        p {
-            // line-height: 1.6;
+        h2 {
+            text-align: flex-start;
+            color: var(--mp-blue, #22219b);
+
+            @include for-size(tablet, up) {
+                text-align: center;
+            }
         }
     }
 </style>
