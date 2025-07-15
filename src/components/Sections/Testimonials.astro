@@ -1,6 +1,8 @@
 ---
 import SectionLayout from "@/layouts/SectionLayout.astro";
 
+const headingAccred = "Accreditations";
+
 // ----- testimonials data -----
 const testimonials = [
     {
@@ -77,13 +79,9 @@ const testimonials = [
                     <h2 id="testimonials-heading" class="lg__font font-light">
                         TESTIMONIALS
                     </h2>
-                    <!-- <p class="mt-5 sm__font font-light">
-                    How our partnerships transformed our client's outreach and
-                    engagement
-                </p> -->
                 </header>
             </div>
-            <div
+            <section
                 class="testimonial-container relative overflow-hidden"
                 role="region"
                 aria-live="polite"
@@ -96,7 +94,7 @@ const testimonials = [
                             data-index={index}
                             aria-hidden={index !== 0 ? "true" : "false"}
                         >
-                            <div class="text-center max-w-4xl mx-auto px-4 sm__font">
+                            <article class="text-center max-w-4xl mx-auto px-4 sm__font">
                                 <blockquote class=" sm__font font-light  mb-12 ">
                                     <p>"{testimonial.quote}"</p>
                                 </blockquote>
@@ -108,14 +106,89 @@ const testimonials = [
                                         {testimonial.title}
                                     </p>
                                 </aside>
-                            </div>
+                            </article>
                         </article>
                     ))
                 }
-            </div>
+            </section>
         </section>
     </section>
+
+    <!-- Accreditation/partner logos -->
+    <section class="container--logos">
+        <figure class="logos">
+            <img
+                src="/images/logos/Mia-accredited.png"
+                alt="logo-mia-accredited-supplier"
+            />
+
+            <img
+                src="/images/logos/London-Venue-2024.png"
+                alt="logo-proud-partner-of-london-venue-catering-awards-2024"
+            />
+        </figure>
+    </section>
 </SectionLayout>
+<style lang="scss">
+    .container--logos {
+        padding: 0rem 2rem 2rem 2rem;
+        // margin: 0 2rem 0 2rem;
+        // align-content: center;
+        justify-content: center;
+        align-content: center;
+    }
+
+    .logos img {
+        max-height: 20vh;
+        max-width: 40vw;
+
+        @include for-size(tablet, up) {
+            max-height: 28vh;
+            max-width: 60vw;
+        }
+    }
+
+    .logos {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+        row-gap: 2rem;
+        justify-content: center;
+        align-content: center;
+
+        @include for-size(phone, up) {
+            grid-template-columns: 30% 30%; //define no. columns and the width
+            grid-template-rows: 1fr; //define no. columsn and their height
+            column-gap: 4rem;
+
+            // grid-template-columns: 1fr 1fr auto; //define x 2 columns | set width to take up equal space | auto enables columns to grow
+            // grid-template-rows: 300px; //set row height
+        }
+    }
+
+    // .container--logos img {
+    //     // position: relative;
+    //     width: auto;
+    // }
+
+    .testimonial--section {
+        background: #f6f0e7;
+        color: #22219b !important;
+    }
+
+    .testimonial-nav-btn {
+        @apply p-2 rounded-full hover:border-mp-blue transition-all duration-300;
+    }
+
+    .testimonial-nav-btn:hover {
+        background-color: #22219b;
+    }
+
+    .testimonial-container {
+        min-height: 30vh;
+        position: relative;
+    }
+</style>
 
 <script>
     class TestimonialSlider {
@@ -202,28 +275,3 @@ const testimonials = [
         new TestimonialSlider();
     });
 </script>
-
-<style>
-    .testimonial--section {
-        background: #f6f0e7;
-        color: #22219b !important;
-    }
-
-    h2 {
-        text-transform: uppercase;
-        /* font-weight: 900; */
-    }
-
-    .testimonial-nav-btn {
-        @apply p-2 rounded-full hover:border-mp-blue transition-all duration-300;
-    }
-
-    .testimonial-nav-btn:hover {
-        background-color: #22219b;
-    }
-
-    .testimonial-container {
-        min-height: 30vh;
-        position: relative;
-    }
-</style>

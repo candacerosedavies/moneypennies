@@ -24,8 +24,6 @@ const {
     variant="color"
     allowOverflow={true}
     textWidth="standard"
-    hasParallax={true}
-    parallaxSpeed={0.3}
     className="Section03 lg__hr py-20 border-t-[0.5px] border-mp-blue"
     heightVariant="normal"
 >
@@ -86,12 +84,12 @@ const {
 <style lang="scss">
     .section03--container__text {
         position: relative;
-        z-index: 10;
+        // z-index: 10;
         gap: 6vh;
-        will-change: transform;
-        transition: transform 0.1s ease-out;
+        // will-change: transform;
+        // transition: transform 0.1s ease-out;
         flex-grow: 1;
-        padding: 6rem 2rem;
+        // padding: 6rem 2rem;
 
         @include for-size(tablet, up) {
             gap: 8vh;
@@ -100,7 +98,7 @@ const {
 
     .section03__heading {
         text-transform: uppercase;
-        font-weight: 300;
+
         position: relative;
         padding: 0;
         max-width: 80%;
