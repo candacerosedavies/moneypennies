@@ -1,7 +1,11 @@
 ---
+//TESTIMONIALS
 import SectionLayout from "@/layouts/SectionLayout.astro";
 
-const headingAccred = "Accreditations";
+const logo01Heading = "We partner with";
+const logo01Para = "London Venue & catering Awards";
+const logo02Heading = "Accredited by the";
+const logo02Para = "Meetings Industry Association";
 
 // ----- testimonials data -----
 const testimonials = [
@@ -24,11 +28,39 @@ const testimonials = [
 ---
 
 <SectionLayout className="testimonial--section ">
-    <section
+    <!-- <section
         class="md:px-12 py-20 border-t-[0.5px] border-mp-blue"
         aria-labelledby="testimonials-heading"
-    >
-        <section class="max-w-6xl mx-auto px-10">
+    > -->
+
+    <section class="testimonial--border" aria-labelledby="testimonials-heading">
+        <section class="container--logos">
+            <figure class="grid--logos">
+                <article id="logo01Text">
+                    <h2 class="md__font">{logo01Heading}</h2>
+                    <p class="sm__font">{logo01Para}</p>
+                </article>
+
+                <img
+                    src="/images/logos/London-Venue-2024.png"
+                    alt="logo-proud-partner-of-london-venue-catering-awards-2024"
+                    id="logo01"
+                />
+
+                <img
+                    src="/images/logos/Mia-accredited.png"
+                    alt="logo-mia-accredited-supplier"
+                    id="logo02"
+                />
+                <article id="logo02Text">
+                    <h2 class="md__font">{logo02Heading}</h2>
+                    <p class="sm__font">{logo02Para}</p>
+                </article>
+            </figure>
+        </section>
+
+        <!-- <section class="max-w-6xl mx-auto px-10"> -->
+        <section class="container--slider max-w-6xl">
             <div class="flex items-center justify-center flex-col gap 2">
                 <!----- Testimonial L/R buttons ----->
                 <nav
@@ -76,7 +108,7 @@ const testimonials = [
                     </button>
                 </nav>
                 <header class="mb-10">
-                    <h2 id="testimonials-heading" class="lg__font font-light">
+                    <h2 id="testimonials-heading" class="lg__font">
                         TESTIMONIALS
                     </h2>
                 </header>
@@ -115,66 +147,106 @@ const testimonials = [
     </section>
 
     <!-- Accreditation/partner logos -->
-    <section class="container--logos">
-        <figure class="logos">
-            <img
-                src="/images/logos/Mia-accredited.png"
-                alt="logo-mia-accredited-supplier"
-            />
-
-            <img
-                src="/images/logos/London-Venue-2024.png"
-                alt="logo-proud-partner-of-london-venue-catering-awards-2024"
-            />
-        </figure>
-    </section>
 </SectionLayout>
 <style lang="scss">
+    .container--slider,
+    .tesimonials-heading {
+        padding: 4rem 4rem 0 4rem;
+        // margin-left: auto;
+        // margin-right: auto;
+    }
+
     .container--logos {
-        padding: 0rem 2rem 2rem 2rem;
-        // margin: 0 2rem 0 2rem;
-        // align-content: center;
-        justify-content: center;
-        align-content: center;
+        // padding: 0rem 2rem 4rem 2rem;
+        // display: flex;
+        // justify-content: center;
+        // align-items: center;
+    }
+    #logo01Text {
+        grid-area: logo01Text;
+    }
+    #logo01 {
+        grid-area: logo01;
     }
 
-    .logos img {
-        max-height: 20vh;
-        max-width: 40vw;
-
-        @include for-size(tablet, up) {
-            max-height: 28vh;
-            max-width: 60vw;
-        }
+    #logo02Text {
+        grid-area: logo02Text;
     }
 
-    .logos {
+    #logo02 {
+        grid-area: logo02;
+    }
+
+    .grid--logos {
         display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: 1fr 1fr;
-        row-gap: 2rem;
-        justify-content: center;
-        align-content: center;
+        height: 100%;
+        grid-template-columns: 20rem;
+        grid-gap: 10px 10px;
 
-        @include for-size(phone, up) {
-            grid-template-columns: 30% 30%; //define no. columns and the width
-            grid-template-rows: 1fr; //define no. columsn and their height
-            column-gap: 4rem;
+        grid-template-areas:
+            "logo01Text ."
+            "logo01 ."
+            ".logo02"
+            ". logo02Text";
 
-            // grid-template-columns: 1fr 1fr auto; //define x 2 columns | set width to take up equal space | auto enables columns to grow
-            // grid-template-rows: 300px; //set row height
-        }
+        // display: grid;
+
+        // justify-content: center;
+        // align-items: center;
+        // gap: 4rem;
+
+        // @include for-size(tablet, up) {
+        //     gap: 4rem;
+        // }
     }
 
-    // .container--logos img {
-    //     // position: relative;
-    //     width: auto;
+    // #logo01Text {
+    //     grid-column: 1 / 2;
+    //     // grid-column-start: 1;
+    //     // grid-column-end: 2;
     // }
 
-    .testimonial--section {
-        background: #f6f0e7;
-        color: #22219b !important;
+    // #logo01 {
+    //     grid-column: 2 / 3;
+    // }
+
+    #logo01,
+    #logo02 {
+        max-height: 10vh;
+        width: auto;
+        align-self: center;
+        @include for-size(tablet, up) {
+            max-height: 20vh;
+            width: auto;
+        }
     }
+
+    //DON'T NEED THIS
+    .testimonial--border {
+        // background: #f6f0e7;
+        // color: #22219b !important;
+        // border-top: 0.5px solid #22219b;
+        padding-top: 4rem;
+    }
+
+    // THIS ONE
+    // .testimonial--border {
+    //     // background: #f6f0e7;
+    //     // color: #22219b !important;
+    //     position: relative;
+    //     padding-top: 4rem;
+
+    //     &::before {
+    //         content: "";
+    //         position: absolute;
+    //         top: 0;
+    //         left: 2rem;
+    //         right: 2rem;
+    //         height: 2px;
+    //         // box-shadow: 4px 2px 6px 1px;
+    //         background-color: #22219b;
+    //     }
+    // }
 
     .testimonial-nav-btn {
         @apply p-2 rounded-full hover:border-mp-blue transition-all duration-300;
@@ -185,7 +257,7 @@ const testimonials = [
     }
 
     .testimonial-container {
-        min-height: 30vh;
+        min-height: 40vh;
         position: relative;
     }
 </style>
